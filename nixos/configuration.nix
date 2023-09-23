@@ -90,12 +90,6 @@
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
       extraGroups = [ "wheel" "networkmanager" ];
-      packages = with pkgs; [
-        fzf
-        p7zip
-        pinentry
-        qrencode
-      ];
     };
   };
 
@@ -104,11 +98,12 @@
   environment.systemPackages = with pkgs; [
       bat
       curl
-      exa
+      eza
       fd
       fzf
       git
       gnutar
+      home-manager
       neovim
       openssh
       p7zip
