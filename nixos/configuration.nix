@@ -57,28 +57,27 @@
     };
   };
 
-  # FIXME: Add the rest of your current configuration
-
-  # TODO: Set your hostname
   networking.hostName = "lappy386";
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
+  boot.blacklistedKernelModules = ["psmouse"];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.extraEntries = {
     "fedora.conf" = ''
-    title Fedora
-    efi /EFI/fedora/shim.efi
+      title Fedora
+      efi /EFI/fedora/shim.efi
     '';
+    plymouth = {
+      enable = true; #  Enable plymouth for nice boot and shutdown screens
+    };
+    kernelPackages = pkgs.linuxPackages_latest; # Get latest kernel
   };
 
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
-    # FIXME: Replace with your username
     bowmanjd = {
       # TODO: You can set an initial password for your user.
       # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
@@ -89,33 +88,32 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" "networkmanager" ];
+      extraGroups = ["audio" "wheel" "docker" "networkmanager" "plugdev" "video"];
     };
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-      bat
-      curl
-      eza
-      fd
-      fzf
-      git
-      gnutar
-      home-manager
-      neovim
-      openssh
-      p7zip
-      pinentry
-      python311
-      python311Packages.pynvim
-      qrencode
-      ripgrep
-      sudo
-      tree
-      wget
-      zip
+    alejandra
+    curl
+    docker
+    fd
+    git
+    gnutar
+    home-manager
+    neovim
+    openssh
+    p7zip
+    pinentry
+    podman
+    python311
+    python311Packages.pynvim
+    ripgrep
+    sudo
+    tree
+    wget
+    zip
   ];
 
   # This setups a SSH server. Very important if you're setting up a headless system.
@@ -128,6 +126,8 @@
     settings.PasswordAuthentication = false;
   };
 
+  services.thermald.enable = true;
+
   services.fprintd = {
     enable = true;
     package = pkgs.fprintd-tod;
@@ -137,7 +137,26 @@
     };
   };
 
-	security.polkit.enable = true;
+  services.pipewire.enable = true;
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
+  # Needed for sway
+  security.polkit.enable = true;
+
+  # Allows for updating firmware via `fwupdmgr`.
+  services.fwupd.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
