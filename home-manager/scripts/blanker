@@ -1,0 +1,4 @@
+#!/bin/sh
+
+NOLOCK="${XDG_RUNTIME_DIR}/nolock"
+[ -f "$NOLOCK" ] || swaymsg "output * dpms off"

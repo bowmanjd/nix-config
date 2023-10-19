@@ -1,0 +1,5 @@
+#!/bin/sh
+
+WAKELOCK="${XDG_RUNTIME_DIR}/wakelock"
+NOLOCK="${XDG_RUNTIME_DIR}/nolock"
+[ -f "$WAKELOCK" ] || [ -f "$NOLOCK" ] || systemctl suspend

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+LOCKSCREEN="${HOME}/.local/bin/lockscreen"
+SUSPEND="${HOME}/.local/bin/suspenders"
+BLANK="${HOME}/.local/bin/blanker"
+
+swayidle -w \
+  timeout 300 "$LOCKSCREEN" \
+  timeout 310 "$BLANK" resume 'swaymsg "output * dpms on"' \
+	timeout 1800 "$SUSPEND" \
+	timeout 10 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
+	resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
+  lock "$LOCKSCREEN" \
+  before-sleep "$LOCKSCREEN --force"

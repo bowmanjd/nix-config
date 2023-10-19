@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+"""Screen capture utility."""
+import datetime
+import pathlib
+import subprocess
+
+HOME = pathlib.Path.home()
+CAPDIR = HOME / "Pictures" / "snips"
+
+
+def pic_list() -> list:
+    """Get picklist of filenames.
+
+    Returns:
+        Newline-concatenated options list
+    """
+    now = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d_%I-%M-%S%P.png")
+    existing = sorted(
+        CAPDIR.glob("*.png"), key=lambda x: x.stat().st_atime, reverse=True
+    )
+    return ["", now] + [i.name for i in existing]
+
+
+def prompt() -> str:
+    """Prompt user for filename using fuzzel.
+
+    Returns:
+        Selected string
+    """
+    filenames = "\n".join(pic_list())
+    selected = subprocess.check_output(
+        ["/usr/bin/fuzzel", "-d"], text=True, input=filenames
+    )
+    return selected.strip()
+
+
+def get_area() -> str:
+    """Prompt for screen area selection and get geometry and coordinates.
+
+    Returns:
+        Geometry and coordinates string from slurp
+    """
+    area = subprocess.check_output(["/usr/bin/slurp"], text=True)
+    return area.strip()
+
+
+def capture(area: str, outfile: pathlib.Path | None) -> None:
+    """Capture selected area to clipboard and optional file.
+
+    Args:
+        area: geometry and coordinates string from slurp
+        outfile: optional full path to desired output file
+    """
+    image = subprocess.check_output(["/usr/bin/grim", "-g", area, "-"])
+    subprocess.run(["/usr/bin/wl-copy"], input=image)
+    if outfile:
+        outfile.write_bytes(image)
+
+
+def run() -> None:
+    """Command runner."""
+    CAPDIR.mkdir(parents=True, exist_ok=True)
+    area = get_area()
+    filename = prompt()
+    if filename:
+        outfile = (CAPDIR / filename).with_suffix(".png")
+    else:
+        outfile = None
+    capture(area, outfile)
+
+
+if __name__ == "__main__":
+    run()

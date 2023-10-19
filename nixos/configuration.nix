@@ -102,10 +102,11 @@
     git
     gnutar
     home-manager
+		iputils
+		iproute2
     neovim
     openssh
     p7zip
-    pinentry
     podman
     python311
     python311Packages.pynvim
