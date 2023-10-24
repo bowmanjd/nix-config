@@ -108,8 +108,7 @@
     openssh
     p7zip
     podman
-    python311
-    python311Packages.pynvim
+    python3
     ripgrep
     sudo
     tree
