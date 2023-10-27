@@ -71,10 +71,6 @@
       title Fedora
       efi /EFI/fedora/shim.efi
     '';
-    plymouth = {
-      enable = true; #  Enable plymouth for nice boot and shutdown screens
-    };
-    kernelPackages = pkgs.linuxPackages_latest; # Get latest kernel
   };
 
   users.users = {
@@ -102,8 +98,8 @@
     git
     gnutar
     home-manager
-		iputils
-		iproute2
+    iputils
+    iproute2
     neovim
     openssh
     p7zip
@@ -137,7 +133,14 @@
     };
   };
 
-  services.pipewire.enable = true;
+  sound.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
@@ -154,6 +157,7 @@
 
   # Needed for sway
   security.polkit.enable = true;
+	security.pam.services.swaylock = {};
 
   # Allows for updating firmware via `fwupdmgr`.
   services.fwupd.enable = true;
