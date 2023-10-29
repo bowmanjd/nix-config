@@ -49,6 +49,7 @@
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
 		age
+    alejandra
     fira-code
     fira-code-symbols
     font-awesome
@@ -104,7 +105,9 @@
       bandit
       beautifulsoup4
       black
+			cmarkgfm
       eradicate
+			fire
       flake8
       flake8-bugbear
       flake8-docstrings
@@ -113,11 +116,14 @@
       lxml
       pep8-naming
       pexpect
+			pip
       ptpython
       pynvim
       pytest
       reorder-python-imports
+			setuptools
       types-beautifulsoup4
+			weasyprint
       wheel
     ]))
     qrencode
@@ -173,6 +179,7 @@
     }
     PROMPT_COMMAND=''${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
 		. $HOME/.local/bin/sshagent
+		export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
     '';
   };
   programs.ssh = {
