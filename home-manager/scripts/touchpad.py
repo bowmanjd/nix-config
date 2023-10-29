@@ -11,7 +11,7 @@ def get_device() -> dict:
         Device info dict
     """
     raw_inputs = subprocess.check_output(  # noqa: S603
-        ["/usr/bin/swaymsg", "-r", "-t", "get_inputs"], text=True
+        ["swaymsg", "-r", "-t", "get_inputs"], text=True
     )
     inputs = json.loads(raw_inputs)
     touchpad = next(i for i in inputs if i["type"] == "touchpad")
@@ -45,7 +45,7 @@ def dwt_toggle(device: dict) -> bool:
     else:
         flag = "enable"
     subprocess.check_output(  # noqa: S603
-        ["/usr/bin/swaymsg", "input", device["identifier"], "dwt", flag], text=True
+        ["swaymsg", "input", device["identifier"], "dwt", flag], text=True
     )
     return not enabled
 
@@ -61,9 +61,9 @@ def waybar(device: dict) -> str:
     """
     enabled = dwt_enabled(device)
     if enabled:
-        output = ""
+        output = "󰌌"
     else:
-        output = "ﳶ"
+        output = "󰟸"
     return output
 
 

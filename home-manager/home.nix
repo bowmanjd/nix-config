@@ -48,6 +48,16 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
+		age
+    fira-code
+    fira-code-symbols
+    font-awesome
+    liberation_ttf
+    mplus-outline-fonts.githubRelease
+    nerdfonts
+    noto-fonts
+    noto-fonts-emoji
+    proggyfonts
     bat
     bc
     brightnessctl
@@ -63,7 +73,6 @@
     eslint_d
     eza
     ffmpeg_6-full
-    font-awesome_5
     foot
     fuzzel
     fzf
@@ -79,7 +88,6 @@
     libreoffice-fresh
     microsoft-edge
     neofetch
-    nerdfonts
     nmap
     nodePackages_latest.bash-language-server
     nodePackages_latest.poor-mans-t-sql-formatter-cli
@@ -121,6 +129,7 @@
     starship
     stylelint
     stylua
+    swayidle
     unixODBCDrivers.msodbcsql18
     vhs
     virtualenv
@@ -145,6 +154,29 @@
     enableCompletion = true;
     enableVteIntegration = true;
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
+    profileExtra = ''
+    [ "$(tty)" = "/dev/tty1" ] && exec sway
+    '';
+    bashrcExtra = ''
+    osc7_cwd() {
+        local strlen=''${#PWD}
+        local encoded=""
+        local pos c o
+        for (( pos=0; pos<strlen; pos++ )); do
+            c=''${PWD:$pos:1}
+            case "$c" in
+                [-/:_.!\'\(\)~[:alnum:]] ) o="''${c}" ;;
+                * ) printf -v o '%%%02X' "''\'''${c}" ;;
+            esac
+            encoded+="''${o}"
+        done
+        printf '\e]7;file://%s%s\e\\' "''${HOSTNAME}" "''${encoded}"
+    }
+    PROMPT_COMMAND=''${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
+    '';
+  };
+  programs.ssh = {
+    enable = true;
   };
   programs.direnv = {
     enable = true;
@@ -156,6 +188,47 @@
       main = {
         term = "xterm-256color";
         font = "Hack Nerd Font:size=14";
+      };
+      cursor = {
+        color = "111111 cccccc";
+      };
+      colors = {
+        foreground = "cdd6f4"; # Text
+        background = "000000"; # Base
+        regular0 = "45475a";   # Surface 1
+        regular1 = "f38ba8";   # red
+        regular2 = "a6e3a1";   # green
+        regular3 = "f9e2af";   # yellow
+        regular4 = "89b4fa";   # blue
+        regular5 = "f5c2e7";   # pink
+        regular6 = "94e2d5";   # teal
+        regular7 = "bac2de";   # Subtext 1
+        bright0 = "585b70";    # Surface 2
+        bright1 = "f38ba8";    # red
+        bright2 = "a6e3a1";    # green
+        bright3 = "f9e2af";    # yellow
+        bright4 = "89b4fa";    # blue
+        bright5 = "f5c2e7";    # pink
+        bright6 = "94e2d5";    # teal
+        bright7 = "a6adc8";    # Subtext 0
+        # foreground = "dddddd";
+        # background = "000000";
+        # regular0 = "000000";  # black
+        # regular1 = "cc0403";  # red
+        # regular2 = "19cb00";  # green
+        # regular3 = "cecb00";  # yellow
+        # regular4 = "0d73cc";  # blue
+        # regular5 = "cb1ed1";  # magenta
+        # regular6 = "0dcdcd";  # cyan
+        # regular7 = "dddddd";  # white
+        # bright0 = "767676";   # bright black
+        # bright1 = "f2201f";   # bright red
+        # bright2 = "23fd00";   # bright green
+        # bright3 = "fffd00";   # bright yellow
+        # bright4 = "1a8fff";   # bright blue
+        # bright5 = "fd28ff";   # bright magenta
+        # bright6 = "14ffff";   # bright cyan
+        # bright7 = "ffffff";   # bright white
       };
     };
   };
@@ -183,6 +256,7 @@
       cmp_luasnip
       cmp-nvim-lsp
       gitsigns-nvim
+      lspkind-nvim
       luasnip
       null-ls-nvim
       nvim-cmp
@@ -232,40 +306,213 @@
       vim.cmd("au BufNewFile,BufRead *.sql set shiftwidth=4 tabstop=4 expandtab ff=unix")
       vim.cmd("au BufNewFile,BufRead *.js set shiftwidth=2 tabstop=2 expandtab")
 
-			require'nvim-treesitter.configs'.setup {
-				ensure_installed = {
-					"all"
-				},
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-			}
+      require'nvim-treesitter.configs'.setup {
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+      }
 
-			require("catppuccin").setup({
-				flavour = "mocha",
-				color_overrides = {
-					mocha = {
-						base = "#000000",
-						mantle = "#000000",
-						crust = "#000000",
-					},
-				},
-			})
-			vim.cmd([[colorscheme catppuccin]])
+      require("catppuccin").setup({
+        flavour = "mocha",
+        color_overrides = {
+          mocha = {
+            base = "#000000",
+            mantle = "#000000",
+            crust = "#000000",
+          },
+        },
+      })
+      vim.cmd([[colorscheme catppuccin]])
 
-			require('lualine').setup(
-				tabline = {
-					lualine_a = {
-						{
-							"buffers",
-						},
-					},
-				},
-			)
+      require('lualine').setup({
+        tabline = {
+          lualine_a = {
+            {
+              "buffers",
+            },
+          },
+        },
+      })
 
       require('ibl').setup()
-			'';
+      require('telescope').setup({
+        extensions = {
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          },
+        },
+      })
+      require('telescope').load_extension("fzf")
+      require('gitsigns').setup()
+
+      local cmp = require('cmp')
+      cmp.setup({
+        view = {
+          entries = "native",
+        },
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.close(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+        }),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+        }, {
+          { name = "buffer" },
+        }),
+      })
+
+      cmp.setup.filetype("sql", {
+        view = {
+          entries = "native",
+        },
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.close(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources(
+          { { name = "vim-dadbod-completion" }, { name = "luasnip" } },
+          { { name = "buffer" } }
+        ),
+      })
+
+      local on_attach = function(client, bufnr)
+        local function buf_set_keymap(...)
+          vim.api.nvim_buf_set_keymap(bufnr, ...)
+        end
+        local function buf_set_option(...)
+          vim.api.nvim_buf_set_option(bufnr, ...)
+        end
+        local opts = { noremap = true, silent = true }
+        if client.supports_method("textDocument/formatting") then
+          buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
+        end
+        buf_set_keymap("n", "<space>]", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+      end
+
+      -- Setup lspconfig.
+      local cmp_nvim_lsp = require("cmp_nvim_lsp")
+      local lspconfig = require("lspconfig")
+      local capabilities = cmp_nvim_lsp.default_capabilities()
+
+      lspconfig.bashls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.pyright.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.gopls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.golangci_lint_ls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.rust_analyzer.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          checkOnSave = {
+            command = "clippy",
+          },
+        },
+      })
+      lspconfig.jsonls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.html.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.yamlls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.dockerls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.quick_lint_js.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+      local lspkind = require("lspkind")
+      cmp.setup({
+        formatting = {
+          format = lspkind.cmp_format({ with_text = true }),
+        },
+      })
+
+      local nullls = require("null-ls")
+      home = os.getenv("HOME")
+      nullls.setup({
+        on_attach = on_attach,
+        sources = {
+          -- nullls.builtins.formatting.sqlformat.with({ args = { "-s", "4", "-m", "150", "-d", "    " } }),
+          nullls.builtins.formatting.dprint.with({ filetypes = { "markdown", "toml" } }),
+          nullls.builtins.formatting.sqlfluff.with({
+                    timeout_ms = 60000,
+            extra_args = {
+              "--config",
+              home .. "/devel/sql/.sqlfluff",
+              "--dialect",
+              "tsql",
+            },
+          }),
+          nullls.builtins.diagnostics.sqlfluff.with({
+                    timeout_ms = 10000,
+            extra_args = {
+              "--config",
+              home .. "/devel/sql/.sqlfluff",
+              "--dialect",
+              "tsql",
+            },
+          }),
+          nullls.builtins.formatting.prettierd.with({ filetypes = { "css", "scss" } }),
+          nullls.builtins.diagnostics.stylelint,
+          nullls.builtins.formatting.stylua,
+          nullls.builtins.formatting.reorder_python_imports,
+          nullls.builtins.formatting.black,
+          nullls.builtins.diagnostics.flake8,
+          nullls.builtins.diagnostics.eslint_d,
+          nullls.builtins.formatting.eslint_d,
+          nullls.builtins.code_actions.eslint_d,
+        },
+      })
+      '';
+
     };
 
   wayland.windowManager.sway = {
@@ -290,9 +537,9 @@
         };
       };
       output = {
-      	"*" = {
-	  bg = "#000000 solid_color";
-	};
+        "*" = {
+    bg = "#000000 solid_color";
+  };
       };
       window = {
         border = 0;
@@ -371,6 +618,7 @@
         "${modifier}+Shift+9" = "move container to workspace number 9";
       };
     };
+    extraConfig = "default_border none";
   };
 
   programs.swaylock = {
@@ -424,23 +672,23 @@
               <big>{icon}</big>'';
             format-charging = ''
               {capacity}
-              '';
+              󰂄'';
             format-plugged = ''
               {capacity}
-              ﮣ'';
+              󱐥'';
             format-alt = ''
               {time}
               {icon}'';
-            format-icons = ["" "" "" "" "" "" "" "" "" ""];
+            format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         };
         network = {
             format-wifi = ''
               {signalStrength}
-              直'';
+              󰖩'';
             format-ethernet = "";
             tooltip-format = "{essid} {ifname} {ipaddr}";
             format-linked = "{ifname} (No IP) ";
-            format-disconnected = "睊";
+            format-disconnected = "󰖪";
             format-alt = ''
               {essid}
               {ifname}
@@ -450,8 +698,8 @@
             format = ''
               {volume}
               <big>{icon}</big>'';
-            format-muted = "<big>婢</big>";
-            format-icons = ["奄" "奔" "墳"];
+            format-muted = "<big>󰸈</big>";
+            format-icons = ["󰕿" "󰖀" "󰕾"];
             on-click = "pavucontrol";
         };
         "custom/dwt" = {
@@ -461,7 +709,7 @@
         };
       };
     };
-		style = ./configs/waybar.css
+    style = ./configs/waybar.css;
   };
 
   services.mako = {
@@ -478,6 +726,13 @@
     recursive = true;
     source = ./scripts;
     target = "./.local/bin";
+  };
+
+  home.file."secrets" = {
+    enable = true;
+    recursive = true;
+    source = ./secrets;
+    target = "./.ssh";
   };
 
   home.sessionPath = [

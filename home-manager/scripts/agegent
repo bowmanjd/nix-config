@@ -1,0 +1,30 @@
+#!/bin/sh
+
+cipher="$HOME/.ssh/age.key"
+secrets="$XDG_RUNTIME_DIR/.bubba"
+secret="$secrets/age.key"
+
+if [ ! -d "$secrets" ]; then
+	mkdir -p "$secrets"
+fi
+
+if [ ! -f "$secret" ]; then
+	>"$secret"
+	chmod 0600 "$secret"
+  rage -d "$cipher" > "$secret"
+fi
+
+if [ -t 0 ]; then 
+  if [ $# -ne 0 ]; then 
+    OUT="$1"
+  fi
+else
+  OUT="$(mktemp)"
+  while IFS='' read -r line; do
+    printf "%s\n" "$line"
+  done > "$OUT"
+fi
+
+if [ -f "$OUT" ]; then
+  cat "$OUT" | rage -d -i "$secret"
+fi
