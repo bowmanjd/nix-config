@@ -8,7 +8,7 @@ if [ ! -d "$secrets" ]; then
 	mkdir -p "$secrets"
 fi
 
-if [ ! -f "$secret" ]; then
+if [ ! -s "$secret" ]; then
 	>"$secret"
 	chmod 0600 "$secret"
   rage -d "$cipher" > "$secret"

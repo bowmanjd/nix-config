@@ -759,9 +759,14 @@
     anchor = "bottom-right";
   };
   # services.clipman.enable = true;
+
+  xdg.configFile."fuzzel.ini" = {
+    enable = true;
+    source = ./configs/fuzzel.ini;
+    target = "fuzzel/fuzzel.ini";
+  };
   
   # copy files to ~/.local/bin
-
   home.file."scripts" = {
     enable = true;
     executable = true;
