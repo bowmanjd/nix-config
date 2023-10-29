@@ -93,6 +93,7 @@
     docker
     fd
     git
+		glibcLocalesUtf8
     gnutar
     home-manager
     iputils
