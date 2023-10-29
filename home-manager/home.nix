@@ -559,7 +559,7 @@
     };
 
   wayland.windowManager.sway = {
-    enable = false;
+    enable = true;
     extraConfigEarly = "set $wobsock $XDG_RUNTIME_DIR/wob.sock";
     config = rec {
       modifier = "Mod4";
