@@ -587,7 +587,7 @@
         border = 0;
         hideEdgeBorders = "both";
       };
-      menu = "fuzzel -p 'Run:' --no-exit-on-keyboard-focus-loss -f 'Hack Nerd Font 15' --launch-prefix 'swaymsg exec --'";
+      menu = "fuzzel -p 'Run:'";
       fonts = {
         names = [ "Hack Nerd Font" ];
         size = 11.0;
