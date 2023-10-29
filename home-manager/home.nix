@@ -184,7 +184,6 @@
     lfs.enable = true;
     userName  = "Jonathan Bowman";
     userEmail = "git@bowmanjd.com";
-		signing.key = builtins.readFile ./secrets/id_ed25519.pub;
 		ignores = [
       ".envrc"
       "[._]*.s[a-v][a-z]"
@@ -209,8 +208,9 @@
 				autoSetupRemote = true;
 				default = "simple";
 			};
-			commit.gpgSign = true;
+			commit.gpgsign = true;
 			gpg.format = "ssh";
+			user.signingKey = builtins.readFile ./secrets/id_ed25519.pub;
     };
   };
   programs.direnv = {
