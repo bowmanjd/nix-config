@@ -73,6 +73,15 @@
     '';
   };
 
+	printing.enable = true;
+	
+	services.avahi = {
+		enable = true;
+		nssmdns = true;
+		# for a WiFi printer
+		openFirewall = true;
+	};
+
   users.users = {
     bowmanjd = {
       # Be sure to change it (using passwd) after rebooting!
