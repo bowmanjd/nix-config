@@ -180,6 +180,7 @@
     PROMPT_COMMAND=''${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
 		. $HOME/.local/bin/sshagent
 		export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
+		export LC_CTYPE="en_US.UTF-8"
     '';
   };
   programs.ssh = {
@@ -558,7 +559,7 @@
     };
 
   wayland.windowManager.sway = {
-    enable = true;
+    enable = false;
     extraConfigEarly = "set $wobsock $XDG_RUNTIME_DIR/wob.sock";
     config = rec {
       modifier = "Mod4";
