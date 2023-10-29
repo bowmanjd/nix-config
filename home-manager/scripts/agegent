@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cipher="$HOME/.ssh/age.key"
+cipher="$HOME/.ssh/secrets/age.key"
 secrets="$XDG_RUNTIME_DIR/.bubba"
 secret="$secrets/age.key"
 

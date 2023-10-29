@@ -144,7 +144,6 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;
@@ -173,10 +172,46 @@
         printf '\e]7;file://%s%s\e\\' "''${HOSTNAME}" "''${encoded}"
     }
     PROMPT_COMMAND=''${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
+		. $HOME/.local/bin/sshagent
     '';
   };
   programs.ssh = {
     enable = true;
+  };
+	programs.git = {
+    enable = true;
+    package = pkgs.gitAndTools.gitFull;
+    lfs.enable = true;
+    userName  = "Jonathan Bowman";
+    userEmail = "git@bowmanjd.com";
+		signing.key = builtins.readFile ./secrets/id_ed25519.pub;
+		ignores = [
+      ".envrc"
+      "[._]*.s[a-v][a-z]"
+      "!*.svg"
+      "[._]*.sw[a-p]"
+      "[._]s[a-rt-v][a-z]"
+      "[._]ss[a-gi-z]"
+      "[._]sw[a-p]"
+      "Session.vim"
+      "Sessionx.vim"
+			".netrwhist"
+			"*~"
+			"[._]*.un~"
+		];
+    extraConfig = {
+      core.editor = "nvim";
+      pull.rebase = true;
+			diff.colorMoved = "zebra";
+			fetch.prune = true;
+      init.defaultBranch = "main";
+			push = {
+				autoSetupRemote = true;
+				default = "simple";
+			};
+			commit.gpgSign = true;
+			gpg.format = "ssh";
+    };
   };
   programs.direnv = {
     enable = true;
@@ -732,7 +767,7 @@
     enable = true;
     recursive = true;
     source = ./secrets;
-    target = "./.ssh";
+    target = ".ssh/secrets";
   };
 
   home.sessionPath = [
