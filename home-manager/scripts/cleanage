@@ -1,0 +1,12 @@
+#!/bin/sh
+
+hours=6
+
+secrets="$XDG_RUNTIME_DIR/.bubba"
+created=$(stat -c%W "$secrets")
+fresh=$(date --date="$hours hours ago" '+%s')
+
+if [ $created -lt $fresh ]; then
+  rm -rf "$secrets"
+fi
+

@@ -72,15 +72,17 @@
       efi /EFI/fedora/shim.efi
     '';
   };
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  #hardware.bluetooth.powerOnBoot = true;
 
-	services.printing.enable = true;
-	
-	services.avahi = {
-		enable = true;
-		nssmdns = true;
-		# for a WiFi printer
-		openFirewall = true;
-	};
+  services.printing.enable = true;
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    # for a WiFi printer
+    openFirewall = true;
+  };
 
   users.users = {
     bowmanjd = {
@@ -102,7 +104,7 @@
     docker
     fd
     git
-		glibcLocalesUtf8
+    glibcLocalesUtf8
     gnutar
     home-manager
     iputils
@@ -164,7 +166,7 @@
 
   # Needed for sway
   security.polkit.enable = true;
-	security.pam.services.swaylock = {};
+  security.pam.services.swaylock = {};
 
   # Allows for updating firmware via `fwupdmgr`.
   services.fwupd.enable = true;

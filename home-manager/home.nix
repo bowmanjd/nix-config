@@ -48,7 +48,7 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
-		age
+    age
     alejandra
     fira-code
     fira-code-symbols
@@ -101,31 +101,32 @@
     podman
     prettierd
     prismlauncher
-    (python311.withPackages(ps: with ps; [
-      bandit
-      beautifulsoup4
-      black
-			cmarkgfm
-      eradicate
-			fire
-      flake8
-      flake8-bugbear
-      flake8-docstrings
-      fonttools
-      isort
-      lxml
-      pep8-naming
-      pexpect
-			pip
-      ptpython
-      pynvim
-      pytest
-      reorder-python-imports
-			setuptools
-      types-beautifulsoup4
-			weasyprint
-      wheel
-    ]))
+    (python311.withPackages (ps:
+      with ps; [
+        bandit
+        beautifulsoup4
+        black
+        cmarkgfm
+        eradicate
+        fire
+        flake8
+        flake8-bugbear
+        flake8-docstrings
+        fonttools
+        isort
+        lxml
+        pep8-naming
+        pexpect
+        pip
+        ptpython
+        pynvim
+        pytest
+        reorder-python-imports
+        setuptools
+        types-beautifulsoup4
+        weasyprint
+        wheel
+      ]))
     qrencode
     quick-lint-js
     rage
@@ -160,39 +161,39 @@
     enableVteIntegration = true;
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
     profileExtra = ''
-    [ "$(tty)" = "/dev/tty1" ] && exec sway
+      [ "$(tty)" = "/dev/tty1" ] && exec sway
     '';
     bashrcExtra = ''
-    osc7_cwd() {
-        local strlen=''${#PWD}
-        local encoded=""
-        local pos c o
-        for (( pos=0; pos<strlen; pos++ )); do
-            c=''${PWD:$pos:1}
-            case "$c" in
-                [-/:_.!\'\(\)~[:alnum:]] ) o="''${c}" ;;
-                * ) printf -v o '%%%02X' "''\'''${c}" ;;
-            esac
-            encoded+="''${o}"
-        done
-        printf '\e]7;file://%s%s\e\\' "''${HOSTNAME}" "''${encoded}"
-    }
-    PROMPT_COMMAND=''${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
-		export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
-		export LC_CTYPE="en_US.UTF-8"
-		. $HOME/.local/bin/sshagent
+        osc7_cwd() {
+            local strlen=''${#PWD}
+            local encoded=""
+            local pos c o
+            for (( pos=0; pos<strlen; pos++ )); do
+                c=''${PWD:$pos:1}
+                case "$c" in
+                    [-/:_.!\'\(\)~[:alnum:]] ) o="''${c}" ;;
+                    * ) printf -v o '%%%02X' "''\'''${c}" ;;
+                esac
+                encoded+="''${o}"
+            done
+            printf '\e]7;file://%s%s\e\\' "''${HOSTNAME}" "''${encoded}"
+        }
+        PROMPT_COMMAND=''${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
+      export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
+      export LC_CTYPE="en_US.UTF-8"
+      . $HOME/.local/bin/sshagent
     '';
   };
   programs.ssh = {
     enable = true;
   };
-	programs.git = {
+  programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
     lfs.enable = true;
-    userName  = "Jonathan Bowman";
+    userName = "Jonathan Bowman";
     userEmail = "git@bowmanjd.com";
-		ignores = [
+    ignores = [
       ".envrc"
       "[._]*.s[a-v][a-z]"
       "!*.svg"
@@ -202,23 +203,23 @@
       "[._]sw[a-p]"
       "Session.vim"
       "Sessionx.vim"
-			".netrwhist"
-			"*~"
-			"[._]*.un~"
-		];
+      ".netrwhist"
+      "*~"
+      "[._]*.un~"
+    ];
     extraConfig = {
       core.editor = "nvim";
       pull.rebase = true;
-			diff.colorMoved = "zebra";
-			fetch.prune = true;
+      diff.colorMoved = "zebra";
+      fetch.prune = true;
       init.defaultBranch = "main";
-			push = {
-				autoSetupRemote = true;
-				default = "simple";
-			};
-			commit.gpgsign = true;
-			gpg.format = "ssh";
-			user.signingKey = builtins.readFile ./secrets/id_ed25519.pub;
+      push = {
+        autoSetupRemote = true;
+        default = "simple";
+      };
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      user.signingKey = builtins.readFile ./secrets/id_ed25519.pub;
     };
   };
   programs.direnv = {
@@ -238,22 +239,22 @@
       colors = {
         foreground = "cdd6f4"; # Text
         background = "000000"; # Base
-        regular0 = "45475a";   # Surface 1
-        regular1 = "f38ba8";   # red
-        regular2 = "a6e3a1";   # green
-        regular3 = "f9e2af";   # yellow
-        regular4 = "89b4fa";   # blue
-        regular5 = "f5c2e7";   # pink
-        regular6 = "94e2d5";   # teal
-        regular7 = "bac2de";   # Subtext 1
-        bright0 = "585b70";    # Surface 2
-        bright1 = "f38ba8";    # red
-        bright2 = "a6e3a1";    # green
-        bright3 = "f9e2af";    # yellow
-        bright4 = "89b4fa";    # blue
-        bright5 = "f5c2e7";    # pink
-        bright6 = "94e2d5";    # teal
-        bright7 = "a6adc8";    # Subtext 0
+        regular0 = "45475a"; # Surface 1
+        regular1 = "f38ba8"; # red
+        regular2 = "a6e3a1"; # green
+        regular3 = "f9e2af"; # yellow
+        regular4 = "89b4fa"; # blue
+        regular5 = "f5c2e7"; # pink
+        regular6 = "94e2d5"; # teal
+        regular7 = "bac2de"; # Subtext 1
+        bright0 = "585b70"; # Surface 2
+        bright1 = "f38ba8"; # red
+        bright2 = "a6e3a1"; # green
+        bright3 = "f9e2af"; # yellow
+        bright4 = "89b4fa"; # blue
+        bright5 = "f5c2e7"; # pink
+        bright6 = "94e2d5"; # teal
+        bright7 = "a6adc8"; # Subtext 0
         # foreground = "dddddd";
         # background = "000000";
         # regular0 = "000000";  # black
@@ -301,7 +302,7 @@
       gitsigns-nvim
       lspkind-nvim
       luasnip
-      null-ls-nvim
+      none-ls-nvim
       nvim-cmp
       nvim-lightbulb
       nvim-lspconfig
@@ -331,6 +332,7 @@
       vim.opt.tabstop = 2
       vim.opt.softtabstop = 2
       vim.opt.shiftwidth = 2
+      vim.opt.expandtab = true
 
       vim.opt.number = true
       vim.opt.cursorline = true
@@ -342,12 +344,37 @@
       vim.opt.background = "dark"
       vim.opt.termguicolors = true
 
-      vim.cmd(
-        "au BufNewFile,BufRead *.md set spell spelllang=en_us ft=markdown formatoptions=l lbr wrap textwidth=0 wrapmargin=0 nolist"
-      )
-      vim.cmd("au BufNewFile,BufRead ssh_config,*/.ssh/config.d/*  setf sshconfig")
-      vim.cmd("au BufNewFile,BufRead *.sql set shiftwidth=4 tabstop=4 expandtab ff=unix")
-      vim.cmd("au BufNewFile,BufRead *.js set shiftwidth=2 tabstop=2 expandtab")
+			vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+				pattern = {"*.md"},
+				callback = function()
+					vim.opt.spell = true
+					vim.opt.spelllang = "en_us"
+					vim.opt.filetype = "markdown"
+					vim.opt.formatoptions = "l"
+					vim.opt.linebreak = true
+					vim.opt.wrap = true
+					vim.opt.textwidth = 0
+					vim.opt.wrapmargin = 0
+					vim.opt.list = false
+				end
+			})
+
+			vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+				pattern = {"ssh_config", "*/.ssh/config.d/*"},
+				callback = function()
+					vim.opt.filetype = "sshconfig"
+				end
+			})
+
+			vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+				pattern = {"*.sql"},
+				callback = function()
+					vim.opt.shiftwidth = 4
+					vim.opt.tabstop = 4
+					vim.opt.expandtab = true
+					vim.opt.fileformat = "unix"
+				end
+			})
 
       require'nvim-treesitter.configs'.setup {
         highlight = {
@@ -554,24 +581,25 @@
           nullls.builtins.code_actions.eslint_d,
         },
       })
-      '';
-
-    };
+    '';
+  };
 
   wayland.windowManager.sway = {
     enable = true;
     extraConfigEarly = "set $wobsock $XDG_RUNTIME_DIR/wob.sock";
     config = rec {
       modifier = "Mod4";
-      terminal = "foot"; 
+      terminal = "foot";
       startup = [
         {command = "wl-paste -t text --watch clipman store --max-items=500";}
         {command = "~/.local/bin/idle";}
         {command = "rm -f $wobsock && mkfifo $wobsock && tail -f $wobsock | wob";}
       ];
-      bars = [ {
-        command = "waybar";
-      } ];
+      bars = [
+        {
+          command = "waybar";
+        }
+      ];
       input = {
         "1739:52710:DLL0945:00_06CB:CDE6_Touchpad" = {
           dwt = "enabled";
@@ -581,8 +609,8 @@
       };
       output = {
         "*" = {
-    bg = "#000000 solid_color";
-  };
+          bg = "#000000 solid_color";
+        };
       };
       window = {
         border = 0;
@@ -590,7 +618,7 @@
       };
       menu = "fuzzel -p 'Run:'";
       fonts = {
-        names = [ "Hack Nerd Font" ];
+        names = ["Hack Nerd Font"];
         size = 11.0;
       };
       keybindings = {
@@ -631,9 +659,9 @@
         "Print" = "exec ~/.local/bin/screencap";
         "${modifier}+m" = "exec makoctl dismiss -a";
         "${modifier}+l" = "exec ~/.local/bin/lockscreen --force";
-        "Ctrl+grave" =  "exec clipman pick --max-items=25 --tool=CUSTOM --tool-args=\"${menu} -d -p 'Clipboard:'\"";
+        "Ctrl+grave" = "exec clipman pick --max-items=25 --tool=CUSTOM --tool-args=\"${menu} -d -p 'Clipboard:'\"";
         "Ctrl+asciitilde" = "exec clipman clear --max-items=25 --tool=CUSTOM --tool-args=\"${menu} -d -p 'Delete from Clipboard:'\"";
-        "XF86PowerOff" =  "exec systemctl suspend";
+        "XF86PowerOff" = "exec systemctl suspend";
         "XF86Sleep" = "exec systemctl suspend";
         "XF86AudioRaiseVolume" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+ && printf '%.0f\\n' $(echo \"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[\\.0-9]\\+')*100\" | bc) > $wobsock";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%- && printf '%.0f\\n' $(echo \"$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[\\.0-9]\\+')*100\" | bc) > $wobsock";
@@ -686,64 +714,64 @@
         modules-center = ["tray"];
         modules-left = ["clock" "battery" "network" "wireplumber" "custom/dwt"];
         "sway/mode" = {
-            format = "<span style=\"italic\">{}</span>";
+          format = "<span style=\"italic\">{}</span>";
         };
         tray = {
-            spacing = 10;
+          spacing = 10;
         };
         clock = {
-            timezone = "America/New_York";
-            format = ''
-              {:%I
-              %M
-              
-              %b
-              %d}'';
-            tooltip-format = ''
-              <big>{:%Y %B}</big>
-              <tt><small>{calendar}</small></tt>'';
-            format-alt = "{:%Y-%m-%d}";
+          timezone = "America/New_York";
+          format = ''
+            {:%I
+            %M
+                        
+            %b
+            %d}'';
+          tooltip-format = ''
+            <big>{:%Y %B}</big>
+            <tt><small>{calendar}</small></tt>'';
+          format-alt = "{:%Y-%m-%d}";
         };
         battery = {
-            states = {
-                good = 85;
-                warning = 30;
-                critical = 15;
-            };
-            format = ''
-              {capacity}
-              <big>{icon}</big>'';
-            format-charging = ''
-              {capacity}
-              󰂄'';
-            format-plugged = ''
-              {capacity}
-              󱐥'';
-            format-alt = ''
-              {time}
-              {icon}'';
-            format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+          states = {
+            good = 85;
+            warning = 30;
+            critical = 15;
+          };
+          format = ''
+            {capacity}
+            <big>{icon}</big>'';
+          format-charging = ''
+            {capacity}
+            󰂄'';
+          format-plugged = ''
+            {capacity}
+            󱐥'';
+          format-alt = ''
+            {time}
+            {icon}'';
+          format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         };
         network = {
-            format-wifi = ''
-              {signalStrength}
-              󰖩'';
-            format-ethernet = "";
-            tooltip-format = "{essid} {ifname} {ipaddr}";
-            format-linked = "{ifname} (No IP) ";
-            format-disconnected = "󰖪";
-            format-alt = ''
-              {essid}
-              {ifname}
-              {ipaddr}/{cidr}'';
+          format-wifi = ''
+            {signalStrength}
+            󰖩'';
+          format-ethernet = "";
+          tooltip-format = "{essid} {ifname} {ipaddr}";
+          format-linked = "{ifname} (No IP) ";
+          format-disconnected = "󰖪";
+          format-alt = ''
+            {essid}
+            {ifname}
+            {ipaddr}/{cidr}'';
         };
         wireplumber = {
-            format = ''
-              {volume}
-              <big>{icon}</big>'';
-            format-muted = "<big>󰸈</big>";
-            format-icons = ["󰕿" "󰖀" "󰕾"];
-            on-click = "pavucontrol";
+          format = ''
+            {volume}
+            <big>{icon}</big>'';
+          format-muted = "<big>󰸈</big>";
+          format-icons = ["󰕿" "󰖀" "󰕾"];
+          on-click = "pavucontrol";
         };
         "custom/dwt" = {
           exec = "~/.local/bin/touchpad.py waybar";
@@ -766,7 +794,7 @@
     source = ./configs/fuzzel.ini;
     target = "fuzzel/fuzzel.ini";
   };
-  
+
   # copy files to ~/.local/bin
   home.file."scripts" = {
     enable = true;
@@ -788,7 +816,7 @@
   ];
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
-    XDG_CURRENT_DESKTOP = "sway"; 
+    XDG_CURRENT_DESKTOP = "sway";
     EMAIL = "git@bowmanjd.com";
   };
 

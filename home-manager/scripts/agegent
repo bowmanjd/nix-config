@@ -6,6 +6,7 @@ secret="$secrets/age.key"
 
 if [ ! -d "$secrets" ]; then
 	mkdir -p "$secrets"
+	chmod 0700 "$secrets"
 fi
 
 if [ ! -s "$secret" ]; then
