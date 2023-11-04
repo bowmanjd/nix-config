@@ -75,6 +75,18 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   #hardware.bluetooth.powerOnBoot = true;
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = false;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+    docker.rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   services.printing.enable = true;
 
   services.avahi = {
@@ -90,10 +102,8 @@
       initialPassword = "Insecure123";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["audio" "wheel" "docker" "networkmanager" "plugdev" "video"];
+      extraGroups = ["audio" "wheel" "networkmanager" "plugdev" "video"];
     };
   };
 
@@ -113,6 +123,7 @@
     openssh
     p7zip
     podman
+    podman-compose
     python3
     ripgrep
     sudo

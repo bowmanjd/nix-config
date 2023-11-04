@@ -1,6 +1,6 @@
 #!/bin/sh
 
-hours=6
+hours=2
 
 secrets="$XDG_RUNTIME_DIR/.bubba"
 created=$(stat -c%W "$secrets")

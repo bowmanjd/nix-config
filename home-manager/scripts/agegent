@@ -17,15 +17,18 @@ fi
 
 if [ -t 0 ]; then 
   if [ $# -ne 0 ]; then 
-    OUT="$1"
+    ENCRYPTEDFILE="$1"
   fi
 else
-  OUT="$(mktemp)"
+  ENCRYPTEDFILE="$(mktemp)"
   while IFS='' read -r line; do
     printf "%s\n" "$line"
-  done > "$OUT"
+  done > "$ENCRYPTEDFILE"
+  CLEANUP="$ENCRYPTEDFILE"
 fi
 
-if [ -f "$OUT" ]; then
-  cat "$OUT" | rage -d -i "$secret"
+if [ -f "$ENCRYPTEDFILE" ]; then
+  cat "$ENCRYPTEDFILE" | rage -d -i "$secret"
 fi
+
+rm "$CLEANUP"
