@@ -1,3 +1,7 @@
 #!/bin/sh
 
-pinentry -C "en_US.UTF-8" "$@"
+if [ -z "$LC_CTYPE" ]; then
+  export LC_CTYPE="en_US.UTF-8"
+fi
+
+pinentry -C "$LC_CTYPE" "$@"

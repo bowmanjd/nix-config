@@ -3,10 +3,13 @@
 hours=2
 
 secrets="$XDG_RUNTIME_DIR/.bubba"
-created=$(stat -c%W "$secrets")
-fresh=$(date --date="$hours hours ago" '+%s')
 
-if [ $created -lt $fresh ]; then
-  rm -rf "$secrets"
+if [ -d "$secrets" ]; then
+  created=$(stat -c%W "$secrets")
+  fresh=$(date --date="$hours hours ago" '+%s')
+
+  if [ $created -lt $fresh ]; then
+    rm -rf "$secrets"
+  fi
 fi
 

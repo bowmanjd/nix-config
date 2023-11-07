@@ -724,7 +724,7 @@
           format = ''
             {:%I
             %M
-                        
+            
             %b
             %d}'';
           tooltip-format = ''
@@ -818,6 +818,35 @@
     MOZ_ENABLE_WAYLAND = 1;
     XDG_CURRENT_DESKTOP = "sway";
     EMAIL = "git@bowmanjd.com";
+  };
+
+  systemd.user.services = {
+    "cleanage" = {
+      Unit = {
+        Description = "Remove any stale unencrypted artifacts";
+      };
+      Service = {
+        ExecStart = "%h/.local/bin/cleanage";
+        Type = "oneshot";
+      };
+    };
+  };
+
+  systemd.user.timers = {
+    "cleanage" = {
+      Unit = {
+        Description = "Run stale unencrypted artifact cleanup regularly";
+      };
+      Timer = {
+        OnCalendar = "hourly";
+        OnUnitActiveSec = "5sec";
+        Persistent = true;
+        RandomizedDelaySec="5min";
+      };
+      Install = {
+        wantedBy = [ "timers.target" ];
+      };
+    };
   };
 
   # Nicely reload system units when changing configs
