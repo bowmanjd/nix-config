@@ -36,6 +36,6 @@
       vim-dadbod-completion
       #mini-nvim
     ];
-    extraLuaConfig = builtins.readFile ./nvim.lua
+    extraLuaConfig = builtins.readFile ./nvim.lua;
   };
 }
