@@ -34,6 +34,40 @@
     "$HOME/.local/bin"
   ];
 
+  programs.git = {
+    enable = true;
+    package = pkgs.gitAndTools.gitFull;
+    lfs.enable = true;
+    userName = "Jonathan Bowman";
+    ignores = [
+      ".envrc"
+      "[._]*.s[a-v][a-z]"
+      "!*.svg"
+      "[._]*.sw[a-p]"
+      "[._]s[a-rt-v][a-z]"
+      "[._]ss[a-gi-z]"
+      "[._]sw[a-p]"
+      "Session.vim"
+      "Sessionx.vim"
+      ".netrwhist"
+      "*~"
+      "[._]*.un~"
+    ];
+    extraConfig = {
+      core.editor = "nvim";
+      pull.rebase = true;
+      diff.colorMoved = "zebra";
+      fetch.prune = true;
+      init.defaultBranch = "main";
+      push = {
+        autoSetupRemote = true;
+        default = "simple";
+      };
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+    };
+  };
+
   programs.ssh = {
     enable = true;
   };
