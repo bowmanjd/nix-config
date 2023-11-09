@@ -60,12 +60,53 @@
   };
 
   # copy files to ~/.local/bin
-  home.file."swayscripts" = {
+  home.file."bemoji" = {
     enable = true;
     executable = true;
-    recursive = true;
-    source = ./scripts;
-    target = "./.local/bin";
+    source = ./scripts/bemoji;
+    target = "./.local/bin/bemoji";
+  };
+
+  home.file."idle" = {
+    enable = true;
+    executable = true;
+    source = ./scripts/idle;
+    target = "./.local/bin/idle";
+  };
+
+  home.file."blanker" = {
+    enable = true;
+    executable = true;
+    source = ./scripts/blanker;
+    target = "./.local/bin/blanker";
+  };
+
+  home.file."lockscreen" = {
+    enable = true;
+    executable = true;
+    source = ./scripts/lockscreen;
+    target = "./.local/bin/lockscreen";
+  };
+
+  home.file."screencap" = {
+    enable = true;
+    executable = true;
+    source = ./scripts/screencap;
+    target = "./.local/bin/screencap";
+  };
+
+  home.file."suspenders" = {
+    enable = true;
+    executable = true;
+    source = ./scripts/suspenders;
+    target = "./.local/bin/suspenders";
+  };
+
+  home.file."touchpad" = {
+    enable = true;
+    executable = true;
+    source = ./scripts/touchpad.py;
+    target = "./.local/bin/touchpad.py";
   };
 
   xdg.configFile."fuzzel.ini" = {
@@ -156,7 +197,7 @@
         };
       };
     };
-    style = ./configs/waybar.css;
+    style = ./waybar.css;
   };
 
   wayland.windowManager.sway = {
