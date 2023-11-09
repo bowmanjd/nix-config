@@ -11,6 +11,7 @@
     # ./nvim.nix
     ./nvim
     ./fonts
+    ./sway
   ];
 
   nixpkgs = {
@@ -259,7 +260,6 @@
         OnCalendar = "hourly";
         Persistent = true;
         RandomizedDelaySec="5min";
-        Unit = "cleanage.service";
       };
       Install = {
         wantedBy = [ "timers.target" ];
