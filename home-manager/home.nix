@@ -4,34 +4,17 @@
 }: {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
     ./nvim
     ./fonts
     ./sway
+    ./guiapps
   ];
 
   nixpkgs = {
-    # You can add overlays here
     overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
-    # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
     };
   };
 
@@ -47,41 +30,23 @@
     bat
     bc
     buildah
-    calibre
     cargo
     degit
-    dockerfile-language-server-nodejs
-    dprint
     du-dust
-    easyeffects
-    eslint_d
     eza
     ffmpeg_6-full
-    fzf
-    gimp
+    gitui
     glow
     go
-    helvum
     htop
-    inkscape
     jq
     jql
     libgourou
-    libreoffice-fresh
-    microsoft-edge
     neofetch
     nmap
-    nodePackages_latest.bash-language-server
-    nodePackages_latest.poor-mans-t-sql-formatter-cli
-    nodePackages_latest.prettier
-    nodePackages_latest.pyright
-    openttd
     p7zip
-    pavucontrol
     pinentry
     podman
-    prettierd
-    prismlauncher
     (python311.withPackages (ps:
       with ps; [
         bandit
@@ -109,30 +74,20 @@
         wheel
       ]))
     qrencode
-    quick-lint-js
     rage
     rustc
     skopeo
     sqlcmd
     sqlfluff
     starship
-    stylelint
-    stylua
     unixODBCDrivers.msodbcsql18
     vhs
     virtualenv
-    #visidata
-    vscode-langservers-extracted
-    yaml-language-server
     yt-dlp
   ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox-wayland;
-  };
   programs.bash = {
     enable = true;
     enableCompletion = true;

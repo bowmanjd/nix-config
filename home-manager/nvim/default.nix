@@ -2,6 +2,23 @@
   pkgs,
   ...
 }: {
+  home.packages = with pkgs; [
+    dockerfile-language-server-nodejs
+    dprint
+    eslint_d
+    fzf
+    nodePackages_latest.bash-language-server
+    nodePackages_latest.poor-mans-t-sql-formatter-cli
+    nodePackages_latest.prettier
+    nodePackages_latest.pyright
+    prettierd
+    quick-lint-js
+    stylelint
+    stylua
+    vscode-langservers-extracted
+    yaml-language-server
+  ];
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
