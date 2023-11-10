@@ -1,0 +1,12 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "scripts/native-utils/Cargo.toml"
+    ],
+    "workbench.colorCustomizations": {
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#6194da",
+        "titleBar.activeBackground": "#3878d0",
+        "titleBar.inactiveBackground": "#3878d099",
+    },
+    "peacock.remoteColor": "#3878d0"
+}
