@@ -9,9 +9,8 @@
 
 {
   imports = [
+    ./nixos-wsl/modules
     ./base.nix
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
   ];
 
   wsl.enable = true;
