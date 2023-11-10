@@ -30,6 +30,11 @@
         # > Our main nixos configuration file <
         modules = [./nixos/lappy.nix];
       };
+      work = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        # > Our main nixos configuration file <
+        modules = [./nixos/work.nix];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
