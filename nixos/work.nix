@@ -19,11 +19,12 @@
   
   users.users = {
     jbowman = {
-      # Be sure to change it (using passwd) after rebooting!
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
       ];
       extraGroups = [ "wheel" ];
     };
   };
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
