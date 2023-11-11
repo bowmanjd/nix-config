@@ -25,7 +25,6 @@
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
     bashrcExtra = ''
       export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
-      export LC_CTYPE="en_US.UTF-8"
       . $HOME/.local/bin/sshagent
     '';
   };
