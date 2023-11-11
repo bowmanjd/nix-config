@@ -23,12 +23,13 @@
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild switch --flake .#lappy386'
     nixosConfigurations = {
+			# Available through 'sudo nixos-rebuild switch --flake .#lappy386'
       lappy386 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [./nixos/lappy.nix];
       };
+			# Available through 'sudo nixos-rebuild switch --flake .#work'
       work = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [./nixos/work.nix];
@@ -36,13 +37,18 @@
     };
 
     # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager switch --flake .#bowmanjd@lappy386'
     homeConfigurations = {
+			# Available through 'home-manager switch --flake .#bowmanjd@lappy386'
       "bowmanjd@lappy386" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        # > Our main home-manager configuration file <
         modules = [./home-manager/home.nix];
+      };
+			# Available through 'home-manager switch --flake .#jbowman@work'
+      "jbowman@work" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home-manager/work.nix];
       };
     };
   };
