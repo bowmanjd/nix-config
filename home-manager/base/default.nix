@@ -141,6 +141,7 @@
     rage
     rustc
     skopeo
+    sops
     sqlcmd
     sqlfluff
     starship
