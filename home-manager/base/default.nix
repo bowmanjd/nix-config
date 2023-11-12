@@ -99,6 +99,7 @@
     du-dust
     eza
     ffmpeg_6-full
+    libgcc
     gitui
     glow
     go
