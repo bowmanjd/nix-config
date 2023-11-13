@@ -20,6 +20,12 @@
     };
   };
 
+  programs.bash = {
+    bashrcExtra = ''
+      PROMPT_COMMAND=''${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"; printf "\033]0;$TITLE\a"'
+    '';
+  };
+
   home.file."secrets" = {
     enable = true;
     recursive = true;
