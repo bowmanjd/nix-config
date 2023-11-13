@@ -28,7 +28,7 @@
       . $HOME/.local/bin/sshagent
     '';
     shellAliases = {
-      ls1 = "eza -1";
+      ls1 = "eza -1 --icons=never";
     };
   };
 

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+for f in $(file -i "$@" | rg utf-16 | rg -o '^[^:]+'); do
+	holder=$(mktemp)
+	iconv -f UTF-16 -t UTF-8 $f -o $holder
+	mv $holder $f
+done
+
+sed -i '1s/^\xEF\xBB\xBF//' "$@"
+sed -i $'s/\r$//' "$@"
+
+for f in $(ls -1 $@ | rg sql); do
+  #sqlformat -s 4 -m 100 -jd "    " -f $f -g $f
+	fluff $f
+done

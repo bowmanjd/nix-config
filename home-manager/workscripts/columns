@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sqlcmd -C -h -1 -W -Q "SET NOCOUNT ON; SELECT STRING_AGG(COLUMN_NAME, ', ') FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$1'" | win32yank -i
+

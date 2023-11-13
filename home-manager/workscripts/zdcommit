@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+import shlex
+from pathlib import Path
+from functools import cache
+
+from git.repo import Repo
+
+REPO = Path.home() / "devel/DataConversion"
+
+
+def ticket_changes(file_list: list, prefix: str = ""):
+    pending = {}
+    for f in file_list:
+        p = Path(f)
+        parts = p.stem.split("-")
+        ticket = parts[0]
+        message = " ".join(parts[1:])
+        if ticket.isnumeric():
+            file = (REPO / p).resolve()
+            folder = file.parent
+            title = get_title(folder)
+            pending[ticket] = {
+                "message": f"{title} {prefix}{message} gz#{ticket}",
+                "file": file,
+                "folder": folder,
+            }
+
+    return pending
+
+
+def untracked():
+    repo = Repo(REPO)
+    files = repo.untracked_files
+    return ticket_changes(files)
+
+
+def changed():
+    repo = Repo(REPO)
+    files = [d.a_path for d in repo.index.diff(None) if d.change_type == "M"]
+    return ticket_changes(files, "update to ")
+
+@cache
+def get_title(path: Path):
+    title = ''
+    for folder in [path] + list(path.parents):
+        conf = folder / ".envrc"
+        if conf.exists():
+            contents = conf.read_text()
+            lexer = shlex.shlex(contents, posix=True)
+            lexer.whitespace_split = True
+            title = next(i.split("=")[1] for i in lexer if "TITLE=" in i)
+            break
+    return title
+
+
+def run():
+    repo = Repo(REPO)
+    index = repo.index
+    for ticket, info in untracked().items():
+        index.add(info["file"])
+        index.commit(info["message"])
+        print(info["message"])
+    for ticket, info in changed().items():
+        index.add(info["file"])
+        index.commit(info["message"])
+        print(info["message"])
+
+
+if __name__ == "__main__":
+    run()

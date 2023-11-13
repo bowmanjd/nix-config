@@ -1,0 +1,3 @@
+#!/bin/sh
+
+bcp "$@" -U "$SQLCMDUSER" -P "$SQLCMDPASSWORD" -S "$SQLCMDSERVER" -u

@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""Generate table backup scripts."""
+import datetime
+
+
+def print_script(
+    tablename: str, src_db: str = "CargasEnergy", dest_db: str = "ConversionScripts"
+) -> None:
+    """Output scripts to create table and backup.
+
+    Args:
+        tablename: the name of table
+    """
+    today = datetime.datetime.now().strftime("%Y_%m_%d")
+    backup_table = f"{tablename}_Backup_{today}"
+    output = (
+        "IF NOT EXISTS (\n"
+        "        SELECT 1\n"
+        f"        FROM {dest_db}.INFORMATION_SCHEMA.TABLES\n"
+        f"        WHERE TABLE_NAME = '{backup_table}'\n"
+        "        )\n"
+        "    SELECT *\n"
+        f"    INTO {dest_db}..{backup_table}\n"
+        f"    FROM {src_db}..{tablename}\n"
+    )
+    print(output)
+
+
+def run() -> None:
+    """Command processor/runner."""
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="This script outputs T-SQL to create"
+        " and populate backup tables if they do not already exist."
+        " Multiple tables can be listed."
+    )
+    parser.add_argument("table", nargs="+", help="Name(s) of table(s) to backup")
+    parser.add_argument(
+        "-s",
+        "--src",
+        help="Database from which to backup" " (default: CargasEnergy)",
+        default="CargasEnergy",
+    )
+    parser.add_argument(
+        "-d",
+        "--dest",
+        help="Database in which to store backup tables" " (default: ConversionScripts)",
+        default="ConversionScripts",
+    )
+
+    args = parser.parse_args()
+
+    for table in args.table:
+        print_script(table, src_db=args.src, dest_db=args.dest)
+
+
+if __name__ == "__main__":
+    run()

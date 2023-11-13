@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+import argparse
+import pathlib
+import re
+import sys
+
+
+def splitter(
+    filepath: pathlib.Path,
+    split_pattern: str,
+    name_pattern: str,
+    out_dir=None,
+    dryrun: bool = False,
+) -> None:
+    re_split = re.compile(split_pattern)
+    re_name = re.compile(name_pattern)
+    if not out_dir:
+        out_dir = filepath.parent
+
+    with filepath.open() as f:
+        out_filename = None
+        out_stream = None
+        queue = []
+        for line in f:
+            if out_filename and not out_stream:
+                out_filename = (out_dir / out_filename).with_suffix(filepath.suffix)
+                if dryrun:
+                    out_stream = sys.stdout
+                    out_stream.write(f"------------\n{out_filename}:\n")
+                else:
+                    out_stream = out_filename.open("w")
+                out_stream.write("".join(queue))
+                queue = []
+            name_match = re_name.search(line)
+            if name_match:
+                out_filename = name_match[1].strip()
+
+            if re_split.match(line):
+                out_filename = None
+                if out_stream and out_stream != sys.stdout:
+                    out_stream.close()
+                out_stream = None
+            else:
+                if out_stream:
+                    out_stream.write(line)
+                else:
+                    queue.append(line)
+
+
+def run() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("filepath", help="Path to file to split", type=pathlib.Path)
+    parser.add_argument(
+        "split", help="regex pattern to match the split token (delimiter)"
+    )
+    parser.add_argument(
+        "name",
+        help="regex pattern to match to determine"
+        "name (first match group) of each file",
+    )
+    parser.add_argument("--dry", help="Do nothing; only a dry run", action="store_true")
+    parser.add_argument(
+        "--dir",
+        help="Optional output directory",
+        type=pathlib.Path,
+        default=pathlib.Path.cwd(),
+    )
+    args = parser.parse_args()
+    splitter(args.filepath, args.split, args.name, args.dir, args.dry)
+
+
+if __name__ == "__main__":
+    run()

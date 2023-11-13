@@ -1,0 +1,4 @@
+#!/bin/sh
+
+fd -i "$@" ~/ce/schemas/ | rg -P 'Views/' | sed 's/ /\\ /g'
+

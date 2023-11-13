@@ -1,0 +1,3 @@
+#!/bin/sh
+
+fd -i "$@" ~/ce/schemas/ | rg -P 'Tables/(?!Triggers|Keys|Indexes|Constraints)' | cat

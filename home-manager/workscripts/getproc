@@ -1,0 +1,3 @@
+#!/bin/sh
+
+(printf "USE ConversionScripts;\n\nSET ANSI_NULLS ON;\nSET QUOTED_IDENTIFIER ON;\nGO\n"; sqlcmd -C -y 0 -d ConversionScripts -Q "SET NOCOUNT ON; SELECT OBJECT_DEFINITION (OBJECT_ID('$1'))") | sed 's/CREATE\s\+PROC/CREATE OR ALTER PROC/' | head -n -1

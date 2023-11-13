@@ -1,0 +1,5 @@
+#!/bin/sh
+
+git log -n1 --pretty=format:"%ad" $1
+stat -c "%y" $1
+sqlcmd -C -d ConversionScripts -h-1 -W -Q "SELECT LAST_ALTERED FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = '$2'"

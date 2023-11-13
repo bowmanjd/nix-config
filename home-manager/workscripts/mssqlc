@@ -1,0 +1,9 @@
+#!/bin/sh
+
+export MSSQL_CLI_SERVER="$SQLCMDSERVER"
+export MSSQL_CLI_USER="$SQLCMDUSER"
+export MSSQL_CLI_DATABASE="$SQLCMDDBNAME"
+export MSSQL_CLI_PASSWORD="$SQLCMDPASSWORD"
+
+export CUSTOMER=$(sqlcmd -C -l 1 -W -h -1 -Q "SET NOCOUNT ON; SELECT TOP 1 Name FROM bCompany")
+mssql-cli -C --prompt "$CUSTOMER\n\d> " "$@"

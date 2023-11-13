@@ -1,0 +1,3 @@
+#!/bin/sh
+
+fd -i "$@" ~/ce/schemas/ | rg -P 'Programmability/' | sed 's/ /\\ /g'

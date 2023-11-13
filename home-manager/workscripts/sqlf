@@ -1,0 +1,2 @@
+#!/bin/sh
+sqlformat -s 4 -m 88 -d "    " "$@"

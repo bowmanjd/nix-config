@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""Export query to CSV."""
+import csv
+import os
+import pathlib
+import subprocess
+
+
+def get_columns(query: str) -> list:
+    """Call sqlcmd to get column header row.
+
+    Args:
+        query: SQL query string
+
+    Returns:
+        columns list
+    """
+    column_query = f"SELECT TOP 0 * FROM ({query}) AS ColumnQuery"
+    cmd = ["sqlcmd", "-X", "-C", "-Q", column_query, "-N", "-s,", "-W"]
+    result = subprocess.check_output(cmd, text=True)
+    columns = result.splitlines()[0].split(",")
+    return columns
+
+
+def bcp_pull(query: str, filename: pathlib.Path) -> pathlib.Path:
+    """Call bcp and write output to file.
+
+    Args:
+        query: SQL query string
+        filename: name of output filename
+    """
+    cmd = [
+        "bcp",
+        query,
+        "queryout",
+        filename,
+        "-c",
+        "-t0x1f",
+        "-r0x1e",
+        "-q",
+        "-u",
+        "-U",
+        os.getenv("SQLCMDUSER"),
+        "-P",
+        os.getenv("SQLCMDPASSWORD"),
+        "-d",
+        os.getenv("SQLCMDDBNAME"),
+        "-S",
+        os.getenv("SQLCMDSERVER"),
+    ]
+    subprocess.check_call(cmd, stdout=subprocess.DEVNULL)
+
+
+def csv_write(
+    in_path: pathlib.Path, out_path: pathlib.Path, columns: list | None
+) -> None:
+    """Take bcp output and write to compliant CSV file.
+
+    Args:
+        in_path: name of bcp file
+        out_path: name of CSV file
+    """
+    bufsize = 2048
+    partial = ""
+    with in_path.open() as infile, out_path.open(
+        "w", newline="", encoding="utf-8-sig"
+    ) as outfile:
+        writer = csv.writer(outfile)
+        if columns:
+            writer.writerow(columns)
+        for chunk in infile.read(bufsize):
+            if partial:
+                chunk = partial + chunk
+            lines = chunk.split("\x1e")
+            partial = lines.pop()
+            rows = (line.split("\x1f") for line in lines)
+            writer.writerows(rows)
+
+
+def view(filename: pathlib.Path) -> None:
+    """Call vd to view CSV file.
+
+    Args:
+        filename: name of file
+    """
+    subprocess.check_call(["vd", filename])
+
+
+def run() -> None:
+    """Command runner."""
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-q", "--query", help="query text to execute")
+    group.add_argument(
+        "-s", "--script", help="query script file to load", type=pathlib.Path
+    )
+    parser.add_argument(
+        "-o", "--outfile", help="CSV filename to write", type=pathlib.Path
+    )
+    parser.add_argument(
+        "-v", "--view", help="view query results with vd", action="store_true"
+    )
+    args = parser.parse_args()
+
+    if args.script:
+        query = args.script.read_text()
+    else:
+        query = args.query
+    columns = get_columns(query)
+    if args.outfile:
+        temp_out = args.outfile.with_suffix(".temp.txt")
+        csv_out = args.outfile
+    else:
+        temp_out = pathlib.Path("./queryout.temp.txt")
+        csv_out = pathlib.Path("./queryout.csv")
+
+    bcp_pull(query, temp_out)
+    csv_write(temp_out, csv_out, columns)
+    if args.view:
+        view(csv_out)
+
+    temp_out.unlink()
+    if not args.outfile:
+        if not args.view:
+            print(csv_out.read_text(encoding="utf-8-sig"), end="")
+        csv_out.unlink()
+
+
+if __name__ == "__main__":
+    run()
