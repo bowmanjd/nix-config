@@ -23,7 +23,14 @@
   programs.bash = {
     bashrcExtra = ''
       PROMPT_COMMAND=''${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"; printf "\033]0;$TITLE\a"'
+      if [ ! -L "$HOME/.local/bin/win32yank" ]; then
+        ln -s /mnt/c/Users/jbowman/scoop/shims/win32yank.exe "$HOME/.local/bin/win32yank"
+      fi
     '';
+    shellAliases = {
+      c = "win32yank -i";
+      p = "win32yank -o";
+    };
   };
 
   home.file."secrets" = {

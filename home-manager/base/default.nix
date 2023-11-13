@@ -27,6 +27,9 @@
       export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
       . $HOME/.local/bin/sshagent
     '';
+    shellAliases = {
+      ls1 = "eza -1";
+    };
   };
 
   home.sessionPath = [
