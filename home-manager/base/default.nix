@@ -158,42 +158,6 @@
     yt-dlp
   ];
 
-  # copy files to ~/.local/bin
-  home.file."agegent" = {
-    enable = true;
-    executable = true;
-    source = ./scripts/agegent;
-    target = "./.local/bin/agegent";
-  };
-
-  home.file."cleanage" = {
-    enable = true;
-    executable = true;
-    source = ./scripts/cleanage;
-    target = "./.local/bin/cleanage";
-  };
-
-  home.file."pinentryutf8" = {
-    enable = true;
-    executable = true;
-    source = ./scripts/pinentryutf8;
-    target = "./.local/bin/pinentryutf8";
-  };
-
-  home.file."sshagent" = {
-    enable = true;
-    executable = true;
-    source = ./scripts/sshagent;
-    target = "./.local/bin/sshagent";
-  };
-
-  home.file."superscript" = {
-    enable = true;
-    executable = true;
-    source = ./scripts/superscript;
-    target = "./.local/bin/superscript";
-  };
-
   systemd.user.services = {
     "cleanage" = {
       Unit = {
