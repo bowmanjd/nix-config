@@ -1,7 +1,7 @@
-{ lib, stdenv }:
+{ lib, stdenv, ... }:
 
 stdenv.mkDerivation {
-  pname = "example-unfree-package";
+  pname = "base-scripts";
   version = "1.0";
 
   dontUnpack = true;
@@ -20,7 +20,6 @@ stdenv.mkDerivation {
       github = "bowmanjd";
       githubId = 86415;
       name = "Jonathan Bowman";
-      };
-    ];
+    } ];
   };
 }
