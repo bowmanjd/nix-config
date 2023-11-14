@@ -13,6 +13,10 @@
     homeDirectory = "/home/jbowman";
   };
 
+  home.packages = with pkgs; [
+    workscripts
+  ];
+
   programs.git = {
     userEmail = "jbowman@cargas.com";
     extraConfig = {
