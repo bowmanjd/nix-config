@@ -1,4 +1,4 @@
 # build using 'nix build .#basescripts'
-pkgs: {
+{ pkgs ? import <nixpkgs> { } }: rec {
   basescripts = pkgs.callPackage ./basescripts { };
 }
