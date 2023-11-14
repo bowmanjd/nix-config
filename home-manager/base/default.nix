@@ -94,7 +94,7 @@
   home.packages = with pkgs; [
     age
     alejandra
-    #basescripts
+    basescripts
     bat
     bc
     buildah

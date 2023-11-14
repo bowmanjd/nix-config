@@ -6,9 +6,11 @@ stdenv.mkDerivation {
 
   dontUnpack = true;
 
+  src = ./scripts;
+
   installPhase = ''
     mkdir -p $out/bin
-    cp scripts/* $out/bin
+    cp $src/* $out/bin/
     chmod +x $out/bin/*
   '';
 
