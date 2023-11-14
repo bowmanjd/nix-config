@@ -1,7 +1,7 @@
 { lib, stdenv, ... }:
 
 stdenv.mkDerivation {
-  pname = "base-scripts";
+  pname = "basescripts";
   version = "1.0";
 
   dontUnpack = true;
