@@ -22,6 +22,8 @@
     inherit (self) outputs;
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    packages.x86_64-linux = import ./pkgs nixpkgs.legacyPackages.x86_64-linux;
+    overlays = import ./overlays {inherit inputs;};
     # NixOS configuration entrypoint
     nixosConfigurations = {
 			# Available through 'sudo nixos-rebuild switch --flake .#lappy386'
