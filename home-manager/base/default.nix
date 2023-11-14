@@ -1,9 +1,11 @@
 {
   pkgs,
+  outputs,
   ...
 }: {
   nixpkgs = {
     overlays = [
+      outputs.overlays.additions
     ];
     config = {
       allowUnfree = true;
