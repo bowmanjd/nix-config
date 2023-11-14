@@ -10,6 +10,11 @@
     };
   };
 
+  imports = [
+    ./basescripts.nix
+  ];
+
+
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs
