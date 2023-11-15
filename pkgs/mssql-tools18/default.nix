@@ -22,13 +22,14 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
+    cp -r opt/ $out/
     cp opt/mssql-tools18/bin/* $out/bin/
     mkdir -p $out/opt/mssql-tools18/
     cp -r opt/mssql-tools18/share $out/opt/mssql-tools18/
     cp -r opt/mssql-tools18/share $out/
   '';
 
-  postFixup = lib.optionalString stdenv.isLinux ''
+  postFixup = ''
     patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc ]} $out/bin/*
   '';
 
