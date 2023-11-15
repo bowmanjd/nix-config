@@ -31,6 +31,7 @@ stdenv.mkDerivation {
 
   postFixup = ''
     patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc ]} $out/bin/*
+    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc ]} $out/opt/mssql-tools18/bin/*
   '';
 
   meta = {
