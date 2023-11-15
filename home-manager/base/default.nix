@@ -27,7 +27,7 @@
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
     bashrcExtra = ''
       export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
-      . $HOME/.local/bin/sshagent
+      . $(command -v sshagent)
     '';
     shellAliases = {
       ls1 = "eza -1 --icons=never";
