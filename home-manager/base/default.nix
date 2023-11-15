@@ -147,6 +147,7 @@
     qrencode
     rage
     rustc
+    rust-analyzer
     skopeo
     sops
     sqlcmd
