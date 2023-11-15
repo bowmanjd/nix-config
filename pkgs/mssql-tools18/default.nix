@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, ... }:
+{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, openssl, libkrb5, libuuid, ... }:
 let version = "18.2.1.1-1";
 in
 stdenv.mkDerivation {
@@ -22,14 +22,14 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    cp opt/mssql-tools18/bin/bcp $out/bin/bcp
+    cp opt/mssql-tools18/bin/* $out/bin/
     mkdir -p $out/opt/mssql-tools18/
     cp -r opt/mssql-tools18/share $out/opt/mssql-tools18/
     cp -r opt/mssql-tools18/share $out/
   '';
 
   postFixup = lib.optionalString stdenv.isLinux ''
-    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc ]} $out/bin/bcp
+    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc ]} $out/bin/*
   '';
 
   meta = {
