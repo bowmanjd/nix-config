@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, openssl, libkrb5, libuuid, unixODBCDrivers, autoPatchelfHook, ... }:
+{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, ... }:
 let version = "18.2.1.1-1";
 in
 stdenv.mkDerivation {
@@ -28,8 +28,7 @@ stdenv.mkDerivation {
 
   postFixup = ''
     patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/bcp
-    patchelf --add-needed  libmsodbcsql-18.1.so.1.1 $out/bin/bcp
-    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc  unixODBCDrivers.msodbcsql18 libuuid libkrb5 openssl ]} $out/bin/bcp
+    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc ]} $out/bin/bcp
   '';
 
   meta = {
