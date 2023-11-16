@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   '';
 
   postFixup = ''
-    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc unixODBCDrivers.msodbcsql18 ]} $out/bin/bcp
+    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc ]} $out/bin/bcp
   '';
 
   meta = {
