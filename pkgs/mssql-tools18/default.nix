@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, openssl, libkrb5, libuuid, ... }:
+{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, openssl, libkrb5, libuuid, unixODBCDrivers, autoPatchelfHook, ... }:
 let version = "18.2.1.1-1";
 in
 stdenv.mkDerivation {
@@ -22,16 +22,12 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    cp -r opt/ $out/
-    cp opt/mssql-tools18/bin/* $out/bin/
-    mkdir -p $out/opt/mssql-tools18/
-    cp -r opt/mssql-tools18/share $out/opt/mssql-tools18/
+    cp opt/mssql-tools18/bin/bcp $out/bin/bcp
     cp -r opt/mssql-tools18/share $out/
   '';
 
   postFixup = ''
-    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc ]} $out/bin/*
-    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc ]} $out/opt/mssql-tools18/bin/*
+    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC openssl libkrb5 libuuid stdenv.cc.cc unixODBCDrivers.msodbcsql18 ]} $out/bin/bcp
   '';
 
   meta = {
