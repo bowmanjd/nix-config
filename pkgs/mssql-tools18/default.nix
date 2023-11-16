@@ -27,6 +27,7 @@ stdenv.mkDerivation {
   '';
 
   postFixup = ''
+    patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/bcp
     patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc ]} $out/bin/bcp
   '';
 
