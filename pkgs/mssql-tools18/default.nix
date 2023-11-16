@@ -28,6 +28,7 @@ stdenv.mkDerivation {
 
   postFixup = ''
     patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/bcp
+    patchelf --add-needed ${lib.makeLibraryPath [  unixODBCDrivers.msodbcsql18 ]} $out/bin/bcp
     patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc  unixODBCDrivers.msodbcsql18 libuuid libkrb5 openssl ]} $out/bin/bcp
   '';
 
