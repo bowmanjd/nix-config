@@ -73,7 +73,8 @@
   environment.etc."odbcinst.ini".text = ''
     [ODBC Driver 18 for SQL Server]
     Description=Microsoft ODBC Driver 18 for SQL Server
-    Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.1.1
+    Driver=${lib.makeLibraryPath [ pkgs.unixODBCDrivers.msodbcsql18 ]}/libmsodbcsql-18.3.so.1.1
+    
   '';
 # fd -t f libmsodbcsql-18 /nix/store | head -n 1
 

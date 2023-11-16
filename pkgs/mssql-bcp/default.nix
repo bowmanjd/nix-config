@@ -2,8 +2,8 @@
 let version = "18.2.1.1-1";
 in
 stdenv.mkDerivation {
-  pname = "mssql-tools18";
-  name = "mssql-tools18";
+  pname = "mssql-bcp";
+  name = "mssql-bcp";
 
   src = fetchurl {
     url = "https://packages.microsoft.com/debian/11/prod/pool/main/m/mssql-tools18/mssql-tools18_${version}_amd64.deb";

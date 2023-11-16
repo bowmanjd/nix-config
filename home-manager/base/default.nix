@@ -113,6 +113,7 @@
     jq
     jql
     libgourou
+    mssql-bcp
     neofetch
     nmap
     p7zip
