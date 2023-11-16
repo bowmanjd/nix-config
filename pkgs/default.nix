@@ -2,5 +2,5 @@
 { pkgs ? import <nixpkgs> { }, ... }: rec {
   basescripts = pkgs.callPackage ./basescripts { };
   workscripts = pkgs.callPackage ./workscripts { };
-  mssql-tools18 = pkgs.callPackage ./mssql-bcp { };
+  mssql-bcp = pkgs.callPackage ./mssql-bcp { };
 }
