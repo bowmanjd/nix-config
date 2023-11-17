@@ -1,9 +1,8 @@
 { lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, ... }:
-let version = "18.2.1.1-1";
-in
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "mssql-bcp";
   name = "mssql-bcp";
+  version = "18.2.1.1-1";
 
   src = fetchurl {
     url = "https://packages.microsoft.com/debian/11/prod/pool/main/m/mssql-tools18/mssql-tools18_${version}_amd64.deb";
