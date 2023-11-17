@@ -70,17 +70,9 @@
     zip
   ];
 
-  #environment.etc."odbcinst.ini".text = ''
-  #  [ODBC Driver 18 for SQL Server]
-  #  Description=Microsoft ODBC Driver 18 for SQL Server
-  #  Driver=${lib.makeLibraryPath [ pkgs.unixODBCDrivers.msodbcsql18 ]}/libmsodbcsql-18.1.so.1.1
-  #  
-  #'';
   environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [
     msodbcsql18
   ];
-
-# fd -t f libmsodbcsql-18 /nix/store | head -n 1
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
