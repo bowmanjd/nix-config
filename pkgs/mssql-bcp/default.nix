@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, ... }:
+{ lib, stdenv, fetchurl, dpkg, patchelf, unixODBC, unixODBCDrivers, ... }:
 stdenv.mkDerivation rec {
   pname = "mssql-bcp";
   name = "mssql-bcp";
@@ -27,7 +27,8 @@ stdenv.mkDerivation rec {
 
   postFixup = ''
     patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/bcp
-    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc ]} $out/bin/bcp
+    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc unixODBCDrivers.msodbcsql18 ]} $out/bin/bcp
+    patchelf --add-needed ${unixODBCDrivers.msodbcsql18.driver} $out/bin/bcp
   '';
 
   meta = {
