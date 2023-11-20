@@ -26,6 +26,7 @@
     enableVteIntegration = true;
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
     bashrcExtra = ''
+      export DIRENV_LOG_FORMAT=
       export PINENTRY_PROGRAM="$HOME/.local/bin/pinentryutf8"
       . $(command -v sshagent)
     '';
@@ -79,6 +80,8 @@
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
+    config = {
+    };
   };
 
   programs.eza = {
@@ -91,6 +94,14 @@
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
+    settings = {
+      command_timeout = 2000;
+      env_var = {
+        CUSTOMER = {
+          format = "(to [$env_value](bold green)) ";
+        };
+      };
+    };
   };
 
   home.packages = with pkgs; [

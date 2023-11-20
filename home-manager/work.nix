@@ -30,13 +30,31 @@
       if [ ! -L "$HOME/.local/bin/win32yank" ]; then
         ln -s /mnt/c/Users/jbowman/scoop/shims/win32yank.exe "$HOME/.local/bin/win32yank"
       fi
+      export SQLSERVER=127.0.0.1
+      export SQLCMDUSER="sa"
+      export SQLCMDDBNAME="CargasEnergy"
     '';
     shellAliases = {
       c = "win32yank -i";
       p = "win32yank -o";
     };
   };
-
+  programs.ssh.matchBlocks = {
+    "tun" = {
+      hostname = "129.213.98.217";
+      user = "jbowman";
+      port = 5517;
+    };
+    "sqltun" = {
+      hostname = "129.213.98.217";
+      user = "tunnel";
+      port = 5517;
+      extraOptions = {
+        RequestTTY = "no";
+        ExitOnForwardFailure = "yes";
+      };
+    };
+  };
   home.file."secrets" = {
     enable = true;
     recursive = true;
