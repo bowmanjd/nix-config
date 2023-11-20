@@ -80,8 +80,6 @@
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
-    config = {
-    };
   };
 
   programs.eza = {
