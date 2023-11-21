@@ -114,6 +114,7 @@
     du-dust
     eza
     ffmpeg_6-full
+    file
     gcc
     gitui
     glow
