@@ -1,13 +1,13 @@
 { lib, stdenv, fetchzip, ... }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "ms-sqltoolsservice";
-  version = "1.0";
+  version = "4.5.0.15";
 
   dontUnpack = true;
 
   src = fetchzip {
-    url = "https://github.com/microsoft/sqltoolsservice/releases/download/4.5.0.15/Microsoft.SqlTools.Migration-rhel-x64-net6.0.tar.gz";
+    url = "https://github.com/microsoft/sqltoolsservice/releases/download/${version}/Microsoft.SqlTools.Migration-rhel-x64-net6.0.tar.gz";
     hash = "sha256-V26R+dJO9LfUQiLgYb/AVzOXNj3Iu5h9cRj9LIUiYqY=";
     stripRoot = false;
   };
