@@ -4,4 +4,5 @@
   workscripts = pkgs.callPackage ./workscripts { };
   mssql-bcp = pkgs.callPackage ./mssql-bcp { };
   ms-sqltoolsservice = pkgs.callPackage ./ms-sqltoolsservice { };
+  mssql-cli = pkgs.callPackage ./mssql-cli { };
 }
