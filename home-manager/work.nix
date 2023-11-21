@@ -30,6 +30,12 @@
       if [ ! -L "$HOME/.local/bin/win32yank" ]; then
         ln -s /mnt/c/Users/jbowman/scoop/shims/win32yank.exe "$HOME/.local/bin/win32yank"
       fi
+      if [ ! -d "$HOME/ce" ]; then
+        mkdir "$HOME/ce"
+        if [ ! -L "$HOME/ce/schemas" ]; then
+          ln -s "$HOME/devel/CargasEnergy/CargasEnergyDB/Schema Objects/Schemas" "$HOME/ce/schemas"
+        fi
+      fi
       export SQLSERVER=127.0.0.1
       export SQLCMDUSER="sa"
       export SQLCMDDBNAME="CargasEnergy"
