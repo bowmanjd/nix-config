@@ -3,7 +3,10 @@
 SOCKFILE="$HOME/.ssh-agent.sock"
 
 # start ssh-agent only if it is not running
-pidof ssh-agent > /dev/null 2>&1 || rm -f "$SOCKFILE" && ssh-agent -a "$SOCKFILE" -t 4h >"$HOME/.ssh-agent-info"
+if ! pidof ssh-agent > /dev/null 2>&1 ; then
+  rm -f "$SOCKFILE"
+  ssh-agent -a "$SOCKFILE" -t 4h >"$HOME/.ssh-agent-info"
+fi
 if [ -f "${HOME}/.ssh-agent-info" ]; then
   . "${HOME}/.ssh-agent-info" >/dev/null
   export SSH_AUTH_SOCK
