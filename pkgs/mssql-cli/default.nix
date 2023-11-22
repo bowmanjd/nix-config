@@ -1,8 +1,10 @@
 { lib, python311, fetchFromGitHub }:
-python311.pkgs.buildPythonApplication rec {
+python311.pkgs.buildPythonPackage rec {
   pname = "mssql-cli";
   version = "1.0";
 
+  nativeBuildInputs = [ python311.pkgs.wrapPython ];
+  
   propagatedBuildInputs = with python311.pkgs; [
     applicationinsights
     cli-helpers
@@ -13,22 +15,24 @@ python311.pkgs.buildPythonApplication rec {
     prompt-toolkit
     sqlparse
     wheel
+    #pygments
   ];
 
   src = fetchFromGitHub {
-    owner = "bowmanjd";
+    owner = "dbcli";
     repo = "mssql-cli";
     rev = "HEAD";
-    hash = "sha256-xvOaCUvgzX8mAeQ4Ic3eGjvCFAhS8Uxh68ibXNEYZEM=";
+    hash = "sha256-XB+r8FW81oJ5h86LN1gkbOaN2s7QyVIW98YgDQQzH50=";
   };
 
-  checkPhase = ''
-    #runHook preCheck
-
-    #pytest
-
-    #runHook postCheck
+  postFixup = ''
+    wrapProgram "$out/bin/mssql-cli" \
+      --prefix PYTHONPATH : "$PYTHONPATH" \
+      --prefix PATH : "${python311}/bin"
   '';
+  
+  doCheck = false;
+
   pythonImportsCheck = [
     "mssqlcli"
   ];
