@@ -240,7 +240,7 @@ nullls.setup({
 			},
 		}),
 		nullls.builtins.diagnostics.sqlfluff.with({
-			timeout_ms = 10000,
+			timeout_ms = 60000,
 			extra_args = {
 				"--config",
 				home .. "/devel/sql/.sqlfluff",
