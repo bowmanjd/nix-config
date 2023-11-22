@@ -1,4 +1,4 @@
-{ lib, python311, conftest, fetchFromGitHub }:
+{ lib, python311, fetchFromGitHub }:
 python311.pkgs.buildPythonApplication rec {
   pname = "mssql-cli";
   version = "1.0";
@@ -11,46 +11,15 @@ python311.pkgs.buildPythonApplication rec {
     future
     humanize
     prompt-toolkit
-    pygments
-    pyyaml
     sqlparse
     wheel
-  ];
-
-  checkInputs = [
-    conftest
-    (python311.withPackages (ps:
-      with ps; [
-      setuptools
-      coverage
-      pytest-cov
-      pytest-timeout
-      mock
-      twine
-      tox
-      jinja2
-      diff-cover
-      appdirs
-      hypothesis
-      pylint
-      regex
-      twine
-      flake8
-      tblib
-      tqdm
-      pathspec
-      pytest
-      wrapt
-      packaging
-      six
-    ]))
   ];
 
   src = fetchFromGitHub {
     owner = "bowmanjd";
     repo = "mssql-cli";
     rev = "HEAD";
-    hash = "sha256-kUc3y9OlaQ72MsESrVd+eqm4xulFixYMKAIMeP3+NOc=";
+    hash = "sha256-xvOaCUvgzX8mAeQ4Ic3eGjvCFAhS8Uxh68ibXNEYZEM=";
   };
 
   checkPhase = ''
@@ -60,6 +29,9 @@ python311.pkgs.buildPythonApplication rec {
 
     #runHook postCheck
   '';
+  pythonImportsCheck = [
+    "mssqlcli"
+  ];
 
   meta = {
     description = "mssql-cli interactive command-line tool for querying SQL Server";
