@@ -124,7 +124,6 @@
     jql
     libgourou
     mssql-bcp
-    mssql-cli
     neofetch
     nmap
     p7zip

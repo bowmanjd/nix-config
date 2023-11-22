@@ -15,7 +15,7 @@ python311.pkgs.buildPythonPackage rec {
     prompt-toolkit
     sqlparse
     wheel
-    #pygments
+    pygments
   ];
 
   src = fetchFromGitHub {

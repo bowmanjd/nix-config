@@ -15,6 +15,8 @@
 
   home.packages = with pkgs; [
     workscripts
+    ms-sqltoolsservice
+    mssql-cli
   ];
 
   programs.git = {
