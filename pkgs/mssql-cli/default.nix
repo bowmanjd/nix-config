@@ -35,14 +35,4 @@ python311.pkgs.buildPythonPackage rec {
     "mssqlcli"
   ];
 
-  meta = {
-    description = "mssql-cli interactive command-line tool for querying SQL Server";
-    license = lib.licenses.bsd3;
-    maintainers = [ {
-      email = "git@bowmanjd.org";
-      github = "bowmanjd";
-      githubId = 86415;
-      name = "Jonathan Bowman";
-    } ];
-  };
 }
