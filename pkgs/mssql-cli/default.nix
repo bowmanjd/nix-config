@@ -3,8 +3,6 @@ python311.pkgs.buildPythonPackage rec {
   pname = "mssql-cli";
   version = "1.0";
 
-  nativeBuildInputs = [ python311.pkgs.wrapPython ];
-  
   propagatedBuildInputs = with python311.pkgs; [
     applicationinsights
     cli-helpers
