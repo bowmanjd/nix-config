@@ -12,8 +12,8 @@ stdenv.mkDerivation rec {
   };
 
   installPhase = ''
-    mkdir -p $out/lib
-    cd $out/lib
+    mkdir -p $out
+    cd $out
     tar xf $src
   '';
 
