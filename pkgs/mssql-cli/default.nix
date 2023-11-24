@@ -16,7 +16,6 @@ python311.pkgs.buildPythonPackage rec {
     sqlparse
     wheel
     pygments
-    ms-sqltoolsservice
   ];
 
   src = fetchFromGitHub {
@@ -31,7 +30,6 @@ python311.pkgs.buildPythonPackage rec {
       --set MSSQLTOOLSSERVICE_PATH "${ms-sqltoolsservice}" \
       --prefix PYTHONPATH : "$PYTHONPATH" \
       --prefix PATH : "${python311}/bin" \
-      --prefix PATH : "${ms-sqltoolsservice}"
   '';
   
   doCheck = false;
