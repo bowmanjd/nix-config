@@ -1,7 +1,9 @@
-{ lib, python311, fetchFromGitHub, ms-sqltoolsservice }:
+{ lib, pkgs, python311, fetchFromGitHub }:
 python311.pkgs.buildPythonPackage rec {
   pname = "mssql-cli";
   version = "1.0";
+
+  ms-sqltoolsservice = pkgs.callPackage ../ms-sqltoolsservice { };
 
   propagatedBuildInputs = with python311.pkgs; [
     applicationinsights
@@ -14,6 +16,7 @@ python311.pkgs.buildPythonPackage rec {
     sqlparse
     wheel
     pygments
+    ms-sqltoolsservice
   ];
 
   src = fetchFromGitHub {
@@ -25,9 +28,10 @@ python311.pkgs.buildPythonPackage rec {
 
   postFixup = ''
     wrapProgram "$out/bin/mssql-cli" \
-      --set MSSQLTOOLSSERVICE_PATH ms-sqltoolsservice \
+      --set MSSQLTOOLSSERVICE_PATH "${ms-sqltoolsservice}" \
       --prefix PYTHONPATH : "$PYTHONPATH" \
       --prefix PATH : "${python311}/bin" \
+      --prefix PATH : "${ms-sqltoolsservice}"
   '';
   
   doCheck = false;

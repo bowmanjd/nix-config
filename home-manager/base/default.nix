@@ -124,6 +124,7 @@
     jql
     libgourou
     mssql-bcp
+    ms-sqltoolsservice
     mssql-cli
     neofetch
     nmap
