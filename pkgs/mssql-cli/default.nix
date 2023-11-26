@@ -1,4 +1,4 @@
-{ lib, pkgs, python311, fetchFromGitHub }:
+{ lib, pkgs, python311, fetchFromGitHub, ... }:
 python311.pkgs.buildPythonPackage rec {
   pname = "mssql-cli";
   version = "1.0";
@@ -27,9 +27,9 @@ python311.pkgs.buildPythonPackage rec {
 
   postFixup = ''
     wrapProgram "$out/bin/mssql-cli" \
-      --set MSSQLTOOLSSERVICE_PATH "${ms-sqltoolsservice}" \
+      --set MSSQLTOOLSSERVICE_PATH ${lib.makeBinPath [ ms-sqltoolsservice ]} \
       --prefix PYTHONPATH : "$PYTHONPATH" \
-      --prefix PATH : "${python311}/bin" \
+      --prefix PATH : ${lib.makeBinPath [ python311 ]} \
   '';
   
   doCheck = false;

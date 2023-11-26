@@ -127,6 +127,7 @@
     ms-sqltoolsservice
     mssql-cli
     neofetch
+    nix-index
     nmap
     p7zip
     pinentry
