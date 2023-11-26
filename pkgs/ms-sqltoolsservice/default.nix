@@ -4,8 +4,6 @@ stdenv.mkDerivation rec {
   version = "4.11.0.10";
   dotnet_version = "7.0";
 
-  dontUnpack = true;
-
   buildInputs = with pkgs; [
     stdenv.cc.cc
     zlib
@@ -16,6 +14,9 @@ stdenv.mkDerivation rec {
     libkrb5
   ];
 
+  dontUnpack = true;
+
+  # Don't strip, as it results in "Failed to create CoreCLR, HRESULT: 0x80004005"
   dontStrip = true;
 
   nativeBuildInputs = [ autoPatchelfHook ];
@@ -24,7 +25,6 @@ stdenv.mkDerivation rec {
     "libcrypto.so.10"
     "libssl.so.10"
   ];
-
 
   src = fetchurl {
     url = "https://github.com/microsoft/sqltoolsservice/releases/download/${version}/Microsoft.SqlTools.ServiceLayer-rhel-x64-net${dotnet_version}.tar.gz";
@@ -36,6 +36,9 @@ stdenv.mkDerivation rec {
     tar -x -C $out/bin -f $src
   '';
 
+  # Need to add icu dependency so autoPatchelfHook can associate required libraries
+  # Also follow powershell's example in updating lttng-ust
+  # And add needed modern ssl
   postFixup = ''
     patchelf \
       --add-needed libicui18n.so \
