@@ -52,7 +52,9 @@ stdenv.mkDerivation rec {
       --add-needed libicuuc.so \
       $out/bin/libcoreclr.so \
       $out/bin/*System.Globalization.Native.so
-    patchelf --replace-needed liblttng-ust.so.0 liblttng-ust.so $out/bin/libcoreclrtraceptprovider.so
+    patchelf \
+      --replace-needed liblttng-ust.so.0 liblttng-ust.so \
+      $out/bin/libcoreclrtraceptprovider.so
     patchelf \
       --add-needed libgssapi_krb5.so \
       $out/bin/*System.Net.Security.Native.so
