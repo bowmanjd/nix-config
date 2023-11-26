@@ -29,7 +29,7 @@ def prompt() -> str:
     """
     filenames = "\n".join(pic_list())
     selected = subprocess.check_output(
-        ["/usr/bin/fuzzel", "-d"], text=True, input=filenames
+        ["fuzzel", "-d"], text=True, input=filenames
     )
     return selected.strip()
 
@@ -52,7 +52,7 @@ def capture(area: str, outfile: pathlib.Path | None) -> None:
         outfile: optional full path to desired output file
     """
     image = subprocess.check_output(["grim", "-g", area, "-"])
-    subprocess.run(["/usr/bin/wl-copy"], input=image)
+    subprocess.run(["wl-copy"], input=image)
     if outfile:
         outfile.write_bytes(image)
 
