@@ -1,4 +1,11 @@
-{ lib, stdenv, fetchurl, autoPatchelfHook, pkgs, ... }:
+{
+  lib,
+  stdenv,
+  fetchurl,
+  autoPatchelfHook,
+  pkgs,
+  ...
+}:
 stdenv.mkDerivation rec {
   pname = "ms-sqltoolsservice";
   version = "4.11.0.10";
@@ -19,7 +26,7 @@ stdenv.mkDerivation rec {
   # Don't strip, as it results in "Failed to create CoreCLR, HRESULT: 0x80004005"
   dontStrip = true;
 
-  nativeBuildInputs = [ autoPatchelfHook ];
+  nativeBuildInputs = [autoPatchelfHook];
 
   autoPatchelfIgnoreMissingDeps = [
     "libcrypto.so.10"
@@ -56,11 +63,13 @@ stdenv.mkDerivation rec {
   meta = {
     description = "Microsoft SQL Tools API service that provides SQL Server data management capabilities";
     license = lib.licenses.mit;
-    maintainers = [ {
-      email = "git@bowmanjd.org";
-      github = "bowmanjd";
-      githubId = 86415;
-      name = "Jonathan Bowman";
-    } ];
+    maintainers = [
+      {
+        email = "git@bowmanjd.org";
+        github = "bowmanjd";
+        githubId = 86415;
+        name = "Jonathan Bowman";
+      }
+    ];
   };
 }
