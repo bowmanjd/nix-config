@@ -40,7 +40,7 @@ def get_area() -> str:
     Returns:
         Geometry and coordinates string from slurp
     """
-    area = subprocess.check_output(["/usr/bin/slurp"], text=True)
+    area = subprocess.check_output(["slurp"], text=True)
     return area.strip()
 
 
@@ -51,7 +51,7 @@ def capture(area: str, outfile: pathlib.Path | None) -> None:
         area: geometry and coordinates string from slurp
         outfile: optional full path to desired output file
     """
-    image = subprocess.check_output(["/usr/bin/grim", "-g", area, "-"])
+    image = subprocess.check_output(["grim", "-g", area, "-"])
     subprocess.run(["/usr/bin/wl-copy"], input=image)
     if outfile:
         outfile.write_bytes(image)
