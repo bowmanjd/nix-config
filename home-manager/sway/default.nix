@@ -7,6 +7,8 @@
     clipman
     foot
     fuzzel
+    grim
+    slurp
     swayidle
     waybar
     wl-clipboard
