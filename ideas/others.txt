@@ -1,4 +1,0 @@
-dogdns
-dig
-nslookup?
-nmap

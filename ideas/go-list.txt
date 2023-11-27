@@ -1,6 +1,0 @@
-  glow: github.com/charmbracelet/glow@v1.5.1
-   gup: github.com/nao1215/gup@v0.24.0
-shiori: github.com/go-shiori/shiori@v1.5.5
-  sqls: github.com/lighttiger2505/sqls@v0.2.22
-  tour: golang.org/x/website/tour@v0.0.0-20210616181959-e0d934b43647
-   vhs: github.com/charmbracelet/vhs@v0.6.0
