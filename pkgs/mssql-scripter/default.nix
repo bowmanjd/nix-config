@@ -18,8 +18,9 @@ python311.pkgs.buildPythonPackage rec {
   };
 
   patchPhase = ''
-    substituteInPlace mssql-scripter \
-      --replace "/usr/bin/bash" "/usr/bin/env bash"
+    patchShebangs mssql-scripter
+    substituteInPlace mssqlscripter/main.py \
+      --replace "utf-8" "utf-16"
   '';
 
   postFixup = ''

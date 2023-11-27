@@ -132,6 +132,7 @@
     mssql-bcp
     ms-sqltoolsservice
     mssql-cli
+    mssql-scripter
     ncftp
     neofetch
     nix-index
