@@ -216,9 +216,9 @@
     };
   };
 
-  xdg.configFile."mssql-cli.config" = {
+  xdg.configFile."mssqlcli.config" = {
     enable = true;
-    source = ./mssql-cli.config;
+    source = ./mssqlcli.config;
     target = "mssqlcli/config";
   };
 }
