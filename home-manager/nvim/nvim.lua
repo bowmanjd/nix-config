@@ -25,6 +25,9 @@ vim.opt.smartcase = true
 vim.opt.background = "dark"
 vim.opt.termguicolors = true
 
+vim.g.db_ui_use_nerd_fonts = 1
+vim.g.db_ui_execute_on_save = 0
+
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	pattern = { "*.md" },
 	callback = function()
