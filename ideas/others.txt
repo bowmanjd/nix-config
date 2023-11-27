@@ -1,0 +1,4 @@
+dogdns
+dig
+nslookup?
+nmap
