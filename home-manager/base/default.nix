@@ -111,7 +111,11 @@
     buildah
     cargo
     degit
+    dig
+    dogdns
+    dnsutils
     du-dust
+    elinks
     eza
     ffmpeg_6-full
     file
@@ -120,18 +124,22 @@
     glow
     go
     htop
+    html-tidy
+    inetutils
     jq
     jql
     libgourou
     mssql-bcp
     ms-sqltoolsservice
     mssql-cli
+    ncftp
     neofetch
     nix-index
     nmap
     p7zip
     pinentry
     podman
+    powershell
     (python311.withPackages (ps:
       with ps; [
         bandit
@@ -153,19 +161,25 @@
         pynvim
         pytest
         reorder-python-imports
+        rich
         setuptools
+        tidylib
         types-beautifulsoup4
         weasyprint
         wheel
       ]))
     qrencode
     rage
+    rich-cli
     rustc
     rust-analyzer
+    see
+    shiori
     skopeo
     sops
     sqlcmd
     sqlfluff
+    sqlite
     starship
     unixODBCDrivers.msodbcsql18
     vhs
