@@ -186,6 +186,8 @@
     vhs
     virtualenv
     yt-dlp
+    unzip
+    zip
   ];
 
   systemd.user.services = {
