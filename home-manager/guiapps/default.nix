@@ -13,7 +13,7 @@
     openttd
     pavucontrol
     prismlauncher
-    xeyes
+    xorg.xeyes
   ];
 
   programs.firefox = {
