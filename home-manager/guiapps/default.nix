@@ -4,6 +4,7 @@
 }: {
   home.packages = with pkgs; [
     calibre
+    chromium
     easyeffects
     gimp
     helvum
@@ -13,8 +14,8 @@
     openttd
     pavucontrol
     prismlauncher
-    xorg.xeyes
     xdotool
+    xorg.xeyes
     ydotool
   ];
 
