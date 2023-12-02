@@ -14,6 +14,8 @@
     pavucontrol
     prismlauncher
     xorg.xeyes
+    xdotool
+    ydotool
   ];
 
   programs.firefox = {
