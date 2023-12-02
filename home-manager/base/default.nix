@@ -77,6 +77,27 @@
     enable = true;
   };
 
+  programs.ssh.matchBlocks = {
+    "server" = {
+      hostname = "192.168.0.5";
+      user = "bowman4";
+      port = 22;
+      forwardAgent = true;
+    };
+    "percheron" = {
+      hostname = "150.136.226.68";
+      user = "bowman4";
+      port = 2227;
+      forwardAgent = true;
+    };
+    "gopher" = {
+      hostname = "104.154.208.5";
+      user = "jbowman";
+      port = 5222;
+      forwardAgent = true;
+    };
+  };
+
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
