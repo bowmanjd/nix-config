@@ -50,7 +50,7 @@
           ./nixos/work.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
+            #home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.jbowman = import ./home-manager/work.nix;
             home-manager.extraSpecialArgs = {inherit inputs outputs;};
