@@ -29,29 +29,53 @@
 			# Available through 'sudo nixos-rebuild switch --flake .#lappy386'
       lappy386 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/lappy.nix];
+        modules = [
+          ./nixos/lappy.nix
+          home-manager.nixosModules.home-manager
+          {
+            #home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.bowmanjd = import ./home-manager/home.nix;
+            home-manager.extraSpecialArgs = {inherit inputs outputs;};
+
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
+          }
+        ];
       };
 			# Available through 'sudo nixos-rebuild switch --flake .#work'
       work = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/work.nix];
+        modules = [
+          ./nixos/work.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.jbowman = import ./home-manager/work.nix;
+            home-manager.extraSpecialArgs = {inherit inputs outputs;};
+
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
+          }
+        ];
       };
     };
 
     # Standalone home-manager configuration entrypoint
-    homeConfigurations = {
-			# Available through 'home-manager switch --flake .#bowmanjd@lappy386'
-      "bowmanjd@lappy386" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/home.nix];
-      };
-			# Available through 'home-manager switch --flake .#jbowman@work'
-      "jbowman@work" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/work.nix];
-      };
-    };
+    #homeConfigurations = {
+		#	# Available through 'home-manager switch --flake .#bowmanjd@lappy386'
+    #  "bowmanjd@lappy386" = home-manager.lib.homeManagerConfiguration {
+    #    pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+    #    extraSpecialArgs = {inherit inputs outputs;};
+    #    modules = [./home-manager/home.nix];
+    #  };
+		#	# Available through 'home-manager switch --flake .#jbowman@work'
+    #  "jbowman@work" = home-manager.lib.homeManagerConfiguration {
+    #    pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    #    extraSpecialArgs = {inherit inputs outputs;};
+    #    modules = [./home-manager/work.nix];
+    #  };
+    #};
   };
 }

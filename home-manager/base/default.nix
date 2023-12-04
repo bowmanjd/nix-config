@@ -206,6 +206,7 @@
     unixODBCDrivers.msodbcsql18
     vhs
     virtualenv
+    xsv
     yt-dlp
     unzip
     zip
