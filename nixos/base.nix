@@ -3,12 +3,15 @@
   lib,
   config,
   pkgs,
+  outputs,
   ...
 }: {
 
   nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+    ];
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };

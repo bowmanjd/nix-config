@@ -3,14 +3,14 @@
   outputs,
   ...
 }: {
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-    ];
-    config = {
-      allowUnfree = true;
-    };
-  };
+  #nixpkgs = {
+  #  overlays = [
+  #    outputs.overlays.additions
+  #  ];
+  #  config = {
+  #    allowUnfree = true;
+  #  };
+  #};
 
   programs.home-manager.enable = true;
 
