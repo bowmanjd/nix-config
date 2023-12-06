@@ -3,14 +3,6 @@
   outputs,
   ...
 }: {
-  #nixpkgs = {
-  #  overlays = [
-  #    outputs.overlays.additions
-  #  ];
-  #  config = {
-  #    allowUnfree = true;
-  #  };
-  #};
 
   programs.home-manager.enable = true;
 
@@ -130,6 +122,7 @@
     bat
     bc
     buildah
+    cachix
     cargo
     degit
     dig
