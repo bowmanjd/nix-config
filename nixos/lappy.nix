@@ -16,6 +16,8 @@
   networking.hostName = "lappy386";
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
+  nix.settings.trusted-users = [ "root" "bowmanjd" ];
+
   boot.blacklistedKernelModules = ["psmouse"];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
