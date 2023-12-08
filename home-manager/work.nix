@@ -15,6 +15,7 @@
 
   home.packages = with pkgs; [
     workscripts
+    wslu
   ];
 
   programs.git = {
