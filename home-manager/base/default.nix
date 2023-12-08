@@ -124,6 +124,7 @@
     buildah
     cachix
     cargo
+    comrak
     degit
     dig
     dogdns
