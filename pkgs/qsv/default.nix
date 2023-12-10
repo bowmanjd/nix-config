@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, rustPlatform, Security }:
+{ lib, stdenv, fetchFromGitHub, rustPlatform }:
 
 rustPlatform.buildRustPackage rec {
   pname = "qsv";
@@ -8,12 +8,10 @@ rustPlatform.buildRustPackage rec {
     owner = "jqnatividad";
     repo = "qsv";
     rev = version;
-    hash = "";
+    hash = "sha256-AGPXkFnxhCahPAIem/q7xvxaiKp/ny8+pODZoBSC870=";
   };
 
-  cargoSha256 = "";
-
-  buildInputs = lib.optional stdenv.isDarwin Security;
+  cargoHash = "sha256-eTH25kPQe+BoR6Sp5LbZzWikjgOD4dJ7SBTut9C4Kp4=";
 
   meta = with lib; {
     description = "CSVs sliced, diced & analyzed.";
