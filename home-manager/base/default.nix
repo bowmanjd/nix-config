@@ -138,6 +138,7 @@
     gitui
     glow
     go
+    handlr
     htop
     html-tidy
     inetutils
@@ -203,6 +204,7 @@
     xsv
     yt-dlp
     unzip
+    xdg-utils
     zip
   ];
 
