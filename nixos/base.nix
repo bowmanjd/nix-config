@@ -36,6 +36,13 @@
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  networking = {
+    firewall.enable = true;
+    nftables = {
+      enable = true;
+    };
+  };
+
   virtualisation = {
     podman = {
       enable = true;
@@ -45,6 +52,10 @@
     docker.rootless = {
       enable = true;
       setSocketVariable = true;
+      daemon.settings = {
+        iptables = false;
+        ip6tables = false;
+      };
     };
   };
 

@@ -13,10 +13,12 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "lappy386";
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking = {
+    hostName = "lappy386";
+    networkmanager.enable = true;
+  };
 
-  nix.settings.trusted-users = [ "root" "bowmanjd" ];
+  nix.settings.trusted-users = [ "root" ];
 
   boot.blacklistedKernelModules = ["psmouse"];
   boot.loader.systemd-boot.enable = true;
