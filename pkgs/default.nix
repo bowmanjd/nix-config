@@ -6,4 +6,5 @@
   ms-sqltoolsservice = pkgs.callPackage ./ms-sqltoolsservice { };
   mssql-cli = pkgs.callPackage ./mssql-cli { };
   mssql-scripter = pkgs.callPackage ./mssql-scripter { };
+  qsv = pkgs.callPackage ./qsv { };
 }
