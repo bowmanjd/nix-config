@@ -124,6 +124,7 @@
     buildah
     cachix
     cargo
+    cargo-binstall
     comrak
     degit
     dig
