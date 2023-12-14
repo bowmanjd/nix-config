@@ -188,7 +188,7 @@
         wheel
       ]))
     qrencode
-    qsv
+    #qsv
     rage
     rich-cli
     rustc
