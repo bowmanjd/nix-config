@@ -40,7 +40,7 @@
     firewall.enable = true;
     nftables = {
       enable = true;
-      checkRuleset = false;
+      #checkRuleset = false;
     };
   };
 
