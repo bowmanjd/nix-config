@@ -85,6 +85,11 @@
     zip
   ];
 
+  programs.bash = {
+    enableCompletion = true;
+    vteIntegration = true;
+  };
+
   environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [
     msodbcsql18
   ];
