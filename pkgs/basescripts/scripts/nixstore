@@ -1,0 +1,3 @@
+#!/bin/sh
+
+nix-store -q --requisites /var/run/current-system |   tr '\n' '\0' |   find -files0-from - -name "$@"
