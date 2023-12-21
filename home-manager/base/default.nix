@@ -126,6 +126,7 @@
     cachix
     cargo
     cargo-binstall
+    clippy
     comrak
     degit
     dig
@@ -192,6 +193,7 @@
     rage
     rich-cli
     rustc
+    rustfmt
     rust-analyzer
     see
     shiori
