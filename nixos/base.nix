@@ -38,10 +38,10 @@
 
   networking = {
     firewall.enable = true;
-    nftables = {
-      enable = true;
-      #checkRuleset = false;
-    };
+    #nftables = {
+    #  enable = true;
+    #  #checkRuleset = false;
+    #};
   };
 
   virtualisation = {
@@ -54,8 +54,8 @@
       enable = true;
       setSocketVariable = true;
       daemon.settings = {
-        iptables = false;
-        ip6tables = false;
+        #iptables = false;
+        #ip6tables = false;
       };
     };
   };
