@@ -11,6 +11,10 @@
     ./guiapps
   ];
 
+  home.packages = with pkgs; [
+    android-tools 
+  ];
+
   home = {
     username = "bowmanjd";
     homeDirectory = "/home/bowmanjd";

@@ -77,7 +77,7 @@
       forwardAgent = true;
     };
     "percheron" = {
-      hostname = "150.136.226.68";
+      hostname = "129.213.21.111";
       user = "bowmanjd";
       port = 2227;
       forwardAgent = true;
