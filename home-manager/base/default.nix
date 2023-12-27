@@ -82,6 +82,12 @@
       port = 2227;
       forwardAgent = true;
     };
+    "haflinger" = {
+      hostname = "132.145.175.236";
+      user = "bowmanjd";
+      port = 2227;
+      forwardAgent = true;
+    };
     "gopher" = {
       hostname = "104.154.208.5";
       user = "jbowman";
@@ -137,6 +143,7 @@
     eza
     ffmpeg_6-full
     file
+    flatbuffers
     gcc
     gitui
     glow
@@ -210,7 +217,9 @@
     yt-dlp
     unzip
     xdg-utils
+    xxHash
     zip
+    zoxide
   ];
 
   systemd.user.services = {
