@@ -27,6 +27,10 @@
     };
   };
 
+  programs.bash.initExtra = [
+    ". ${pkgs.git}/share/bash-completion/completions/git-prompt.sh"
+  ];
+
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
