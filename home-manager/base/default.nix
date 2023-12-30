@@ -90,6 +90,18 @@
       port = 2227;
       forwardAgent = true;
     };
+    "belgian" = {
+      hostname = "132.145.212.196";
+      user = "bowmanjd";
+      port = 2227;
+      forwardAgent = true;
+    };
+    "breton" = {
+      hostname = "138.197.14.170";
+      user = "bowmanjd";
+      port = 2227;
+      forwardAgent = true;
+    };
     "gopher" = {
       hostname = "104.154.208.5";
       user = "jbowman";
