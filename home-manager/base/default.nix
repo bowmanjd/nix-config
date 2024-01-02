@@ -102,10 +102,10 @@
       port = 2227;
       forwardAgent = true;
     };
-    "gopher" = {
+    "clydesdale" = {
       hostname = "104.154.208.5";
-      user = "jbowman";
-      port = 5222;
+      user = "bowmanjd";
+      port = 2227;
       forwardAgent = true;
     };
   };
