@@ -173,6 +173,7 @@
     ms-sqltoolsservice
     mssql-cli
     mssql-scripter
+    ncdu
     ncftp
     neofetch
     nix-index
