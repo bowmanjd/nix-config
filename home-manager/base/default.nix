@@ -64,6 +64,11 @@
       };
       commit.gpgsign = true;
       gpg.format = "ssh";
+      filter.ageencrypt = {
+        required = true;
+        clean = "rage -r age1npc2n2mytn0u62s6qj2ymh9caavevh9z7ttfhperzj0uyxfnffmst0wrlf -r age1tsnykfpw5t8ce6lckl3exk7fyqulc3n23vmasqrlapw42d6ff5us9mld9v -a -";
+        smudge = "agegent";
+      };
     };
   };
 
