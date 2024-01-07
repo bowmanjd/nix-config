@@ -230,6 +230,7 @@
     sqlfluff
     sqlite
     starship
+    tmux
     unixODBCDrivers.msodbcsql18
     vhs
     virtualenv
