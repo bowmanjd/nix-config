@@ -92,6 +92,8 @@
     zip
   ];
 
+  services.tailscale.enable = true;
+
   programs.bash = {
     enableCompletion = true;
     vteIntegration = true;
