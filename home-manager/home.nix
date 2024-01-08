@@ -38,4 +38,5 @@
   home.sessionVariables = {
     EMAIL = "git@bowmanjd.com";
   };
+  services.tailscale.enable = true;
 }
