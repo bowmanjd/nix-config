@@ -13,6 +13,7 @@ stdenv.mkDerivation rec {
     [
       dpkg
       patchelf
+      unixODBCDrivers.msodbcsql18
     ];
 
   unpackPhase = ''
@@ -27,8 +28,8 @@ stdenv.mkDerivation rec {
 
   postFixup = ''
     patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" $out/bin/bcp
-    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc unixODBCDrivers.msodbcsql18 ]} $out/bin/bcp
     patchelf --add-needed ${unixODBCDrivers.msodbcsql18.driver} $out/bin/bcp
+    patchelf --set-rpath ${lib.makeLibraryPath [ unixODBC stdenv.cc.cc unixODBCDrivers.msodbcsql18 ]} $out/bin/bcp
   '';
 
   meta = {
