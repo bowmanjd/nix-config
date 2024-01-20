@@ -1,9 +1,9 @@
 {
+  lib,
   pkgs,
   outputs,
   ...
 }: {
-
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs
@@ -243,13 +243,15 @@
     zoxide
   ];
 
-  systemd.user.services = {
+  systemd.user.services = let
+    scriptpath = lib.makeBinPath [ pkgs.basescripts ];
+  in {
     "cleanage" = {
       Unit = {
         Description = "Remove any stale unencrypted artifacts";
       };
       Service = {
-        ExecStart = "%h/.local/bin/cleanage";
+        ExecStart = lib.concatStrings [ scriptpath "/cleanage" ];
         Type = "oneshot";
       };
     };
@@ -263,10 +265,10 @@
       Timer = {
         OnCalendar = "hourly";
         Persistent = true;
-        RandomizedDelaySec="5min";
+        RandomizedDelaySec = "5min";
       };
       Install = {
-        wantedBy = [ "timers.target" ];
+        wantedBy = ["timers.target"];
       };
     };
   };
@@ -277,4 +279,3 @@
     target = "mssqlcli/config";
   };
 }
-

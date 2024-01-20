@@ -1,4 +1,4 @@
-{ lib, stdenv, ... }:
+{ lib, pkgs, stdenv, ... }:
 
 stdenv.mkDerivation {
   pname = "basescripts";
@@ -7,6 +7,10 @@ stdenv.mkDerivation {
   dontUnpack = true;
 
   src = ./scripts;
+
+  propagatedBuildInputs = with pkgs; [
+    coreutils
+  ];
 
   installPhase = ''
     mkdir -p $out/bin
