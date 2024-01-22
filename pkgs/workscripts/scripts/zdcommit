@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 import os
 import shlex
-from pathlib import Path
 from functools import cache
+from pathlib import Path
 
 from git.repo import Repo
-
-REPO = Path.home() / "devel/DataConversion"
 
 
 def ticket_changes(file_list: list, prefix: str = ""):
@@ -29,16 +27,15 @@ def ticket_changes(file_list: list, prefix: str = ""):
     return pending
 
 
-def untracked():
-    repo = Repo(REPO)
+def untracked(repo):
     files = repo.untracked_files
     return ticket_changes(files)
 
 
-def changed():
-    repo = Repo(REPO)
+def changed(repo):
     files = [d.a_path for d in repo.index.diff(None) if d.change_type == "M"]
     return ticket_changes(files, "update to ")
+
 
 @cache
 def get_title(path: Path):
@@ -54,14 +51,25 @@ def get_title(path: Path):
     return title
 
 
+@cache
+def get_repo():
+    folder = Path.home() / "devel/DataConversion"
+    path = Path.cwd()
+    for folder in [path] + list(path.parents):
+        gitdir = folder / ".git"
+        if gitdir.exists():
+            break
+    return Repo(folder)
+
+
 def run():
-    repo = Repo(REPO)
+    repo = get_repo()
     index = repo.index
-    for ticket, info in untracked().items():
+    for ticket, info in untracked(repo).items():
         index.add(info["file"])
         index.commit(info["message"])
         print(info["message"])
-    for ticket, info in changed().items():
+    for ticket, info in changed(repo).items():
         index.add(info["file"])
         index.commit(info["message"])
         print(info["message"])
