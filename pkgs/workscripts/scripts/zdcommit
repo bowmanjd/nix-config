@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import shlex
 from pathlib import Path
 from functools import cache
@@ -41,7 +42,7 @@ def changed():
 
 @cache
 def get_title(path: Path):
-    title = ''
+    title = os.getenv("TITLE", "")
     for folder in [path] + list(path.parents):
         conf = folder / ".envrc"
         if conf.exists():
