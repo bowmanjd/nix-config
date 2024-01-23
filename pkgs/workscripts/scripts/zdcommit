@@ -7,7 +7,7 @@ from pathlib import Path
 from git.repo import Repo
 
 
-def ticket_changes(file_list: list, prefix: str = ""):
+def ticket_changes(repo, file_list: list, prefix: str = ""):
     pending = {}
     for f in file_list:
         p = Path(f)
@@ -15,7 +15,7 @@ def ticket_changes(file_list: list, prefix: str = ""):
         ticket = parts[0]
         message = " ".join(parts[1:])
         if ticket.isnumeric():
-            file = (REPO / p).resolve()
+            file = (Path(repo.git_dir).parent / p).resolve()
             folder = file.parent
             title = get_title(folder)
             pending[ticket] = {
@@ -29,12 +29,12 @@ def ticket_changes(file_list: list, prefix: str = ""):
 
 def untracked(repo):
     files = repo.untracked_files
-    return ticket_changes(files)
+    return ticket_changes(repo, files)
 
 
 def changed(repo):
     files = [d.a_path for d in repo.index.diff(None) if d.change_type == "M"]
-    return ticket_changes(files, "update to ")
+    return ticket_changes(repo, files, "update to ")
 
 
 @cache
@@ -65,11 +65,11 @@ def get_repo():
 def run():
     repo = get_repo()
     index = repo.index
-    for ticket, info in untracked(repo).items():
+    for _ticket, info in untracked(repo).items():
         index.add(info["file"])
         index.commit(info["message"])
         print(info["message"])
-    for ticket, info in changed(repo).items():
+    for _ticket, info in changed(repo).items():
         index.add(info["file"])
         index.commit(info["message"])
         print(info["message"])
