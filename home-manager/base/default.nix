@@ -151,6 +151,7 @@
     cachix
     cargo
     cargo-binstall
+    cargo-insta
     clippy
     comrak
     degit
