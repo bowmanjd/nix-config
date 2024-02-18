@@ -7,6 +7,7 @@
     dprint
     eslint_d
     fzf
+    gopls
     nodePackages_latest.bash-language-server
     nodePackages_latest.poor-mans-t-sql-formatter-cli
     nodePackages_latest.prettier
