@@ -167,7 +167,7 @@
     gcc
     gitui
     glow
-    go
+    go_1_22
     handlr
     htop
     html-tidy
@@ -175,6 +175,7 @@
     jq
     jql
     libgourou
+    libpcap
     mssql-bcp
     ms-sqltoolsservice
     mssql-cli
