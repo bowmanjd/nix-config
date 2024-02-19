@@ -167,6 +167,7 @@
     gcc
     gitui
     glow
+    gnumake
     go_1_22
     handlr
     htop
