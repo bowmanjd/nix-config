@@ -184,6 +184,15 @@ lspconfig.pyright.setup({
 lspconfig.gopls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
 })
 lspconfig.golangci_lint_ls.setup({
 	capabilities = capabilities,
