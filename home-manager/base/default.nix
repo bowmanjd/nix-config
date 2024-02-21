@@ -153,6 +153,7 @@
     cargo-binstall
     cargo-insta
     clippy
+    cobra-cli
     comrak
     degit
     dig
