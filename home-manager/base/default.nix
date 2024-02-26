@@ -236,6 +236,7 @@
     starship
     tmux
     unixODBCDrivers.msodbcsql18
+    usql
     vhs
     virtualenv
     xsv
