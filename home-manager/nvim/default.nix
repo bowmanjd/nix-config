@@ -37,6 +37,8 @@
       cmp-buffer
       cmp_luasnip
       cmp-nvim-lsp
+      copilot-lua
+      copilot-cmp
       gitsigns-nvim
       lspkind-nvim
       luasnip

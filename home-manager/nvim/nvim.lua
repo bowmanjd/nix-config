@@ -89,6 +89,13 @@ require("lualine").setup({
 	},
 })
 
+require("copilot").setup({
+	suggestion = { enabled = false },
+	panel = { enabled = false },
+})
+
+require("copilot_cmp").setup()
+
 require("ibl").setup()
 require("telescope").setup({
 	extensions = {
@@ -128,6 +135,7 @@ cmp.setup({
 		end,
 	}),
 	sources = cmp.config.sources({
+		{ name = "copilot" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 	}, {
@@ -184,15 +192,15 @@ lspconfig.pyright.setup({
 lspconfig.gopls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-      gofumpt = true,
-    },
-  },
+	settings = {
+		gopls = {
+			analyses = {
+				unusedparams = true,
+			},
+			staticcheck = true,
+			gofumpt = true,
+		},
+	},
 })
 lspconfig.golangci_lint_ls.setup({
 	capabilities = capabilities,
@@ -231,9 +239,15 @@ lspconfig.quick_lint_js.setup({
 local lspkind = require("lspkind")
 cmp.setup({
 	formatting = {
-		format = lspkind.cmp_format({ with_text = true }),
+		format = lspkind.cmp_format({
+      mode = "symbol_text",
+      max_width = 50,
+      symbol_map = { Copilot = "" }
+		}),
 	},
 })
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 local nullls = require("null-ls")
 home = os.getenv("HOME")
@@ -241,7 +255,7 @@ nullls.setup({
 	on_attach = on_attach,
 	sources = {
 		-- nullls.builtins.formatting.sqlformat.with({ args = { "-s", "4", "-m", "150", "-d", "    " } }),
-		nullls.builtins.formatting.dprint.with({ filetypes = { "markdown", "toml" } }),
+		-- nullls.builtins.formatting.dprint.with({ filetypes = { "markdown", "toml" } }),
 		nullls.builtins.formatting.sqlfluff.with({
 			timeout_ms = 60000,
 			extra_args = {
@@ -263,11 +277,11 @@ nullls.setup({
 		nullls.builtins.formatting.prettierd.with({ filetypes = { "css", "scss" } }),
 		nullls.builtins.diagnostics.stylelint,
 		nullls.builtins.formatting.stylua,
-		nullls.builtins.formatting.reorder_python_imports,
+		-- nullls.builtins.formatting.reorder_python_imports,
 		nullls.builtins.formatting.black,
-		nullls.builtins.diagnostics.flake8,
-		nullls.builtins.diagnostics.eslint_d,
-		nullls.builtins.formatting.eslint_d,
-		nullls.builtins.code_actions.eslint_d,
+		--nullls.builtins.diagnostics.flake8,
+		-- nullls.builtins.diagnostics.eslint_d,
+		-- nullls.builtins.formatting.eslint_d,
+		-- nullls.builtins.code_actions.eslint_d,
 	},
 })
