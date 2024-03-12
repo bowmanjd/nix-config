@@ -29,6 +29,11 @@
 
   programs.bash.initExtra = ". ${pkgs.git}/share/bash-completion/completions/git-prompt.sh";
 
+  programs.atuin = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
