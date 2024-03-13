@@ -191,6 +191,7 @@
     neofetch
     nix-index
     nmap
+    nodejs
     p7zip
     pinentry
     podman
