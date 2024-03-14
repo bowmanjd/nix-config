@@ -16,6 +16,10 @@
   wsl.enable = true;
   wsl.defaultUser = "jbowman";
 
+  networking = {
+    hostName = "jbowman-cargas";
+  };
+
   nix.settings.trusted-users = [ "root" "jbowman" ];
   
   users.users = {
