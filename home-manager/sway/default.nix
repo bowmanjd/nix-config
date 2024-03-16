@@ -10,6 +10,7 @@
     grim
     slurp
     swayidle
+    warp-terminal
     waybar
     wl-clipboard
     wob
