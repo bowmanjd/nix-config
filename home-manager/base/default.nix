@@ -59,6 +59,7 @@
     ];
     extraConfig = {
       core.editor = "nvim";
+      core.autocrlf = "input";
       pull.rebase = true;
       diff.colorMoved = "zebra";
       fetch.prune = true;
