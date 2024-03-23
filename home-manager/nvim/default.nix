@@ -48,6 +48,7 @@
       nvim-cmp
       nvim-lightbulb
       nvim-lspconfig
+      nvim-notify
       nvim-treesitter.withAllGrammars
       nvim-web-devicons
       plenary-nvim
