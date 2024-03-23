@@ -86,6 +86,8 @@
     ];
   };
 
+  programs.wshowkeys.enable = true;
+
   # Needed for sway
   security.polkit.enable = true;
   security.pam.services.swaylock = {};
