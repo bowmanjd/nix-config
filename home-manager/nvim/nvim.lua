@@ -60,6 +60,13 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	end,
 })
 
+vim.notify = require("notify")
+
+explain = function(content, duration)
+  duration = duration or 1000
+  vim.notify(content, "info", { timeout = duration, render = "minimal" })
+end
+
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
