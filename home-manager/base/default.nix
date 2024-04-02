@@ -210,6 +210,12 @@
         flake8-docstrings
         fonttools
         isort
+        langchain
+        llama-index
+        llama-index-program-openai
+        llama-index-llms-openai
+        llama-index-readers-file
+        llama-index-readers-database
         lxml
         pep8-naming
         pexpect
