@@ -197,7 +197,7 @@
     pinentry
     podman
     powershell
-    (python311.withPackages (ps:
+    (python312.withPackages (ps:
       with ps; [
         bandit
         beautifulsoup4
@@ -210,13 +210,19 @@
         flake8-docstrings
         fonttools
         isort
-        langchain
-        llama-index
-        llama-index-program-openai
-        llama-index-llms-openai
-        llama-index-readers-file
-        llama-index-readers-database
+        #langchain
+        #llama-index-core
+        #llama-index-llms-openai
+        #llama-index-program-openai
+        #llama-index-llms-openai
+        #llama-index-readers-file
+        #llama-index-readers-json
+        #llama-index-readers-database
+        #llama-index-readers-llama-parse
+        #llama-index-vector-stores-qdrant
+        #llama-index-vector-stores-chroma
         lxml
+        #nltk
         pep8-naming
         pexpect
         pip
