@@ -210,7 +210,7 @@
         flake8-docstrings
         fonttools
         isort
-        langchain
+        #langchain
         llama-index-core
         llama-index-program-openai
         llama-index-llms-openai
