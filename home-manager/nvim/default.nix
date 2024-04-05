@@ -31,6 +31,7 @@
     withNodeJs = true;
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
+      ChatGPT-nvim
       csv-vim
       direnv-vim
       catppuccin-nvim
