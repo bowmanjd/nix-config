@@ -1,3 +1,5 @@
+home = os.getenv("HOME")
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.hidden = true
@@ -160,6 +162,10 @@ require("telescope").setup({
 require("telescope").load_extension("fzf")
 require("gitsigns").setup()
 
+require("chatgpt").setup({
+  api_key_cmd = "agegent " .. home .. "/.local/share/secrets/openai.enc.txt",
+})
+
 local cmp = require("cmp")
 cmp.setup({
 	view = {
@@ -300,7 +306,6 @@ cmp.setup({
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 local nullls = require("null-ls")
-home = os.getenv("HOME")
 nullls.setup({
 	on_attach = on_attach,
 	sources = {
