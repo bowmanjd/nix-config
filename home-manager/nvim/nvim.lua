@@ -166,6 +166,11 @@ require("chatgpt").setup({
   api_key_cmd = "agegent " .. home .. "/.local/share/secrets/openai.enc.txt",
 })
 
+require("mason").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = { "powershell_es", },
+}
+
 local cmp = require("cmp")
 cmp.setup({
 	view = {
@@ -241,6 +246,11 @@ lspconfig.bashls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+lspconfig.powershell_es.setup {
+	capabilities = capabilities,
+	on_attach = on_attach,
+  bundle_path = vim.fn.stdpath "data" .. "/mason/packages/powershell-editor-services",
+}
 lspconfig.pyright.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,

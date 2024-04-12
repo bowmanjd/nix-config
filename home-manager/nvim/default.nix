@@ -43,8 +43,11 @@
       copilot-lua
       copilot-cmp
       gitsigns-nvim
+      lazy-nvim
       lspkind-nvim
       luasnip
+      mason-nvim
+      mason-lspconfig-nvim
       none-ls-nvim
       nvim-cmp
       nvim-lightbulb
