@@ -181,6 +181,7 @@
     inetutils
     jq
     jql
+    libgdiplus
     libgourou
     libpcap
     mssql-bcp
