@@ -32,6 +32,13 @@
   programs.atuin = {
     enable = true;
     enableBashIntegration = true;
+    flags = [
+      #"--no-disable-up-arrow"
+    ];
+    settings = {
+      sync_frequency = "10m";
+      filter_mode_shell_up_key_binding = "session";
+    };
   };
 
   home.sessionPath = [
