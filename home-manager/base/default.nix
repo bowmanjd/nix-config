@@ -181,6 +181,7 @@
     gitui
     glow
     gnumake
+    gnupg
     go_1_22
     handlr
     htop
