@@ -251,7 +251,7 @@
     qrencode
     #qsv
     rage
-    rich-cli
+    #rich-cli
     rustc
     rustfmt
     rust-analyzer
