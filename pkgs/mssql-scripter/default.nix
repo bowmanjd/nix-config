@@ -14,7 +14,7 @@ python311.pkgs.buildPythonPackage rec {
     owner = "microsoft";
     repo = "mssql-scripter";
     rev = "HEAD";
-    hash = "sha256-YPckb4TDK+hN4U4Hac03JgbxkoU9qN/sg3CBZygFnU8=";
+    hash = "sha256-sabuoIgdrndcf5LVFfDpA/T0hQsAmmLRwo+jpd0/lYU=";
   };
 
   patchPhase = ''

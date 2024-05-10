@@ -12,20 +12,20 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "qsv";
-  version = "0.118.0";
+  version = "0.127.0";
 
   src = fetchFromGitHub {
     owner = "jqnatividad";
     repo = "qsv";
     rev = version;
-    hash = "sha256-EVNqWETlKO7bpnh3rn6wjntgk5Xqa3/mnsu+hxu2UKk=";
+    hash = "sha256-QxG7jEyNofzs9oBJm+sX4+cm3LzkyqdSlzwNNQJWREw=";
   };
 
   postPatch = ''
     rm .cargo/config.toml;
   '';
 
-  cargoHash = "sha256-qd+zk83KxGsqYq+4mzSLK3qhuRbe3h0jdbxvrC30S1s=";
+  cargoHash = "";
 
   buildInputs =
     [
