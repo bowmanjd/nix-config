@@ -89,6 +89,11 @@
     enable = true;
   };
 
+  programs.tmux = {
+    enable = true;
+    newSession = true;
+  };
+
   programs.ssh.matchBlocks = {
     "server" = {
       hostname = "192.168.0.5";
@@ -263,7 +268,6 @@
     sqlfluff
     sqlite
     starship
-    tmux
     unixODBCDrivers.msodbcsql18
     usql
     vhs
