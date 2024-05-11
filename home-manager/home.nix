@@ -38,4 +38,12 @@
   home.sessionVariables = {
     EMAIL = "git@bowmanjd.com";
   };
+
+  programs.ssh.matchBlocks = {
+    "work" = {
+      hostname = "10.0.0.100";
+      user = "jbowman";
+      port = 5517;
+    };
+  };
 }
