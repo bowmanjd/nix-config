@@ -42,8 +42,32 @@
   programs.ssh.matchBlocks = {
     "work" = {
       hostname = "10.0.0.100";
-      user = "jbowman";
+      user = "jbowman@cargas";
       port = 5517;
+      extraOptions = {
+        RequestTTY = "force";
+        RemoteCommand = "\"C:\\Program Files\\WSL\\wsl.exe\" --cd ~";
+      };
+    };
+    "workps" = {
+      hostname = "10.0.0.100";
+      user = "jbowman@cargas";
+      port = 5517;
+      extraOptions = {
+        RequestTTY = "force";
+        RemoteCommand = "pwsh -NoProfile";
+      };
+    };
+    "workpw" = {
+      hostname = "10.0.0.100";
+      user = "jbowman@cargas";
+      port = 5517;
+      extraOptions = {
+        RequestTTY = "force";
+        RemoteCommand = "pwsh -NoProfile";
+        PubkeyAuthentication = "no";
+        PreferredAuthentications = "password";
+      };
     };
   };
 }

@@ -20,6 +20,8 @@
 
   nix.settings.trusted-users = [ "root" ];
 
+  systemd.network.wait-online.enable = false;
+
   boot.blacklistedKernelModules = ["psmouse"];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
