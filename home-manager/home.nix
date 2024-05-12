@@ -42,6 +42,10 @@
   programs.ssh.matchBlocks = {
     "work" = {
       hostname = "10.0.0.100";
+      user = "jbowman";
+    };
+    "workwsl" = {
+      hostname = "10.0.0.100";
       user = "jbowman@cargas";
       port = 5517;
       extraOptions = {
