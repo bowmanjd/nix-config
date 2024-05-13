@@ -194,6 +194,7 @@
     inetutils
     jq
     jql
+    lftp
     libgdiplus
     libgourou
     libpcap
@@ -207,6 +208,7 @@
     nix-index
     nmap
     nodejs
+    openssl
     p7zip
     pinentry
     podman
