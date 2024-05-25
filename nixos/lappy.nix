@@ -20,7 +20,8 @@
 
   nix.settings.trusted-users = [ "root" ];
 
-  systemd.network.wait-online.enable = false;
+  #systemd.network.wait-online.enable = false;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   boot.blacklistedKernelModules = ["psmouse"];
   boot.loader.systemd-boot.enable = true;
