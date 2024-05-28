@@ -280,6 +280,7 @@
     xdg-utils
     xxHash
     zip
+    zola
     zoxide
   ];
 
