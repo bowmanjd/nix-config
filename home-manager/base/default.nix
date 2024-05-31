@@ -164,6 +164,7 @@
     basescripts
     bat
     bc
+    broot
     buildah
     cachix
     cargo
@@ -173,6 +174,8 @@
     cobra-cli
     comrak
     degit
+    delta
+    diff-so-fancy
     dig
     dogdns
     dnsutils
@@ -198,6 +201,7 @@
     libgdiplus
     libgourou
     libpcap
+    miller
     mssql-bcp
     ms-sqltoolsservice
     mssql-cli
@@ -260,17 +264,22 @@
     #qsv
     rage
     #rich-cli
+    repgrep
     rustc
     rustfmt
     rust-analyzer
+    sad
+    sd
     see
     shiori
+    skim
     skopeo
     sops
     sqlcmd
     sqlfluff
     sqlite
     starship
+    tokei
     unixODBCDrivers.msodbcsql18
     usql
     vhs
