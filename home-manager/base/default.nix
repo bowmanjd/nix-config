@@ -213,7 +213,7 @@
     pinentry
     podman
     powershell
-    (python312.withPackages (ps:
+    (python3.withPackages (ps:
       with ps; [
         bandit
         beautifulsoup4
@@ -241,6 +241,7 @@
         llama-index-vector-stores-qdrant
         llama-index-vector-stores-chroma
         lxml
+        pathtools
         pep8-naming
         pexpect
         pip
