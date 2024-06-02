@@ -131,6 +131,11 @@
       port = 2227;
       forwardAgent = true;
     };
+    "github" = {
+      hostname = "ssh.github.com";
+      user = "git";
+      port = 443;
+    };
   };
 
   programs.direnv = {
