@@ -92,6 +92,7 @@
   programs.tmux = {
     enable = true;
     baseIndex = 1;
+    customPaneNavigationAndResize = true;
     escapeTime = 0;
     keyMode = "vi";
     mouse = true;
