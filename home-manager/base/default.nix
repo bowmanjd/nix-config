@@ -91,7 +91,18 @@
 
   programs.tmux = {
     enable = true;
+    baseIndex = 1;
+    escapeTime = 0;
+    keyMode = "vi";
+    mouse = true;
+    prefix = "C-a";
     newSession = true;
+    terminal = "screen-256color";
+    tmuxinator.enable = true;
+    extraConfig = ''
+      bind | split-window -h
+      bind - split-window -v
+    '';
   };
 
   programs.ssh.matchBlocks = {
