@@ -94,6 +94,7 @@
     baseIndex = 1;
     customPaneNavigationAndResize = true;
     escapeTime = 0;
+    historyLimit = 5000;
     keyMode = "vi";
     mouse = true;
     prefix = "C-a";
