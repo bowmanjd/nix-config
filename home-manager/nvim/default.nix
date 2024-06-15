@@ -8,10 +8,10 @@
     eslint_d
     fzf
     gopls
-    nodePackages_latest.bash-language-server
-    nodePackages_latest.poor-mans-t-sql-formatter-cli
-    nodePackages_latest.prettier
-    nodePackages_latest.pyright
+    #nodePackages.bash-language-server # TODO https://nixpk.gs/pr-tracker.html?pr=319882
+    nodePackages.poor-mans-t-sql-formatter-cli
+    nodePackages.prettier
+    #nodePackages.pyright #TODO
     prettierd
     quick-lint-js
     stylelint

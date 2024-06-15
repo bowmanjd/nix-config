@@ -95,7 +95,7 @@
   services.tailscale.enable = true;
 
   programs.bash = {
-    enableCompletion = true;
+    completion.enable = true;
     vteIntegration = true;
   };
 
