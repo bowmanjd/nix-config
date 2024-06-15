@@ -184,6 +184,7 @@
     bc
     broot
     buildah
+    bun
     cachix
     cargo
     cargo-binstall
@@ -191,8 +192,11 @@
     clippy
     cobra-cli
     comrak
+    corepack_22
     degit
     delta
+    devbox
+    devenv
     diff-so-fancy
     dig
     dogdns
@@ -229,7 +233,7 @@
     neofetch
     nix-index
     nmap
-    nodejs
+    nodejs_22
     openssl
     p7zip
     pinentry
