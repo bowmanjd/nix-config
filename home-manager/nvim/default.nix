@@ -11,7 +11,7 @@
     #nodePackages.bash-language-server # TODO https://nixpk.gs/pr-tracker.html?pr=319882
     nodePackages.poor-mans-t-sql-formatter-cli
     nodePackages.prettier
-    #nodePackages.pyright #TODO
+    pyright
     prettierd
     quick-lint-js
     stylelint
