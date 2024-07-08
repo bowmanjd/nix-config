@@ -8,7 +8,7 @@
     eslint_d
     fzf
     gopls
-    #nodePackages.bash-language-server # TODO https://nixpk.gs/pr-tracker.html?pr=319882
+    nodePackages.bash-language-server
     nodePackages.poor-mans-t-sql-formatter-cli
     nodePackages.prettier
     pyright
