@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+  DB=ConversionScripts
+else
+  DB="$1"
+fi
+
+sqlcmd -h-1 -W -Q "SET NOCOUNT ON; SELECT ROUTINE_NAME FROM $DB.INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'PROCEDURE'"

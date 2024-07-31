@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+for f in $(listprocs); do
+  echo $f
+  getproc "$f" | sed $'s/\r$//' > "dbo.$f.StoredProcedure.sql"
+done
