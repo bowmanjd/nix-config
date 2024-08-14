@@ -89,7 +89,7 @@
     ];
   };
 
-  programs.wshowkeys.enable = true;
+  programs.dconf.enable = true;
 
   # Needed for sway
   security.polkit.enable = true;
