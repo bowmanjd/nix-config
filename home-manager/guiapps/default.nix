@@ -21,7 +21,8 @@
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland;
+    package = (pkgs.wrapFirefox (pkgs.firefox-unwrapped.override { pipewireSupport = true;}) {});
+    #package = pkgs.firefox-wayland.override { pipewireSupport = true;};
   };
 }
 

@@ -18,8 +18,20 @@
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
+    MOZ_USE_XINPUT2 = "1";
     XDG_CURRENT_DESKTOP = "sway";
     NIXOS_OZONE_WL = "1";
+  };
+
+  xdg = {
+    portal = {
+      config.common.default = "*";
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
   };
 
   programs.bash = {
@@ -332,7 +344,10 @@
         "${modifier}+Shift+9" = "move container to workspace number 9";
       };
     };
-    extraConfig = "default_border none";
+    extraConfig = ''
+      default_border none
+      exec systemctl --user import-environment
+    '';
   };
 }
 
