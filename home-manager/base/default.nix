@@ -194,7 +194,7 @@
     comrak
     corepack_22
     degit
-    delta
+    #delta
     devbox
     devenv
     diff-so-fancy

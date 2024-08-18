@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     calibre
     chromium
-    easyeffects
+    #easyeffects
     gimp
     helvum
     inkscape
