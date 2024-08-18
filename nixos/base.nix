@@ -111,6 +111,14 @@
     settings.PasswordAuthentication = false;
   };
 
+  services.caddy = {
+    enable = true;
+    virtualHosts."localhost".extraConfig = ''
+      respond "Hello, world!"
+      tls internal
+    '';
+  };
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }
