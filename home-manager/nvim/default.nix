@@ -18,7 +18,7 @@
     stylua
     vim
     vimgolf
-    vscode-langservers-extracted
+    #vscode-langservers-extracted
     yaml-language-server
   ];
 
