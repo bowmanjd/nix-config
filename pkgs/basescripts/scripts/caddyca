@@ -1,0 +1,7 @@
+#!/bin/sh
+
+moz_dir="$HOME/.mozilla/firefox"
+default_profile="$moz_dir/$(git config -f $moz_dir/profiles.ini --get profile0.path)"
+
+sudo certutil -A -n "Caddy Local CA" -t "TC,Cw,Tw" -i /var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt -d "$default_profile"
+sudo certutil -A -n "Caddy Local CA" -t "TC,Cw,Tw" -i /var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt -d "$HOME/.pki/nssdb/"
