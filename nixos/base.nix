@@ -45,13 +45,6 @@
 
   networking = {
     firewall.enable = true;
-    hosts = {
-      "127.0.0.1" = ["localhost" "8080.bowmanjd.com" "5173.bowmanjd.com" "5173.home.arpa"];
-    };
-    #nftables = {
-    #  enable = true;
-    #  #checkRuleset = false;
-    #};
   };
 
   virtualisation = {
@@ -115,13 +108,29 @@
     settings.PasswordAuthentication = false;
   };
 
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      address = [
+        "/home.arpa/127.0.0.1"
+        "/local.bowmanjd.com/127.0.0.1"
+      ];
+      cache-size = 2000;
+    };
+  };
+
   services.caddy = {
     enable = true;
     virtualHosts."https://localhost".extraConfig = ''
       reverse_proxy http://127.0.0.1:8000
       tls internal
     '';
-    virtualHosts."*.bowmanjd.com".extraConfig = ''
+    virtualHosts."*.local.bowmanjd.com".extraConfig = ''
+      @numericSubdomain `{labels.3}.matches("^[0-9]+$")`
+      reverse_proxy @numericSubdomain 127.0.0.1:{labels.3}
+      tls internal
+    '';
+    virtualHosts."*.home.arpa".extraConfig = ''
       @numericSubdomain `{labels.2}.matches("^[0-9]+$")`
       reverse_proxy @numericSubdomain 127.0.0.1:{labels.2}
       tls internal

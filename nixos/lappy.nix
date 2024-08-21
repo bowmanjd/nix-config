@@ -15,7 +15,10 @@
 
   networking = {
     hostName = "lappy386";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+    };
+    resolvconf.useLocalResolver = true;
   };
 
   nix.settings.trusted-users = [ "root" ];
