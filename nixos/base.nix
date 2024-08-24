@@ -6,7 +6,6 @@
   outputs,
   ...
 }: {
-
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
@@ -30,7 +29,7 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
-      trusted-users = [ "@wheel" ];
+      trusted-users = ["@wheel"];
     };
   };
 
@@ -121,20 +120,20 @@
 
   services.caddy = {
     enable = true;
-    virtualHosts."https://localhost".extraConfig = ''
-      reverse_proxy http://127.0.0.1:8000
-      tls internal
-    '';
-    virtualHosts."*.local.bowmanjd.com".extraConfig = ''
-      @numericSubdomain `{labels.3}.matches("^[0-9]+$")`
-      reverse_proxy @numericSubdomain 127.0.0.1:{labels.3}
-      tls internal
-    '';
-    virtualHosts."*.home.arpa".extraConfig = ''
-      @numericSubdomain `{labels.2}.matches("^[0-9]+$")`
-      reverse_proxy @numericSubdomain 127.0.0.1:{labels.2}
-      tls internal
-    '';
+    virtualHosts = {
+      "localhost".extraConfig = ''
+        reverse_proxy 127.0.0.1:8000
+        tls internal
+      '';
+      "*.home.arpa" = {
+        serverAliases = [ "*.local.bowmanjd.com" ];
+        extraConfig = ''
+          @startsWithPort header_regexp Host ^\d+
+          reverse_proxy @startsWithPort 127.0.0.1:{re.0}
+          tls internal
+        '';
+      };
+    };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
