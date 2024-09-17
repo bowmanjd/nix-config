@@ -52,6 +52,7 @@
     userName = "Jonathan Bowman";
     ignores = [
       ".envrc"
+      ".sqltun"
       "[._]*.s[a-v][a-z]"
       "!*.svg"
       "[._]*.sw[a-p]"

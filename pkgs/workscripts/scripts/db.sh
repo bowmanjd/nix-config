@@ -2,6 +2,11 @@
 
 # ESCAPED_PASSWORD=$(python -c "import urllib.parse; print(urllib.parse.quote('$SQLCMDPASSWORD'),end='')")
 
+if [ -e .sqltun ]; then
+  export SQLPORT="$LOCALSQLPORT"
+  export SQLSERVER=127.0.0.1
+fi
+
 DBEXTRA="?trustServerCertificate&encrypt"
 #DBURL="sqlserver://$SQLCMDUSER:$ESCAPED_PASSWORD@$SQLSERVER:$SQLPORT"
 DBURL="sqlserver://$SQLCMDUSER@$SQLSERVER:$SQLPORT"

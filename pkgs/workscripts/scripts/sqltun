@@ -1,3 +1,5 @@
 #!/bin/sh
 
+touch .sqltun
 ssh -L "$LOCALSQLPORT:/home/tunnel/$TUNNELSOCK" sqltun
+rm .sqltun
