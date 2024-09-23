@@ -161,8 +161,7 @@ require("telescope").setup({
 })
 require("telescope").load_extension("fzf")
 
-require('gitsigns').setup{
-  ...
+require('gitsigns').setup({
   on_attach = function(bufnr)
     local gitsigns = require('gitsigns')
 
@@ -207,7 +206,7 @@ require('gitsigns').setup{
     -- Text object
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
-}
+})
 
 require("chatgpt").setup({
   api_key_cmd = "agegent " .. home .. "/.local/share/secrets/openai.enc.txt",
