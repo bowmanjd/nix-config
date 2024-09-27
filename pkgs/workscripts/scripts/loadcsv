@@ -2,9 +2,10 @@
 
 tablename=$(basename "$1" | cut -d'.' -f1)
 loadsql="$HOME/ctemp/$tablename.sql"
+database="${2:-ConversionScripts}"
 
 sql=$(busser output -i -t "$tablename" -j -o "$loadsql" "$1")
 
-sqlcmd -C -d ConversionScripts -Q "$sql"
+sqlcmd -C -d "$database" -Q "$sql"
 
-sqlcmd -C -d ConversionScripts -i "$loadsql"
+sqlcmd -C -d "$database" -i "$loadsql"
