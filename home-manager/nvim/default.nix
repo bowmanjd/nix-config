@@ -18,7 +18,7 @@
     stylua
     vim
     vimgolf
-    #vscode-langservers-extracted
+    vscode-langservers-extracted
     yaml-language-server
   ];
 
@@ -46,6 +46,7 @@
       lazy-nvim
       lspkind-nvim
       luasnip
+      markdown-preview-nvim
       mason-nvim
       mason-lspconfig-nvim
       none-ls-nvim
@@ -58,6 +59,8 @@
       plenary-nvim
       telescope-nvim
       telescope-fzf-native-nvim
+      trouble-nvim
+      typescript-tools-nvim
       vim-dadbod
       vim-dadbod-ui
       vim-dadbod-completion
