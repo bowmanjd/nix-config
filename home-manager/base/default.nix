@@ -210,6 +210,8 @@
     file
     flatbuffers
     gcc
+    #gitbutler
+    gitoxide
     gitui
     glow
     gnumake
@@ -285,9 +287,9 @@
         wheel
       ]))
     qrencode
-    #qsv
+    qsv
     rage
-    #rich-cli
+    rich-cli
     repgrep
     rustc
     rustfmt
