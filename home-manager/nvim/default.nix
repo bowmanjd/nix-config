@@ -32,6 +32,7 @@
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
       ChatGPT-nvim
+      cloak-nvim
       csv-vim
       direnv-vim
       catppuccin-nvim
@@ -42,6 +43,7 @@
       cmp-nvim-lsp
       copilot-lua
       copilot-cmp
+      diffview-nvim
       gitsigns-nvim
       lazy-nvim
       lspkind-nvim
