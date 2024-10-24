@@ -64,52 +64,52 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 notify = require("notify")
 render_explain = function(bufnr, notif, highlights, config)
-  local max_message_width = math.max(math.max(unpack(vim.tbl_map(function(line)
-    return vim.fn.strchars(line)
-  end, notif.message))))
-  local title = notif.title[1]
-  local title_accum = vim.str_utfindex(title)
+	local max_message_width = math.max(math.max(unpack(vim.tbl_map(function(line)
+		return vim.fn.strchars(line)
+	end, notif.message))))
+	local title = notif.title[1]
+	local title_accum = vim.str_utfindex(title)
 
-  local namespace = require("notify.render.base").namespace()
+	local namespace = require("notify.render.base").namespace()
 
-  vim.api.nvim_buf_set_lines(bufnr, 0, 1, false, { "", "" })
-  vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
-    virt_text = {
-      { title, highlights.title },
-    },
-    virt_text_win_col = 0,
-    priority = 10,
-  })
-  vim.api.nvim_buf_set_extmark(bufnr, namespace, 1, 0, {
-    virt_text = {
-      {
-        string.rep("━", math.max(max_message_width, title_accum, config.minimum_width())),
-        highlights.border,
-      },
-    },
-    virt_text_win_col = 0,
-    priority = 10,
-  })
-  vim.api.nvim_buf_set_lines(bufnr, 2, -1, false, notif.message)
+	vim.api.nvim_buf_set_lines(bufnr, 0, 1, false, { "", "" })
+	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
+		virt_text = {
+			{ title, highlights.title },
+		},
+		virt_text_win_col = 0,
+		priority = 10,
+	})
+	vim.api.nvim_buf_set_extmark(bufnr, namespace, 1, 0, {
+		virt_text = {
+			{
+				string.rep("━", math.max(max_message_width, title_accum, config.minimum_width())),
+				highlights.border,
+			},
+		},
+		virt_text_win_col = 0,
+		priority = 10,
+	})
+	vim.api.nvim_buf_set_lines(bufnr, 2, -1, false, notif.message)
 
-  vim.api.nvim_buf_set_extmark(bufnr, namespace, 2, 0, {
-    hl_group = highlights.body,
-    end_line = 1 + #notif.message,
-    end_col = #notif.message[#notif.message],
-    priority = 50,
-  })
+	vim.api.nvim_buf_set_extmark(bufnr, namespace, 2, 0, {
+		hl_group = highlights.body,
+		end_line = 1 + #notif.message,
+		end_col = #notif.message[#notif.message],
+		priority = 50,
+	})
 end
 
 notify.setup({
-  minimum_width = 20,
-  timeout = 1000
+	minimum_width = 20,
+	timeout = 1000,
 })
 
 vim.notify = notify
 
 explain = function(content, title, duration)
-  duration = duration or 1000
-  vim.notify(content, "info", { title = title, timeout = duration, render = render_explain })
+	duration = duration or 1000
+	vim.notify(content, "info", { title = title, timeout = duration, render = render_explain })
 end
 
 require("nvim-treesitter.configs").setup({
@@ -161,61 +161,69 @@ require("telescope").setup({
 })
 require("telescope").load_extension("fzf")
 
-require('gitsigns').setup({
-  on_attach = function(bufnr)
-    local gitsigns = require('gitsigns')
+require("gitsigns").setup({
+	on_attach = function(bufnr)
+		local gitsigns = require("gitsigns")
 
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
+		local function map(mode, l, r, opts)
+			opts = opts or {}
+			opts.buffer = bufnr
+			vim.keymap.set(mode, l, r, opts)
+		end
 
-    -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then
-        vim.cmd.normal({']c', bang = true})
-      else
-        gitsigns.nav_hunk('next')
-      end
-    end)
+		-- Navigation
+		map("n", "]c", function()
+			if vim.wo.diff then
+				vim.cmd.normal({ "]c", bang = true })
+			else
+				gitsigns.nav_hunk("next")
+			end
+		end)
 
-    map('n', '[c', function()
-      if vim.wo.diff then
-        vim.cmd.normal({'[c', bang = true})
-      else
-        gitsigns.nav_hunk('prev')
-      end
-    end)
+		map("n", "[c", function()
+			if vim.wo.diff then
+				vim.cmd.normal({ "[c", bang = true })
+			else
+				gitsigns.nav_hunk("prev")
+			end
+		end)
 
-    -- Actions
-    map('n', '<leader>hs', gitsigns.stage_hunk)
-    map('n', '<leader>hr', gitsigns.reset_hunk)
-    map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('n', '<leader>hS', gitsigns.stage_buffer)
-    map('n', '<leader>hu', gitsigns.undo_stage_hunk)
-    map('n', '<leader>hR', gitsigns.reset_buffer)
-    map('n', '<leader>hp', gitsigns.preview_hunk)
-    map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
-    map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-    map('n', '<leader>hd', gitsigns.diffthis)
-    map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
-    map('n', '<leader>td', gitsigns.toggle_deleted)
+		-- Actions
+		map("n", "<leader>hs", gitsigns.stage_hunk)
+		map("n", "<leader>hr", gitsigns.reset_hunk)
+		map("v", "<leader>hs", function()
+			gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+		end)
+		map("v", "<leader>hr", function()
+			gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+		end)
+		map("n", "<leader>hS", gitsigns.stage_buffer)
+		map("n", "<leader>hu", gitsigns.undo_stage_hunk)
+		map("n", "<leader>hR", gitsigns.reset_buffer)
+		map("n", "<leader>hp", gitsigns.preview_hunk)
+		map("n", "<leader>hb", function()
+			gitsigns.blame_line({ full = true })
+		end)
+		map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+		map("n", "<leader>hd", gitsigns.diffthis)
+		map("n", "<leader>hD", function()
+			gitsigns.diffthis("~")
+		end)
+		map("n", "<leader>td", gitsigns.toggle_deleted)
 
-    -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-  end
+		-- Text object
+		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+	end,
 })
 
 require("chatgpt").setup({
-  api_key_cmd = "agegent " .. home .. "/.local/share/secrets/openai.enc.txt",
+	api_key_cmd = "agegent " .. home .. "/.local/share/secrets/openai.enc.txt",
 })
 
 require("mason").setup()
-require("mason-lspconfig").setup {
-  ensure_installed = { "powershell_es", },
-}
+require("mason-lspconfig").setup({
+	ensure_installed = { "powershell_es" },
+})
 
 local cmp = require("cmp")
 cmp.setup({
@@ -296,11 +304,15 @@ lspconfig.biome.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
-lspconfig.powershell_es.setup {
+lspconfig.powershell_es.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-  bundle_path = vim.fn.stdpath "data" .. "/mason/packages/powershell-editor-services",
-}
+	bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+})
+lspconfig.emmet_language_server.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
 lspconfig.pyright.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -389,7 +401,7 @@ nullls.setup({
 				"tsql",
 			},
 		}),
-		nullls.builtins.formatting.prettierd.with({ filetypes = { "css", "scss" } }),
+		-- nullls.builtins.formatting.prettierd.with({ filetypes = { "css", "scss" } }),
 		nullls.builtins.diagnostics.stylelint,
 		nullls.builtins.formatting.stylua,
 		-- nullls.builtins.formatting.reorder_python_imports,

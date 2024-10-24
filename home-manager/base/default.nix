@@ -206,6 +206,7 @@
     dnsutils
     du-dust
     elinks
+    emmet-language-server
     eza
     ffmpeg_6-full
     file
