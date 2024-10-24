@@ -292,6 +292,10 @@ lspconfig.bashls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
+lspconfig.biome.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
 lspconfig.powershell_es.setup {
 	capabilities = capabilities,
 	on_attach = on_attach,

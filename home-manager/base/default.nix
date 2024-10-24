@@ -184,6 +184,7 @@
     basescripts
     bat
     bc
+    biome
     broot
     buildah
     bun
@@ -305,6 +306,7 @@
     sqlfluff
     sqlite
     starship
+    swc
     tokei
     unixODBCDrivers.msodbcsql18
     usql
