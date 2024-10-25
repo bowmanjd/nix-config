@@ -52,7 +52,6 @@
       markdown-preview-nvim
       mason-nvim
       mason-lspconfig-nvim
-      none-ls-nvim
       nvim-cmp
       nvim-lightbulb
       nvim-lspconfig
