@@ -33,6 +33,7 @@
     plugins = with pkgs.vimPlugins; [
       ChatGPT-nvim
       cloak-nvim
+      conform-nvim
       csv-vim
       direnv-vim
       catppuccin-nvim

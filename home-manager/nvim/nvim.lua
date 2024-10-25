@@ -277,17 +277,49 @@ cmp.setup.filetype("sql", {
 	sources = cmp.config.sources({ { name = "vim-dadbod-completion" }, { name = "luasnip" } }, { { name = "buffer" } }),
 })
 
+local conform = require("conform")
+conform.setup({
+  formatters_by_ft = {
+    css = { "stylelint" },
+    lua = { "stylua" },
+    python = { "isort", "black" },
+    -- You can customize some of the format options for the filetype (:help conform.format)
+    rust = { "rustfmt" },
+    -- Conform will run the first available formatter
+    javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
+    sql = { "sqlfluff" },
+  },
+  default_format_opts = {
+    async = true,
+    lsp_format = "fallback",
+    timeout_ms = 60000,
+  },
+  formatters = {
+    sqlfluff = {
+      require_cwd = false,
+      quiet = true,
+      exit_codes = { 0, 1 },
+      args = {
+        "format",
+        "--ignore-local-config",
+        "--dialect",
+        "tsql",
+        "--config",
+        home .. "/devel/sql/.sqlfluff",
+        "-",
+      },
+    },
+  },
+})
+
+vim.keymap.set('n',  "<leader>f", "<cmd>lua require'conform'.format()<CR>", { noremap = true })
+
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
 	local opts = { noremap = true, silent = true }
-	if client.supports_method("textDocument/formatting") then
-		buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
-	end
+  -- buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
 	buf_set_keymap("n", "<space>]", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 end
 
@@ -376,39 +408,3 @@ cmp.setup({
 })
 
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-
-local nullls = require("null-ls")
-nullls.setup({
-	on_attach = on_attach,
-	sources = {
-		-- nullls.builtins.formatting.sqlformat.with({ args = { "-s", "4", "-m", "150", "-d", "    " } }),
-		-- nullls.builtins.formatting.dprint.with({ filetypes = { "markdown", "toml" } }),
-		nullls.builtins.formatting.sqlfluff.with({
-			timeout_ms = 60000,
-			extra_args = {
-				"--config",
-				home .. "/devel/sql/.sqlfluff",
-				"--dialect",
-				"tsql",
-			},
-		}),
-		nullls.builtins.diagnostics.sqlfluff.with({
-			timeout_ms = 60000,
-			extra_args = {
-				"--config",
-				home .. "/devel/sql/.sqlfluff",
-				"--dialect",
-				"tsql",
-			},
-		}),
-		-- nullls.builtins.formatting.prettierd.with({ filetypes = { "css", "scss" } }),
-		nullls.builtins.diagnostics.stylelint,
-		nullls.builtins.formatting.stylua,
-		-- nullls.builtins.formatting.reorder_python_imports,
-		nullls.builtins.formatting.black,
-		--nullls.builtins.diagnostics.flake8,
-		-- nullls.builtins.diagnostics.eslint_d,
-		-- nullls.builtins.formatting.eslint_d,
-		-- nullls.builtins.code_actions.eslint_d,
-	},
-})
