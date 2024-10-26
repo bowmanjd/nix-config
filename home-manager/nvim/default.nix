@@ -54,6 +54,7 @@
       mason-lspconfig-nvim
       nvim-cmp
       nvim-lightbulb
+      nvim-lint
       nvim-lspconfig
       nvim-notify
       nvim-treesitter.withAllGrammars

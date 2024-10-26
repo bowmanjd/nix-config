@@ -300,7 +300,7 @@ conform.setup({
       quiet = true,
       exit_codes = { 0, 1 },
       args = {
-        "format",
+        "fix",
         "--ignore-local-config",
         "--dialect",
         "tsql",
