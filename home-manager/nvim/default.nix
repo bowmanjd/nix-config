@@ -48,6 +48,7 @@
       copilot-lua
       copilot-cmp
       diffview-nvim
+      friendly-snippets
       gitsigns-nvim
       lazy-nvim
       lspkind-nvim
