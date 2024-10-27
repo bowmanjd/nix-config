@@ -23,6 +23,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.signcolumn = "yes"
 
 vim.opt.background = "dark"
 vim.opt.termguicolors = true
@@ -225,7 +226,32 @@ require("mason-lspconfig").setup({
 	ensure_installed = { "powershell_es" },
 })
 
+local lspconfig_defaults = require("lspconfig").util.default_config
+lspconfig_defaults.capabilities =
+	vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "LSP actions",
+	callback = function(event)
+		local opts = { buffer = event.buf }
+
+		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+		vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+		vim.keymap.set("n", "<leader>]", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+		vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+		vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+		vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+		vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+		vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+		vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+	end,
+})
+
 local cmp = require("cmp")
+local lspkind = require("lspkind")
+--cmp.register_source('look', require('cmp_path').new())
 cmp.setup({
 	view = {
 		entries = "native",
@@ -249,109 +275,101 @@ cmp.setup({
 			end
 		end,
 	}),
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
+			max_width = 50,
+			symbol_map = { Copilot = "", DB = "󰆼", VariableMember = "" },
+			before = function(entry, vim_item)
+				vim_item.menu = ({
+					["vim-dadbod-completion"] = "[DB]",
+					buffer = "[Buffer]",
+					copilot = "[Copilot]",
+					look = "[Look]",
+					luasnip = "[Snippet]",
+					nvim_lsp = "[LSP]",
+					path = "[Path]",
+					rg = "[Rg]",
+					tags = "[Tag]",
+					treesitter = "[Treesitter]",
+				})[entry.source.name]
+				return vim_item
+			end,
+		}),
+	},
 	sources = cmp.config.sources({
 		{ name = "copilot" },
 		{ name = "nvim_lsp" },
+		{ name = "vim-dadbod-completion" },
 		{ name = "luasnip" },
-	}, {
+		{ name = "treesitter" },
+		{
+			name = "look",
+			keyword_length = 3,
+			option = { loud = true, fflag = true, dict = home .. "/.config/look/words" },
+		},
 		{ name = "buffer" },
+		{ name = "tags", keyword_length = 2 },
+		{ name = "rg", keyword_length = 3 },
+		{ name = "path" },
 	}),
 })
 
-cmp.setup.filetype("sql", {
-	view = {
-		entries = "native",
-	},
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-	}),
-	sources = cmp.config.sources({ { name = "vim-dadbod-completion" }, { name = "luasnip" } }, { { name = "buffer" } }),
+cmp.setup({
+	formatting = {},
 })
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 local conform = require("conform")
 conform.setup({
-  formatters_by_ft = {
-    css = { "stylelint" },
-    lua = { "stylua" },
-    python = { "isort", "black" },
-    -- You can customize some of the format options for the filetype (:help conform.format)
-    rust = { "rustfmt" },
-    -- Conform will run the first available formatter
-    javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
-    sql = { "sqlfluff" },
-  },
-  default_format_opts = {
-    async = true,
-    lsp_format = "fallback",
-    timeout_ms = 60000,
-  },
-  formatters = {
-    sqlfluff = {
-      require_cwd = false,
-      quiet = true,
-      exit_codes = { 0, 1 },
-      args = {
-        "fix",
-        "--ignore-local-config",
-        "--dialect",
-        "tsql",
-        "--config",
-        home .. "/devel/sql/.sqlfluff",
-        "-",
-      },
-    },
-  },
+	formatters_by_ft = {
+		css = { "stylelint" },
+		lua = { "stylua" },
+		nix = { "alejandra" },
+		python = { "isort", "black" },
+		rust = { "rustfmt" },
+		-- You can customize some of the format options for the filetype (:help conform.format)
+		-- Conform will run the first available formatter
+		javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
+		sql = { "sqlfluff" },
+	},
+	default_format_opts = {
+		async = true,
+		lsp_format = "fallback",
+		timeout_ms = 60000,
+	},
+	formatters = {
+		sqlfluff = {
+			require_cwd = false,
+			quiet = true,
+			exit_codes = { 0, 1 },
+			args = {
+				"fix",
+				"--ignore-local-config",
+				"--dialect",
+				"tsql",
+				"--config",
+				home .. "/devel/sql/.sqlfluff",
+				"-",
+			},
+		},
+	},
 })
 
-vim.keymap.set('n',  "<leader>f", "<cmd>lua require'conform'.format()<CR>", { noremap = true })
-
-local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
-	local opts = { noremap = true, silent = true }
-  -- buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
-	buf_set_keymap("n", "<space>]", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-end
+vim.keymap.set("n", "<leader>f", "<cmd>lua require'conform'.format()<CR>", { noremap = true })
 
 -- Setup lspconfig.
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lspconfig = require("lspconfig")
-local capabilities = cmp_nvim_lsp.default_capabilities()
 
-lspconfig.bashls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.biome.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
+lspconfig.bashls.setup({})
+lspconfig.biome.setup({})
 lspconfig.powershell_es.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
 	bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
 })
-lspconfig.emmet_language_server.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.pyright.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
+lspconfig.emmet_language_server.setup({})
+lspconfig.pyright.setup({})
 lspconfig.gopls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
 	settings = {
 		gopls = {
 			analyses = {
@@ -362,49 +380,16 @@ lspconfig.gopls.setup({
 		},
 	},
 })
-lspconfig.golangci_lint_ls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
+lspconfig.golangci_lint_ls.setup({})
 lspconfig.rust_analyzer.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
 	settings = {
 		checkOnSave = {
 			command = "clippy",
 		},
 	},
 })
-lspconfig.jsonls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.html.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.yamlls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.dockerls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.quick_lint_js.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
-local lspkind = require("lspkind")
-cmp.setup({
-	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol_text",
-			max_width = 50,
-			symbol_map = { Copilot = "" },
-		}),
-	},
-})
-
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+lspconfig.jsonls.setup({})
+lspconfig.html.setup({})
+lspconfig.yamlls.setup({})
+lspconfig.dockerls.setup({})
+lspconfig.quick_lint_js.setup({})

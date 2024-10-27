@@ -1,0 +1,7 @@
+bEntity
+bEntityID
+bEntity_bLocation
+bEquipment
+bEquipmentID
+bEntity_bServiceContract
+bEntity_bServiceContract_bEquipment

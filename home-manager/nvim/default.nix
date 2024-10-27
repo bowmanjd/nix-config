@@ -1,10 +1,8 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
+    biome
     dockerfile-language-server-nodejs
-    dprint
+    emmet-language-server
     eslint_d
     fzf
     gopls
@@ -14,6 +12,7 @@
     pyright
     prettierd
     quick-lint-js
+    ruff
     stylelint
     stylua
     vim
@@ -40,8 +39,12 @@
       lualine-nvim
       indent-blankline-nvim
       cmp-buffer
-      cmp_luasnip
       cmp-nvim-lsp
+      cmp-path
+      cmp-rg
+      cmp-look
+      cmp_luasnip
+      cmp-treesitter
       copilot-lua
       copilot-cmp
       diffview-nvim
@@ -70,5 +73,12 @@
       #mini-nvim
     ];
     extraLuaConfig = builtins.readFile ./nvim.lua;
+  };
+
+
+  xdg.configFile."words" = {
+    enable = true;
+    source = ./words;
+    target = "look/words";
   };
 }

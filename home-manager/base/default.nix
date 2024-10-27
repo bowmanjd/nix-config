@@ -184,7 +184,6 @@
     basescripts
     bat
     bc
-    biome
     broot
     buildah
     bun
@@ -198,6 +197,7 @@
     corepack_22
     degit
     #delta
+    deno
     devbox
     devenv
     diff-so-fancy
@@ -206,12 +206,12 @@
     dnsutils
     du-dust
     elinks
-    emmet-language-server
     eza
     ffmpeg_6-full
     file
     flatbuffers
     gcc
+    gh
     #gitbutler
     gitoxide
     gitui
@@ -313,7 +313,7 @@
     usql
     vhs
     virtualenv
-    xsv
+    yq
     yt-dlp
     unzip
     xdg-utils
