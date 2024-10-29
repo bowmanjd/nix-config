@@ -31,31 +31,33 @@
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
       ChatGPT-nvim
-      cloak-nvim
-      conform-nvim
-      csv-vim
-      direnv-vim
       catppuccin-nvim
-      lualine-nvim
-      indent-blankline-nvim
+      cloak-nvim
       cmp-buffer
+      cmp-emoji
+      cmp-look
       cmp-nvim-lsp
       cmp-path
       cmp-rg
-      cmp-look
-      cmp_luasnip
       cmp-treesitter
-      copilot-lua
+      cmp-tmux
+      cmp_luasnip
+      conform-nvim
       copilot-cmp
+      copilot-lua
+      csv-vim
       diffview-nvim
+      direnv-vim
       friendly-snippets
       gitsigns-nvim
+      indent-blankline-nvim
       lazy-nvim
       lspkind-nvim
+      lualine-nvim
       luasnip
       markdown-preview-nvim
-      mason-nvim
       mason-lspconfig-nvim
+      mason-nvim
       nvim-cmp
       nvim-lightbulb
       nvim-lint
@@ -64,13 +66,13 @@
       nvim-treesitter.withAllGrammars
       nvim-web-devicons
       plenary-nvim
-      telescope-nvim
       telescope-fzf-native-nvim
+      telescope-nvim
       trouble-nvim
       typescript-tools-nvim
       vim-dadbod
-      vim-dadbod-ui
       vim-dadbod-completion
+      vim-dadbod-ui
       #mini-nvim
     ];
     extraLuaConfig = builtins.readFile ./nvim.lua;
