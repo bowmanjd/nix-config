@@ -268,41 +268,48 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping({
-       i = function(fallback)
-         if cmp.visible() and cmp.get_active_entry() then
-           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-         else
-           fallback()
-         end
-       end,
-       s = cmp.mapping.confirm({ select = true }),
-       c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-     }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.locally_jumpable(1) then
-        luasnip.jump(1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+		["<CR>"] = cmp.mapping({
+			i = function(fallback)
+				if cmp.visible() and cmp.get_active_entry() then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+				else
+					fallback()
+				end
+			end,
+			s = cmp.mapping.confirm({ select = true }),
+			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+		}),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.locally_jumpable(1) then
+				luasnip.jump(1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.locally_jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 	},
 	formatting = {
 		format = lspkind.cmp_format({
 			mode = "symbol_text",
 			max_width = 50,
-			symbol_map = { Copilot = "", Rg = "󰍉", Look = "👀", DB = "󰆼", VariableMember = "", Tmux = "" },
+			symbol_map = {
+				Copilot = "",
+				Rg = "󰍉",
+				Look = "👀",
+				DB = "󰆼",
+				VariableMember = "",
+				Tmux = "",
+			},
 			before = function(entry, vim_item)
 				vim_item.menu = ({
 					["vim-dadbod-completion"] = "[DB]",
@@ -315,7 +322,7 @@ cmp.setup({
 					path = "[Path]",
 					rg = "[Rg]",
 					tags = "[Tag]",
-          tmux = "[Tmux]",
+					tmux = "[Tmux]",
 					treesitter = "[Treesitter]",
 				})[entry.source.name]
 				return vim_item
@@ -331,12 +338,12 @@ cmp.setup({
 		{
 			name = "tmux",
 			option = { all_panes = true },
-      group_index = 2,
+			group_index = 2,
 		},
 		{
 			name = "look",
 			keyword_length = 3,
-      group_index = 2,
+			group_index = 2,
 			option = { loud = true, fflag = true, dict = home .. "/.config/look/words" },
 		},
 		{ name = "buffer", group_index = 2 },
@@ -386,6 +393,22 @@ conform.setup({
 })
 
 vim.keymap.set("n", "<leader>f", "<cmd>lua require'conform'.format()<CR>", { noremap = true })
+
+local lint = require("lint")
+lint.linters.sqlfluff.args = {
+	"fix",
+	"--ignore-local-config",
+	"--dialect",
+	"tsql",
+	"--config",
+	home .. "/devel/sql/.sqlfluff",
+	"-",
+}
+
+lint.linters_by_ft = {
+	sql = { "sqlfluff" },
+	javascript = { "biomejs" },
+}
 
 -- Setup lspconfig.
 local lspconfig = require("lspconfig")
