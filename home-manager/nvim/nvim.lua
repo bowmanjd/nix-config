@@ -395,8 +395,10 @@ conform.setup({
 vim.keymap.set("n", "<leader>f", "<cmd>lua require'conform'.format()<CR>", { noremap = true })
 
 local lint = require("lint")
+lint.linters.sqlfluff.stdin = true
 lint.linters.sqlfluff.args = {
-	"fix",
+	"lint",
+	"--format=json",
 	"--ignore-local-config",
 	"--dialect",
 	"tsql",
@@ -409,6 +411,9 @@ lint.linters_by_ft = {
 	sql = { "sqlfluff" },
 	javascript = { "biomejs" },
 }
+
+vim.keymap.set("n", "<leader>l", "<cmd>lua require'lint'.try_lint()<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>L", "<cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>", { noremap = true })
 
 -- Setup lspconfig.
 local lspconfig = require("lspconfig")
