@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = with pkgs; [
     biome
     dockerfile-language-server-nodejs
@@ -6,15 +10,20 @@
     eslint_d
     fzf
     gopls
+    hadolint
+    markdownlint-cli
     nodePackages.bash-language-server
     nodePackages.poor-mans-t-sql-formatter-cli
     nodePackages.prettier
+    nodePackages.jsonlint
     pyright
     prettierd
     quick-lint-js
     ruff
     stylelint
     stylua
+    tflint
+    vale
     vim
     vimgolf
     vscode-langservers-extracted
@@ -58,6 +67,7 @@
       markdown-preview-nvim
       mason-lspconfig-nvim
       mason-nvim
+      nui-nvim
       nvim-cmp
       nvim-lightbulb
       nvim-lint
@@ -73,11 +83,20 @@
       vim-dadbod
       vim-dadbod-completion
       vim-dadbod-ui
+      which-key-nvim
       #mini-nvim
     ];
-    extraLuaConfig = builtins.readFile ./nvim.lua;
+    extraLuaConfig =
+      ''
+        pluginPath = "${pkgs.vimUtils.packDir config.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start"
+      ''
+      + builtins.readFile ./nvim.lua;
   };
 
+  xdg.configFile."nvim/lua" = {
+    recursive = true;
+    source = ./lua;
+  };
 
   xdg.configFile."words" = {
     enable = true;
