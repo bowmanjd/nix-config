@@ -67,6 +67,7 @@
       markdown-preview-nvim
       mason-lspconfig-nvim
       mason-nvim
+      neo-tree-nvim
       nui-nvim
       nvim-cmp
       nvim-lightbulb
