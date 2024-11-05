@@ -2,6 +2,20 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		event = { "BufReadPre", "BufNewFile" },
+		keys = {
+			{
+				"<leader>l",
+				require("lint").try_lint,
+				desc = "Lint buffer",
+			},
+			{
+				"<leader>L",
+				function()
+					vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+				end,
+				desc = "Lint buffer",
+			},
+		},
 		config = function()
 			local lint = require("lint")
 			lint.linters_by_ft = lint.linters_by_ft or {}
@@ -35,10 +49,6 @@ return {
 					end
 				end,
 			})
-		end,
-		init = function()
-			vim.keymap.set("n", "<leader>l", "<cmd>lua require'lint'.try_lint()<CR>", { noremap = true })
-			vim.keymap.set("n", "<leader>L", "<cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>", { noremap = true })
 		end,
 	},
 }
