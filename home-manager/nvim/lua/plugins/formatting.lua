@@ -6,6 +6,7 @@ return {
 		{
 			"<leader>f",
       require'conform'.format,
+      mode = { "n", "v" },
 			desc = "Format buffer",
 		},
 	},

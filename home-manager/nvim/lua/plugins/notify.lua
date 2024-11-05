@@ -1,6 +1,13 @@
 return {
 	{
 		"rcarriga/nvim-notify",
+    keys = {
+      {
+        "<leader>m",
+        "<cmd>lua notify.dismiss()<cr>",
+        desc = "Dismiss notifications",
+      },
+    },
 		config = function()
 			notify = require("notify")
 			render_explain = function(bufnr, notif, highlights, config)

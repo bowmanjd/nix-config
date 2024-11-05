@@ -1,6 +1,4 @@
 return {
-	-- which-key helps you remember key bindings by showing a popup
-	-- with the active keybindings of the command you started typing.
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
