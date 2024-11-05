@@ -254,7 +254,7 @@
         eradicate
         fire
         flake8
-        flake8-bugbear
+        #flake8-bugbear
         flake8-docstrings
         fonttools
         isort
