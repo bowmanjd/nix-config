@@ -103,6 +103,7 @@
     newSession = true;
     terminal = "screen-256color";
     tmuxinator.enable = true;
+    secureSocket = false;
     extraConfig = ''
       bind | split-window -h
       bind - split-window -v
