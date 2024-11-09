@@ -203,6 +203,7 @@
     devenv
     diff-so-fancy
     dig
+    distrobox
     dogdns
     dnsutils
     du-dust
@@ -216,6 +217,7 @@
     #gitbutler
     gitoxide
     gitui
+    git-subrepo
     glow
     gnumake
     gnupg
