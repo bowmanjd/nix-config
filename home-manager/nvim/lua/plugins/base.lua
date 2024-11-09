@@ -8,6 +8,7 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
+    branch = '0.1.x',
 		opts = {
 			extensions = {
 				fzf = {
@@ -23,6 +24,6 @@ return {
 			tele.setup(opts)
 			tele.load_extension("fzf")
 		end,
-		dependencies = { "nvim-telescope/telescope-fzf-native.nvim" },
+		dependencies = { "nvim-telescope/telescope-fzf-native.nvim", "nvim-lua/plenary.nvim" },
 	},
 }
