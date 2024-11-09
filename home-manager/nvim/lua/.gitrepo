@@ -4,8 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = none
+	remote = git@github.com:bowmanjd/nvim-lua.git
 	branch = main
-	commit = 
+	commit = eadd2c8723df38665eac10f5655ec071e06ea130
 	method = merge
 	cmdver = 0.4.9
+	parent = 4de300e7237dbf41be28cb683f6e4dee617c91cc
