@@ -9,7 +9,7 @@ vim.opt.fileformat = "unix"
 vim.opt.fileformats = { "unix", "dos" }
 
 vim.opt.backup = false
-vim.opt.writebackup = false
+vim.opt.writebackup = true
 
 vim.opt.smartindent = true
 vim.opt.tabstop = 2
