@@ -232,6 +232,7 @@
     libgdiplus
     libgourou
     libpcap
+    lilipod
     miller
     mssql-bcp
     ms-sqltoolsservice

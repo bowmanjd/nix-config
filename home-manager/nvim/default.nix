@@ -61,7 +61,6 @@
       gitsigns-nvim
       indent-blankline-nvim
       lazy-nvim
-      lilipod
       lspkind-nvim
       lualine-nvim
       luasnip
