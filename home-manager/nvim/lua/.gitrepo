@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:bowmanjd/nvim-lua.git
 	branch = main
-	commit = eadd2c8723df38665eac10f5655ec071e06ea130
+	commit = 29b49a6bb717c570f10773b84d05d768baf7a653
 	method = merge
 	cmdver = 0.4.9
-	parent = 4de300e7237dbf41be28cb683f6e4dee617c91cc
+	parent = fba93a034c53ecc67c97dafd581c926beb5089b9
