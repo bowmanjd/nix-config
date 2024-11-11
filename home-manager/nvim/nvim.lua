@@ -1,4 +1,4 @@
-require('base')
+require("base")
 
 require("lazy").setup({
 	spec = {
