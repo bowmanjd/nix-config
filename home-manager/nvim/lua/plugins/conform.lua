@@ -6,7 +6,9 @@ return {
 	keys = {
 		{
 			"<leader>f",
-      require'conform'.format,
+      function() 
+        require'conform'.format
+      end,
       mode = { "n", "v" },
 			desc = "Format buffer",
 		},

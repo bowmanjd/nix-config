@@ -5,7 +5,9 @@ return {
 		keys = {
 			{
 				"<leader>l",
-				require("lint").try_lint,
+        function ()
+          require("lint").try_lint
+        end,
 				desc = "Lint buffer",
 			},
 			{
