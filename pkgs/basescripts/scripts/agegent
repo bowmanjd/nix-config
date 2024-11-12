@@ -10,7 +10,7 @@ if [ ! -d "$secrets" ]; then
 fi
 
 if [ ! -s "$secret" ]; then
-	>"$secret"
+	:>"$secret"
 	chmod 0600 "$secret"
   rage -d "$cipher" > "$secret"
 fi
@@ -28,7 +28,7 @@ else
 fi
 
 if [ -f "$ENCRYPTEDFILE" ]; then
-  cat "$ENCRYPTEDFILE" | rage -d -i "$secret"
+  rage -d -i "$secret" < "$ENCRYPTEDFILE"
 fi
 
 if [ -f "$TMPFILE" ]; then
