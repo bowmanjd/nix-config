@@ -15,6 +15,7 @@ return {
 			"rafamadriz/friendly-snippets",
 			"zbirenbaum/copilot-cmp",
 			"zbirenbaum/copilot.lua",
+			"windwp/nvim-autopairs",
 		},
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
@@ -128,6 +129,9 @@ return {
 					{ name = "emoji", group_index = 2 },
 				}),
 			})
+
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 		end,
