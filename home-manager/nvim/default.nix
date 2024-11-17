@@ -76,6 +76,7 @@
       nvim-notify
       nvim-treesitter.withAllGrammars
       nvim-web-devicons
+      oil-nvim
       plenary-nvim
       telescope-fzf-native-nvim
       telescope-nvim
