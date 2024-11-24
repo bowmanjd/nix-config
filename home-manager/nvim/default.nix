@@ -70,6 +70,7 @@
       markdown-preview-nvim
       mason-lspconfig-nvim
       mason-nvim
+      omnisharp-extended-lsp-nvim
       neo-tree-nvim
       nui-nvim
       nvim-cmp
@@ -94,6 +95,7 @@
     extraLuaConfig =
       ''
         pluginPath = "${pkgs.vimUtils.packDir config.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start"
+        omnisharpPath = "${pkgs.omnisharp-roslyn.outPath}/lib/omnisharp-roslyn/OmniSharp.dll"
       ''
       + builtins.readFile ./nvim.lua;
   };

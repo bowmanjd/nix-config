@@ -205,6 +205,7 @@
     dig
     distrobox
     dogdns
+    dotnet-sdk
     dnsutils
     du-dust
     elinks
