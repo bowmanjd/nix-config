@@ -18,6 +18,7 @@ return {
 	---@type conform.setupOpts
 	opts = {
 		formatters_by_ft = {
+      cs = { "csharpier" },
 			css = { "stylelint" },
 			lua = { "stylua" },
 			nix = { "alejandra" },

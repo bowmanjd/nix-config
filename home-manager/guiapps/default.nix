@@ -9,7 +9,7 @@
     gimp
     helvum
     inkscape
-    libreoffice-fresh
+    #libreoffice-fresh
     microsoft-edge
     openttd
     pavucontrol

@@ -5,6 +5,7 @@
 }: {
   home.packages = with pkgs; [
     biome
+    csharpier
     dockerfile-language-server-nodejs
     emmet-language-server
     eslint_d
@@ -16,6 +17,7 @@
     nodePackages.poor-mans-t-sql-formatter-cli
     nodePackages.prettier
     nodePackages.jsonlint
+    omnisharp-roslyn
     pyright
     prettierd
     quick-lint-js
@@ -59,6 +61,7 @@
       direnv-vim
       friendly-snippets
       gitsigns-nvim
+      guess-indent-nvim
       indent-blankline-nvim
       lazy-nvim
       lspkind-nvim
