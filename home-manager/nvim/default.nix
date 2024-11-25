@@ -95,7 +95,7 @@
     extraLuaConfig =
       ''
         pluginPath = "${pkgs.vimUtils.packDir config.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start"
-        omnisharpPath = "${pkgs.omnisharp-roslyn.outPath}/lib/omnisharp-roslyn/OmniSharp.dll"
+        omnisharpCmd = { "dotnet", "${pkgs.omnisharp-roslyn.outPath}/lib/omnisharp-roslyn/OmniSharp.dll" }
       ''
       + builtins.readFile ./nvim.lua;
   };

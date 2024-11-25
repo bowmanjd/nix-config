@@ -101,7 +101,7 @@ return {
 			lspconfig.dockerls.setup({})
 			--lspconfig.quick_lint_js.setup({})
 			lspconfig.omnisharp.setup({
-				cmd = { "dotnet", omnisharpPath },
+				cmd = omnisharpCmd,
 
 				settings = {
 					FormattingOptions = {
