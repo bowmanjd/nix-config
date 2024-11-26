@@ -72,6 +72,7 @@
       mason-nvim
       omnisharp-extended-lsp-nvim
       neo-tree-nvim
+      neogit
       nui-nvim
       nvim-cmp
       nvim-lightbulb
