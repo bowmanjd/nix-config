@@ -84,6 +84,7 @@
       plenary-nvim
       telescope-fzf-native-nvim
       telescope-nvim
+      toggleterm-nvim
       trouble-nvim
       typescript-tools-nvim
       vim-dadbod

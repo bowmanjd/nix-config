@@ -229,6 +229,7 @@
     inetutils
     jq
     jql
+    lazygit
     lftp
     libgdiplus
     libgourou
