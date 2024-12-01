@@ -100,6 +100,15 @@ return {
 			end, {
 				desc = "[S]earch for [P]rograms",
 			})
+			vim.keymap.set("n", "<leader>si", function()
+				builtin.live_grep({
+					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "" or "~/devel/CargasEnergy/")
+						.. "CargasEnergyDB/Schema Objects/Schemas/",
+					glob_pattern = { "**/Programmability/**" },
+				})
+			end, {
+				desc = "[S]earch [In] Programs",
+			})
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
