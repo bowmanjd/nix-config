@@ -13,7 +13,8 @@ require("lazy").setup({
 	},
 	dev = {
 		path = pluginPath,
-		patterns = { ".*" },
+		patterns = { "" },
+		fallback = false,
 	},
 	install = {
 		-- Safeguard in case we forget to install a plugin with Nix
