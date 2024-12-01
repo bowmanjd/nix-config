@@ -52,7 +52,9 @@ return {
 			-- CargasEnergy
 			vim.keymap.set("n", "<leader>sc", function()
 				builtin.live_grep({
-					cwd = "~/devel/CargasEnergy/CargasEnergyDB/Schema Objects/Schemas/",
+					--cwd = "~/devel/CargasEnergy/CargasEnergyDB/Schema Objects/Schemas/",
+					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "" or "~/devel/CargasEnergy/")
+						.. "CargasEnergyDB/Schema Objects/Schemas/",
 					glob_pattern = { "**/Tables/**", "!**/{Indexes,Keys,Triggers,Constraints}/**" },
 				})
 			end, {
@@ -60,7 +62,8 @@ return {
 			})
 			vim.keymap.set("n", "<leader>st", function()
 				builtin.find_files({
-					cwd = "~/devel/CargasEnergy/CargasEnergyDB/Schema Objects/Schemas/",
+					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "" or "~/devel/CargasEnergy/")
+						.. "CargasEnergyDB/Schema Objects/Schemas/",
 					find_command = {
 						"fd",
 						"-i",
@@ -70,6 +73,9 @@ return {
 						"never",
 						"-E",
 						"**/{Views,Programmability,Indexes,Keys,Triggers,Constraints}/**",
+						"--full-path",
+						"-g",
+						"**/Tables/**",
 					},
 				})
 			end, {
@@ -77,7 +83,9 @@ return {
 			})
 			vim.keymap.set("n", "<leader>sp", function()
 				builtin.find_files({
-					cwd = "~/devel/CargasEnergy/CargasEnergyDB/Schema Objects/Schemas/",
+					--cwd = "~/devel/CargasEnergy/CargasEnergyDB/Schema Objects/Schemas/",
+					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "" or "~/devel/CargasEnergy/")
+						.. "CargasEnergyDB/Schema Objects/Schemas/",
 					search_dirs = {
 						"CRM/Programmability/",
 						"API/Programmability/",
@@ -87,14 +95,6 @@ return {
 						"dbo/Programmability/",
 						"DataConversion/Programmability/",
 						"Dashboard/Programmability/",
-					},
-					find_command = {
-						"fd",
-						"-i",
-						"--type",
-						"f",
-						"--color",
-						"never",
 					},
 				})
 			end, {
