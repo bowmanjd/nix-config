@@ -29,6 +29,7 @@ return {
 			lint.linters.sqlfluff.args = {
 				"lint",
 				"--format=json",
+				--"--ignore-local-config",
 				"--dialect",
 				"tsql",
 				"--config",
