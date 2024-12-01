@@ -56,6 +56,7 @@ return {
 					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "" or "~/devel/CargasEnergy/")
 						.. "CargasEnergyDB/Schema Objects/Schemas/",
 					glob_pattern = { "**/Tables/**", "!**/{Indexes,Keys,Triggers,Constraints}/**" },
+					path_display = { "filename_first" },
 				})
 			end, {
 				desc = "[S]earch for [C]olumn",
@@ -77,6 +78,7 @@ return {
 						"-g",
 						"**/Tables/**",
 					},
+					path_display = { "filename_first" },
 				})
 			end, {
 				desc = "[S]earch for [T]ables",
@@ -96,6 +98,7 @@ return {
 						"DataConversion/Programmability/",
 						"Dashboard/Programmability/",
 					},
+					path_display = { "filename_first" },
 				})
 			end, {
 				desc = "[S]earch for [P]rograms",
@@ -105,6 +108,7 @@ return {
 					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "" or "~/devel/CargasEnergy/")
 						.. "CargasEnergyDB/Schema Objects/Schemas/",
 					glob_pattern = { "**/Programmability/**" },
+					path_display = { "filename_first" },
 				})
 			end, {
 				desc = "[S]earch [In] Programs",
