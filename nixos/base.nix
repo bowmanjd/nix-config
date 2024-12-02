@@ -12,6 +12,11 @@
     ];
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "dotnet-core-combined"
+        "dotnet-sdk-6.0.428"
+        "dotnet-sdk-wrapped-6.0.428"
+      ];
     };
   };
 
@@ -127,7 +132,7 @@
         tls internal
       '';
       "*.home.arpa" = {
-        serverAliases = [ "*.local.bowmanjd.com" "*.dev.internal" ];
+        serverAliases = ["*.local.bowmanjd.com" "*.dev.internal"];
         logFormat = "output file ${config.services.caddy.logDir}/access-local.log";
         extraConfig = ''
           @startsWithPort header_regexp Host ^\d+

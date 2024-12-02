@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
@@ -11,10 +8,16 @@
     liberation_ttf
     maple-mono-NF
     mplus-outline-fonts.githubRelease
-    nerdfonts
+    nerd-fonts.hack
+    nerd-fonts.noto
+    nerd-fonts.arimo
+    nerd-fonts.iosevka
+    nerd-fonts.fira-code
+    nerd-fonts.inconsolata
+    nerd-fonts.sauce-code-pro
+    nerd-fonts.caskaydia-cove
     noto-fonts
     noto-fonts-emoji
     proggyfonts
   ];
 }
-
