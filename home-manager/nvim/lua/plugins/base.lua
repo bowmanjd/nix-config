@@ -105,9 +105,14 @@ return {
 			})
 			vim.keymap.set("n", "<leader>si", function()
 				builtin.live_grep({
-					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "" or "~/devel/CargasEnergy/")
-						.. "CargasEnergyDB/Schema Objects/Schemas/",
-					glob_pattern = { "**/Programmability/**" },
+					cwd = (vim.fn.isdirectory("CargasEnergyDB") > 0 and "." or "~/devel/CargasEnergy/"),
+					glob_pattern = { 
+						"**/Programmability/**",
+						"*.js",
+						"*.jsx",
+						"*.cs",
+						"*.aspx",
+					},
 					path_display = { "filename_first" },
 				})
 			end, {
