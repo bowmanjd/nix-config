@@ -57,6 +57,7 @@ return {
 						.. "CargasEnergyDB/Schema Objects/Schemas/",
 					glob_pattern = { "**/Tables/**", "!**/{Indexes,Keys,Triggers,Constraints}/**" },
 					path_display = { "filename_first" },
+					additional_args = { "-i" },
 				})
 			end, {
 				desc = "[S]earch for [C]olumn",
@@ -114,6 +115,7 @@ return {
 						"*.aspx",
 					},
 					path_display = { "filename_first" },
+					additional_args = { "-i" },
 				})
 			end, {
 				desc = "[S]earch [In] Programs",
