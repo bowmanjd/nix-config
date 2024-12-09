@@ -21,7 +21,7 @@ return {
 		},
 		{
 			"<leader>D",
-			"<cmd>%s/^\\(create \\)\\(proc\\)/\\1or alter \\2/e<cr><cmd>silent!DB<cr>u",
+			"<cmd>%s/^\\(create \\)\\(proc\\)/\\1or alter \\2/<cr><Plug>(DBUI_ExecuteQuery)<cr>u",
 			mode = { "n" },
 			desc = "Alter SQL procedure",
 		},
