@@ -14,6 +14,7 @@
     openttd
     pavucontrol
     prismlauncher
+    vscode-fhs
     xdotool
     xorg.xeyes
     ydotool
