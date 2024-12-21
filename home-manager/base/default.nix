@@ -227,6 +227,7 @@
     htop
     html-tidy
     inetutils
+    inotify-tools
     jq
     jql
     lazygit
@@ -319,6 +320,7 @@
     usql
     vhs
     virtualenv
+    watchexec
     yq
     yt-dlp
     unzip

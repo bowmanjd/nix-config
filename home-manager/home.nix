@@ -46,10 +46,12 @@
     };
     "workwsl" = {
       hostname = "10.0.0.100";
-      user = "jbowman@cargas";
+      user = "jbowman";
       port = 5517;
       extraOptions = {
         RequestTTY = "force";
+        PubkeyAuthentication = "no";
+        PreferredAuthentications = "password";
         RemoteCommand = "\"C:\\Program Files\\WSL\\wsl.exe\" --cd ~";
       };
     };
@@ -64,7 +66,7 @@
     };
     "workpw" = {
       hostname = "10.0.0.100";
-      user = "jbowman@cargas";
+      user = "jbowman";
       port = 5517;
       extraOptions = {
         RequestTTY = "force";

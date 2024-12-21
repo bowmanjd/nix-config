@@ -38,6 +38,7 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
 
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.cups-brother-hll2350dw ];
 
   services.avahi = {
     enable = true;
