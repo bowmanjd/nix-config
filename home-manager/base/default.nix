@@ -112,7 +112,7 @@
 
   programs.ssh.matchBlocks = {
     "server" = {
-      hostname = "192.168.0.5";
+      hostname = "10.0.0.5";
       user = "bowman4";
       port = 22;
       forwardAgent = true;
@@ -151,6 +151,11 @@
       hostname = "ssh.github.com";
       user = "git";
       port = 443;
+    };
+    "tun" = {
+      hostname = "129.213.98.217";
+      user = "jbowman";
+      port = 5517;
     };
   };
 
