@@ -29,7 +29,8 @@ python3.pkgs.buildPythonPackage rec {
     wrapProgram "$out/bin/mssql-cli" \
       --set MSSQLTOOLSSERVICE_PATH ${lib.makeBinPath [ ms-sqltoolsservice ]} \
       --prefix PYTHONPATH : "$PYTHONPATH" \
-      --prefix PATH : ${lib.makeBinPath [ python3 ]} \
+      --prefix PATH : ${lib.makeBinPath [ python3 ]}
+    sed -i "s/utcnow().isoformat() + 'Z'/now(datetime.UTC).isoformat()/" $out/lib/python3*/site-packages/mssqlcli/telemetry_upload.py
   '';
   
   doCheck = false;
