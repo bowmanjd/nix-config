@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     biome
     csharpier
+    delve
     dockerfile-language-server-nodejs
     emmet-language-server
     eslint_d
@@ -13,6 +14,8 @@
     gopls
     hadolint
     markdownlint-cli
+    lldb
+    netcoredbg
     nodePackages.bash-language-server
     nodePackages.poor-mans-t-sql-formatter-cli
     nodePackages.prettier
@@ -29,6 +32,8 @@
     vim
     vimgolf
     vscode-langservers-extracted
+    vscode-extensions.ms-vscode.cpptools
+    vscode-extensions.vadimcn.vscode-lldb
     yaml-language-server
   ];
 
@@ -70,11 +75,15 @@
       markdown-preview-nvim
       mason-lspconfig-nvim
       mason-nvim
+      mason-nvim-dap-nvim
       omnisharp-extended-lsp-nvim
       neo-tree-nvim
       neogit
       nui-nvim
       nvim-cmp
+      nvim-dap
+      nvim-dap-ui
+      nvim-dap-lldb
       nvim-lightbulb
       nvim-lint
       nvim-lspconfig
