@@ -6,6 +6,7 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
     'leoluz/nvim-dap-go',
+    'julianolf/nvim-dap-lldb',
   },
   keys = {
     {

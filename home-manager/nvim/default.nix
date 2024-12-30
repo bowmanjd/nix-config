@@ -15,7 +15,7 @@
     hadolint
     markdownlint-cli
     lldb
-    netcoredbg
+    #netcoredbg
     nodePackages.bash-language-server
     nodePackages.poor-mans-t-sql-formatter-cli
     nodePackages.prettier
