@@ -247,7 +247,7 @@
     mssql-cli
     mssql-scripter
     ncdu
-    ncftp
+    #ncftp
     neofetch
     nix-index
     nmap
