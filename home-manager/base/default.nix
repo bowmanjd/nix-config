@@ -19,7 +19,7 @@
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
     bashrcExtra = ''
       export DIRENV_LOG_FORMAT=
-      #export PINENTRY_PROGRAM="$(command -v pinentryutf8)"
+      export PINENTRY_PROGRAM="$(command -v pinentryutf8)"
       . $(command -v sshagent)
     '';
     shellAliases = {
