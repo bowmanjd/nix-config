@@ -76,6 +76,7 @@
     fd
     git
     glibcLocalesUtf8
+    glibcLocales
     gnutar
     home-manager
     iputils
