@@ -65,6 +65,7 @@
       "*~"
       "[._]*.un~"
     ];
+    difftastic.enable = true;
     extraConfig = {
       core.editor = "nvim";
       core.autocrlf = "input";
