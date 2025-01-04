@@ -219,6 +219,7 @@
     ffmpeg_6-full
     file
     flatbuffers
+    frogmouth
     gcc
     gh
     #gitbutler
@@ -230,6 +231,7 @@
     gnupg
     go_1_22
     handlr
+    harlequin
     htop
     html-tidy
     inetutils
