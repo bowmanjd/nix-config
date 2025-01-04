@@ -295,7 +295,9 @@
         pytest
         reorder-python-imports
         rich
+        rich-rst
         setuptools
+        textual
         tidylib
         types-beautifulsoup4
         weasyprint
