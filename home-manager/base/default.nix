@@ -236,6 +236,7 @@
     #harlequin
     htop
     html-tidy
+    imagemagick
     inetutils
     inotify-tools
     jq
