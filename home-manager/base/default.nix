@@ -202,6 +202,7 @@
     cobra-cli
     comrak
     corepack_22
+    dblab
     degit
     #delta
     deno
@@ -245,6 +246,7 @@
     libgourou
     libpcap
     lilipod
+    lsix
     miller
     mssql-bcp
     ms-sqltoolsservice
