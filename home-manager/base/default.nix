@@ -233,7 +233,7 @@
     gnupg
     go_1_22
     handlr
-    #harlequin
+    harlequin
     htop
     html-tidy
     inetutils
