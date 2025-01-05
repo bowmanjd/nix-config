@@ -12,6 +12,7 @@
     swayidle
     #warp-terminal
     waybar
+    wezterm
     wl-clipboard
     wob
   ];
