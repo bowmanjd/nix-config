@@ -259,7 +259,6 @@
     openssl
     p7zip
     pinentry
-    pipx
     podman
     powershell
     (python3.withPackages (ps:
@@ -328,8 +327,10 @@
     starship
     swc
     tokei
+    toolong
     unixODBCDrivers.msodbcsql18
     usql
+    uv
     vhs
     virtualenv
     watchexec
