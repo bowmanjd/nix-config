@@ -101,6 +101,7 @@
       vim-dadbod-completion
       vim-dadbod-ui
       which-key-nvim
+      zellij-nav-nvim
       #mini-nvim
     ];
     extraLuaConfig =

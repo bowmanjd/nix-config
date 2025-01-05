@@ -92,6 +92,11 @@
     enable = true;
   };
 
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;
