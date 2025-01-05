@@ -211,6 +211,7 @@
     dig
     distrobox
     dogdns
+    dotacat
     dotnet-sdk
     dnsutils
     du-dust
@@ -258,6 +259,7 @@
     openssl
     p7zip
     pinentry
+    pipx
     podman
     powershell
     (python3.withPackages (ps:
