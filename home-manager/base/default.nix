@@ -233,7 +233,7 @@
     gnupg
     go_1_22
     handlr
-    harlequin
+    #harlequin
     htop
     html-tidy
     inetutils
@@ -292,6 +292,8 @@
         #llama-index-vector-stores-chroma
         lxml
         #pathtools
+        #numpy
+        numpy_1
         pep8-naming
         pexpect
         pip
