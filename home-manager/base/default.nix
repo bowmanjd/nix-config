@@ -94,7 +94,7 @@
 
   programs.zellij = {
     enable = true;
-    enableBashIntegration = true;
+    enableBashIntegration = false;
   };
 
   programs.tmux = {
@@ -238,7 +238,8 @@
     gnupg
     go_1_22
     handlr
-    #harlequin
+    harlequin
+    harlequin-odbc
     htop
     html-tidy
     imagemagick
