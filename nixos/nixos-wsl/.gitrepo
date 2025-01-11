@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:nix-community/NixOS-WSL.git
+	branch = main
+	commit = 63c3b4ed1712a3a0621002cd59bfdc80875ecbb0
+	parent = 0426233c66a4e98c83efddfb2e538b1919ee9f0f
+	method = merge
+	cmdver = 0.4.9

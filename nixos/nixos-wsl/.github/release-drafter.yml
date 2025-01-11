@@ -1,0 +1,37 @@
+change-template: "* $TITLE (#$NUMBER) @$AUTHOR"
+categories:
+  - title: '🚀 Features'
+    labels:
+      - enhancement
+  - title: "🪲 Bugfixes"
+    labels:
+      - bug
+  - title: "🧪 Tests"
+    labels:
+      - tests
+  - title: "📖 Documentation"
+    labels:
+      - documentation
+exclude-labels:
+  - release-exclude
+autolabeler:
+  - label: 'release-exclude'
+    title:
+      - 'Update flakes'
+      - 'chore(deps): lock file maintenance'
+  - label: 'bug'
+    title:
+      - '/^[Ff]ix(\(.*\))?(:|(?= ))(?!.* [tT]est.*).*$/'
+  - label: 'enhancement'
+    title:
+      - '/^feat:/'
+  - label: 'tests'
+    files:
+      - 'tests/**/*.ps1'
+
+template: |
+    # Changelog
+
+    ## 🛠️ General Changes
+
+    $CHANGES

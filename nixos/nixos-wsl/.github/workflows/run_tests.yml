@@ -1,0 +1,53 @@
+name: Tests
+
+on:
+  workflow_call: {}
+
+jobs:
+  prepare:
+    name: Find Tests 🔍
+    runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps.tests.outputs.tests }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix ❄️
+        uses: ./.github/actions/install-nix
+
+      - name: Find Tests 🔍
+        id: tests
+        run: |
+          find tests -name '*.Tests.ps1' -print0 | perl -pe 's|(.*?)\x0|"\1",|g;s|,$||;s|(.*)|tests=[\1]|' >> $GITHUB_OUTPUT
+
+  tests:
+    name: Test 🧪
+    needs:
+      - prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        test: ${{ fromJSON(needs.prepare.outputs.tests) }}
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download Tarball 📥
+        uses: actions/download-artifact@v4
+        with:
+          name: tarball
+
+      - name: Setup WSL 🐧
+        run: |
+          wsl --update
+          wsl --version
+
+      - name: Execute Test 🧪
+        shell: pwsh
+        run: Invoke-Pester -Output Detailed ${{ matrix.test }}
