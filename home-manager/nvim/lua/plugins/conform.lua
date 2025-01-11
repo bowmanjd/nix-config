@@ -20,6 +20,7 @@ return {
 		formatters_by_ft = {
       cs = { "csharpier" },
 			css = { "stylelint" },
+			html = { "prettier", "djlint", "superhtml" },
 			lua = { "stylua" },
 			nix = { "alejandra" },
 			python = { "isort", "black" },
@@ -28,6 +29,7 @@ return {
 			-- Conform will run the first available formatter
 			javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
 			sql = { "sqlfluff" },
+			xml = { "xmllint" },
 		},
 		default_format_opts = {
 			async = true,

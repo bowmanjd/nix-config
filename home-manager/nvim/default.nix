@@ -7,14 +7,16 @@
     biome
     csharpier
     delve
+    djlint
     dockerfile-language-server-nodejs
     emmet-language-server
     eslint_d
     fzf
     gopls
     hadolint
-    markdownlint-cli
+    libxml2
     lldb
+    markdownlint-cli
     #netcoredbg
     nodePackages.bash-language-server
     nodePackages.poor-mans-t-sql-formatter-cli
@@ -27,6 +29,7 @@
     ruff
     stylelint
     stylua
+    superhtml
     tflint
     vale
     vim
@@ -76,6 +79,7 @@
       mason-lspconfig-nvim
       mason-nvim
       mason-nvim-dap-nvim
+      mini-surround
       omnisharp-extended-lsp-nvim
       neo-tree-nvim
       neogit
