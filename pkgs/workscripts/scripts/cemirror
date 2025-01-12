@@ -1,0 +1,25 @@
+#!/bin/sh
+
+tgit="$HOME/win/scoop/shims/git.exe -C C:\Users\jbowman\devel\CargasEnergy"
+this_branch=$(git branch --show-current)
+target_branch=$($tgit branch --show-current)
+
+if [ $this_branch != $target_branch ]; then
+    printf "Refusing to mirror different branches\n"
+    exit 1
+fi
+
+this_head=$(git rev-parse --short HEAD)
+target_head=$($tgit rev-parse --short HEAD)
+
+targetbase="$HOME/win/devel/CargasEnergy"
+
+{
+    git ls-files -om --exclude-standard
+    git log --name-only --pretty='' --diff-filter=MACRT $target_head..$thishead
+} | sort -u | while read -r file; do
+    targetdir=$(dirname "$file")
+    [ -n "$targetdir" ] && mkdir -p "$targetbase/$targetdir"
+    cp "$file" "$targetbase/$targetdir/"
+done
+
