@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # You can import other home-manager modules here
   imports = [
     ./base
@@ -12,7 +9,7 @@
   ];
 
   home.packages = with pkgs; [
-    android-tools 
+    android-tools
     google-cloud-sdk
   ];
 
@@ -75,5 +72,11 @@
         PreferredAuthentications = "password";
       };
     };
+  };
+
+  xdg.configFile."yt-dlp.conf" = {
+    enable = true;
+    source = ./yt-dlp-home.conf;
+    target = "yt-dlp/config";
   };
 }
