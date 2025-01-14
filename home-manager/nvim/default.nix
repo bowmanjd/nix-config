@@ -16,6 +16,7 @@
     hadolint
     libxml2
     lldb
+    lua51Packages.tiktoken_core
     markdownlint-cli
     #netcoredbg
     nodePackages.bash-language-server
@@ -49,7 +50,9 @@
     withNodeJs = true;
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
+      avante-nvim
       ChatGPT-nvim
+      CopilotChat-nvim
       catppuccin-nvim
       cloak-nvim
       cmp-buffer
