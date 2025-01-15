@@ -5,6 +5,7 @@ return {
 	},
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ 'echasnovski/mini.surround', version = '*', config = true },
+	{ 'echasnovski/mini.comment', version = '*', config = true },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",

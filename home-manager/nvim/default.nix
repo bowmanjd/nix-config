@@ -83,6 +83,7 @@
       mason-nvim
       mason-nvim-dap-nvim
       mini-surround
+      mini-comment
       omnisharp-extended-lsp-nvim
       neo-tree-nvim
       neogit
