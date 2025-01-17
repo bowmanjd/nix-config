@@ -43,6 +43,7 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/.dotnet/tools"
   ];
 
   programs.git = {
@@ -356,14 +357,14 @@
   ];
 
   systemd.user.services = let
-    scriptpath = lib.makeBinPath [ pkgs.basescripts ];
+    scriptpath = lib.makeBinPath [pkgs.basescripts];
   in {
     "cleanage" = {
       Unit = {
         Description = "Remove any stale unencrypted artifacts";
       };
       Service = {
-        ExecStart = lib.concatStrings [ scriptpath "/cleanage" ];
+        ExecStart = lib.concatStrings [scriptpath "/cleanage"];
         Type = "oneshot";
       };
     };
@@ -389,5 +390,9 @@
     enable = true;
     source = ./mssqlcli.config;
     target = "mssqlcli/config";
+  };
+
+  home.sessionVariables = {
+    DOTNET_ROOT = "${pkgs.dotnet-sdk}/share/dotnet";
   };
 }
