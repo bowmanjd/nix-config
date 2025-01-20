@@ -6,12 +6,6 @@ return {
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "echasnovski/mini.surround", version = "*", config = true },
 	{ "numToStr/Comment.nvim", version = "*", config = true },
-	--[[ {
-		"kkoomen/vim-doge",
-		run = function()
-			vim.fn["doge#install"]()
-		end,
-	} ]],
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
