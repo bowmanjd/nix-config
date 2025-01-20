@@ -3,7 +3,8 @@ return {
 		"jackMort/ChatGPT.nvim",
 		event = "VeryLazy",
 		opts = {
-			api_key_cmd = "agegent " .. home .. "/.ssh/secrets/openai.enc.txt",
+			-- api_key_cmd = "agegent " .. home .. "/.ssh/secrets/openai.enc.txt",
+			model = "gpt-4o",
 		},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
