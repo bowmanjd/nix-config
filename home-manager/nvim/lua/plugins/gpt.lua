@@ -4,7 +4,9 @@ return {
 		event = "VeryLazy",
 		opts = {
 			-- api_key_cmd = "agegent " .. home .. "/.ssh/secrets/openai.enc.txt",
-			model = "gpt-4o",
+			openai_params = {
+				model = "gpt-4o",
+			},
 		},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
