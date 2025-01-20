@@ -219,6 +219,7 @@
     distrobox
     dogdns
     dotacat
+    dotnet-repl
     dotnet-sdk
     dnsutils
     du-dust
@@ -256,6 +257,7 @@
     lilipod
     lsix
     miller
+    mono
     mssql-bcp
     ms-sqltoolsservice
     mssql-cli

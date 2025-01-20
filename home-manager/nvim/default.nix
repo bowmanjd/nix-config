@@ -64,6 +64,7 @@
       cmp-treesitter
       cmp-tmux
       cmp_luasnip
+      comment-nvim
       conform-nvim
       copilot-cmp
       copilot-lua
