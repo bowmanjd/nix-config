@@ -17,6 +17,7 @@
     libxml2
     lldb
     lua51Packages.tiktoken_core
+    lua51Packages.jsregexp
     markdownlint-cli
     #netcoredbg
     nodePackages.bash-language-server
