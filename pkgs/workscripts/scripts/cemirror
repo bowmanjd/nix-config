@@ -16,10 +16,12 @@ targetbase="$HOME/win/devel/CargasEnergy"
 
 {
     git ls-files -om --exclude-standard
-    git log --name-only --pretty='' --diff-filter=MACRT $target_head..$thishead
+    git log --name-only --pretty='' --diff-filter=MACRT "$target_head..$this_head"
 } | sort -u | while read -r file; do
-    targetdir=$(dirname "$file")
-    [ -n "$targetdir" ] && mkdir -p "$targetbase/$targetdir"
-    cp "$file" "$targetbase/$targetdir/"
+    if [ -r "$file" ]; then
+        targetdir=$(dirname "$file")
+        [ -n "$targetdir" ] && mkdir -p "$targetbase/$targetdir"
+        cp "$file" "$targetbase/$targetdir/"
+    fi
 done
 

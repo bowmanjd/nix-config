@@ -1,0 +1,7 @@
+#!/bin/sh
+
+rootdir=$(git rev-parse --show-toplevel)
+webproj=$(fd CargasEnergyWeb.csproj "$rootdir")
+sed -i 's/\(VSToolsPath..WebApplications.*Condition="\)[^"]\+/\1false/' "$webproj"
+dotnet "$@"
+sed -i 's/\(VSToolsPath..WebApplications.*Condition="\)[^"]\+/\1'"'"'$(VSToolsPath)'"'"' != '"''"'/' "$webproj"
