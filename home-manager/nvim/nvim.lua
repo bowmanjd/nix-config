@@ -21,3 +21,8 @@ require("lazy").setup({
 		missing = false,
 	},
 })
+
+vim.opt.rtp:append(treesitterPath, treesitterGrammars)
+--vim.opt.rtp:append(treesitterGrammars)
+package.cpath = package.cpath .. jsregexpPath
+package.cpath = package.cpath .. tiktokenCorePath

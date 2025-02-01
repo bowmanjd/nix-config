@@ -16,8 +16,9 @@
     hadolint
     libxml2
     lldb
-    lua51Packages.tiktoken_core
-    lua51Packages.jsregexp
+    luajitPackages.tiktoken_core
+    luajitPackages.jsregexp
+    lynx
     markdownlint-cli
     #netcoredbg
     nodePackages.bash-language-server
@@ -114,10 +115,19 @@
       zellij-nav-nvim
       #mini-nvim
     ];
-    extraLuaConfig =
+    extraLuaConfig = let
+      grammarsPath = pkgs.symlinkJoin {
+        name = "nvim-treesitter-grammars";
+        paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+      };
+    in
       ''
         pluginPath = "${pkgs.vimUtils.packDir config.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start"
         omnisharpCmd = { "dotnet", "${pkgs.omnisharp-roslyn.outPath}/lib/omnisharp-roslyn/OmniSharp.dll" }
+        treesitterPath = "${pkgs.vimPlugins.nvim-treesitter}"
+        treesitterGrammars = "${grammarsPath}"
+        jsregexpPath = "${pkgs.luajitPackages.jsregexp}/lib/lua/5.1/jsregexp/?.so;"
+        tiktokenCorePath = "${pkgs.luajitPackages.tiktoken_core}/lib/lua/5.1/?.so;"
       ''
       + builtins.readFile ./nvim.lua;
   };
