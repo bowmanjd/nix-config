@@ -18,6 +18,8 @@
     lldb
     luajitPackages.tiktoken_core
     luajitPackages.jsregexp
+    # luajitPackages.luarocks
+    # lua51Packages.luarocks
     lynx
     markdownlint-cli
     #netcoredbg
@@ -66,6 +68,7 @@
       cmp-treesitter
       cmp-tmux
       cmp_luasnip
+      codecompanion-nvim
       comment-nvim
       conform-nvim
       copilot-cmp
@@ -73,7 +76,9 @@
       csv-vim
       diffview-nvim
       direnv-vim
+      dressing-nvim
       friendly-snippets
+      fzf-lua
       gitsigns-nvim
       guess-indent-nvim
       indent-blankline-nvim
@@ -85,6 +90,7 @@
       mason-lspconfig-nvim
       mason-nvim
       mason-nvim-dap-nvim
+      mini-pick
       mini-surround
       mini-comment
       omnisharp-extended-lsp-nvim
@@ -103,6 +109,7 @@
       nvim-web-devicons
       oil-nvim
       plenary-nvim
+      render-markdown-nvim
       telescope-fzf-native-nvim
       telescope-nvim
       toggleterm-nvim
@@ -128,6 +135,7 @@
         treesitterGrammars = "${grammarsPath}"
         jsregexpPath = "${pkgs.luajitPackages.jsregexp}/lib/lua/5.1/jsregexp/?.so;"
         tiktokenCorePath = "${pkgs.luajitPackages.tiktoken_core}/lib/lua/5.1/?.so;"
+        luarocksPath = "${pkgs.luajitPackages.luarocks}"
       ''
       + builtins.readFile ./nvim.lua;
   };
