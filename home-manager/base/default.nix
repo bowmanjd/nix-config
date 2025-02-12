@@ -210,7 +210,7 @@
     comrak
     corepack_22
     dblab
-    degit
+    #degit
     #delta
     deno
     devbox
@@ -229,7 +229,7 @@
     ffmpeg_6-full
     file
     flatbuffers
-    frogmouth
+    #frogmouth
     gcc
     gh
     #gitbutler
