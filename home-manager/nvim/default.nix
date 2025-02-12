@@ -15,7 +15,7 @@
     gopls
     hadolint
     libxml2
-    lldb
+    #lldb
     luajitPackages.tiktoken_core
     luajitPackages.jsregexp
     # luajitPackages.luarocks
@@ -41,7 +41,7 @@
     vimgolf
     vscode-langservers-extracted
     vscode-extensions.ms-vscode.cpptools
-    vscode-extensions.vadimcn.vscode-lldb
+    #vscode-extensions.vadimcn.vscode-lldb
     yaml-language-server
   ];
 

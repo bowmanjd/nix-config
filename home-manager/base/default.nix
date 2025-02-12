@@ -241,8 +241,8 @@
     gnupg
     go_1_22
     handlr
-    harlequin
-    harlequin-odbc
+    #harlequin
+    # harlequin-odbc
     htop
     html-tidy
     imagemagick
@@ -315,7 +315,7 @@
         rich
         rich-rst
         setuptools
-        textual
+        #textual
         tidylib
         types-beautifulsoup4
         weasyprint
@@ -342,7 +342,7 @@
     starship
     swc
     tokei
-    toolong
+    #toolong
     unixODBCDrivers.msodbcsql18
     usql
     uv
