@@ -324,7 +324,7 @@
     qrencode
     #qsv
     rage
-    rich-cli
+    #rich-cli
     repgrep
     rustc
     rustfmt
