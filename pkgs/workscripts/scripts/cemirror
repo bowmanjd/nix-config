@@ -3,10 +3,7 @@
 target="${1:-C:\Users\jbowman\devel\CargasEnergy}"
 targetbase=$(wslpath "$target")
 tgit="$HOME/win/scoop/shims/git.exe -C $target"
-echo $target
-echo $tgit
-echo $targetbase
-return
+echo "Mirroring to $targetbase"
 
 this_branch=$(git branch --show-current)
 target_branch=$($tgit branch --show-current)
