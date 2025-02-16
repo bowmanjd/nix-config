@@ -1,18 +1,23 @@
 #!/bin/sh
 
-tgit="$HOME/win/scoop/shims/git.exe -C C:\Users\jbowman\devel\CargasEnergy"
+target="${1:-C:\Users\jbowman\devel\CargasEnergy}"
+targetbase=$(wslpath "$target")
+tgit="$HOME/win/scoop/shims/git.exe -C $target"
+echo $target
+echo $tgit
+echo $targetbase
+return
+
 this_branch=$(git branch --show-current)
 target_branch=$($tgit branch --show-current)
 
-if [ $this_branch != $target_branch ]; then
+if [ "$this_branch" != "$target_branch" ]; then
     printf "Refusing to mirror different branches\n"
     exit 1
 fi
 
 this_head=$(git rev-parse --short HEAD)
 target_head=$($tgit rev-parse --short HEAD)
-
-targetbase="$HOME/win/devel/CargasEnergy"
 
 {
     git ls-files -om --exclude-standard
