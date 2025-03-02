@@ -22,6 +22,8 @@
       export PINENTRY_PROGRAM="$(command -v pinentryutf8)"
       . $(command -v sshagent)
       export OPENAI_API_KEY=$(agegent ~/.ssh/secrets/openai.enc.txt)
+      export TAVILY_API_KEY=$(agegent ~/.ssh/secrets/tavily.enc.txt)
+      export ANTHROPIC_API_KEY=$(agegent ~/.ssh/secrets/anthropic.enc.txt)
     '';
     shellAliases = {
       ls1 = "eza -1 --icons=never";
