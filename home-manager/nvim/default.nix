@@ -12,6 +12,8 @@
     emmet-language-server
     eslint_d
     fzf
+    golangci-lint
+    golangci-lint-langserver
     gopls
     hadolint
     libxml2
