@@ -26,6 +26,7 @@ return {
 			model = "claude-3.7-sonnet",
 		},
 	},
+
 	{
 		"olimorris/codecompanion.nvim",
 		dependencies = {
@@ -33,13 +34,21 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
+			adapters = {
+				claude_copilot = function()
+					return require("codecompanion.adapters").extend("copilot", {
+						name = "claude_copilot", -- Unique adapter name
+						schema = {
+							model = {
+								default = "claude-3.7-sonnet",
+							},
+						},
+					})
+				end,
+			},
 			strategies = {
-				chat = {
-					adapter = "openai",
-				},
-				inline = {
-					adapter = "copilot",
-				},
+				chat = { adapter = "claude_copilot" },
+				inline = { adapter = "claude_copilot" },
 			},
 		},
 	},
