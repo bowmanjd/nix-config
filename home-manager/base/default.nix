@@ -288,6 +288,7 @@
         #flake8-bugbear
         flake8-docstrings
         fonttools
+        goose-cli
         isort
         #langchain
         #llama-index-core
