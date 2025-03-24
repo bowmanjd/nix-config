@@ -82,6 +82,7 @@
         default = "simple";
       };
       commit.gpgsign = true;
+      tag.gpgsign = true;
       gpg.format = "ssh";
       rerere.enabled = true;
       filter.ageencrypt = {
