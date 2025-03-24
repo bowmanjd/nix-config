@@ -73,7 +73,7 @@
       
       # Available through 'sudo nixos-rebuild switch --flake .#work'
       work = mkNixosSystem {
-        hostname = "work";
+        hostname = "jbowman-cargas";
         username = "jbowman";
         nixosConfigFile = ./nixos/work.nix;
         homeConfigFile = ./home-manager/work.nix;
