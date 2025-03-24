@@ -6,7 +6,7 @@
     fira-code-symbols
     font-awesome
     liberation_ttf
-    maple-mono-NF
+    maple-mono.NF
     mplus-outline-fonts.githubRelease
     nerd-fonts.hack
     nerd-fonts.noto

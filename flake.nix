@@ -4,9 +4,8 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
-    # nixpkgs-wayland
-    # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/";
@@ -20,62 +19,66 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-  in {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-    packages.x86_64-linux = import ./pkgs nixpkgs.legacyPackages.x86_64-linux;
-    overlays = import ./overlays {inherit inputs;};
-    # NixOS configuration entrypoint
-    nixosConfigurations = {
-			# Available through 'sudo nixos-rebuild switch --flake .#lappy386'
-      lappy386 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/lappy.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.bowmanjd = import ./home-manager/home.nix;
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
-        ];
-      };
-			# Available through 'sudo nixos-rebuild switch --flake .#work'
-      work = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/work.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.jbowman = import ./home-manager/work.nix;
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
-        ];
+    inherit (nixpkgs) lib;
+    systems = ["x86_64-linux"];
+    forAllSystems = lib.genAttrs systems;
+    
+    # Add stable nixpkgs as overlay
+    overlay-stable = final: prev: {
+      stable = import inputs.nixpkgs-stable {
+        system = final.system;
+        config.allowUnfree = true;
       };
     };
 
-    # Standalone home-manager configuration entrypoint
-    #homeConfigurations = {
-		#	# Available through 'home-manager switch --flake .#bowmanjd@lappy386'
-    #  "bowmanjd@lappy386" = home-manager.lib.homeManagerConfiguration {
-    #    pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-    #    extraSpecialArgs = {inherit inputs outputs;};
-    #    modules = [./home-manager/home.nix];
-    #  };
-		#	# Available through 'home-manager switch --flake .#jbowman@work'
-    #  "jbowman@work" = home-manager.lib.homeManagerConfiguration {
-    #    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #    extraSpecialArgs = {inherit inputs outputs;};
-    #    modules = [./home-manager/work.nix];
-    #  };
-    #};
+    # Create a common function for NixOS configurations
+    mkNixosSystem = {
+      hostname,
+      username,
+      nixosConfigFile,
+      homeConfigFile,
+      extraModules ? [],
+    }: nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs outputs;};
+      modules = [
+        {
+          nixpkgs.overlays = [overlay-stable];
+          networking.hostName = hostname;
+        }
+        nixosConfigFile
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${username} = import homeConfigFile;
+            extraSpecialArgs = {inherit inputs outputs;};
+          };
+        }
+      ] ++ extraModules;
+    };
+  in {
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    overlays = import ./overlays {inherit inputs;};
+    
+    # NixOS configuration entrypoint
+    nixosConfigurations = {
+      # Available through 'sudo nixos-rebuild switch --flake .#lappy386'
+      lappy386 = mkNixosSystem {
+        hostname = "lappy386";
+        username = "bowmanjd";
+        nixosConfigFile = ./nixos/lappy.nix;
+        homeConfigFile = ./home-manager/home.nix;
+      };
+      
+      # Available through 'sudo nixos-rebuild switch --flake .#work'
+      work = mkNixosSystem {
+        hostname = "work";
+        username = "jbowman";
+        nixosConfigFile = ./nixos/work.nix;
+        homeConfigFile = ./home-manager/work.nix;
+      };
+    };
   };
 }

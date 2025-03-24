@@ -21,7 +21,7 @@
     resolvconf.useLocalResolver = true;
   };
 
-  nix.settings.trusted-users = [ "root" ];
+  nix.settings.trusted-users = ["root"];
 
   #systemd.network.wait-online.enable = false;
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -38,7 +38,7 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
 
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.cups-brother-hll2350dw ];
+  services.printing.drivers = [pkgs.cups-brother-hll2350dw];
 
   services.avahi = {
     enable = true;
@@ -62,12 +62,17 @@
 
   services.thermald.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    nss_latest
+    cmake
+  ];
+
   services.fprintd = {
     enable = true;
-    package = pkgs.fprintd-tod;
+    package = pkgs.stable.fprintd-tod;
     tod = {
       enable = true;
-      driver = pkgs.libfprint-2-tod1-goodix;
+      driver = pkgs.stable.libfprint-2-tod1-goodix;
     };
   };
 
