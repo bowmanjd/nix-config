@@ -88,11 +88,20 @@ return {
 		event = "VeryLazy",
 		lazy = false,
 		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+		keys = {
+			{
+				"<leader>ac",
+				"<Cmd>AvanteClear<cr>",
+				mode = "n",
+				desc = "Clear Avante chat history",
+			},
+		},
 		opts = {
 			provider = "copilot",
 			auto_suggestions_provider = "claude",
 			copilot = {
 				model = "claude-3.7-sonnet",
+				max_tokens = 90000,
 			},
 			suggestion = {
 				debounce = 2000,
