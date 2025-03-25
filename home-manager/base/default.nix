@@ -197,6 +197,7 @@
 
   home.packages = with pkgs; [
     age
+    aider-chat
     alejandra
     basescripts
     bat
