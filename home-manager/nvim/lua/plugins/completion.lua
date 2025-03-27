@@ -18,6 +18,7 @@ return {
 			"windwp/nvim-autopairs",
 		},
 		config = function()
+			vim.opt.completeopt = { "menu", "menuone", "noselect", "noinsert", "popup" }
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/lua/snippets/" })
 
