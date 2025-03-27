@@ -93,6 +93,7 @@
 
   programs.swaylock = {
     enable = true;
+    package = pkgs.stable.swaylock;
     settings = {
       color = "000000";
       daemonize = true;
