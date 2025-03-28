@@ -13,7 +13,7 @@
     eslint_d
     fzf
     golangci-lint
-    golangci-lint-langserver
+    # golangci-lint-langserver
     gopls
     hadolint
     libxml2
