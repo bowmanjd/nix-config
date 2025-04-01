@@ -120,6 +120,9 @@
       bind | split-window -h
       bind - split-window -v
     '';
+    plugins = with pkgs; [
+      tmuxPlugins.catppuccin
+    ];
   };
 
   programs.ssh.matchBlocks = {
