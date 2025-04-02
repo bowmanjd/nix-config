@@ -25,6 +25,17 @@ return {
 			require("copilot").setup({
 				suggestion = { enabled = false },
 				panel = { enabled = false },
+				filetypes = {
+					["*"] = function()
+						-- Don't attach to large files (greater than 100KB in this example)
+						local max_file_size = 400 * 1024 -- 400KB in bytes
+						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(0))
+						if ok and stats and stats.size > max_file_size then
+							return false
+						end
+						return true
+					end,
+				},
 			})
 
 			require("copilot_cmp").setup()
