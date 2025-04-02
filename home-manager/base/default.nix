@@ -119,9 +119,31 @@
     extraConfig = ''
       bind | split-window -h
       bind - split-window -v
+
+      set -g @catppuccin_flavor "mocha"
+      set -g @catppuccin_window_status_style "rounded"
     '';
     plugins = with pkgs; [
-      tmuxPlugins.catppuccin
+      # tmuxPlugins.cpu
+      tmuxPlugins.battery
+      {
+        plugin = tmuxPlugins.catppuccin;
+        extraConfig = ''
+          # Options to make tmux more pleasant
+          set -g mouse on
+          set -g default-terminal "tmux-256color"
+
+          # Make the status line pretty and add some modules
+          set -g status-right-length 100
+          set -g status-left-length 100
+          set -g status-left ""
+          set -g status-right "#{E:@catppuccin_status_session}"
+          # set -agF status-right "#{E:@catppuccin_status_cpu}"
+          set -ag status-right "#{E:@catppuccin_status_application}"
+          set -ag status-right "#{E:@catppuccin_status_uptime}"
+          set -agF status-right "#{E:@catppuccin_status_battery}"
+        '';
+      }
     ];
   };
 
