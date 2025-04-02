@@ -38,7 +38,18 @@ return {
 				},
 			})
 
-			require("copilot_cmp").setup()
+			require("copilot_cmp").setup({
+				-- Add a condition to disable copilot_cmp for large files
+				filter = function(entry, ctx)
+					-- Don't show suggestions in large files
+					local max_file_size = 400 * 1024 -- 400KB in bytes
+					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(0))
+					if ok and stats and stats.size > max_file_size then
+						return false
+					end
+					return true
+				end
+			})
 
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
@@ -119,7 +130,19 @@ return {
 					}),
 				},
 				sources = cmp.config.sources({
-					{ name = "copilot", group_index = 2 },
+					{ 
+						name = "copilot", 
+						group_index = 2,
+						-- Additional check at the source level
+						entry_filter = function()
+							local max_file_size = 400 * 1024 -- 400KB
+							local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(0))
+							if ok and stats and stats.size > max_file_size then
+								return false
+							end
+							return true
+						end
+					},
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "vim-dadbod-completion", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },

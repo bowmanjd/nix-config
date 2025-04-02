@@ -125,23 +125,19 @@
     '';
     plugins = with pkgs; [
       # tmuxPlugins.cpu
-      tmuxPlugins.battery
       {
         plugin = tmuxPlugins.catppuccin;
         extraConfig = ''
-          # Options to make tmux more pleasant
           set -g mouse on
           set -g default-terminal "tmux-256color"
-
-          # Make the status line pretty and add some modules
+          set -g @catppuccin_window_text " #W"
+          set -g @catppuccin_window_current_text " #W"
           set -g status-right-length 100
           set -g status-left-length 100
           set -g status-left ""
-          set -g status-right "#{E:@catppuccin_status_session}"
-          # set -agF status-right "#{E:@catppuccin_status_cpu}"
-          set -ag status-right "#{E:@catppuccin_status_application}"
+          set -g status-right "#{E:@catppuccin_status_application}"
+          set -ag status-right "#{E:@catppuccin_status_session}"
           set -ag status-right "#{E:@catppuccin_status_uptime}"
-          set -agF status-right "#{E:@catppuccin_status_battery}"
         '';
       }
     ];
