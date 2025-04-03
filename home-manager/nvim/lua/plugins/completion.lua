@@ -99,7 +99,7 @@ return {
 								nvim_lsp = "[LSP]",
 								path = "[Path]",
 								-- rg = "[Rg]",
-								tags = "[Tag]",
+								-- tags = "[Tag]",
 								tmux = "[Tmux]",
 								treesitter = "[Treesitter]",
 							})[entry.source.name]
@@ -125,7 +125,7 @@ return {
 					-- 	option = { loud = true, fflag = true, dict = home .. "/.config/look/words" },
 					-- },
 					{ name = "buffer", group_index = 2 },
-					{ name = "tags", keyword_length = 2, group_index = 2 },
+					-- { name = "tags", keyword_length = 2, group_index = 2 },
 					-- { name = "rg", keyword_length = 3, group_index = 2 },
 					{ name = "path", group_index = 2 },
 					{ name = "emoji", group_index = 2 },
