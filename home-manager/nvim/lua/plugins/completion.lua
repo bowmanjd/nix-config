@@ -10,7 +10,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"onsails/lspkind.nvim",
 			"L3MON4D3/LuaSnip",
-			"ray-x/cmp-treesitter",
+			-- "ray-x/cmp-treesitter",
 			"andersevenrud/cmp-tmux",
 			"rafamadriz/friendly-snippets",
 			"zbirenbaum/copilot-cmp",
@@ -101,7 +101,7 @@ return {
 								-- rg = "[Rg]",
 								-- tags = "[Tag]",
 								tmux = "[Tmux]",
-								treesitter = "[Treesitter]",
+								-- treesitter = "[Treesitter]",
 							})[entry.source.name]
 							return vim_item
 						end,
@@ -112,7 +112,7 @@ return {
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "vim-dadbod-completion", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
-					{ name = "treesitter", group_index = 2 },
+					-- { name = "treesitter", group_index = 2 },
 					{
 						name = "tmux",
 						option = { all_panes = true },
