@@ -90,7 +90,7 @@ return {
 		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 		keys = {
 			{
-				"<leader>ac",
+				"<leader>ae",
 				"<Cmd>AvanteClear<cr>",
 				mode = "n",
 				desc = "Clear Avante chat history",
@@ -98,12 +98,13 @@ return {
 		},
 		opts = {
 			provider = "copilot",
-			auto_suggestions_provider = "claude",
+			auto_suggestions_provider = nil, -- Set to nil to disable auto suggestions
 			copilot = {
 				model = "claude-3.7-sonnet",
 				max_tokens = 90000,
 			},
 			suggestion = {
+				enabled = false, -- Disable suggestions completely
 				debounce = 2000,
 				throttle = 2000,
 			},
