@@ -265,7 +265,7 @@
     glow
     gnumake
     gnupg
-    go_1_22
+    go
     goose-cli
     handlr
     #harlequin
