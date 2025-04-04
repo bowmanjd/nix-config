@@ -76,6 +76,19 @@ return {
 						},
 					})
 				end,
+        openrouter_auto = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            env = {
+              url = "https://openrouter.ai/api",
+              api_key = "OPENROUTER_API_KEY",
+              chat_url = "/v1/chat/completions",
+            },
+            schema = {
+              model = {
+                default = "openrouter/auto",
+              },
+            },
+          })
 			},
 			strategies = {
 				chat = { adapter = "claude_copilot" },
@@ -107,6 +120,14 @@ return {
 				enabled = false, -- Disable suggestions completely
 				debounce = 2000,
 				throttle = 2000,
+			},
+			vendors = {
+				openrouter = {
+					__inherited_from = "openai",
+					endpoint = "https://openrouter.ai/api/v1",
+					api_key_name = "OPENROUTER_API_KEY",
+					model = "openrouter/auto",
+				},
 			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
