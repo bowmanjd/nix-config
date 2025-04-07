@@ -1,12 +1,12 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     brightnessctl
+    catppuccin-cursors.mochaGreen
+    catppuccin-gtk
     clipman
     foot
     fuzzel
+    greenfoot
     grim
     slurp
     swayidle
@@ -22,6 +22,7 @@
     MOZ_USE_XINPUT2 = "1";
     XDG_CURRENT_DESKTOP = "sway";
     NIXOS_OZONE_WL = "1";
+    GTK_THEME = "Catppuccin-Mocha";
   };
 
   xdg = {
@@ -156,7 +157,6 @@
     target = "fuzzel/fuzzel.ini";
   };
 
-
   services.mako = {
     enable = true;
     anchor = "bottom-right";
@@ -241,8 +241,38 @@
     style = ./waybar.css;
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Mocha"; # CHANGE THIS to your preferred variant
+      package = pkgs.catppuccin-gtk;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    font = {
+      name = "Noto Sans";
+      size = 11;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      cursor-theme = "catppuccin-mocha-green-cursors";
+    };
+  };
+
   wayland.windowManager.sway = {
     enable = true;
+    wrapperFeatures.gtk = true;
     extraConfigEarly = "set $wobsock $XDG_RUNTIME_DIR/wob.sock";
     config = rec {
       modifier = "Mod4";
@@ -352,4 +382,3 @@
     '';
   };
 }
-

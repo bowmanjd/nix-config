@@ -25,6 +25,8 @@
       export TAVILY_API_KEY=$(agegent ~/.ssh/secrets/tavily.enc.txt)
       export ANTHROPIC_API_KEY=$(agegent ~/.ssh/secrets/anthropic.enc.txt)
       export OPENROUTER_API_KEY=$(agegent ~/.ssh/secrets/openrouter.enc.txt)
+      export GROQ_API_KEY=$(agegent ~/.ssh/secrets/groq.enc.txt)
+      export GOOGLE_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
     '';
     shellAliases = {
       ls1 = "eza -1 --icons=never";
