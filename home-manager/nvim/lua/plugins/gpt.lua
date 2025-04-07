@@ -76,7 +76,7 @@ return {
 						},
 					})
 				end,
-				openrouter_auto = function()
+				openrouter = function()
 					return require("codecompanion.adapters").extend("openai_compatible", {
 						env = {
 							url = "https://openrouter.ai/api",
@@ -85,7 +85,7 @@ return {
 						},
 						schema = {
 							model = {
-								default = "openrouter/auto",
+								default = "google/gemini-2.5-pro-preview-03-25",
 							},
 						},
 					})
@@ -127,7 +127,7 @@ return {
 					__inherited_from = "openai",
 					endpoint = "https://openrouter.ai/api/v1",
 					api_key_name = "OPENROUTER_API_KEY",
-					model = "openrouter/auto",
+					model = "google/gemini-2.5-pro-preview-03-25",
 				},
 			},
 		},
