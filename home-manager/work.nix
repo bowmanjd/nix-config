@@ -69,6 +69,12 @@
     target = ".ssh/secrets";
   };
 
+  home.file."aider" = {
+    enable = true;
+    source = ./aider-work.conf.yml;
+    target = "./.aider.conf.yml";
+  };
+
   home.sessionVariables = {
     EMAIL = "jbowman@cargas.com";
   };

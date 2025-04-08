@@ -25,6 +25,12 @@
     };
   };
 
+  home.file."aider" = {
+    enable = true;
+    source = ./aider-home.conf.yml;
+    target = "./.aider.conf.yml";
+  };
+
   home.file."secrets" = {
     enable = true;
     recursive = true;
