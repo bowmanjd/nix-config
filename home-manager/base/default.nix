@@ -66,6 +66,7 @@
       "[._]s[a-rt-v][a-z]"
       "[._]ss[a-gi-z]"
       "[._]sw[a-p]"
+      ".aider*"
       "Session.vim"
       "Sessionx.vim"
       ".netrwhist"
