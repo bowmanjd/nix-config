@@ -9,7 +9,7 @@ dark-mode: true
 code-theme: github-dark
 gitignore: false
 auto-lint: false
-analytics-disable: true
+analytics-disable: false
 check-update: false
 show-release-notes: false
 voice-format: mp3
