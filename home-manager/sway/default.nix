@@ -13,6 +13,7 @@
     #warp-terminal
     waybar
     wezterm
+    wf-recorder
     wl-clipboard
     wob
   ];
