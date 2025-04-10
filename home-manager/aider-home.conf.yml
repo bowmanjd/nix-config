@@ -2,8 +2,11 @@ model: openrouter/google/gemini-2.5-pro-exp-03-25:free
 #model: openrouter/deepseek/deepseek-chat-v3-0324:free
 #model: groq/deepseek-r1-distill-llama-70b
 weak-model: groq/llama-3.1-8b-instant
-editor-model: openrouter/google/gemini-2.5-pro-exp-03-25:free
+#editor-model: openrouter/google/gemini-2.5-pro-exp-03-25:free
+editor-model: groq/deepseek-r1-distill-llama-70b
+editor-edit-format: editor-diff
 
+show-model-warnings: false
 architect: true
 vim: true
 dark-mode: true
