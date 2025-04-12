@@ -73,6 +73,7 @@
   environment.systemPackages = with pkgs; [
     curl
     docker
+    docker-compose
     fd
     git
     glibcLocalesUtf8
