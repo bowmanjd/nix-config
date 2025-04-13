@@ -316,7 +316,7 @@
         #flake8-bugbear
         flake8-docstrings
         fonttools
-        hf-trasfer
+        hf-transfer
         huggingface-hub
         isort
         #langchain
