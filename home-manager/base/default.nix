@@ -196,6 +196,9 @@
   };
 
   programs.direnv = {
+    config = {
+      log_format = "-";
+    };
     enable = true;
     enableBashIntegration = true;
     nix-direnv.enable = true;
