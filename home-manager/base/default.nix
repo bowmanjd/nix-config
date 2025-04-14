@@ -18,7 +18,7 @@
     enableVteIntegration = true;
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
     bashrcExtra = ''
-      export DIRENV_LOG_FORMAT=
+      #export DIRENV_LOG_FORMAT=
       export PINENTRY_PROGRAM="$(command -v pinentryutf8)"
       . $(command -v sshagent)
       export OPENAI_API_KEY=$(agegent ~/.ssh/secrets/openai.enc.txt)
@@ -199,6 +199,7 @@
     enable = true;
     enableBashIntegration = true;
     nix-direnv.enable = true;
+    silent = true;
   };
 
   programs.eza = {
