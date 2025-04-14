@@ -8,9 +8,7 @@ editor-model: openrouter/anthropic/claude-3.7-sonnet
 #editor-model: openrouter/google/gemini-2.5-pro-preview-03-25
 
 architect: true
-map-refresh: files
 git-commit-verify: true
-subtree-only: true
 vim: true
 dark-mode: true
 code-theme: github-dark
