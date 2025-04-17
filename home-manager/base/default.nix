@@ -321,6 +321,7 @@
         flake8-docstrings
         fonttools
         hf-transfer
+        hf-xet
         huggingface-hub
         isort
         #langchain
@@ -367,6 +368,7 @@
     rust-analyzer
     sad
     sd
+    sl
     see
     shiori
     skim
