@@ -11,6 +11,7 @@
   home.packages = with pkgs; [
     android-tools
     google-cloud-sdk
+    #wrangler
   ];
 
   home = {

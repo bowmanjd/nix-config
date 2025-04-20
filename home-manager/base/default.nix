@@ -35,6 +35,11 @@
 
   programs.bash.initExtra = ". ${pkgs.git}/share/bash-completion/completions/git-prompt.sh";
 
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+  }
+
   programs.atuin = {
     enable = true;
     enableBashIntegration = true;
@@ -226,7 +231,7 @@
 
   home.packages = with pkgs; [
     age
-    aider-chat-full
+    aider-chat-with-playwright
     alejandra
     basescripts
     bat
@@ -394,7 +399,6 @@
     xxHash
     zip
     zola
-    zoxide
   ];
 
   systemd.user.services = let

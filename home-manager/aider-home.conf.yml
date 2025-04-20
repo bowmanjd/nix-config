@@ -1,6 +1,6 @@
-model: openrouter/google/gemini-2.5-pro-exp-03-25:free
-edit-format: diff-fenced
-#model: openrouter/deepseek/deepseek-chat-v3-0324:free
+#model: openrouter/google/gemini-2.5-pro-exp-03-25:free
+model: openrouter/deepseek/deepseek-chat-v3-0324:free
+edit-format: editor-diff
 #model: groq/deepseek-r1-distill-llama-70b
 #weak-model: groq/deepseek-r1-distill-llama-70b
 weak-model: groq/llama-3.1-8b-instant
