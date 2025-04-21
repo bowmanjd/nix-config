@@ -81,7 +81,7 @@
     difftastic.enable = true;
     extraConfig = {
       core.editor = "nvim";
-      core.autocrlf = "input";
+      core.autocrlf = false;
       pull.rebase = true;
       diff.colorMoved = "zebra";
       fetch.prune = true;
