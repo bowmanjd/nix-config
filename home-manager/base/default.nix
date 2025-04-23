@@ -27,6 +27,7 @@
       export OPENROUTER_API_KEY=$(agegent ~/.ssh/secrets/openrouter.enc.txt)
       export GROQ_API_KEY=$(agegent ~/.ssh/secrets/groq.enc.txt)
       export GOOGLE_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
+      export OLLAMA_API_BASE=http://127.0.0.1:11434
     '';
     shellAliases = {
       ls1 = "eza -1 --icons=never";
