@@ -39,6 +39,8 @@
   services.printing.enable = true;
   services.printing.drivers = [pkgs.cups-brother-hll2350dw];
 
+  services.ollama.enable = true;
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -76,7 +78,6 @@
       };
     };
   };
-
 
   users.users = {
     bowmanjd = {
