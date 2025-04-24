@@ -4,7 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
-    #biome
+    biome
     csharpier
     delve
     djlint
