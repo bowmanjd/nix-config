@@ -235,6 +235,7 @@
 
   home.packages = with pkgs; [
     age
+    aichat
     aider-chat-with-playwright
     alejandra
     basescripts
@@ -301,6 +302,7 @@
     lilipod
     lsix
     miller
+    mods
     mono
     mssql-bcp
     ms-sqltoolsservice
