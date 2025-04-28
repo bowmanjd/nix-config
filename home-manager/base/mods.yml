@@ -132,9 +132,6 @@ apis:
       claude-3.7-sonnet:
         aliases: ["claude37sonnet"]
         max-input-chars: 680000
-      claude-3.5-sonnet:
-        aliases: ["claude35sonnet"]
-        max-input-chars: 680000
       gemini-2-5-pro:
         aliases: ["gemini25pro"]
         max-input-chars: 392000
