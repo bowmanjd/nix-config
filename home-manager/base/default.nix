@@ -269,6 +269,7 @@
     du-dust
     elinks
     eza
+    fabric-ai
     ffmpeg_6-full
     file
     flatbuffers
@@ -441,6 +442,12 @@
     enable = true;
     source = ./mssqlcli.config;
     target = "mssqlcli/config";
+  };
+
+  xdg.configFile."mods.yml" = {
+    enable = true;
+    source = ./mods.yml;
+    target = "mods/mods.yml";
   };
 
   home.sessionVariables = {
