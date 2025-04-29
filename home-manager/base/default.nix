@@ -403,6 +403,7 @@
     yt-dlp
     unzip
     xdg-utils
+    xh
     xxHash
     zip
     zola
