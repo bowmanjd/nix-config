@@ -450,6 +450,12 @@
     target = "mods/mods.yml";
   };
 
+  xdg.configFile."aichat.yml" = {
+    enable = true;
+    source = ./aichat.yml;
+    target = "aichat/config.yaml";
+  };
+
   home.sessionVariables = {
     DOTNET_ROOT = "${pkgs.dotnet-sdk}/share/dotnet";
   };
