@@ -28,6 +28,7 @@
       export GROQ_API_KEY=$(agegent ~/.ssh/secrets/groq.enc.txt)
       export GOOGLE_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
       export GEMINI_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
+      export GITHUB_API_KEY=$(agegent ~/.ssh/secrets/copilot.enc.txt)
       export OLLAMA_API_BASE=http://127.0.0.1:11434
       eval $(copilotkey.js)
     '';
