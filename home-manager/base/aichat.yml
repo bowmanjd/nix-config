@@ -1,5 +1,5 @@
 # ---- llm ----
-model: openrouter:deepseek/deepseek-r1-distill-qwen-32b             # Specify the LLM to use
+model: copilot:claude-3.7-sonnet
 temperature: null                # Set default temperature parameter (0, 1)
 top_p: null                      # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
 
@@ -153,7 +153,6 @@ clients:
 #
   - type: openai-compatible
     name: copilot
-    #api_key: '' # exchange your `ghu_` token at https://api.github.com/copilot_internal/v2/token with Bearer token
     api_base: https://api.githubcopilot.com
     patch:                                          # Patch api
       chat_completions:                             # Api type, possible values: chat_completions, embeddings, and rerank
