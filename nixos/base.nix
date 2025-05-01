@@ -106,12 +106,6 @@
     msodbcsql18
   ];
 
-  services.litellm = {
-    enable = true;
-    port = 1173;
-  };
-
-
   services.openssh = {
     enable = true;
     # Forbid root login through SSH.
