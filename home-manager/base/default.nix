@@ -227,7 +227,7 @@
     enable = true;
     enableBashIntegration = true;
     settings = {
-      command_timeout = 2000;
+      command_timeout = 5000;
       env_var = {
         CUSTOMER = {
           format = "(to [$env_value](bold green)) ";

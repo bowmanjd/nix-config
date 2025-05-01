@@ -22,15 +22,17 @@ function checkExistingKey() {
 function getGitHubToken() {
   const configPaths = [
     path.join(os.homedir(), '.config', 'github-copilot', 'hosts.json'),
-    path.join(os.homedir(), '.config', 'github-copilot', 'app.json')
+    path.join(os.homedir(), '.config', 'github-copilot', 'apps.json')
   ];
   
   for (const configPath of configPaths) {
     try {
       if (fs.existsSync(configPath)) {
         const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-        if (config['github.com'] && config['github.com'].oauth_token) {
-          return config['github.com'].oauth_token;
+        for (const host in config) {
+          if (config[host]?.oauth_token) {
+            return config[host].oauth_token;
+          }
         }
       }
     } catch (error) {
