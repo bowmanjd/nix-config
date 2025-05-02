@@ -2,13 +2,14 @@
 
 hours=2
 
-secrets="$XDG_RUNTIME_DIR/.bubba"
+runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+secrets="$runtime_dir/.bubba"
 
 if [ -d "$secrets" ]; then
   created=$(stat -c%W "$secrets")
   fresh=$(date --date="$hours hours ago" '+%s')
 
-  if [ $created -lt $fresh ]; then
+  if [ "$created" -lt "$fresh" ]; then
     rm -rf "$secrets"
   fi
 fi
