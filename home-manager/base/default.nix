@@ -437,7 +437,7 @@
         RandomizedDelaySec = "5min";
       };
       Install = {
-        wantedBy = ["timers.target"];
+        WantedBy = ["timers.target"];
       };
     };
   };
