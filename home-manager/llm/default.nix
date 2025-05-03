@@ -4,7 +4,7 @@
   ...
 }: {
   systemd.user.services = let
-    scriptpath = lib.makeBinPath [pkgs.basescripts];
+    scriptpath = lib.makeBinPath [pkgs.llmscripts];
   in {
     "litellm" = {
       Unit = {
@@ -14,7 +14,7 @@
 
       Service = {
         ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config ${./litellm-config.yaml}";
-        EnvironmentFile = "%h/.config/llm/keys";
+        EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;
       };
@@ -30,6 +30,7 @@
     aider-chat-with-playwright
     fabric-ai
     goose-cli
+    llmscripts
     mods
   ];
 }

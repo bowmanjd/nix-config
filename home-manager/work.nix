@@ -6,6 +6,7 @@
   imports = [
     ./base
     ./nvim
+    ./llm
   ];
 
   home = {

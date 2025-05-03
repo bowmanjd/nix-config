@@ -1,6 +1,7 @@
 # build using 'nix build .#basescripts'
 { pkgs ? import <nixpkgs> { }, ... }: rec {
   basescripts = pkgs.callPackage ./basescripts { };
+  llmscripts = pkgs.callPackage ./llmscripts { };
   # harlequin-odbc = pkgs.callPackage ./harlequin-odbc { };
   # harlequin = pkgs.callPackage ./harlequin { };
   workscripts = pkgs.callPackage ./workscripts { };

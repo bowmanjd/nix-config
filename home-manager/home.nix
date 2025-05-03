@@ -3,6 +3,7 @@
   imports = [
     ./base
     ./nvim
+    ./llm
     ./fonts
     ./sway
     ./guiapps
