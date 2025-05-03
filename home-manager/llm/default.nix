@@ -25,6 +25,15 @@
     };
   };
 
+  programs.bash.bashrcExtra = ''
+      if [ ! -s "$XDG_RUNTIME_DIR/llmconf/keys" ]; then
+        llm_vars.sh
+      fi
+      set -a
+      . "$XDG_RUNTIME_DIR/llmconf/keys"
+      set +a
+  '';
+
   home.packages = with pkgs; [
     aichat
     aider-chat-with-playwright
@@ -33,4 +42,16 @@
     llmscripts
     mods
   ];
+
+  xdg.configFile."mods.yml" = {
+    enable = true;
+    source = ./mods.yml;
+    target = "mods/mods.yml";
+  };
+
+  xdg.configFile."aichat.yml" = {
+    enable = true;
+    source = ./aichat.yml;
+    target = "aichat/config.yaml";
+  };
 }

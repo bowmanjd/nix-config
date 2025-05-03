@@ -105,16 +105,16 @@ async function updateKeysFile(newKey) {
 		if (content.includes("COPILOT_API_KEY=")) {
 			content = content.replace(
 				/COPILOT_API_KEY=.*(\n|$)/,
-				`COPILOT_API_KEY=${newKey}\n`,
+				`COPILOT_API_KEY='${newKey}'\n`,
 			);
 		} else {
-			content += `COPILOT_API_KEY=${newKey}\n`;
+			content += `COPILOT_API_KEY='${newKey}'\n`;
 		}
 
 		// Write updated content back to file
 		fs.writeFileSync(keysFilePath, content, "utf8");
 		fs.chmodSync(keysFilePath, 0o600);
-		console.log(`Updated COPILOT_API_KEY in ${keysFilePath}`);
+		//console.log(`Updated COPILOT_API_KEY in ${keysFilePath}`);
 
 		// Restart the litellm systemd user unit
 		try {
@@ -122,7 +122,7 @@ async function updateKeysFile(newKey) {
 			if (result.error || result.status !== 0) {
 				throw new Error(result.stderr?.toString() || "Unknown error");
 			}
-			console.log("Restarted litellm systemd user unit");
+			//console.log("Restarted litellm systemd user unit");
 		} catch (error) {
 			console.error(
 				`Failed to restart litellm systemd user unit: ${error.message}`,
@@ -148,7 +148,7 @@ async function main() {
 		await updateKeysFile(newKey);
 
 		// Print the key so it can be captured by the parent script if needed
-		console.log(`export COPILOT_API_KEY='${newKey}'`);
+		//console.log(`export COPILOT_API_KEY='${newKey}'`);
 
 		process.exit(0);
 	} catch (error) {

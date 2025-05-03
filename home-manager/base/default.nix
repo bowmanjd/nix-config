@@ -21,16 +21,6 @@
       #export DIRENV_LOG_FORMAT=
       export PINENTRY_PROGRAM="$(command -v pinentryutf8)"
       . $(command -v sshagent)
-      export OPENAI_API_KEY=$(agegent ~/.ssh/secrets/openai.enc.txt)
-      export TAVILY_API_KEY=$(agegent ~/.ssh/secrets/tavily.enc.txt)
-      export ANTHROPIC_API_KEY=$(agegent ~/.ssh/secrets/anthropic.enc.txt)
-      export OPENROUTER_API_KEY=$(agegent ~/.ssh/secrets/openrouter.enc.txt)
-      export GROQ_API_KEY=$(agegent ~/.ssh/secrets/groq.enc.txt)
-      export GOOGLE_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
-      export GEMINI_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
-      export GITHUB_API_KEY=$(agegent ~/.ssh/secrets/copilot.enc.txt)
-      export OLLAMA_API_BASE=http://127.0.0.1:11434
-      eval $(copilotkey.js)
     '';
     shellAliases = {
       ls1 = "eza -1 --icons=never";
@@ -238,8 +228,6 @@
 
   home.packages = with pkgs; [
     age
-    aichat
-    aider-chat-with-playwright
     alejandra
     basescripts
     bat
@@ -272,7 +260,6 @@
     du-dust
     elinks
     eza
-    fabric-ai
     ffmpeg_6-full
     file
     flatbuffers
@@ -287,7 +274,6 @@
     gnumake
     gnupg
     go
-    goose-cli
     handlr
     #harlequin
     # harlequin-odbc
@@ -306,7 +292,6 @@
     lilipod
     lsix
     miller
-    mods
     mono
     mssql-bcp
     ms-sqltoolsservice
@@ -408,6 +393,7 @@
     xdg-utils
     xh
     xxHash
+    zbar
     zip
     zola
   ];
@@ -446,18 +432,6 @@
     enable = true;
     source = ./mssqlcli.config;
     target = "mssqlcli/config";
-  };
-
-  xdg.configFile."mods.yml" = {
-    enable = true;
-    source = ./mods.yml;
-    target = "mods/mods.yml";
-  };
-
-  xdg.configFile."aichat.yml" = {
-    enable = true;
-    source = ./aichat.yml;
-    target = "aichat/config.yaml";
   };
 
   home.sessionVariables = {

@@ -5,7 +5,7 @@ model_list:
       api_base: http://localhost:11434
   - model_name: copilot/claude-3-7-sonnet
     litellm_params:
-      model: openai/claude-3-7-sonnet
+      model: copilot/claude-3-7-sonnet
       api_base: https://api.githubcopilot.com
       api_key: "os.environ/COPILOT_API_KEY" 
       rpm: 15
