@@ -55,6 +55,7 @@
         "/home.arpa/127.0.0.1"
         "/dev.internal/127.0.0.1"
         "/local.bowmanjd.com/127.0.0.1"
+        "/securelogin.wifi.udel.edu/10.2.163.150"
       ];
       cache-size = 2000;
     };

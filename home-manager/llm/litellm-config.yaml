@@ -3,15 +3,19 @@ model_list:
     litellm_params:
       model: ollama/gemma3:4b
       api_base: http://localhost:11434
+  - model_name: claude-3.7
+    litellm_params:
+      model: claude-3.7-sonnet
+      api_key: "os.environ/ANTHROPIC_API_KEY"
   - model_name: copilot/claude-3-7-sonnet
     litellm_params:
-      model: copilot/claude-3-7-sonnet
+      model: openai/claude-3-7-sonnet
       api_base: https://api.githubcopilot.com
       api_key: "os.environ/COPILOT_API_KEY" 
       rpm: 15
       extra_headers: 
         Copilot-Integration-Id: vscode-chat
-        Editor-Version: jbowmancargas/0.2.0
+        Editor-Version: "neovim/0.11.1"
 router_settings:
   routing_strategy: simple-shuffle
 

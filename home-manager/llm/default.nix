@@ -41,6 +41,27 @@
     goose-cli
     llmscripts
     mods
+    (python3.withPackages (ps:
+      with ps; [
+        hf-transfer
+        hf-xet
+        huggingface-hub
+        litellm
+        #langchain
+        #llama-index-core
+        #llama-index-program-openai
+        #llama-index-llms-openai
+        #llama-index-llms-openai-like
+        #llama-index-llms-ollama
+        #llama-index-embeddings-openai
+        #llama-index-embeddings-ollama
+        #llama-index-embeddings-huggingface
+        #llama-index-readers-file
+        #llama-index-readers-json
+        #llama-index-readers-database
+        #llama-index-vector-stores-qdrant
+        #llama-index-vector-stores-chroma
+      ]))
   ];
 
   xdg.configFile."mods.yml" = {
