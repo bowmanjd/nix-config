@@ -322,9 +322,8 @@
         fonttools
         isort
         lxml
-        #pathtools
-        #numpy
-        numpy_1
+        numpy
+        #numpy_1
         pep8-naming
         pexpect
         pip
@@ -340,6 +339,10 @@
         types-beautifulsoup4
         weasyprint
         wheel
+        hf-transfer
+        hf-xet
+        huggingface-hub
+        litellm
       ]))
     qrencode
     #qsv

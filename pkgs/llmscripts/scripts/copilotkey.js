@@ -134,10 +134,31 @@ async function updateKeysFile(newKey) {
 	}
 }
 
+// Check for internet connectivity to GitHub
+async function checkGitHubConnectivity() {
+	try {
+		const response = await fetch("https://github.com", {
+			method: "HEAD",
+			signal: AbortSignal.timeout(3000), // 3 second timeout
+		});
+		return response.ok;
+	} catch (error) {
+		return false;
+	}
+}
+
 async function main() {
 	if (checkExistingKey()) {
 		// Key is valid, nothing to do
 		process.exit(0);
+	}
+
+	// First check for GitHub connectivity, retry every 5 seconds if not available
+	let connected = await checkGitHubConnectivity();
+	while (!connected) {
+		console.log("<5>copilotkey: Waiting for connectivity to GitHub...");
+		await new Promise((resolve) => setTimeout(resolve, 5000));
+		connected = await checkGitHubConnectivity();
 	}
 
 	try {

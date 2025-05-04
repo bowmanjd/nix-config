@@ -5,8 +5,6 @@ mkdir -p "$llmconfig"
 keyfile="$llmconfig/keys"
 touch "$keyfile"
 
-old_checksum=$(sha256sum "$keyfile" | rg -o '^\S+')
-
 TAVILY_API_KEY=$(agegent ~/.ssh/secrets/tavily.enc.txt)
 ANTHROPIC_API_KEY=$(agegent ~/.ssh/secrets/anthropic.enc.txt)
 OPENROUTER_API_KEY=$(agegent ~/.ssh/secrets/openrouter.enc.txt)

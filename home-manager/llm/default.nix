@@ -17,21 +17,50 @@
         EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;
+        StartLimitIntervalSec = "300";
+        StartLimitBurst = "5";
       };
 
       Install = {
         WantedBy = ["default.target"];
       };
     };
+    "copilotkey" = {
+      Unit = {
+        Description = "Refresh Github Copilot API key";
+      };
+      Service = {
+        ExecStart = "${scriptpath}/copilotkey.js";
+        Type = "oneshot";
+        After = ["network-online.target"];
+        Wants = ["network-online.target"];
+      };
+    };
   };
 
+  systemd.user.timers = {
+    "copilotkey" = {
+      Unit = {
+        Description = "Refresh Github Copilot API key regularly";
+      };
+      Timer = {
+        OnCalendar = "*:0/30";
+        Persistent = true;
+      };
+      Install = {
+        WantedBy = ["timers.target"];
+      };
+    };
+  };
+
+
   programs.bash.bashrcExtra = ''
-      if [ ! -s "$XDG_RUNTIME_DIR/llmconf/keys" ]; then
-        llm_vars.sh
-      fi
-      set -a
-      . "$XDG_RUNTIME_DIR/llmconf/keys"
-      set +a
+    if [ ! -s "$XDG_RUNTIME_DIR/llmconf/keys" ]; then
+      llm_vars.sh
+    fi
+    set -a
+    . "$XDG_RUNTIME_DIR/llmconf/keys"
+    set +a
   '';
 
   home.packages = with pkgs; [
@@ -41,27 +70,6 @@
     goose-cli
     llmscripts
     mods
-    (python3.withPackages (ps:
-      with ps; [
-        hf-transfer
-        hf-xet
-        huggingface-hub
-        litellm
-        #langchain
-        #llama-index-core
-        #llama-index-program-openai
-        #llama-index-llms-openai
-        #llama-index-llms-openai-like
-        #llama-index-llms-ollama
-        #llama-index-embeddings-openai
-        #llama-index-embeddings-ollama
-        #llama-index-embeddings-huggingface
-        #llama-index-readers-file
-        #llama-index-readers-json
-        #llama-index-readers-database
-        #llama-index-vector-stores-qdrant
-        #llama-index-vector-stores-chroma
-      ]))
   ];
 
   xdg.configFile."mods.yml" = {

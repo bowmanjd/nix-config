@@ -1,21 +1,64 @@
+common_copilot: &common_copilot
+  api_base: https://api.githubcopilot.com
+  api_key: "os.environ/COPILOT_API_KEY" 
+  rpm: 15
+  input_cost_per_token: 0.0
+  output_cost_per_token: 0.0
+  extra_headers:
+    Copilot-Integration-Id: vscode-chat
+    Editor-Version: neovim/0.11.1
+
+common_claude: &common_claude
+  max_output_tokens: 8192
+  max_input_tokens: 90000
+  mode: chat
+  supports_vision: true
+  supports_function_calling: true
+  supports_parallel_function_calling: true
+  supports_system_messages: true
+
 model_list:
-  - model_name: ollama/gemma3:4b
+  - model_name: ollama/*
     litellm_params:
-      model: ollama/gemma3:4b
+      model: ollama_chat/*
       api_base: http://localhost:11434
-  - model_name: claude-3.7
+  - model_name: openai/*
     litellm_params:
-      model: claude-3.7-sonnet
-      api_key: "os.environ/ANTHROPIC_API_KEY"
-  - model_name: copilot/claude-3-7-sonnet
+      model: openai/*
+  - model_name: groq/*
     litellm_params:
-      model: openai/claude-3-7-sonnet
-      api_base: https://api.githubcopilot.com
-      api_key: "os.environ/COPILOT_API_KEY" 
-      rpm: 15
-      extra_headers: 
-        Copilot-Integration-Id: vscode-chat
-        Editor-Version: "neovim/0.11.1"
+      model: groq/*
+  - model_name: openrouter/*
+    litellm_params:
+      model: openrouter/*
+  - model_name: anthropic/*
+    litellm_params:
+      model: anthropic/*
+  - model_name: copilot/claude-3.7-sonnet
+    litellm_params:
+      model: openai/claude-3.7-sonnet
+      max_tokens: 200000
+      <<: *common_claude
+      <<: *common_copilot
+  - model_name: copilot/claude-3.5-sonnet
+    litellm_params:
+      model: openai/claude-3.5-sonnet
+      max_tokens: 90000
+      <<: *common_claude
+      <<: *common_copilot
+  - model_name: copilot/gemini-2.5-pro
+    litellm_params:
+      model: openai/gemini-2.5-pro
+      max_tokens: 90000
+      max_output_tokens: 8192
+      <<: *common_copilot
+  - model_name: copilot/gpt-4.1
+    litellm_params:
+      model: openai/gpt-4.1
+      max_tokens: 128000
+      max_output_tokens: 4096
+      max_input_tokens: 64000
+      <<: *common_copilot
 router_settings:
   routing_strategy: simple-shuffle
 
