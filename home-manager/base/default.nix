@@ -18,9 +18,23 @@
     enableVteIntegration = true;
     historyControl = ["erasedups" "ignoredups" "ignorespace"];
     bashrcExtra = ''
-      #export DIRENV_LOG_FORMAT=
       export PINENTRY_PROGRAM="$(command -v pinentryutf8)"
       . $(command -v sshagent)
+      osc7_cwd() {
+          local strlen=''${#PWD}
+          local encoded=""
+          local pos c o
+          for (( pos=0; pos<strlen; pos++ )); do
+              c=''${PWD:$pos:1}
+              case "$c" in
+                  [-/:_.!\'\(\)~[:alnum:]] ) o="''${c}" ;;
+                  * ) printf -v o '%%%02X' "''\'''${c}" ;;
+              esac
+              encoded+="''${o}"
+          done
+          printf '\e]7;file://%s%s\e\\' "''${HOSTNAME}" "''${encoded}"
+      }
+      PROMPT_COMMAND=''${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
     '';
     shellAliases = {
       ls1 = "eza -1 --icons=never";

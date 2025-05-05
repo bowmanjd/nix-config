@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  environment ? "home",
   ...
 }: {
   systemd.user.services = let
@@ -82,5 +83,11 @@
     enable = true;
     source = ./aichat.yml;
     target = "aichat/config.yaml";
+  };
+
+  home.file."aider" = {
+    enable = true;
+    source = if environment == "work" then ./aider-work.conf.yml else ./aider-home.conf.yml;
+    target = "./.aider.conf.yml";
   };
 }

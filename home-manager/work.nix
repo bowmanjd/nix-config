@@ -6,7 +6,7 @@
   imports = [
     ./base
     ./nvim
-    ./llm
+    (import ./llm { inherit pkgs; environment = "work"; })
   ];
 
   home = {
@@ -68,12 +68,6 @@
     recursive = true;
     source = ./worksecrets;
     target = ".ssh/secrets";
-  };
-
-  home.file."aider" = {
-    enable = true;
-    source = ./aider-work.conf.yml;
-    target = "./.aider.conf.yml";
   };
 
   home.sessionVariables = {

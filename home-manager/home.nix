@@ -3,7 +3,7 @@
   imports = [
     ./base
     ./nvim
-    ./llm
+    (import ./llm { inherit pkgs; environment = "home"; })
     ./fonts
     ./sway
     ./guiapps
@@ -25,12 +25,6 @@
     extraConfig = {
       user.signingKey = builtins.readFile ./secrets/id_ed25519.pub;
     };
-  };
-
-  home.file."aider" = {
-    enable = true;
-    source = ./aider-home.conf.yml;
-    target = "./.aider.conf.yml";
   };
 
   home.file."secrets" = {
