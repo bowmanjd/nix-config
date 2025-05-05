@@ -84,15 +84,6 @@
     target = "aichat/config.yaml";
   };
 
-  home.file."aider" = {
-    enable = true;
-    source =
-      if environment == "work"
-      then ./aider-work.conf.yml
-      else ./aider-home.conf.yml;
-    target = "./.aider.conf.yml";
-  };
-
   home.file."aider" = let
     mergedConfig = pkgs.writeText "aider-merged.conf.yml" (
       builtins.readFile ./aider-common.conf.yml

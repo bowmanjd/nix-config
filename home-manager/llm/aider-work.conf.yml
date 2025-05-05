@@ -1,17 +1,4 @@
+git-commit-verify: true
+
 model: litellm_proxy/workcode
 weak-model: litellm_proxy/worksimple
-
-git-commit-verify: true
-show-model-warnings: false
-vim: true
-dark-mode: true
-code-theme: github-dark
-gitignore: false
-auto-lint: false
-analytics-disable: false
-check-update: false
-show-release-notes: false
-voice-format: mp3
-voice-language: en
-editor: nvim
-
