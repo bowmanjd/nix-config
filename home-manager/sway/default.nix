@@ -160,7 +160,7 @@
 
   services.mako = {
     enable = true;
-    anchor = "bottom-right";
+    settings.anchor = "bottom-right";
   };
 
   programs.waybar = {

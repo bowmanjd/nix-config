@@ -1,16 +1,7 @@
-#model: openrouter/google/gemini-2.5-pro-exp-03-25:free
-model: openrouter/deepseek/deepseek-chat-v3-0324:free
-edit-format: editor-diff
-#model: groq/deepseek-r1-distill-llama-70b
-#weak-model: groq/deepseek-r1-distill-llama-70b
-weak-model: groq/llama-3.1-8b-instant
-#editor-model: openrouter/google/gemini-2.5-pro-exp-03-25:free
-#editor-model: groq/deepseek-r1-distill-llama-70b
-#editor-model: openrouter/anthropic/claude-3.5-sonnet
-#editor-edit-format: editor-diff
+model: litellm_proxy/homecode
+weak-model: litellm_proxy/homesimple
 
 show-model-warnings: false
-#architect: false
 vim: true
 dark-mode: true
 code-theme: github-dark
@@ -22,6 +13,3 @@ show-release-notes: false
 voice-format: mp3
 voice-language: en
 editor: nvim
-
-#max-chat-history-tokens: xxx
-#subtree-only: true

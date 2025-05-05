@@ -1,14 +1,6 @@
-model: openrouter/google/gemini-2.5-pro-preview-03-25
-edit-format: diff-fenced
-#model: openrouter/google/gemini-2.5-pro-exp-03-25:free
-#model: openrouter/deepseek/deepseek-chat-v3-0324
-#model: openrouter/google/gemini-2.5-pro-preview-03-25
-#model: groq/deepseek-r1-distill-llama-70b
-weak-model: openrouter/google/gemini-2.0-flash-001
-#editor-model: openrouter/anthropic/claude-3.7-sonnet
-#editor-model: openrouter/google/gemini-2.5-pro-preview-03-25
+model: litellm_proxy/workcode
+weak-model: litellm_proxy/worksimple
 
-# architect: true
 git-commit-verify: true
 vim: true
 dark-mode: true
@@ -21,6 +13,4 @@ show-release-notes: false
 voice-format: mp3
 voice-language: en
 editor: nvim
-#
-#max-chat-history-tokens: xxx
 

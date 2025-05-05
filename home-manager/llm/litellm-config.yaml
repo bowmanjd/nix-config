@@ -91,6 +91,12 @@ model_list:
   - model_name: workcode
     litellm_params:
       <<: *copilot_claude37
+  - model_name: homesimple
+    litellm_params:
+      model: copilot/gemini-2.0-flash-001
+  - model_name: worksimple
+    litellm_params:
+      model: copilot/gemini-2.0-flash-001
   - model_name: homecodefast
     litellm_params:
       <<: *copilot_claude35
@@ -99,16 +105,39 @@ model_list:
       <<: *copilot_claude35
 router_settings:
   routing_strategy: simple-shuffle
-  fallbacks:
-    homecode: 
-      - copilot/gemini-2.5-pro
-      - openrouter/deepseek/deepseek-chat-v3-0324:free
-      - groq/meta-llama/llama-4-maverick-17b-128e-instruct
-      - gemini/gemini-2.5-pro-preview-03-25
-    workcode:
-      - openrouter/anthropic/claude-3.7-sonnet
-      - anthropic/claude-3-7-sonnet-latest
-      - copilot/gemini-2.5-pro
-      - openrouter/google/gemini-2.5-pro-preview-03-25
+  fallbacks: [
+    {
+      "homecode": [
+        "copilot/gemini-2.5-pro",
+        "openrouter/deepseek/deepseek-chat-v3-0324:free",
+        "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
+        "gemini/gemini-2.5-pro-preview-03-25",
+        "ollama/qwen3:8b" 
+      ]
+    },
+    {
+      "workcode": [
+        "openrouter/anthropic/claude-3.7-sonnet",
+        "anthropic/claude-3-7-sonnet-latest",
+        "copilot/gemini-2.5-pro",
+        "openrouter/google/gemini-2.5-pro-preview-03-25",
+        "ollama/qwen3:8b" 
+      ]
+    },
+    {
+      "homesimple": [
+        "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+        "openrouter/google/gemma-3-27b-it:free",
+        "ollama/gemma3:8b"
+      ]
+    },
+    {
+      "worksimple": [
+        "openrouter/google/gemma-3-27b-it",
+        "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+        "ollama/gemma3:8b"
+      ]
+    }
+  ]
   num_retries: 3
 

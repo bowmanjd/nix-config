@@ -9,6 +9,8 @@
     "litellm" = {
       Unit = {
         Description = "LiteLLM API server";
+        StartLimitIntervalSec = "120";
+        StartLimitBurst = "5";
         After = ["network.target"];
       };
 
@@ -17,8 +19,6 @@
         EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;
-        StartLimitIntervalSec = "300";
-        StartLimitBurst = "5";
       };
 
       Install = {
