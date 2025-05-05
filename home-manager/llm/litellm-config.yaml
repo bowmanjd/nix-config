@@ -93,10 +93,12 @@ model_list:
       <<: *copilot_claude37
   - model_name: homesimple
     litellm_params:
-      model: copilot/gemini-2.0-flash-001
+      model: openai/gemini-2.0-flash-001
+      <<: *common_copilot
   - model_name: worksimple
     litellm_params:
-      model: copilot/gemini-2.0-flash-001
+      model: openai/gemini-2.0-flash-001
+      <<: *common_copilot
   - model_name: homecodefast
     litellm_params:
       <<: *copilot_claude35
