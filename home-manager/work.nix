@@ -1,12 +1,16 @@
 {
   pkgs,
+  lib,
   ...
 }: {
   # You can import other home-manager modules here
   imports = [
     ./base
     ./nvim
-    (import ./llm { inherit pkgs; environment = "work"; })
+    (import ./llm {
+      inherit pkgs lib;
+      environment = "work";
+    })
   ];
 
   home = {
@@ -75,32 +79,30 @@
   };
 
   xdg = {
-        enable = true;
-        mime.enable = true;
+    enable = true;
+    mime.enable = true;
 
-        desktopEntries = {
-            windows = {
-                name = "Window";
-                genericName = "Windows";
-                exec = "wslview %U";
-                terminal = false;
-                categories = [ ];
-                type = "Application";
-                mimeType = [ "text/html" "text/xml" "application/pdf" ];
-            };
-        };
-
-        mimeApps = {
-            enable = true;
-            associations.added = {
-                "application/pdf" = "windows.desktop";
-            };
-
-            defaultApplications = {
-                "application/pdf" = [ "windows.desktop" ];
-            };
-        };
-
-
+    desktopEntries = {
+      windows = {
+        name = "Window";
+        genericName = "Windows";
+        exec = "wslview %U";
+        terminal = false;
+        categories = [];
+        type = "Application";
+        mimeType = ["text/html" "text/xml" "application/pdf"];
+      };
     };
+
+    mimeApps = {
+      enable = true;
+      associations.added = {
+        "application/pdf" = "windows.desktop";
+      };
+
+      defaultApplications = {
+        "application/pdf" = ["windows.desktop"];
+      };
+    };
+  };
 }

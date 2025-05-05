@@ -1,7 +1,3 @@
-model: litellm_proxy/workcode
-weak-model: litellm_proxy/worksimple
-
-git-commit-verify: true
 show-model-warnings: false
 vim: true
 dark-mode: true
@@ -14,4 +10,3 @@ show-release-notes: false
 voice-format: mp3
 voice-language: en
 editor: nvim
-

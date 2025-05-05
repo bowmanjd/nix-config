@@ -54,7 +54,6 @@
     };
   };
 
-
   programs.bash.bashrcExtra = ''
     if [ ! -s "$XDG_RUNTIME_DIR/llmconf/keys" ]; then
       llm_vars.sh
@@ -87,7 +86,22 @@
 
   home.file."aider" = {
     enable = true;
-    source = if environment == "work" then ./aider-work.conf.yml else ./aider-home.conf.yml;
+    source =
+      if environment == "work"
+      then ./aider-work.conf.yml
+      else ./aider-home.conf.yml;
+    target = "./.aider.conf.yml";
+  };
+
+  home.file."aider" = let
+    mergedConfig = pkgs.writeText "aider-merged.conf.yml" (
+      builtins.readFile ./aider-common.conf.yml
+      + "\n\n# ${environment} config\n"
+      + builtins.readFile ./aider-${environment}.conf.yml
+    );
+  in {
+    enable = true;
+    source = mergedConfig;
     target = "./.aider.conf.yml";
   };
 }

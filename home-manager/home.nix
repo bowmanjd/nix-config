@@ -1,9 +1,16 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # You can import other home-manager modules here
   imports = [
     ./base
     ./nvim
-    (import ./llm { inherit pkgs; environment = "home"; })
+    (import ./llm {
+      inherit pkgs lib;
+      environment = "home";
+    })
     ./fonts
     ./sway
     ./guiapps
