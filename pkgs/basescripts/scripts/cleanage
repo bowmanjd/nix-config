@@ -1,6 +1,6 @@
 #!/bin/sh
 
-hours=2
+hours=4
 
 runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 secrets="$runtime_dir/.bubba"

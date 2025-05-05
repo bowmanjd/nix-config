@@ -17,6 +17,18 @@ common_claude_copilot: &common_claude_copilot
   supports_parallel_function_calling: true
   supports_system_messages: true
 
+copilot_claude37: &copilot_claude37
+  model: openai/claude-3.7-sonnet
+  max_tokens: 200000
+  <<: *common_claude_copilot
+  <<: *common_copilot
+
+copilot_claude35: &copilot_claude35
+  model: openai/claude-3.5-sonnet
+  max_tokens: 90000
+  <<: *common_claude_copilot
+  <<: *common_copilot
+
 model_list:
   - model_name: ollama/*
     litellm_params:
@@ -46,10 +58,7 @@ model_list:
       <<: *common_copilot
   - model_name: copilot/claude-3.7-sonnet
     litellm_params:
-      model: openai/claude-3.7-sonnet
-      max_tokens: 200000
-      <<: *common_claude_copilot
-      <<: *common_copilot
+      <<: *copilot_claude37
   - model_name: copilot/claude-3.5-sonnet
     litellm_params:
       model: openai/claude-3.5-sonnet
@@ -69,6 +78,37 @@ model_list:
       max_output_tokens: 4096
       max_input_tokens: 64000
       <<: *common_copilot
+  - model_name: copilot/gpt-4.1
+    litellm_params:
+      model: openai/gpt-4.1
+      max_tokens: 128000
+      max_output_tokens: 4096
+      max_input_tokens: 64000
+      <<: *common_copilot
+  - model_name: homecode
+    litellm_params:
+      <<: *copilot_claude37
+  - model_name: workcode
+    litellm_params:
+      <<: *copilot_claude37
+  - model_name: homecodefast
+    litellm_params:
+      <<: *copilot_claude35
+  - model_name: workcodefast
+    litellm_params:
+      <<: *copilot_claude35
 router_settings:
   routing_strategy: simple-shuffle
+  fallbacks:
+    homecode: 
+      - copilot/gemini-2.5-pro
+      - openrouter/deepseek/deepseek-chat-v3-0324:free
+      - groq/meta-llama/llama-4-maverick-17b-128e-instruct
+      - gemini/gemini-2.5-pro-preview-03-25
+    workcode:
+      - openrouter/anthropic/claude-3.7-sonnet
+      - anthropic/claude-3-7-sonnet-latest
+      - copilot/gemini-2.5-pro
+      - openrouter/google/gemini-2.5-pro-preview-03-25
+  num_retries: 3
 

@@ -44,7 +44,7 @@
         Description = "Refresh Github Copilot API key regularly";
       };
       Timer = {
-        OnCalendar = "*:0/30";
+        OnCalendar = "*:0/15";
         Persistent = true;
       };
       Install = {
