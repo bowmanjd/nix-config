@@ -6,6 +6,7 @@ keyfile="$llmconfig/keys"
 touch "$keyfile"
 
 TAVILY_API_KEY=$(agegent ~/.ssh/secrets/tavily.enc.txt)
+OPENAI_API_KEY=$(agegent ~/.ssh/secrets/openai.enc.txt)
 ANTHROPIC_API_KEY=$(agegent ~/.ssh/secrets/anthropic.enc.txt)
 OPENROUTER_API_KEY=$(agegent ~/.ssh/secrets/openrouter.enc.txt)
 GROQ_API_KEY=$(agegent ~/.ssh/secrets/groq.enc.txt)
@@ -20,6 +21,7 @@ LITELLM_PROXY_API_BASE=http://127.0.0.1:1173
 LITELLM_PROXY_API_KEY="fake_key_123"
 TAVILY_API_KEY=$TAVILY_API_KEY
 ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY
+OPENAI_API_KEY=$OPENAI_API_KEY
 OPENROUTER_API_KEY=$OPENROUTER_API_KEY
 GROQ_API_KEY=$GROQ_API_KEY
 GOOGLE_API_KEY=$GOOGLE_API_KEY
