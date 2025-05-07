@@ -78,9 +78,15 @@
     target = "mods/mods.yml";
   };
 
-  xdg.configFile."aichat.yml" = {
+  xdg.configFile."aichat.yml" = let
+    mergedConfig = pkgs.writeText "aichat-merged.yml" (
+      "\n\n# ${environment} config\n"
+      + builtins.readFile ./aichat-${environment}.yml
+      + builtins.readFile ./aichat-common.yml
+    );
+  in {
     enable = true;
-    source = ./aichat.yml;
+    source = mergedConfig;
     target = "aichat/config.yaml";
   };
 

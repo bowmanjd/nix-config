@@ -1,0 +1,6 @@
+model: litellm:workcode
+temperature: null                # Set default temperature parameter (0, 1)
+top_p: null                      # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
+
+
+

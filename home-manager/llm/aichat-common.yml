@@ -1,7 +1,5 @@
-# ---- llm ----
-model: litellm:homecode
-temperature: null                # Set default temperature parameter (0, 1)
-top_p: null                      # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
+
+# common config
 
 # ---- behavior ----
 stream: true                     # Controls whether to use the stream-style API.
@@ -69,7 +67,7 @@ rag_template: |
   #pdf: 'pdftotext $1 -'                         # Load .pdf file, see https://poppler.freedesktop.org to set up pdftotext
   #docx: 'pandoc --to plain $1'                  # Load .docx file, see https://pandoc.org to set up pandoc
 
-# ---- apperence ----
+# ---- appearence ----
 highlight: true                  # Controls syntax highlighting
 light_theme: false               # Activates a light color theme when true. env: AICHAT_LIGHT_THEME
 # Custom REPL left/right prompts, see https://github.com/sigoden/aichat/wiki/Custom-REPL-Prompt for more details
@@ -178,3 +176,4 @@ clients:
     name: voyageai
     api_base: https://api.voyageai.com/v1
     api_key: xxx
+
