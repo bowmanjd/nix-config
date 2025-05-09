@@ -70,6 +70,7 @@
     goose-cli
     llmscripts
     mods
+    ollama
   ];
 
   xdg.configFile."mods.yml" = {
