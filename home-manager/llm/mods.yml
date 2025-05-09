@@ -230,6 +230,12 @@ apis:
       mixtral-8x7b-32768:
         aliases: ["mixtral"]
         max-input-chars: 98000
+      meta-llama/llama-4-maverick-17b-128e-instruct:
+        aliases: ["maverick"]
+        max-input-chars: 392000
+      meta-llama/llama-4-scout-17b-16e-instruct:
+        aliases: ["scout"]
+        max-input-chars: 392000
   cerebras:
     base-url: https://api.cerebras.ai/v1
     api-key:
