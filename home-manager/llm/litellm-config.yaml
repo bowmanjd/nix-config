@@ -29,6 +29,12 @@ copilot_claude35: &copilot_claude35
   <<: *common_claude_copilot
   <<: *common_copilot
 
+copilot_geminipro: &copilot_geminipro
+  model: openai/gemini-2.5-pro
+  max_tokens: 90000
+  max_output_tokens: 8192
+  <<: *common_copilot
+
 model_list:
   - model_name: ollama/*
     litellm_params:
@@ -65,12 +71,12 @@ model_list:
       max_tokens: 90000
       <<: *common_claude_copilot
       <<: *common_copilot
+  - model_name: gemini-pro
+    litellm_params:
+      <<: *copilot_geminipro
   - model_name: copilot/gemini-2.5-pro
     litellm_params:
-      model: openai/gemini-2.5-pro
-      max_tokens: 90000
-      max_output_tokens: 8192
-      <<: *common_copilot
+      <<: *copilot_geminipro
   - model_name: copilot/gpt-4.1
     litellm_params:
       model: openai/gpt-4.1
@@ -113,7 +119,7 @@ router_settings:
         "copilot/gemini-2.5-pro",
         "openrouter/deepseek/deepseek-chat-v3-0324:free",
         "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
-        "gemini/gemini-2.5-pro-preview-03-25",
+        "gemini/gemini-2.5-pro-exp-03-25",
         "ollama/qwen3:8b" 
       ]
     },
@@ -122,7 +128,7 @@ router_settings:
         "openrouter/anthropic/claude-3.7-sonnet",
         "anthropic/claude-3-7-sonnet-latest",
         "copilot/gemini-2.5-pro",
-        "openrouter/google/gemini-2.5-pro-preview-03-25",
+        "openrouter/google/gemini-2.5-pro-preview",
         "ollama/qwen3:8b" 
       ]
     },
@@ -138,6 +144,11 @@ router_settings:
         "openrouter/google/gemma-3-27b-it",
         "groq/meta-llama/llama-4-scout-17b-16e-instruct",
         "ollama/gemma3:8b"
+      ]
+    },
+    {
+      "gemini-pro": [
+        "openrouter/google/gemini-2.5-pro-preview"
       ]
     }
   ]
