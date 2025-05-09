@@ -357,6 +357,7 @@
         hf-xet
         huggingface-hub
         litellm
+        wordcloud
       ]))
     qrencode
     #qsv
