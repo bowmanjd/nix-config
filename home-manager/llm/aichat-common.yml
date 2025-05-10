@@ -91,11 +91,9 @@ clients:
     # api_key: xxx
     # organization_id: org-xxx                          # Optional
 
-  # For any platform compatible with OpenAI's API
   - type: openai-compatible
     name: ollama
     api_base: http://localhost:11434/v1
-    api_key: xxx                                      # Optional
     models:
       - name: deepseek-r1:7b
         max_input_tokens: 131072
@@ -110,6 +108,19 @@ clients:
         default_chunk_size: 1000
         max_batch_size: 50
       - name: qwen3:8b
+        max_input_tokens: 40960
+        supports_function_calling: true
+
+  - type: openai-compatible
+    name: boron
+    api_base: http://10.0.0.10:11434/v1
+    models:
+      - name: hf.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF:IQ4_XS
+        max_input_tokens: 131072
+      - name: hf.co/mradermacher/gemma-3-4b-it-i1-GGUF:Q4_K_S
+        max_input_tokens: 131072
+        supports_vision: true
+      - name: hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
         max_input_tokens: 40960
         supports_function_calling: true
 

@@ -169,6 +169,18 @@
       port = 22;
       forwardAgent = true;
     };
+    "boron" = {
+      hostname = "10.0.0.10";
+      user = "boron";
+      port = 22;
+      forwardAgent = true;
+    };
+    "nitrogen" = {
+      hostname = "10.0.0.11";
+      user = "nitrogen";
+      port = 22;
+      forwardAgent = true;
+    };
     "percheron" = {
       hostname = "129.213.21.111";
       user = "bowmanjd";
