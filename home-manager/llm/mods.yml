@@ -99,6 +99,31 @@ apis:
       o1-mini:
         aliases: ["o1-mini"]
         max-input-chars: 128000
+  litellm:
+    base-url: http://localhost:1173/v1
+    api-key: abc1234
+    models:
+      homecode:
+        aliases: ["home"]
+        max-input-chars: 680000
+      workcode:
+        aliases: ["work"]
+        max-input-chars: 680000
+      homesimple:
+        aliases: ["hsimp"]
+        max-input-chars: 680000
+      worksimple:
+        aliases: ["wsimp"]
+        max-input-chars: 680000
+      boron-phi:
+        aliases: ["bphi"]
+        max-input-chars: 650000
+      boron-gemma:
+        aliases: ["bgemma"]
+        max-input-chars: 650000
+      boron-qwen:
+        aliases: ["bqwen"]
+        max-input-chars: 650000
   copilot:
     base-url: https://api.githubcopilot.com
     models:

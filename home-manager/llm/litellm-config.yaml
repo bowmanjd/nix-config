@@ -40,6 +40,14 @@ model_list:
     litellm_params:
       model: ollama_chat/*
       api_base: http://localhost:11434
+  - model_name: boron/*
+    litellm_params:
+      model: ollama_chat/*
+      api_base: http://10.0.0.10:11434
+  - model_name: nitrogen/*
+    litellm_params:
+      model: ollama_chat/*
+      api_base: http://10.0.0.11:11434
   - model_name: openai/*
     litellm_params:
       model: openai/*
@@ -91,6 +99,18 @@ model_list:
       max_output_tokens: 4096
       max_input_tokens: 64000
       <<: *common_copilot
+  - model_name: boron-phi
+    litellm_params:
+      model: ollama_chat/hf.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF:IQ4_XS
+      api_base: http://10.0.0.10:11434
+  - model_name: boron-gemma
+    litellm_params:
+      model: ollama_chat/hf.co/mradermacher/gemma-3-4b-it-i1-GGUF:Q4_K_S
+      api_base: http://10.0.0.10:11434
+  - model_name: boron-qwen
+    litellm_params:
+      model: ollama_chat/hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
+      api_base: http://10.0.0.10:11434
   - model_name: homecode
     litellm_params:
       <<: *copilot_claude37

@@ -3,10 +3,28 @@
   pkgs,
   environment ? "home",
   ...
-}: {
-  systemd.user.services = let
-    scriptpath = lib.makeBinPath [pkgs.llmscripts];
-  in {
+}: let
+  scriptpath = lib.makeBinPath [pkgs.llmscripts];
+  
+  # Helper function for creating merged config files
+  mergeConfigs = {
+    name,
+    commonFile,
+    environmentFile,
+    environmentFirst ? false,
+  }: pkgs.writeText "${name}-merged.yml" (
+    if environmentFirst then
+      "\n\n# ${environment} config\n"
+      + builtins.readFile environmentFile
+      + builtins.readFile commonFile
+    else
+      builtins.readFile commonFile
+      + "\n\n# ${environment} config\n"
+      + builtins.readFile environmentFile
+  );
+in {
+  # Systemd services
+  systemd.user.services = {
     "litellm" = {
       Unit = {
         Description = "LiteLLM API server";
@@ -14,18 +32,17 @@
         StartLimitBurst = "5";
         After = ["network.target"];
       };
-
       Service = {
         ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config ${./litellm-config.yaml}";
         EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;
       };
-
       Install = {
         WantedBy = ["default.target"];
       };
     };
+    
     "copilotkey" = {
       Unit = {
         Description = "Refresh Github Copilot API key";
@@ -39,6 +56,7 @@
     };
   };
 
+  # Systemd timers
   systemd.user.timers = {
     "copilotkey" = {
       Unit = {
@@ -54,6 +72,7 @@
     };
   };
 
+  # Bash config
   programs.bash.bashrcExtra = ''
     if [ ! -s "$XDG_RUNTIME_DIR/llmconf/keys" ]; then
       llm_vars.sh
@@ -63,9 +82,11 @@
     set +a
   '';
 
+  # Packages
   home.packages = with pkgs; [
     aichat
     aider-chat-with-playwright
+    claude-code
     fabric-ai
     goose-cli
     llmscripts
@@ -73,33 +94,34 @@
     ollama
   ];
 
-  xdg.configFile."mods.yml" = {
-    enable = true;
-    source = ./mods.yml;
-    target = "mods/mods.yml";
+  # Config files
+  xdg.configFile = {
+    "mods.yml" = {
+      enable = true;
+      source = ./mods.yml;
+      target = "mods/mods.yml";
+    };
+    
+    "aichat.yml" = {
+      enable = true;
+      source = mergeConfigs {
+        name = "aichat";
+        environmentFile = ./aichat-${environment}.yml;
+        commonFile = ./aichat-common.yml;
+        environmentFirst = true;
+      };
+      target = "aichat/config.yaml";
+    };
   };
 
-  xdg.configFile."aichat.yml" = let
-    mergedConfig = pkgs.writeText "aichat-merged.yml" (
-      "\n\n# ${environment} config\n"
-      + builtins.readFile ./aichat-${environment}.yml
-      + builtins.readFile ./aichat-common.yml
-    );
-  in {
+  # Home files
+  home.file."aider" = {
     enable = true;
-    source = mergedConfig;
-    target = "aichat/config.yaml";
-  };
-
-  home.file."aider" = let
-    mergedConfig = pkgs.writeText "aider-merged.conf.yml" (
-      builtins.readFile ./aider-common.conf.yml
-      + "\n\n# ${environment} config\n"
-      + builtins.readFile ./aider-${environment}.conf.yml
-    );
-  in {
-    enable = true;
-    source = mergedConfig;
+    source = mergeConfigs {
+      name = "aider";
+      environmentFile = ./aider-${environment}.conf.yml;
+      commonFile = ./aider-common.conf.yml;
+    };
     target = "./.aider.conf.yml";
   };
 }
