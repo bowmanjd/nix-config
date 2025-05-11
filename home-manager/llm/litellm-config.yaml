@@ -111,6 +111,14 @@ model_list:
     litellm_params:
       model: ollama_chat/hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
       api_base: http://10.0.0.10:11434
+  - model_name: embedding
+    litellm_params:
+      model: ollama_chat/granite-embedding:30m
+      api_base: http://10.0.0.10:11434
+  - model_name: local-embedding
+    litellm_params:
+      model: ollama_chat/granite-embedding:30m
+      api_base: http://localhost:11434
   - model_name: homecode
     litellm_params:
       <<: *copilot_claude37
@@ -169,6 +177,11 @@ router_settings:
     {
       "gemini-pro": [
         "openrouter/google/gemini-2.5-pro-preview"
+      ]
+    },
+    {
+      "embedding": [
+        "local-embedding"
       ]
     }
   ]
