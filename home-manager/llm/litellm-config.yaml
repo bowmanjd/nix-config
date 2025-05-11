@@ -119,6 +119,10 @@ model_list:
     litellm_params:
       model: ollama_chat/granite-embedding:30m
       api_base: http://localhost:11434
+  - model_name: local-rerank
+    litellm_params:
+      model: ollama_chat/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
+      api_base: http://localhost:11434
   - model_name: homecode
     litellm_params:
       <<: *copilot_claude37

@@ -33,8 +33,8 @@ summary_prompt: 'This is a summary of the chat history as a recap: '
 
 # ---- RAG ----
 # See [RAG-Guide](https://github.com/sigoden/aichat/wiki/RAG-Guide) for more details.
-rag_embedding_model: null        # Specifies the embedding model used for context retrieval
-rag_reranker_model: null         # Specifies the reranker model used for sorting retrieved documents
+rag_embedding_model: litellm:local-embedding        # Specifies the embedding model used for context retrieval
+rag_reranker_model: litellm:local-rerank         # Specifies the reranker model used for sorting retrieved documents
 rag_top_k: 5                     # Specifies the number of documents to retrieve for answering queries
 rag_chunk_size: null             # Defines the size of chunks for document processing in characters
 rag_chunk_overlap: null          # Defines the overlap between chunks
