@@ -255,6 +255,7 @@
   home.packages = with pkgs; [
     age
     alejandra
+    argc
     basescripts
     bat
     bc
