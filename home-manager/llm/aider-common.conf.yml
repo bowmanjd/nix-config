@@ -11,3 +11,4 @@ show-release-notes: false
 vim: true
 voice-format: mp3
 voice-language: en
+chat-language: en
