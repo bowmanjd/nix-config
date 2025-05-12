@@ -111,7 +111,7 @@ model_list:
     litellm_params:
       model: ollama_chat/hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
       api_base: http://10.0.0.10:11434
-  - model_name: embedding
+  - model_name: boron-embedding
     litellm_params:
       model: ollama_chat/granite-embedding:30m
       api_base: http://10.0.0.10:11434
@@ -123,6 +123,10 @@ model_list:
     litellm_params:
       model: ollama_chat/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
       api_base: http://localhost:11434
+  - model_name: boron-rerank
+    litellm_params:
+      model: ollama_chat/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
+      api_base: http://10.0.0.10:11434
   - model_name: homecode
     litellm_params:
       <<: *copilot_claude37
@@ -184,7 +188,12 @@ router_settings:
       ]
     },
     {
-      "embedding": [
+      "boron-rerank": [
+        "local-rerank"
+      ]
+    },
+    {
+      "boron-embedding": [
         "local-embedding"
       ]
     }

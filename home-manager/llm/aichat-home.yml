@@ -1,5 +1,7 @@
 model: litellm:homecode
 temperature: null                # Set default temperature parameter (0, 1)
 top_p: null                      # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
+rag_embedding_model: litellm:boron-embedding        # Specifies the embedding model used for context retrieval
+rag_reranker_model: litellm:boron-rerank         # Specifies the reranker model used for sorting retrieved documents
 
 

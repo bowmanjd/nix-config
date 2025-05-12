@@ -33,11 +33,9 @@ summary_prompt: 'This is a summary of the chat history as a recap: '
 
 # ---- RAG ----
 # See [RAG-Guide](https://github.com/sigoden/aichat/wiki/RAG-Guide) for more details.
-rag_embedding_model: litellm:local-embedding        # Specifies the embedding model used for context retrieval
-rag_reranker_model: litellm:local-rerank         # Specifies the reranker model used for sorting retrieved documents
 rag_top_k: 5                     # Specifies the number of documents to retrieve for answering queries
-rag_chunk_size: null             # Defines the size of chunks for document processing in characters
-rag_chunk_overlap: null          # Defines the overlap between chunks
+rag_chunk_size: 1000             # Defines the size of chunks for document processing in characters
+rag_chunk_overlap: 50          # Defines the overlap between chunks
 # Defines the query structure using variables like __CONTEXT__ and __INPUT__ to tailor searches to specific needs
 rag_template: |
   Answer the query based on the context while respecting the rules. (user query, some textual context and rules, all inside xml tags)

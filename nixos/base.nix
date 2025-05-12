@@ -112,6 +112,7 @@
     settings.PermitRootLogin = "no";
     # Use keys only. Remove if you want to SSH using password (not recommended)
     settings.PasswordAuthentication = false;
+    ports = [ 22 5788 ];
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
