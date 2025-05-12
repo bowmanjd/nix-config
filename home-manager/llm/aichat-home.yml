@@ -1,7 +1,7 @@
 model: litellm:homecode
 temperature: null                # Set default temperature parameter (0, 1)
 top_p: null                      # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
-rag_embedding_model: boron-embedding
-rag_reranker_model: boron-rerank
+rag_embedding_model: litellm:boron-embedding
+#rag_reranker_model: boron:hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
 rag_chunk_size: 500             # Defines the size of chunks for document processing in characters
 rag_chunk_overlap: 25          # Defines the overlap between chunks

@@ -193,10 +193,6 @@ clients:
         type: embedding
         default_chunk_size: 500
         max_batch_size: 25
-      - name: boron-rerank
-        type: rerank
-      - name: local-rerank
-        type: rerank
 
   # ----- RAG dedicated -----
 
