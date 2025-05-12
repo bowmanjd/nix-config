@@ -34,8 +34,8 @@ summary_prompt: 'This is a summary of the chat history as a recap: '
 # ---- RAG ----
 # See [RAG-Guide](https://github.com/sigoden/aichat/wiki/RAG-Guide) for more details.
 rag_top_k: 5                     # Specifies the number of documents to retrieve for answering queries
-rag_chunk_size: 1000             # Defines the size of chunks for document processing in characters
-rag_chunk_overlap: 50          # Defines the overlap between chunks
+rag_chunk_size: null             # Defines the size of chunks for document processing in characters
+rag_chunk_overlap: null          # Defines the overlap between chunks
 # Defines the query structure using variables like __CONTEXT__ and __INPUT__ to tailor searches to specific needs
 rag_template: |
   Answer the query based on the context while respecting the rules. (user query, some textual context and rules, all inside xml tags)
@@ -108,6 +108,12 @@ clients:
       - name: qwen3:8b
         max_input_tokens: 40960
         supports_function_calling: true
+      - name: granite-embedding:30m
+        type: embedding
+        default_chunk_size: 1000
+        max_batch_size: 50
+      - name: hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
+        type: rerank
 
   - type: openai-compatible
     name: boron
@@ -121,6 +127,15 @@ clients:
       - name: hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
         max_input_tokens: 40960
         supports_function_calling: true
+      - name: hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
+        max_input_tokens: 40960
+        supports_function_calling: true
+      - name: granite-embedding:30m
+        type: embedding
+        default_chunk_size: 500
+        max_batch_size: 50
+      - name: hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
+        type: rerank
 
   # See https://ai.google.dev/docs
   - type: gemini
@@ -171,6 +186,19 @@ clients:
   - type: openai-compatible
     name: litellm
     api_base: http://localhost:1173
+    models:
+      - name: boron-embedding
+        type: embedding
+        default_chunk_size: 1000
+        max_batch_size: 50
+      - name: local-embedding
+        type: embedding
+        default_chunk_size: 1000
+        max_batch_size: 50
+      - name: boron-rerank
+        type: rerank
+      - name: local-rerank
+        type: rerank
 
   # ----- RAG dedicated -----
 

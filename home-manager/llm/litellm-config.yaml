@@ -8,7 +8,7 @@ common_copilot: &common_copilot
     Copilot-Integration-Id: vscode-chat
     Editor-Version: neovim/0.11.1
 
-common_claude_copilot: &common_claude_copilot
+claude_common: &claude_common
   max_output_tokens: 8192
   max_input_tokens: 90000
   mode: chat
@@ -20,14 +20,12 @@ common_claude_copilot: &common_claude_copilot
 copilot_claude37: &copilot_claude37
   model: openai/claude-3.7-sonnet
   max_tokens: 200000
-  <<: *common_claude_copilot
-  <<: *common_copilot
+  <<: [*claude_common, *common_copilot]
 
 copilot_claude35: &copilot_claude35
   model: openai/claude-3.5-sonnet
   max_tokens: 90000
-  <<: *common_claude_copilot
-  <<: *common_copilot
+  <<: [*claude_common, *common_copilot]
 
 copilot_geminipro: &copilot_geminipro
   model: openai/gemini-2.5-pro
@@ -77,8 +75,7 @@ model_list:
     litellm_params:
       model: openai/claude-3.5-sonnet
       max_tokens: 90000
-      <<: *common_claude_copilot
-      <<: *common_copilot
+      <<: [*claude_common, *common_copilot]
   - model_name: gemini-pro
     litellm_params:
       <<: *copilot_geminipro
@@ -113,19 +110,19 @@ model_list:
       api_base: http://10.0.0.10:11434
   - model_name: boron-embedding
     litellm_params:
-      model: ollama_chat/granite-embedding:30m
+      model: ollama/granite-embedding:30m
       api_base: http://10.0.0.10:11434
   - model_name: local-embedding
     litellm_params:
-      model: ollama_chat/granite-embedding:30m
+      model: ollama/granite-embedding:30m
       api_base: http://localhost:11434
   - model_name: local-rerank
     litellm_params:
-      model: ollama_chat/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
+      model: ollama/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
       api_base: http://localhost:11434
   - model_name: boron-rerank
     litellm_params:
-      model: ollama_chat/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
+      model: ollama/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
       api_base: http://10.0.0.10:11434
   - model_name: homecode
     litellm_params:

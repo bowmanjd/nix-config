@@ -1,5 +1,5 @@
 model: litellm:workcode
 temperature: null                # Set default temperature parameter (0, 1)
 top_p: null                      # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
-rag_embedding_model: litellm:local-embedding        # Specifies the embedding model used for context retrieval
-rag_reranker_model: litellm:local-rerank         # Specifies the reranker model used for sorting retrieved documents
+rag_embedding_model: ollama:granite-embedding:30m
+rag_reranker_model: ollama:hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
