@@ -48,38 +48,6 @@
     openFirewall = true;
   };
 
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      address = [
-        "/home.arpa/127.0.0.1"
-        "/dev.internal/127.0.0.1"
-        "/local.bowmanjd.com/127.0.0.1"
-        "/securelogin.wifi.udel.edu/10.2.163.150"
-      ];
-      cache-size = 2000;
-    };
-  };
-
-  services.caddy = {
-    enable = true;
-    virtualHosts = {
-      "localhost".extraConfig = ''
-        reverse_proxy 127.0.0.1:8000
-        tls internal
-      '';
-      "*.home.arpa" = {
-        serverAliases = ["*.local.bowmanjd.com" "*.dev.internal"];
-        logFormat = "output file ${config.services.caddy.logDir}/access-local.log";
-        extraConfig = ''
-          @startsWithPort header_regexp Host ^\d+
-          reverse_proxy @startsWithPort 127.0.0.1:{re.0}
-          tls internal
-        '';
-      };
-    };
-  };
-
   users.users = {
     bowmanjd = {
       # Be sure to change it (using passwd) after rebooting!

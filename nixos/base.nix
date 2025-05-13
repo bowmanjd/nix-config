@@ -115,6 +115,38 @@
     ports = [ 5788 ];
   };
 
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      address = [
+        "/home.arpa/127.0.0.1"
+        "/dev.internal/127.0.0.1"
+        "/local.bowmanjd.com/127.0.0.1"
+      ];
+      cache-size = 2000;
+    };
+  };
+
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "localhost".extraConfig = ''
+        reverse_proxy 127.0.0.1:8000
+        tls internal
+      '';
+      "*.home.arpa" = {
+        serverAliases = ["*.local.bowmanjd.com" "*.dev.internal"];
+        logFormat = "output file ${config.services.caddy.logDir}/access-local.log";
+        extraConfig = ''
+          @startsWithPort header_regexp Host ^\d+
+          reverse_proxy @startsWithPort 127.0.0.1:{re.0}
+          tls internal
+        '';
+      };
+    };
+  };
+
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }
