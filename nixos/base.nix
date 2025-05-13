@@ -115,18 +115,6 @@
     ports = [ 5788 ];
   };
 
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      address = [
-        "/home.arpa/127.0.0.1"
-        "/dev.internal/127.0.0.1"
-        "/local.bowmanjd.com/127.0.0.1"
-      ];
-      cache-size = 2000;
-    };
-  };
-
   services.caddy = {
     enable = true;
     virtualHosts = {
