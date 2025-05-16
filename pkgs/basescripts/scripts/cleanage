@@ -9,6 +9,8 @@ if [ -d "$secrets" ]; then
   created=$(stat -c%W "$secrets")
   fresh=$(date --date="$hours hours ago" '+%s')
 
+  echo "Secrets dir created: $created and $hours hours ago is: $fresh"
+
   if [ "$created" -lt "$fresh" ]; then
     rm -rf "$secrets"
   fi
