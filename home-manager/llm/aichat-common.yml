@@ -110,8 +110,6 @@ clients:
         type: embedding
         default_chunk_size: 500
         max_batch_size: 25
-      - name: hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
-        type: rerank
 
   - type: openai-compatible
     name: boron
@@ -132,8 +130,6 @@ clients:
         type: embedding
         default_chunk_size: 500
         max_batch_size: 25
-      - name: hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
-        type: rerank
 
   # See https://ai.google.dev/docs
   - type: gemini
@@ -180,6 +176,13 @@ clients:
           headers:                                  # Patch request headers
             Copilot-Integration-Id: vscode-chat
             Editor-Version: aichat/0.29.0 # optional
+
+  - type: openai-compatible
+    name: vllm
+    api_base: http://localhost:5113
+    models:
+      - name: BAAI/bge-reranker-base
+        type: rerank
 
   - type: openai-compatible
     name: litellm
