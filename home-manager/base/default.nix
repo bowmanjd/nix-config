@@ -226,6 +226,7 @@
   programs.direnv = {
     config = {
       log_format = "-";
+      warn_timeout = "45s";
     };
     enable = true;
     enableBashIntegration = true;
