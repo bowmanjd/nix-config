@@ -331,6 +331,7 @@
     nmap
     nodejs_22
     openssl
+    pandoc
     p7zip
     pinentry
     podman

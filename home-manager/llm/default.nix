@@ -5,24 +5,31 @@
   ...
 }: let
   scriptpath = lib.makeBinPath [pkgs.llmscripts];
-  
+
   # Helper function for creating merged config files
   mergeConfigs = {
     name,
     commonFile,
     environmentFile,
     environmentFirst ? false,
-  }: pkgs.writeText "${name}-merged.yml" (
-    if environmentFirst then
-      "\n\n# ${environment} config\n"
-      + builtins.readFile environmentFile
-      + builtins.readFile commonFile
-    else
-      builtins.readFile commonFile
-      + "\n\n# ${environment} config\n"
-      + builtins.readFile environmentFile
-  );
+  }:
+    pkgs.writeText "${name}-merged.yml" (
+      if environmentFirst
+      then
+        "\n\n# ${environment} config\n"
+        + builtins.readFile environmentFile
+        + builtins.readFile commonFile
+      else
+        builtins.readFile commonFile
+        + "\n\n# ${environment} config\n"
+        + builtins.readFile environmentFile
+    );
 in {
+  imports = [
+    (import ./vllm.nix {
+      inherit pkgs lib environment;
+    })
+  ];
   # Systemd services
   systemd.user.services = {
     "litellm" = {
@@ -42,7 +49,7 @@ in {
         WantedBy = ["default.target"];
       };
     };
-    
+
     "copilotkey" = {
       Unit = {
         Description = "Refresh Github Copilot API key";
@@ -92,6 +99,11 @@ in {
     llmscripts
     mods
     ollama
+    vllm
+    # (vllm.override {
+    #   cudaSupport = false;
+    #   rocmSupport = false;
+    # })
   ];
 
   # Config files
@@ -101,7 +113,7 @@ in {
       source = ./mods.yml;
       target = "mods/mods.yml";
     };
-    
+
     "aichat.yml" = {
       enable = true;
       source = mergeConfigs {
