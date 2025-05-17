@@ -420,9 +420,11 @@
     "cleanage" = {
       Unit = {
         Description = "Remove any stale unencrypted artifacts";
+        After = ["default.target"];
+        Wants = ["default.target"];
       };
       Service = {
-        ExecStart = lib.concatStrings [scriptpath "/cleanage.js"];
+        ExecStart = "${pkgs.bun}/bin/bun ${scriptpath}/cleanage.js";
         Type = "oneshot";
       };
     };

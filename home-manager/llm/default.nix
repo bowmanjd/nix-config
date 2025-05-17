@@ -53,12 +53,12 @@ in {
     "copilotkey" = {
       Unit = {
         Description = "Refresh Github Copilot API key";
+        After = ["network-online.target"];
+        Wants = ["network-online.target"];
       };
       Service = {
         ExecStart = "${scriptpath}/copilotkey.js";
         Type = "oneshot";
-        After = ["network-online.target"];
-        Wants = ["network-online.target"];
       };
     };
   };
