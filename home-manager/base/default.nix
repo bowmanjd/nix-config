@@ -422,7 +422,7 @@
         Description = "Remove any stale unencrypted artifacts";
       };
       Service = {
-        ExecStart = lib.concatStrings [scriptpath "/cleanage"];
+        ExecStart = lib.concatStrings [scriptpath "/cleanage.js"];
         Type = "oneshot";
       };
     };
