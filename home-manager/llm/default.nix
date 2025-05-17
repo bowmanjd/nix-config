@@ -94,6 +94,7 @@ in {
     aichat
     aider-chat-with-playwright
     claude-code
+    codex
     fabric-ai
     goose-cli
     llmscripts
