@@ -7,7 +7,7 @@
   # Script to launch vLLM server in CPU-only mode
   vllm-serve-script = pkgs.writeShellScriptBin "vllm-serve-rerank" ''
     exec ${pkgs.vllm}/bin/vllm serve \
-      BAAI/bge-reranker-base \
+      jinaai/jina-reranker-v1-turbo-en \
       --host 127.0.0.1 \
       --port 5113 \
       --tensor-parallel-size 1 \
