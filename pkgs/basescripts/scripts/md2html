@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Usage: ./md2html.sh input.md output.html                                 
+                                                                                      
+INPUT=$1                                                                              
+OUTPUT=$2                                                                             
+                                                                                      
+echo '<!DOCTYPE html>                                                                 
+<html>                                                                                
+<head>                                                                                
+    <meta charset="UTF-8">                                                            
+    <title>'"$2"'</title>                                                    
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            font-size: 12pt;
+        }
+        h1 {
+            font-size: 140%;
+        }
+        h2 {
+            font-size: 115%;
+        }
+        h3 {
+            font-size: 105%;
+        }
+    </style>
+</head>                                                                               
+<body>' > "$OUTPUT"                                                                   
+                                                                                      
+comrak --smart --gfm --unsafe "$INPUT" >> "$OUTPUT"                                                          
+                                                                                      
+echo '</body>                                                                         
+</html>' >> "$OUTPUT"    
