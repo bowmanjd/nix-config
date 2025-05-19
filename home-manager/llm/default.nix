@@ -97,6 +97,7 @@ in {
     codex
     fabric-ai
     goose-cli
+    llama-cpp
     llmscripts
     mods
     ollama
