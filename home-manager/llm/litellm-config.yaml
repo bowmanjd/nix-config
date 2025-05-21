@@ -68,6 +68,9 @@ model_list:
     litellm_params:
       model: openai/*
       <<: *common_copilot
+  - model_name: hf/gemma-3-27b
+    litellm_params:
+      model: huggingface/nebius/google/gemma-3-27b-it
   - model_name: copilot/claude-3.7-sonnet
     litellm_params:
       <<: *copilot_claude37

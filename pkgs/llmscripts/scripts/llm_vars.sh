@@ -13,6 +13,7 @@ GROQ_API_KEY=$(agegent ~/.ssh/secrets/groq.enc.txt)
 GOOGLE_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
 GEMINI_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
 GITHUB_API_KEY=$(agegent ~/.ssh/secrets/copilot.enc.txt)
+HF_TOKEN=$(agegent ~/.ssh/secrets/huggingface.enc.txt)
 
 cat > "$keyfile" <<EOF
 # Auto-generated; do not edit
@@ -27,6 +28,7 @@ GROQ_API_KEY=$GROQ_API_KEY
 GOOGLE_API_KEY=$GOOGLE_API_KEY
 GEMINI_API_KEY=$GEMINI_API_KEY
 GITHUB_API_KEY=$GITHUB_API_KEY
+HF_TOKEN=$HFTOKEN
 COPILOT_API_KEY='$COPILOT_API_KEY'
 EOF
 
