@@ -25,11 +25,11 @@
         + builtins.readFile environmentFile
     );
 in {
-  imports = [
-    (import ./vllm.nix {
-      inherit pkgs lib environment;
-    })
-  ];
+  #imports = [
+  #  (import ./vllm.nix {
+  #    inherit pkgs lib environment;
+  #  })
+  #];
   # Systemd services
   systemd.user.services = {
     "litellm" = {
@@ -92,7 +92,8 @@ in {
   # Packages
   home.packages = with pkgs; [
     aichat
-    aider-chat-with-playwright
+    #aider-chat-with-playwright
+    aider-chat
     claude-code
     codex
     fabric-ai
@@ -101,11 +102,7 @@ in {
     llmscripts
     mods
     ollama
-    vllm
-    # (vllm.override {
-    #   cudaSupport = false;
-    #   rocmSupport = false;
-    # })
+    #vllm
   ];
 
   # Config files
