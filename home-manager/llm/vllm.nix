@@ -6,7 +6,7 @@
 }: let
   # Script to launch vLLM server in CPU-only mode
   vllm-serve-script = pkgs.writeShellScriptBin "vllm-serve-rerank" ''
-    exec ${pkgs.vllm}/bin/vllm serve \
+    exec ${pkgs.stable.vllm}/bin/vllm serve \
       BAAI/bge-reranker-base \
       --host 127.0.0.1 \
       --port 5113 \
@@ -49,5 +49,8 @@ in {
   };
 
   # Add the script to the user's path
-  home.packages = [vllm-serve-script];
+  home.packages = with pkgs.stable; [
+    vllm
+    vllm-serve-script
+  ];
 }

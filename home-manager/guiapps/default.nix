@@ -10,7 +10,6 @@
     helvum
     inkscape
     #libreoffice-fresh
-    microsoft-edge
     openttd
     pavucontrol
     prismlauncher
