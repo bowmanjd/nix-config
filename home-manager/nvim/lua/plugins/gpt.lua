@@ -5,7 +5,7 @@ return {
 		opts = {
 			-- api_key_cmd = "agegent " .. home .. "/.ssh/secrets/openai.enc.txt",
 			openai_params = {
-				model = "gpt-4o",
+				model = "gpt-4.1",
 			},
 		},
 		dependencies = {
@@ -40,7 +40,7 @@ return {
 		},
 		-- build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
-			model = "claude-3.7-sonnet",
+			model = "gpt-4.1",
 		},
 	},
 
@@ -71,7 +71,7 @@ return {
 						name = "claude_copilot", -- Unique adapter name
 						schema = {
 							model = {
-								default = "claude-3.7-sonnet",
+								default = "gpt-4.1",
 							},
 						},
 					})
@@ -114,7 +114,7 @@ return {
 			provider = "copilot",
 			auto_suggestions_provider = nil, -- Set to nil to disable auto suggestions
 			copilot = {
-				model = "claude-3.7-sonnet",
+				model = "gpt-4.1",
 				max_tokens = 90000,
 			},
 			suggestion = {

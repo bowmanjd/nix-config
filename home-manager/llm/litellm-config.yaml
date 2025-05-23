@@ -1,3 +1,5 @@
+copilot_default: &copilot_default copilot/gpt-4.1
+
 common_copilot: &common_copilot
   api_base: https://api.githubcopilot.com
   api_key: "os.environ/COPILOT_API_KEY" 
@@ -17,14 +19,21 @@ claude_common: &claude_common
   supports_parallel_function_calling: true
   supports_system_messages: true
 
-copilot_claude37: &copilot_claude37
-  model: openai/claude-3.7-sonnet
+copilot_claude4: &copilot_claude4
+  model: openai/claude-sonnet-4
   max_tokens: 200000
   <<: [*claude_common, *common_copilot]
 
-copilot_claude35: &copilot_claude35
-  model: openai/claude-3.5-sonnet
-  max_tokens: 90000
+copilot_base: &copilot_base
+  model: *copilot_default
+  max_tokens: 128000
+  max_output_tokens: 4096
+  max_input_tokens: 64000
+  <<: *common_copilot
+
+copilot_claude37: &copilot_claude37
+  model: openai/claude-3.7-sonnet
+  max_tokens: 200000
   <<: [*claude_common, *common_copilot]
 
 copilot_geminipro: &copilot_geminipro
@@ -71,6 +80,9 @@ model_list:
   - model_name: hf/gemma-3-27b
     litellm_params:
       model: huggingface/nebius/google/gemma-3-27b-it
+  - model_name: copilot/claude-4-sonnet
+    litellm_params:
+      <<: *copilot_claude4
   - model_name: copilot/claude-3.7-sonnet
     litellm_params:
       <<: *copilot_claude37
@@ -85,13 +97,6 @@ model_list:
   - model_name: copilot/gemini-2.5-pro
     litellm_params:
       <<: *copilot_geminipro
-  - model_name: copilot/gpt-4.1
-    litellm_params:
-      model: openai/gpt-4.1
-      max_tokens: 128000
-      max_output_tokens: 4096
-      max_input_tokens: 64000
-      <<: *common_copilot
   - model_name: copilot/gpt-4.1
     litellm_params:
       model: openai/gpt-4.1
@@ -129,43 +134,43 @@ model_list:
       api_base: http://10.0.0.10:11434
   - model_name: homecode
     litellm_params:
-      <<: *copilot_claude37
+      model: openrouter/deepseek/deepseek-chat-v3-0324:free
+  - model_name: qwen3
+    litellm_params:
+      model: openrouter/qwen/qwen3-235b-a22b:free
   - model_name: workcode
     litellm_params:
-      <<: *copilot_claude37
+      <<: *copilot_claude4
   - model_name: homesimple
     litellm_params:
-      model: openai/gemini-2.0-flash-001
-      <<: *common_copilot
+      <<: *copilot_base
   - model_name: worksimple
     litellm_params:
-      model: openai/gemini-2.0-flash-001
-      <<: *common_copilot
+      <<: *copilot_base
   - model_name: homecodefast
     litellm_params:
-      <<: *copilot_claude35
+      <<: *copilot_base
   - model_name: workcodefast
     litellm_params:
-      <<: *copilot_claude35
+      <<: *copilot_base
 router_settings:
   routing_strategy: simple-shuffle
   fallbacks: [
     {
       "homecode": [
-        "copilot/gemini-2.5-pro",
-        "openrouter/deepseek/deepseek-chat-v3-0324:free",
         "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
-        "gemini/gemini-2.5-pro-exp-03-25",
+        "openrouter/qwen/qwen3-235b-a22b:free",
+        *copilot_default,
         "ollama/qwen3:8b" 
       ]
     },
     {
       "workcode": [
-        "openrouter/anthropic/claude-3.7-sonnet",
-        "anthropic/claude-3-7-sonnet-latest",
-        "copilot/gemini-2.5-pro",
+        "openrouter/anthropic/claude-sonnet-4-20250514",
+        "anthropic/claude-sonnet-4-20250514",
         "openrouter/google/gemini-2.5-pro-preview",
-        "ollama/qwen3:8b" 
+        *copilot_default,
+        "ollama/devstral" 
       ]
     },
     {
@@ -177,14 +182,19 @@ router_settings:
     },
     {
       "worksimple": [
-        "openrouter/google/gemma-3-27b-it",
         "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+        "openrouter/google/gemma-3-27b-it",
         "ollama/gemma3:8b"
       ]
     },
     {
       "gemini-pro": [
         "openrouter/google/gemini-2.5-pro-preview"
+      ]
+    },
+    {
+      "qwen3": [
+        "openrouter/qwen/qwen3-235b-a22b"
       ]
     },
     {
