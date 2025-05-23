@@ -25,7 +25,7 @@ copilot_claude4: &copilot_claude4
   <<: [*claude_common, *common_copilot]
 
 copilot_base: &copilot_base
-  model: *copilot_default
+  model: openai/gpt-4.1
   max_tokens: 128000
   max_output_tokens: 4096
   max_input_tokens: 64000
