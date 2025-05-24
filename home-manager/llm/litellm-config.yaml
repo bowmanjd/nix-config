@@ -124,20 +124,25 @@ model_list:
     litellm_params:
       model: ollama/granite-embedding:30m
       api_base: http://localhost:11434
-  - model_name: local-rerank
-    litellm_params:
-      model: ollama/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
-      api_base: http://localhost:11434
-  - model_name: boron-rerank
-    litellm_params:
-      model: ollama/hf.co/mradermacher/mxbai-rerank-large-v2-GGUF:Q4_K_M
-      api_base: http://10.0.0.10:11434
   - model_name: homecode
     litellm_params:
       model: openrouter/deepseek/deepseek-chat-v3-0324:free
   - model_name: qwen3
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
+      enable_thinking: false
+      temperature: 0.7
+      top_p: 0.8
+      top_k: 20
+      min_p: 0
+  - model_name: qwen3think
+    litellm_params:
+      model: openrouter/qwen/qwen3-235b-a22b:free
+      enable_thinking: true
+      temperature: 0.6
+      top_p: 0.95
+      top_k: 20
+      min_p: 0
   - model_name: workcode
     litellm_params:
       <<: *copilot_claude4
@@ -145,12 +150,6 @@ model_list:
     litellm_params:
       <<: *copilot_base
   - model_name: worksimple
-    litellm_params:
-      <<: *copilot_base
-  - model_name: homecodefast
-    litellm_params:
-      <<: *copilot_base
-  - model_name: workcodefast
     litellm_params:
       <<: *copilot_base
 router_settings:

@@ -124,6 +124,9 @@ apis:
       boron-qwen:
         aliases: ["bqwen"]
         max-input-chars: 650000
+      qwen3:
+        aliases: ["qwen"]
+        max-input-chars: 680000
   copilot:
     base-url: https://api.githubcopilot.com
     models:
