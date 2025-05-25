@@ -127,14 +127,20 @@ model_list:
   - model_name: homecode
     litellm_params:
       model: openrouter/deepseek/deepseek-chat-v3-0324:free
+  - model_name: gemma3n
+    litellm_params:
+      model: openrouter/google/gemma-3n-e4b-it:free
   - model_name: qwen3
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
-      enable_thinking: false
       temperature: 0.7
       top_p: 0.8
       top_k: 20
       min_p: 0
+      enable_thinking: false
+      extra_body:
+        reasoning:
+          exclude: true
   - model_name: qwen3think
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
@@ -157,9 +163,9 @@ router_settings:
   fallbacks: [
     {
       "homecode": [
-        "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
-        "openrouter/qwen/qwen3-235b-a22b:free",
+        "qwen3",
         *copilot_default,
+        "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
         "ollama/qwen3:8b" 
       ]
     },

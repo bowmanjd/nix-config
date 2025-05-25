@@ -127,6 +127,9 @@ apis:
       qwen3:
         aliases: ["qwen"]
         max-input-chars: 680000
+      qwen3think:
+        aliases: ["qwenthink"]
+        max-input-chars: 680000
   copilot:
     base-url: https://api.githubcopilot.com
     models:
