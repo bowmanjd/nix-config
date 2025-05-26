@@ -116,6 +116,12 @@ model_list:
     litellm_params:
       model: ollama_chat/hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
       api_base: http://10.0.0.10:11434
+      temperature: 0.7
+      top_p: 0.8
+      top_k: 20
+      min_p: 0
+      extra_body:
+        enable_thinking: false
   - model_name: boron-embedding
     litellm_params:
       model: ollama/granite-embedding:30m
@@ -132,7 +138,8 @@ model_list:
       model: openrouter/google/gemma-3n-e4b-it:free
   - model_name: qwen3
     litellm_params:
-      model: openrouter/qwen/qwen3-235b-a22b:free
+      model: openrouter/qwen/qwen3-32b:free
+      #model: openrouter/qwen/qwen3-235b-a22b:free
       temperature: 0.7
       top_p: 0.8
       top_k: 20
@@ -141,14 +148,18 @@ model_list:
       extra_body:
         reasoning:
           exclude: true
-  - model_name: qwen3think
+  - model_name: qwen3big
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
-      enable_thinking: true
+      enable_thinking: false
       temperature: 0.6
       top_p: 0.95
       top_k: 20
       min_p: 0
+      extra_body:
+        reasoning:
+          exclude: true
+          effort: low
   - model_name: workcode
     litellm_params:
       <<: *copilot_claude4

@@ -80,13 +80,18 @@ in {
   };
 
   # Bash config
-  programs.bash.bashrcExtra = ''
+  programs.bash.bashrcExtra = lib.mkAfter ''
     if [ ! -s "$XDG_RUNTIME_DIR/llmconf/keys" ]; then
       llm_vars.sh
     fi
     set -a
     . "$XDG_RUNTIME_DIR/llmconf/keys"
     set +a
+
+    if [ ! -d "$HOME/src/aichat-functions" ]; then
+      git clone git@github.com:sigoden/llm-functions.git "$HOME/src/aichat-functions"
+    fi
+    export AICHAT_FUNCTIONS_DIR="$HOME/src/aichat-functions"
   '';
 
   # Packages
