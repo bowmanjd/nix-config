@@ -15,6 +15,10 @@ GOOGLE_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
 GEMINI_API_KEY=$(agegent ~/.ssh/secrets/gemini.enc.txt)
 GITHUB_API_KEY=$(agegent ~/.ssh/secrets/copilot.enc.txt)
 HF_TOKEN=$(agegent ~/.ssh/secrets/huggingface.enc.txt)
+CLOUDFLARE_API_KEY=$(agegent ~/.ssh/secrets/cloudflare_token.enc.txt)
+CLOUDFLARE_ACCOUNT_ID=$(agegent ~/.ssh/secrets/cloudflare_id.enc.txt)
+CEREBRAS_API_KEY=$(agegent ~/.ssh/secrets/cerebras.enc.txt)
+SAMBANOVA_API_KEY=$(agegent ~/.ssh/secrets/sambanova.enc.txt)
 
 cat > "$keyfile" <<EOF
 # Auto-generated; do not edit
@@ -31,6 +35,10 @@ GOOGLE_API_KEY=$GOOGLE_API_KEY
 GEMINI_API_KEY=$GEMINI_API_KEY
 GITHUB_API_KEY=$GITHUB_API_KEY
 HF_TOKEN=$HF_TOKEN
+CLOUDFLARE_API_KEY=$CLOUDFLARE_API_KEY
+CLOUDFLARE_ACCOUNT_ID=$CLOUDFLARE_ACCOUNT_ID
+CEREBRAS_API_KEY=$CEREBRAS_API_KEY
+SAMBANOVA_API_KEY=$SAMBANOVA_API_KEY
 COPILOT_API_KEY='$COPILOT_API_KEY'
 EOF
 
