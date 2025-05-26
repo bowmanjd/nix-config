@@ -19,6 +19,8 @@ CLOUDFLARE_API_KEY=$(agegent ~/.ssh/secrets/cloudflare_token.enc.txt)
 CLOUDFLARE_ACCOUNT_ID=$(agegent ~/.ssh/secrets/cloudflare_id.enc.txt)
 CEREBRAS_API_KEY=$(agegent ~/.ssh/secrets/cerebras.enc.txt)
 SAMBANOVA_API_KEY=$(agegent ~/.ssh/secrets/sambanova.enc.txt)
+CODESTRAL_API_KEY=$(agegent ~/.ssh/secrets/codestral.enc.txt)
+MISTRAL_API_KEY=$(agegent ~/.ssh/secrets/mistral.enc.txt)
 
 cat > "$keyfile" <<EOF
 # Auto-generated; do not edit
@@ -39,6 +41,8 @@ CLOUDFLARE_API_KEY=$CLOUDFLARE_API_KEY
 CLOUDFLARE_ACCOUNT_ID=$CLOUDFLARE_ACCOUNT_ID
 CEREBRAS_API_KEY=$CEREBRAS_API_KEY
 SAMBANOVA_API_KEY=$SAMBANOVA_API_KEY
+CODESTRAL_API_KEY=$CODESTRAL_API_KEY
+MISTRAL_API_KEY=$MISTRAL_API_KEY
 COPILOT_API_KEY='$COPILOT_API_KEY'
 EOF
 

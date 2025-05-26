@@ -70,6 +70,12 @@ model_list:
   - model_name: sambanova/*
     litellm_params:
       model: sambanova/*
+  - model_name: mistral/*
+    litellm_params:
+      model: mistral/*
+  - model_name: codestral/*
+    litellm_params:
+      model: codestral/*
   - model_name: openrouter/*
     litellm_params:
       model: openrouter/*
