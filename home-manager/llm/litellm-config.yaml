@@ -70,9 +70,28 @@ model_list:
   - model_name: sambanova/*
     litellm_params:
       model: sambanova/*
+  - model_name: together/*
+    litellm_params:
+      model: together_ai/*
   - model_name: mistral/*
     litellm_params:
       model: mistral/*
+  - model_name: devstral
+    litellm_params:
+      model: mistral/devstral-small-2505
+      weight: 10
+  - model_name: devstral
+    litellm_params:
+      model: openrouter/mistralai/devstral-small:free
+      weight: 5
+  - model_name: devstral
+    litellm_params:
+      model: openrouter/mistralai/devstral-small:nitro
+      weight: 4
+  - model_name: devstral
+    litellm_params:
+      model: ollama/devstral
+      weight: 1
   - model_name: codestral/*
     litellm_params:
       model: codestral/*
