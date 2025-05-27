@@ -157,6 +157,7 @@ model_list:
       top_p: 0.8
       top_k: 20
       min_p: 0
+      enable_thinking: false
       extra_body:
         enable_thinking: false
   - model_name: boron-embedding
