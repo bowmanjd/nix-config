@@ -144,7 +144,7 @@
   services.open-webui = {
     enable = true;
     port = 3011;
-    environmentFile = "/run/user/1000/llmconf/keys"
+    environmentFile = "/run/user/1000/llmconf/keys";
   };
 
 
