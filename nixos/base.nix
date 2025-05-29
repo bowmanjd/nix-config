@@ -123,6 +123,12 @@
         reverse_proxy 127.0.0.1:8000
         tls internal
       '';
+      "webui.home.arpa" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:3011
+          tls internal
+        '';
+      };
       "*.home.arpa" = {
         serverAliases = ["*.local.bowmanjd.com" "*.dev.internal"];
         logFormat = "output file ${config.services.caddy.logDir}/access-local.log";
@@ -133,6 +139,12 @@
         '';
       };
     };
+  };
+
+  services.open-webui = {
+    enable = true;
+    port = 3011;
+    environmentFile = "/run/user/1000/llmconf/keys"
   };
 
 
