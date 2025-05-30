@@ -27,8 +27,9 @@ function checkExistingKey() {
 
 		const expTimestamp = Number.parseInt(expMatch[1], 10);
 		const currentTime = Math.floor(Date.now() / 1000);
+		const refreshThreshold = 15 * 60; // 15 minutes in seconds
 
-		return expTimestamp > currentTime;
+		return expTimestamp > (currentTime + refreshThreshold);
 	} catch (error) {
 		console.error("Error checking existing key:", error.message);
 		return false;
