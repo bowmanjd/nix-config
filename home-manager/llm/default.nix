@@ -97,7 +97,7 @@ in {
   # Packages
   home.packages = with pkgs; [
     aichat
-    pkgs.stable.aider-chat-with-playwright
+    aider-chat-with-playwright
     claude-code
     codex
     fabric-ai

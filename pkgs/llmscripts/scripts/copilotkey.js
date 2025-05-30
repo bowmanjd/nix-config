@@ -123,7 +123,7 @@ async function updateKeysFile(newKey) {
 			if (result.error || result.status !== 0) {
 				throw new Error(result.stderr?.toString() || "Unknown error");
 			}
-			//console.log("Restarted litellm systemd user unit");
+			console.log("Restarted litellm systemd user unit");
 		} catch (error) {
 			console.error(
 				`Failed to restart litellm systemd user unit: ${error.message}`,
