@@ -106,6 +106,7 @@ in {
     llmscripts
     mods
     ollama
+    onnxruntime
   ];
 
   # Config files

@@ -160,10 +160,18 @@ model_list:
       enable_thinking: false
       extra_body:
         enable_thinking: false
+  - model_name: boron-code-embedding
+    litellm_params:
+      model: ollama/hf.co/gaianet/jina-embeddings-v2-base-code-GGUF:Q5_K_M
+      api_base: http://10.0.0.10:11434
   - model_name: boron-embedding
     litellm_params:
       model: ollama/granite-embedding:30m
       api_base: http://10.0.0.10:11434
+  - model_name: local-code-embedding
+    litellm_params:
+      model: ollama/hf.co/gaianet/jina-embeddings-v2-base-code-GGUF:Q5_K_M
+      api_base: http://localhost:11434
   - model_name: local-embedding
     litellm_params:
       model: ollama/granite-embedding:30m
