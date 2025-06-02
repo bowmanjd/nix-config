@@ -40,7 +40,7 @@ in {
         After = ["network.target"];
       };
       Service = {
-        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --local --config ${./litellm-config.yaml}";
+        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config ${./litellm-config.yaml}";
         EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;
@@ -118,7 +118,11 @@ in {
       source = ./mods.yml;
       target = "mods/mods.yml";
     };
-
+    "goose.yaml" = {
+      enable = true;
+      source = ./goose.yaml;
+      target = "goose/config.yaml";
+    };
     "aichat.yml" = {
       enable = true;
       source = mergeConfigs {
