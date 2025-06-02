@@ -26,9 +26,9 @@
     );
 in {
   imports = [
-   (import ./vllm.nix {
-     inherit pkgs lib environment;
-   })
+    (import ./vllm.nix {
+      inherit pkgs lib environment;
+    })
   ];
   # Systemd services
   systemd.user.services = {
@@ -112,16 +112,20 @@ in {
   ];
 
   # Config files
+
+  home.activation.gooseConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    config_dir="$XDG_CONFIG_HOME/goose"
+    config_file="$config_dir/config.yaml"
+    if [ ! -f "$config_file" ]; then
+      mkdir -p "$config_dir"
+      cp ${./goose.yaml} "$config_file"
+    fi
+  '';
   xdg.configFile = {
     "mods.yml" = {
       enable = true;
       source = ./mods.yml;
       target = "mods/mods.yml";
-    };
-    "goose.yaml" = {
-      enable = true;
-      source = ./goose.yaml;
-      target = "goose/config.yaml";
     };
     "aichat.yml" = {
       enable = true;
