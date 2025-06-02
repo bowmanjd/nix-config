@@ -42,6 +42,9 @@ copilot_geminipro: &copilot_geminipro
   max_output_tokens: 8192
   <<: *common_copilot
 
+litellm_settings:
+  log_raw_request_response: True
+
 model_list:
   - model_name: ollama/*
     litellm_params:
@@ -80,6 +83,16 @@ model_list:
     litellm_params:
       model: mistral/devstral-small-2505
       weight: 10
+  - model_name: r1
+    litellm_params:
+      model: openrouter/deepseek/deepseek-r1-0528
+      temperature: 0.6
+      top_p: 0.95
+  - model_name: r1q3
+    litellm_params:
+      model: openrouter/deepseek/deepseek-r1-0528-qwen3-8b:free
+      temperature: 0.6
+      top_p: 0.95
   - model_name: devstral
     litellm_params:
       model: openrouter/mistralai/devstral-small:free
@@ -178,7 +191,10 @@ model_list:
       api_base: http://localhost:11434
   - model_name: homecode
     litellm_params:
-      model: openrouter/deepseek/deepseek-chat-v3-0324:free
+      #model: openrouter/deepseek/deepseek-chat-v3-0324:free
+      model: openrouter/deepseek/deepseek-r1-0528:free
+      temperature: 0.6
+      top_p: 0.95
   - model_name: gemma3n
     litellm_params:
       model: openrouter/google/gemma-3n-e4b-it:free
@@ -220,6 +236,7 @@ router_settings:
   fallbacks: [
     {
       "homecode": [
+        "r1",
         "qwen3",
         *copilot_default,
         "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
@@ -247,6 +264,12 @@ router_settings:
         "groq/meta-llama/llama-4-scout-17b-16e-instruct",
         "openrouter/google/gemma-3-27b-it",
         "ollama/gemma3:8b"
+      ]
+    },
+    {
+      "copilot/gpt-4.1": [
+        "openrouter/openai/gpt-4.1",
+        "openai/gpt-4.1",
       ]
     },
     {

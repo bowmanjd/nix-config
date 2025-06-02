@@ -40,10 +40,12 @@ in {
         After = ["network.target"];
       };
       Service = {
-        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config ${./litellm-config.yaml}";
+        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --local --config ${./litellm-config.yaml}";
         EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;
+        StandardOutput = "journal";
+        StandardError = "journal";
       };
       Install = {
         WantedBy = ["default.target"];
