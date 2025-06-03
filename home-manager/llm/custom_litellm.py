@@ -39,15 +39,25 @@ class MyCustomHandler(CustomLogger):
         return data
 
     def log_event(self, event_type, kwargs, response_obj):
-        model = kwargs.get("model", None)
-        messages = kwargs.get("messages", None)
+        model = kwargs.get("model")
+        messages = kwargs.get("messages")
         litellm_params = kwargs.get("litellm_params", {})
         metadata = litellm_params.get("metadata", {})
         model_group = metadata.get("model_group")
         deployment = metadata.get("deployment")
+        model_id = metadata.get("model_info", {}).get("id")
+        api_base = metadata.get("api_base")
+
+        if response_obj is None:
+            print(f"Logging warning: response_obj is None for event_type={event_type}, model={model}")
+            return
+
         cost = litellm.completion_cost(completion_response=response_obj)
-        usage = response_obj.get("usage", None)
-        content = next(item["content"] for item in messages if item["role"] == "user")
+        usage = response_obj.get("usage")
+        if not messages:
+            content = ""
+        else:
+            content = next((item["content"] for item in messages if item["role"] == "user"), "")
         first_10_words = " ".join(content.split()[:10])
 
         print(
@@ -56,7 +66,9 @@ class MyCustomHandler(CustomLogger):
                     f"prompt: {first_10_words}",
                     f"model: {model}",
                     f"model_group: {model_group}",
+                    f"model_id: {model_id}",
                     f"deployment: {deployment}",
+                    f"api_base: {api_base}",
                     f"tokens: {usage.total_tokens}",
                     f"input_tokens: {usage.prompt_tokens}",
                     f"output_tokens: {usage.completion_tokens}",
