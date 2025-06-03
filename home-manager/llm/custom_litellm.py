@@ -25,7 +25,7 @@ class MyCustomHandler(CustomLogger):
         ],
     ):
         model = data.get("model", "")
-        if 'qwen' in model and not 'qwen'.endswith('think'):
+        if 'qwen' in model and not model.endswith('think'):
             messages = data.get("messages", [])
             for i, message in enumerate(messages):
                 if message.get("role") == "system":
