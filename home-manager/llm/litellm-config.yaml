@@ -158,13 +158,15 @@ model_list:
   - model_name: gpt-4.1
     litellm_params:
       model: openrouter/openai/gpt-4.1
+      input_cost_per_token: 2e-06
+      output_cost_per_token: 8e-06
       weight: 2
   - model_name: workgpt-4.1
     litellm_params:
       model: openai/gpt-4.1
       weight: 1
-      input_cost_per_token: 0.0
-      output_cost_per_token: 0.0
+      input_cost_per_token: 2e-06
+      output_cost_per_token: 8e-06
   - model_name: boron-phi
     litellm_params:
       model: ollama_chat/hf.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF:IQ4_XS
@@ -181,9 +183,6 @@ model_list:
       top_p: 0.8
       top_k: 20
       min_p: 0
-      enable_thinking: false
-      extra_body:
-        enable_thinking: false
   - model_name: boron-code-embedding
     litellm_params:
       model: ollama/hf.co/gaianet/jina-embeddings-v2-base-code-GGUF:Q5_K_M
@@ -223,15 +222,20 @@ model_list:
   - model_name: qwen3big
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
-      enable_thinking: false
-      temperature: 0.6
-      top_p: 0.95
+      temperature: 0.7
+      top_p: 0.8
       top_k: 20
       min_p: 0
       extra_body:
         reasoning:
           exclude: true
-          effort: low
+  - model_name: qwen3bigthink
+    litellm_params:
+      model: openrouter/qwen/qwen3-235b-a22b:free
+      temperature: 0.6
+      top_p: 0.95
+      top_k: 20
+      min_p: 0
   - model_name: workcode
     litellm_params:
       <<: *copilot_claude4

@@ -24,11 +24,18 @@ class MyCustomHandler(CustomLogger):
             "rerank",
         ],
     ):
-        print(f"Pre API Call: {call_type} with data: {data}")
         model = data.get("model", "")
         if 'qwen' in model and not 'qwen'.endswith('think'):
-            system_content = next((item["content"] for item in messages if item["role"] == "system"), '') + ' /no_think'
-            system_message = {"role": "system", "content": "You are a helpful assistant."}
+            messages = data.get("messages", [])
+            for i, message in enumerate(messages):
+                if message.get("role") == "system":
+                    system_message = messages.pop(i)
+                    break
+            else:
+                system_message = {"role": "system", "content": ""}
+            system_message["content"] = " ".join([system_message.get("content", ""), ' /no_think']).lstrip()
+            messages.insert(0, system_message)
+            data["messages"] = messages
         return data
 
     def log_event(self, event_type, kwargs, response_obj):
