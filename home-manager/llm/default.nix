@@ -40,7 +40,7 @@ in {
         After = ["network.target"];
       };
       Service = {
-        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config %E/litellm-config.yaml";
+        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config %E/litellm/litellm-config.yaml";
         EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;

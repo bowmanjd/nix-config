@@ -1,86 +1,81 @@
-from litellm.integrations.custom_logger import CustomLogger
+from typing import Literal, Optional, Union
+
 import litellm
+from litellm.caching.dual_cache import DualCache
+from litellm.integrations.custom_logger import CustomLogger
+from litellm.proxy._types import UserAPIKeyAuth
 
-# This file includes the custom callbacks for LiteLLM Proxy
-# Once defined, these can be passed in proxy_config.yaml
+
 class MyCustomHandler(CustomLogger):
-    def log_pre_api_call(self, model, messages, kwargs): 
-        print(f"Pre-API Call")
-    
-    def log_post_api_call(self, kwargs, response_obj, start_time, end_time): 
-        print(f"Post-API Call")
-        
-    def log_success_event(self, kwargs, response_obj, start_time, end_time): 
-        print("On Success")
+    async def async_pre_call_hook(
+        self,
+        user_api_key_dict: UserAPIKeyAuth,
+        cache: DualCache,
+        data: dict,
+        call_type: Literal[
+            "acompletion",
+            "completion",
+            "text_completion",
+            "embeddings",
+            "image_generation",
+            "moderation",
+            "audio_transcription",
+            "pass_through_endpoint",
+            "rerank",
+        ],
+    ):
+        print(f"Pre API Call: {call_type} with data: {data}")
+        model = data.get("model", "")
+        if 'qwen' in model and not 'qwen'.endswith('think'):
+            system_content = next((item["content"] for item in messages if item["role"] == "system"), '') + ' /no_think'
+            system_message = {"role": "system", "content": "You are a helpful assistant."}
+        return data
 
-    def log_failure_event(self, kwargs, response_obj, start_time, end_time): 
-        print(f"On Failure")
-
-    async def async_log_success_event(self, kwargs, response_obj, start_time, end_time):
-        print(f"On Async Success!")
-        # log: key, user, model, prompt, response, tokens, cost
-        # Access kwargs passed to litellm.completion()
+    def log_event(self, event_type, kwargs, response_obj):
         model = kwargs.get("model", None)
         messages = kwargs.get("messages", None)
-        user = kwargs.get("user", None)
-
-        # Access litellm_params passed to litellm.completion(), example access `metadata`
         litellm_params = kwargs.get("litellm_params", {})
-        metadata = litellm_params.get("metadata", {})   # headers passed to LiteLLM proxy, can be found here
-
-        # Calculate cost using  litellm.completion_cost()
+        metadata = litellm_params.get("metadata", {})
+        model_group = metadata.get("model_group")
+        deployment = metadata.get("deployment")
         cost = litellm.completion_cost(completion_response=response_obj)
-        response = response_obj
-        # tokens used in response 
-        usage = response_obj["usage"]
+        usage = response_obj.get("usage", None)
+        content = next(item["content"] for item in messages if item["role"] == "user")
+        first_10_words = " ".join(content.split()[:10])
 
         print(
-            f"""
-                Model: {model},
-                Messages: {messages},
-                User: {user},
-                Usage: {usage},
-                Cost: {cost},
-                Response: {response}
-                Proxy Metadata: {metadata}
-            """
+            "\n".join(
+                [
+                    f"prompt: {first_10_words}",
+                    f"model: {model}",
+                    f"model_group: {model_group}",
+                    f"deployment: {deployment}",
+                    f"tokens: {usage.total_tokens}",
+                    f"input_tokens: {usage.prompt_tokens}",
+                    f"output_tokens: {usage.completion_tokens}",
+                    f"cost: {cost}",
+                ]
+            )
         )
+
+    # async def async_log_pre_api_call(self, model, messages, kwargs):
+    #     print("Pre API Call:")
+    #     print(f"model: {model} and messages: {messages}")
+
+    async def async_log_success_event(self, kwargs, response_obj, start_time, end_time):
+        self.log_event("Async Success", kwargs, response_obj)
         return
 
-    async def async_log_failure_event(self, kwargs, response_obj, start_time, end_time): 
-        try:
-            print(f"On Async Failure !")
-            print("\nkwargs", kwargs)
-            # Access kwargs passed to litellm.completion()
-            model = kwargs.get("model", None)
-            messages = kwargs.get("messages", None)
-            user = kwargs.get("user", None)
+    async def async_log_failure_event(self, kwargs, response_obj, start_time, end_time):
+        exception_event = kwargs.get("exception", None)
+        traceback_event = kwargs.get("traceback_exception", None)
+        self.log_event("Async Failure", kwargs, response_obj)
+        print(
+            f"""
+                Exception: {exception_event}
+                Traceback: {traceback_event}
+            """
+        )
 
-            # Access litellm_params passed to litellm.completion(), example access `metadata`
-            litellm_params = kwargs.get("litellm_params", {})
-            metadata = litellm_params.get("metadata", {})   # headers passed to LiteLLM proxy, can be found here
-
-            # Access Exceptions & Traceback
-            exception_event = kwargs.get("exception", None)
-            traceback_event = kwargs.get("traceback_exception", None)
-
-            # Calculate cost using  litellm.completion_cost()
-            cost = litellm.completion_cost(completion_response=response_obj)
-            print("now checking response obj")
-            
-            print(
-                f"""
-                    Model: {model},
-                    Messages: {messages},
-                    User: {user},
-                    Cost: {cost},
-                    Response: {response_obj}
-                    Proxy Metadata: {metadata}
-                    Exception: {exception_event}
-                    Traceback: {traceback_event}
-                """
-            )
-        except Exception as e:
-            print(f"Exception: {e}")
 
 proxy_handler_instance = MyCustomHandler()
