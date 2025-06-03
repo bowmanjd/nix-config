@@ -43,7 +43,7 @@ copilot_geminipro: &copilot_geminipro
   <<: *common_copilot
 
 litellm_settings:
-  log_raw_request_response: True
+  callbacks: custom_litellm.proxy_handler_instance
 
 model_list:
   - model_name: ollama/*
@@ -151,18 +151,18 @@ model_list:
     litellm_params:
       model: openai/gpt-4.1
       # max_tokens: 128000
-      # max_output_tokens: 4096
+      # max_output_tokens: 8192
       # max_input_tokens: 64000
       weight: 10
       <<: *common_copilot
   - model_name: gpt-4.1
     litellm_params:
       model: openrouter/openai/gpt-4.1
+      weight: 2
+  - model_name: workgpt-4.1
+    litellm_params:
+      model: openai/gpt-4.1
       weight: 1
-  #- model_name: gpt-4.1
-  #  litellm_params:
-  #    model: openai/gpt-4.1
-  #    weight: 1
   - model_name: boron-phi
     litellm_params:
       model: ollama_chat/hf.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF:IQ4_XS
@@ -276,9 +276,8 @@ router_settings:
       ]
     },
     {
-      "copilot/gpt-4.1": [
-        "openrouter/openai/gpt-4.1",
-        "openai/gpt-4.1",
+      "gpt-4.1": [
+        "workgpt-4.1"
       ]
     },
     {

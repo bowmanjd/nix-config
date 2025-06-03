@@ -40,7 +40,7 @@ in {
         After = ["network.target"];
       };
       Service = {
-        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config ${./litellm-config.yaml}";
+        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config %E/litellm-config.yaml";
         EnvironmentFile = "-%t/llmconf/keys";
         Restart = "on-failure";
         RestartSec = 5;
@@ -114,7 +114,7 @@ in {
   # Config files
 
   home.activation.gooseConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    config_dir="$XDG_CONFIG_HOME/goose"
+    config_dir="$HOME/.config/goose"
     config_file="$config_dir/config.yaml"
     if [ ! -f "$config_file" ]; then
       mkdir -p "$config_dir"
@@ -126,6 +126,16 @@ in {
       enable = true;
       source = ./mods.yml;
       target = "mods/mods.yml";
+    };
+    "litellm-config.yaml" = {
+      enable = true;
+      source = ./litellm-config.yaml;
+      target = "litellm/litellm-config.yaml";
+    };
+    "custom_litellm.py" = {
+      enable = true;
+      source = ./custom_litellm.py;
+      target = "litellm/custom_litellm.py";
     };
     "aichat.yml" = {
       enable = true;
