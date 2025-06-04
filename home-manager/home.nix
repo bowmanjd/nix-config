@@ -47,12 +47,12 @@
 
   programs.ssh.matchBlocks = {
     "work" = {
-      hostname = "10.0.0.188";
+      hostname = "10.15.8.14";
       user = "jbowman";
       port = 5788;
     };
     "workwsl" = {
-      hostname = "10.0.0.100";
+      hostname = "10.15.8.14";
       user = "jbowman";
       port = 5517;
       extraOptions = {
@@ -63,7 +63,7 @@
       };
     };
     "workps" = {
-      hostname = "10.0.0.100";
+      hostname = "10.15.8.14";
       user = "jbowman@cargas";
       port = 5517;
       extraOptions = {
@@ -72,7 +72,7 @@
       };
     };
     "workpw" = {
-      hostname = "10.0.0.100";
+      hostname = "10.15.8.14";
       user = "jbowman";
       port = 5517;
       extraOptions = {

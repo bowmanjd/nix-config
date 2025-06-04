@@ -54,60 +54,9 @@ model_list:
     litellm_params:
       model: ollama_chat/*
       api_base: http://10.0.0.10:11434
-  - model_name: nitrogen/*
-    litellm_params:
-      model: ollama_chat/*
-      api_base: http://10.0.0.11:11434
   - model_name: openai/*
     litellm_params:
       model: openai/*
-  - model_name: groq/*
-    litellm_params:
-      model: groq/*
-  - model_name: cloudflare/*
-    litellm_params:
-      model: cloudflare/*
-  - model_name: cerebras/*
-    litellm_params:
-      model: cerebras/*
-  - model_name: sambanova/*
-    litellm_params:
-      model: sambanova/*
-  - model_name: together/*
-    litellm_params:
-      model: together_ai/*
-  - model_name: mistral/*
-    litellm_params:
-      model: mistral/*
-  - model_name: devstral
-    litellm_params:
-      model: mistral/devstral-small-2505
-      weight: 10
-  - model_name: r1
-    litellm_params:
-      model: openrouter/deepseek/deepseek-r1-0528
-      temperature: 0.6
-      top_p: 0.95
-  - model_name: r1q3
-    litellm_params:
-      model: openrouter/deepseek/deepseek-r1-0528-qwen3-8b:free
-      temperature: 0.6
-      top_p: 0.95
-  - model_name: devstral
-    litellm_params:
-      model: openrouter/mistralai/devstral-small:free
-      weight: 5
-  - model_name: devstral
-    litellm_params:
-      model: openrouter/mistralai/devstral-small:nitro
-      weight: 4
-  - model_name: devstral
-    litellm_params:
-      model: ollama/devstral
-      weight: 1
-  - model_name: codestral/*
-    litellm_params:
-      model: codestral/*
   - model_name: openrouter/*
     litellm_params:
       model: openrouter/*
@@ -120,10 +69,74 @@ model_list:
   - model_name: github/*
     litellm_params:
       model: github/*
-  - model_name: copilot/*
+  - model_name: llama-4-scout
     litellm_params:
-      model: openai/*
-      <<: *common_copilot
+      model: groq/meta-llama/llama-4-scout-17b-16e-instruct
+  - model_name: llama-4-scout
+    litellm_params:
+      model: cerebras/llama-4-scout-17b-16e-instruct
+  - model_name: llama-4-scout
+    litellm_params:
+      model: cloudflare/@cf/meta/llama-4-scout-17b-16e-instruct
+  - model_name: llama-4-scout
+    litellm_params:
+      model: openrouter/meta-llama/llama-4-scout:free
+  - model_name: llama-4-maverick
+    litellm_params:
+      model: groq/meta-llama/llama-4-maverick-17b-128e-instruct
+  - model_name: llama-4-maverick
+    litellm_params:
+      model: openrouter/llama-4-maverick:free
+  - model_name: deepseek-r1-70b
+    litellm_params:
+      model: groq/deepseek-r1-distill-llama-70b
+  - model_name: deepseek-r1-70b
+    litellm_params:
+      model: together_ai/deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free
+  - model_name: codestral
+    litellm_params:
+      model: codestral/codestral-2501
+  - model_name: codestral
+    litellm_params:
+      model: mistral/codestral-2501
+  - model_name: mistral-medium
+    litellm_params:
+      model: mistral/mistral-medium-2505
+  - model_name: mistral-small
+    litellm_params:
+      model: mistral/mistral-small-2503
+  - model_name: mistral-small
+    litellm_params:
+      model: cloudflare/@cf/mistralai/mistral-small-3.1-24b-instruct
+  - model_name: mistral-small
+    litellm_params:
+      model: openrouter/mistralai/mistral-small-3.1-24b-instruct:free
+  - model_name: deepseek-r1
+    litellm_params:
+      model: openrouter/deepseek/deepseek-r1-0528
+      temperature: 0.6
+      top_p: 0.95
+  - model_name: deepseek-r1-qwen3-8b
+    litellm_params:
+      model: openrouter/deepseek/deepseek-r1-0528-qwen3-8b:free
+      temperature: 0.6
+      top_p: 0.95
+  - model_name: devstral
+    litellm_params:
+      model: mistral/devstral-small-2505
+      weight: 10
+  - model_name: devstral
+    litellm_params:
+      model: openrouter/mistralai/devstral-small:free
+      weight: 5
+  - model_name: devstral
+    litellm_params:
+      model: openrouter/mistralai/devstral-small:nitro
+      weight: 3
+  - model_name: devstral
+    litellm_params:
+      model: ollama/devstral
+      weight: 1
   - model_name: gemma3:12b
     litellm_params:
       model: cloudflare/@cf/google/gemma-3-12b-it
@@ -132,10 +145,16 @@ model_list:
       model: cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast
   - model_name: llama-3.3
     litellm_params:
-      model: together/meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
+      model: together_ai/meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
   - model_name: llama-3.3
     litellm_params:
       model: groq/llama-3.3-70b-versatile
+  - model_name: llama-3.3
+    litellm_params:
+      model: cerebras/llama-3.3-70b
+  - model_name: llama-3.3
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct:free
   - model_name: copilot/claude-4-sonnet
     litellm_params:
       <<: *copilot_claude4
@@ -153,6 +172,16 @@ model_list:
   - model_name: copilot/gemini-2.5-pro
     litellm_params:
       <<: *copilot_geminipro
+  - model_name: o3-mini
+    litellm_params:
+      model: openai/o3-mini
+      weight: 20
+      <<: *common_copilot
+  - model_name: o4-mini
+    litellm_params:
+      model: openai/o4-mini
+      weight: 20
+      <<: *common_copilot
   - model_name: gpt-4.1
     litellm_params:
       model: openai/gpt-4.1
@@ -231,6 +260,14 @@ model_list:
       extra_body:
         reasoning:
           exclude: true
+  - model_name: qwen3
+    litellm_params:
+      model: cerebras/qwen-3-32b
+      #model: openrouter/qwen/qwen3-235b-a22b:free
+      temperature: 0.7
+      top_p: 0.8
+      top_k: 20
+      min_p: 0
   - model_name: qwen3big
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
@@ -265,7 +302,7 @@ router_settings:
         "r1",
         "qwen3",
         *copilot_default,
-        "groq/meta-llama/llama-4-maverick-17b-128e-instruct",
+        "llama-4-maverick",
         "ollama/qwen3:8b" 
       ]
     },
@@ -280,14 +317,14 @@ router_settings:
     },
     {
       "homesimple": [
-        "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+        "llama-4-scout",
         "openrouter/google/gemma-3-27b-it:free",
         "ollama/gemma3:8b"
       ]
     },
     {
       "worksimple": [
-        "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+        "llama-4-scout",
         "openrouter/google/gemma-3-27b-it",
         "ollama/gemma3:8b"
       ]
