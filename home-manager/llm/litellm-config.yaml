@@ -66,9 +66,12 @@ model_list:
   - model_name: gemini/*
     litellm_params:
       model: gemini/*
-  - model_name: github/*
+  - model_name: gemini-2.5-flash
     litellm_params:
-      model: github/*
+      model: gemini/gemini-2.5-flash-preview-05-20
+  - model_name: gemmma-3
+    litellm_params:
+      model: gemini/gemma-3-27b-it
   - model_name: llama-4-scout
     litellm_params:
       model: groq/meta-llama/llama-4-scout-17b-16e-instruct
