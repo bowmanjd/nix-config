@@ -50,6 +50,7 @@ model_list:
     litellm_params:
       model: ollama_chat/*
       api_base: http://localhost:11434
+      hidden: true
   - model_name: boron/*
     litellm_params:
       model: ollama_chat/*
@@ -69,9 +70,29 @@ model_list:
   - model_name: gemini-2.5-flash
     litellm_params:
       model: gemini/gemini-2.5-flash-preview-05-20
+      weight: 10
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: openrouter/gemini/gemini-2.5-flash-preview-05-20
+      weight: 1
   - model_name: gemmma-3
     litellm_params:
       model: gemini/gemma-3-27b-it
+      max_output_tokens: 8192
+      max_input_tokens: 128000
+      weight: 3
+  - model_name: gemmma-3
+    litellm_params:
+      model: openrouter/google/gemma-3-27b-it:free
+      max_output_tokens: 8192
+      max_input_tokens: 128000
+      weight: 3
+  - model_name: gemma-3
+    litellm_params:
+      model: cloudflare/@cf/google/gemma-3-12b-it
+      max_output_tokens: 8192
+      max_input_tokens: 128000
+      weight: 1
   - model_name: llama-4-scout
     litellm_params:
       model: groq/meta-llama/llama-4-scout-17b-16e-instruct
@@ -140,9 +161,6 @@ model_list:
     litellm_params:
       model: ollama/devstral
       weight: 1
-  - model_name: gemma3:12b
-    litellm_params:
-      model: cloudflare/@cf/google/gemma-3-12b-it
   - model_name: llama-3.3
     litellm_params:
       model: cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast
@@ -172,6 +190,11 @@ model_list:
   - model_name: gemini-pro
     litellm_params:
       <<: *copilot_geminipro
+      weight: 5
+  - model_name: gemini-pro
+    litellm_params:
+      model: openrouter/google/gemini-2.5-pro-preview
+      weight: 1
   - model_name: copilot/gemini-2.5-pro
     litellm_params:
       <<: *copilot_geminipro

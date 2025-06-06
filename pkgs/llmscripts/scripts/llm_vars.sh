@@ -3,7 +3,9 @@
 llmconfig="$XDG_RUNTIME_DIR/llmconf"
 mkdir -p "$llmconfig"
 keyfile="$llmconfig/keys"
+webuifile="$llmconfig/webui"
 touch "$keyfile"
+touch "$webuifile"
 
 TAVILY_API_KEY=$(agegent ~/.ssh/secrets/tavily.enc.txt)
 GOOGLE_SEARCH_API_KEY=$(agegent ~/.ssh/secrets/google_search.enc.txt)
@@ -23,6 +25,27 @@ CODESTRAL_API_KEY=$(agegent ~/.ssh/secrets/codestral.enc.txt)
 TOGETHERAI_API_KEY=$(agegent ~/.ssh/secrets/together.enc.txt)
 MISTRAL_API_KEY=$(agegent ~/.ssh/secrets/mistral.enc.txt)
 NVIDIA_NIM_API_KEY=$(agegent ~/.ssh/secrets/nvidia.enc.txt)
+
+cat > "$webuifile" <<EOF
+# Auto-generated; do not edit
+
+# Open WebUI:
+STATIC_DIR=.
+DATA_DIR=.
+HF_HOME=.
+SENTENCE_TRANSFORMERS_HOME=.
+WEBUI_URL=http://webui.home.arpa
+ENABLE_PERSISTENT_CONFIG=False
+CUSTOM_NAME="Chat Like an Owner"
+WEBUI_NAME="Chat Like an Owner"
+OPENAI_API_BASE_URL=http://127.0.0.1:1173
+OPENAI_API_KEY=sk_fake_key_123
+ENABLE_OLLAMA_API=False
+ENABLE_WEB_SEARCH=True
+WEB_SEARCH_ENGINE=google_pse
+GOOGLE_PSE_ENGINE_ID=626da60bfa6e445c8
+GOOGLE_PSE_API_KEY=$GOOGLE_SEARCH_API_KEY
+EOF
 
 cat > "$keyfile" <<EOF
 # Auto-generated; do not edit

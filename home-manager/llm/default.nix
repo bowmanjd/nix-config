@@ -30,6 +30,7 @@ in {
       inherit pkgs lib environment;
     })
   ];
+
   # Systemd services
   systemd.user.services = {
     "litellm" = {
@@ -46,6 +47,31 @@ in {
         RestartSec = 5;
         StandardOutput = "journal";
         StandardError = "journal";
+      };
+      Install = {
+        WantedBy = ["default.target"];
+      };
+    };
+
+    "webui" = {
+      Unit = {
+        Description = "Open WebUI server";
+        StartLimitIntervalSec = "120";
+        StartLimitBurst = "5";
+        After = ["network.target"];
+      };
+      Service = {
+        WorkingDirectory = "%D/webui";
+        ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %D/webui";
+        ExecStart = "${pkgs.open-webui}/bin/open-webui serve --port 3011 --host 127.0.0.1";
+        EnvironmentFile = "-%t/llmconf/webui";
+        Restart = "on-failure";
+        RestartSec = 5;
+        StandardOutput = "journal";
+        StandardError = "journal";
+        StateDirectory = "open-webui";
+        RuntimeDirectory = "open-webui";
+        RuntimeDirectoryMode = "0755";
       };
       Install = {
         WantedBy = ["default.target"];
@@ -108,6 +134,7 @@ in {
     llmscripts
     mods
     ollama
+    open-webui
     onnxruntime
   ];
 
@@ -121,6 +148,9 @@ in {
       cp ${./goose.yaml} "$config_file"
     fi
   '';
+
+  xdg.dataFile."webui/.keep".text = "# just a placeholder";
+
   xdg.configFile = {
     "mods.yml" = {
       enable = true;

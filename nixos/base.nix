@@ -141,13 +141,6 @@
     };
   };
 
-  services.open-webui = {
-    enable = true;
-    port = 3011;
-    environmentFile = "/run/user/1000/llmconf/keys";
-  };
-
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }
