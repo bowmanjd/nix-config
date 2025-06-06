@@ -50,14 +50,6 @@ EOF
 cat > "$keyfile" <<EOF
 # Auto-generated; do not edit
 
-# Open WebUI:
-CUSTOM_NAME="Chat Like an Owner"
-WEBUI_NAME="Chat Like an Owner"
-ENABLE_WEB_SEARCH=True
-WEB_SEARCH_ENGINE=google_pse
-GOOGLE_PSE_ENGINE_ID=626da60bfa6e445c8
-GOOGLE_PSE_API_KEY=$GOOGLE_SEARCH_API_KEY
-
 # Goose:
 GOOSE_PROVIDER=openai
 GOOSE_PROVIDER__HOST=http://localhost:1173

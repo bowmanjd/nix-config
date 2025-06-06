@@ -46,27 +46,27 @@ litellm_settings:
   callbacks: custom_litellm.proxy_handler_instance
 
 model_list:
-  - model_name: ollama/*
-    litellm_params:
-      model: ollama_chat/*
-      api_base: http://localhost:11434
-      hidden: true
-  - model_name: boron/*
-    litellm_params:
-      model: ollama_chat/*
-      api_base: http://10.0.0.10:11434
-  - model_name: openai/*
-    litellm_params:
-      model: openai/*
-  - model_name: openrouter/*
-    litellm_params:
-      model: openrouter/*
-  - model_name: anthropic/*
-    litellm_params:
-      model: anthropic/*
-  - model_name: gemini/*
-    litellm_params:
-      model: gemini/*
+  # - model_name: ollama/*
+  #   litellm_params:
+  #     model: ollama_chat/*
+  #     api_base: http://localhost:11434
+  #     hidden: true
+  # - model_name: boron/*
+  #   litellm_params:
+  #     model: ollama_chat/*
+  #     api_base: http://10.0.0.10:11434
+  # - model_name: openai/*
+  #   litellm_params:
+  #     model: openai/*
+  # - model_name: openrouter/*
+  #   litellm_params:
+  #     model: openrouter/*
+  # - model_name: anthropic/*
+  #   litellm_params:
+  #     model: anthropic/*
+  # - model_name: gemini/*
+  #   litellm_params:
+  #     model: gemini/*
   - model_name: gemini-2.5-flash
     litellm_params:
       model: gemini/gemini-2.5-flash-preview-05-20
