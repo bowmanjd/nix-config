@@ -71,28 +71,55 @@ model_list:
     litellm_params:
       model: gemini/gemini-2.5-flash-preview-05-20
       weight: 10
+    model_info:
+      id: gemini-2.5-flash
   - model_name: gemini-2.5-flash
     litellm_params:
       model: openrouter/gemini/gemini-2.5-flash-preview-05-20
       weight: 1
+    model_info:
+      id: openrouter-gemini-2.5-flash
   - model_name: gemmma-3
     litellm_params:
       model: gemini/gemma-3-27b-it
       max_output_tokens: 8192
       max_input_tokens: 128000
-      weight: 3
+      weight: 10
+    model_info:
+      id: gemma-3:27b
   - model_name: gemmma-3
     litellm_params:
       model: openrouter/google/gemma-3-27b-it:free
       max_output_tokens: 8192
       max_input_tokens: 128000
-      weight: 3
+      weight: 10
+    model_info:
+      id: openrouter-gemma-3:27b
   - model_name: gemma-3
     litellm_params:
       model: cloudflare/@cf/google/gemma-3-12b-it
       max_output_tokens: 8192
       max_input_tokens: 128000
+      weight: 5
+    model_info:
+      id: cf-gemma-3:12b
+  - model_name: gemma-3
+    litellm_params:
+      model: ollama_chat/gemma3:4b 
+      api_base: http://localhost:11434
       weight: 1
+    model_info:
+      id: ollama-gemma-3:4b
+  - model_name: gemma-3
+    litellm_params:
+      model: ollama_chat/hf.co/mradermacher/gemma-3-4b-it-i1-GGUF:Q4_K_S
+      api_base: http://10.0.0.10:11434
+      weight: 1
+    model_info:
+      id: boron-gemma-3:4b
+  - model_name: gemma-3n
+    litellm_params:
+      model: openrouter/google/gemma-3n-e4b-it:free
   - model_name: llama-4-scout
     litellm_params:
       model: groq/meta-llama/llama-4-scout-17b-16e-instruct
@@ -179,14 +206,35 @@ model_list:
   - model_name: copilot/claude-4-sonnet
     litellm_params:
       <<: *copilot_claude4
-  - model_name: copilot/claude-3.7-sonnet
+  - model_name: claude-3.7-sonnet
     litellm_params:
-      <<: *copilot_claude37
-  - model_name: copilot/claude-3.5-sonnet
+      model: openai/claude-3.7-sonnet
+      max_tokens: 200000
+      max_output_tokens: 16384
+      max_input_tokens: 90000
+      weight: 20
+      <<: *common_copilot
+    model_info:
+      id: copilot-claude-3.7-sonnet
+  - model_name: claude-3.7-sonnet
+    litellm_params:
+      model: openrouter/anthropic/claude-3.7-sonnet
+      weight: 3
+    model_info:
+      id: openrouter-claude-3.7-sonnet
+  - model_name: claude-3.7-sonnet
+    litellm_params:
+      model: anthropic/claude-3.7-sonnet-latest
+      weight: 1
+    model_info:
+      id: anthropic-claude-3.7-sonnet
+  - model_name: claude-3.5-sonnet
     litellm_params:
       model: openai/claude-3.5-sonnet
       max_tokens: 90000
-      <<: [*claude_common, *common_copilot]
+      max_output_tokens: 8192
+      max_input_tokens: 90000
+      <<: *common_copilot
   - model_name: gemini-pro
     litellm_params:
       <<: *copilot_geminipro
@@ -198,6 +246,16 @@ model_list:
   - model_name: copilot/gemini-2.5-pro
     litellm_params:
       <<: *copilot_geminipro
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      weight: 20
+      <<: *common_copilot
+  - model_name: o1
+    litellm_params:
+      model: openai/o1
+      weight: 20
+      <<: *common_copilot
   - model_name: o3-mini
     litellm_params:
       model: openai/o3-mini
@@ -238,10 +296,6 @@ model_list:
     litellm_params:
       model: ollama_chat/hf.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF:IQ4_XS
       api_base: http://10.0.0.10:11434
-  - model_name: boron-gemma
-    litellm_params:
-      model: ollama_chat/hf.co/mradermacher/gemma-3-4b-it-i1-GGUF:Q4_K_S
-      api_base: http://10.0.0.10:11434
   - model_name: boron-qwen
     litellm_params:
       model: ollama_chat/hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
@@ -268,13 +322,7 @@ model_list:
       api_base: http://localhost:11434
   - model_name: homecode
     litellm_params:
-      #model: openrouter/deepseek/deepseek-chat-v3-0324:free
-      model: openrouter/deepseek/deepseek-r1-0528:free
-      temperature: 0.6
-      top_p: 0.95
-  - model_name: gemma3n
-    litellm_params:
-      model: openrouter/google/gemma-3n-e4b-it:free
+      <<: *copilot_base
   - model_name: qwen3
     litellm_params:
       model: openrouter/qwen/qwen3-32b:free
@@ -325,9 +373,8 @@ router_settings:
   fallbacks: [
     {
       "homecode": [
-        "r1",
+        "deepseek-r1",
         "qwen3",
-        *copilot_default,
         "llama-4-maverick",
         "ollama/qwen3:8b" 
       ]
@@ -362,8 +409,19 @@ router_settings:
       ]
     },
     {
+      "claude-3.7-sonnet": [
+        "openrouter-claude-3.7-sonnet",
+        "anthropic-claude-3.7-sonnet"
+      ]
+    },
+    {
       "gemini-pro": [
         "openrouter/google/gemini-2.5-pro-preview"
+      ]
+    },
+    {
+      "gemini-2.5-flash": [
+        "openrouter-gemini-2.5-flash"
       ]
     },
     {

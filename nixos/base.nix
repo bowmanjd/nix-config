@@ -116,6 +116,15 @@
     ports = [ 5788 ];
   };
 
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "litellm" "sandbox" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
+
   services.caddy = {
     enable = true;
     virtualHosts = {
