@@ -25,8 +25,8 @@ CODESTRAL_API_KEY=$(agegent ~/.ssh/secrets/codestral.enc.txt)
 TOGETHERAI_API_KEY=$(agegent ~/.ssh/secrets/together.enc.txt)
 MISTRAL_API_KEY=$(agegent ~/.ssh/secrets/mistral.enc.txt)
 NVIDIA_NIM_API_KEY=$(agegent ~/.ssh/secrets/nvidia.enc.txt)
-LITELLM_MASTER_KEY=$(agegent ~/.ssh/secrets/litellm-key.enc.txt)
-LITELLM_SALT_KEY=$(agegent ~/.ssh/secrets/litellm-salt.enc.txt)
+LITELLM_KEY=$(agegent ~/.ssh/secrets/litellm-key.enc.txt)
+LITELLM_SALT=$(agegent ~/.ssh/secrets/litellm-salt.enc.txt)
 
 cat > "$webuifile" <<EOF
 # Auto-generated; do not edit
@@ -41,7 +41,7 @@ ENABLE_PERSISTENT_CONFIG=False
 CUSTOM_NAME="Chat Like an Owner"
 WEBUI_NAME="Chat Like an Owner"
 OPENAI_API_BASE_URL=http://127.0.0.1:1173
-OPENAI_API_KEY=$LITELLM_MASTER_KEY
+OPENAI_API_KEY=$LITELLM_KEY
 ENABLE_OLLAMA_API=False
 ENABLE_WEB_SEARCH=True
 ENABLE_EVALUATION_ARENA_MODELS=False
@@ -54,10 +54,11 @@ cat > "$keyfile" <<EOF
 # Auto-generated; do not edit
 
 # Goose:
-GOOSE_PROVIDER=openai
+# GOOSE_PROVIDER=openai
 GOOSE_PROVIDER__HOST=http://localhost:1173
-GOOSE_PROVIDER__API_KEY=$LITELLM_MASTER_KEY
+GOOSE_PROVIDER__API_KEY=$LITELLM_KEY
 GOOSE_PROVIDER__TYPE=openai
+GOOSE_PROVIDER__MODEL=gpt-4.1
 GOOSE_PLANNER_PROVIDER=openai
 GOOSE_MODEL=gpt-4.1
 GOOSE_PLANNER_MODEL=gpt-4.1
@@ -67,9 +68,10 @@ GOOSE_MODE=smart_approve
 
 OLLAMA_API_BASE=http://127.0.0.1:11434
 LITELLM_PROXY_API_BASE=http://127.0.0.1:1173
-LITELLM_PROXY_API_KEY=$LITELLM_MASTER_KEY
-LITELLM_MASTER_KEY=$LITELLM_MASTER_KEY
-LITELLM_SALT_KEY=$LITELLM_SALT_KEY
+LITELLM_PROXY_API_KEY=$LITELLM_KEY
+LITELLM_API_KEY=$LITELLM_KEY
+# LITELLM_MASTER_KEY=$LITELLM_KEY
+# LITELLM_SALT_KEY=$LITELLM_SALT_KEY
 TAVILY_API_KEY=$TAVILY_API_KEY
 GOOGLE_SEARCH_API_KEY=$GOOGLE_SEARCH_API_KEY
 ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY

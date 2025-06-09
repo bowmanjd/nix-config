@@ -41,10 +41,20 @@ in {
         After = ["network.target"];
       };
       Service = {
+        WorkingDirectory = "%D/litellm";
+        ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %D/litellm";
         ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config %E/litellm/litellm-config.yaml";
         EnvironmentFile = "-%t/llmconf/keys";
+        Environment = [
+          "PRISMA_SCHEMA_ENGINE_BINARY=${pkgs.prisma-engines}/bin/schema-engine"
+          "PRISMA_QUERY_ENGINE_BINARY=${pkgs.prisma-engines}/bin/query-engine"
+          "PRISMA_QUERY_ENGINE_LIBRARY=${pkgs.prisma-engines}/lib/libquery_engine.node"
+        ];
         Restart = "on-failure";
         RestartSec = 5;
+        StateDirectory = "open-webui";
+        RuntimeDirectory = "open-webui";
+        RuntimeDirectoryMode = "0755";
         StandardOutput = "journal";
         StandardError = "journal";
       };
@@ -136,6 +146,7 @@ in {
     ollama
     open-webui
     onnxruntime
+    prisma-engines
   ];
 
   # Config files
@@ -150,6 +161,7 @@ in {
   '';
 
   xdg.dataFile."webui/.keep".text = "# just a placeholder";
+  xdg.dataFile."litellm/.keep".text = "# just a placeholder";
 
   xdg.configFile = {
     "mods.yml" = {

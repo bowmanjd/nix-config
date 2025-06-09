@@ -392,7 +392,7 @@ litellm_settings:
   default_fallbacks: ["copilot-gpt-4.1"]
 
 general_settings:
-  database_url: postgresql:///litellm
+  #database_url: postgresql://postgres@localhost:5432/litellm
   store_model_in_db: false
 
 router_settings:
