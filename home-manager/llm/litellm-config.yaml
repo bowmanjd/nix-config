@@ -1,49 +1,21 @@
-copilot_default: &copilot_default copilot/gpt-4.1
+copilot_default: &copilot_default copilot-gpt-4.1
 
 common_copilot: &common_copilot
   api_base: https://api.githubcopilot.com
   api_key: "os.environ/COPILOT_API_KEY" 
-  rpm: 15
+  rpm: 20
   input_cost_per_token: 0.0
   output_cost_per_token: 0.0
   extra_headers:
     Copilot-Integration-Id: vscode-chat
     Editor-Version: neovim/0.11.1
 
-claude_common: &claude_common
-  max_output_tokens: 8192
-  max_input_tokens: 90000
-  mode: chat
-  supports_vision: true
-  supports_function_calling: true
-  supports_parallel_function_calling: true
-  supports_system_messages: true
-
-copilot_claude4: &copilot_claude4
-  model: openai/claude-sonnet-4
-  max_tokens: 200000
-  <<: [*claude_common, *common_copilot]
-
 copilot_base: &copilot_base
   model: openai/gpt-4.1
   max_tokens: 128000
-  max_output_tokens: 4096
-  max_input_tokens: 64000
+  max_output_tokens: 16384
+  max_input_tokens: 128000
   <<: *common_copilot
-
-copilot_claude37: &copilot_claude37
-  model: openai/claude-3.7-sonnet
-  max_tokens: 200000
-  <<: [*claude_common, *common_copilot]
-
-copilot_geminipro: &copilot_geminipro
-  model: openai/gemini-2.5-pro
-  max_tokens: 90000
-  max_output_tokens: 8192
-  <<: *common_copilot
-
-litellm_settings:
-  callbacks: custom_litellm.proxy_handler_instance
 
 model_list:
   # - model_name: ollama/*
@@ -107,6 +79,8 @@ model_list:
     litellm_params:
       model: ollama_chat/gemma3:4b 
       api_base: http://localhost:11434
+      max_output_tokens: 8192
+      max_input_tokens: 128000
       weight: 1
     model_info:
       id: ollama-gemma-3:4b
@@ -114,6 +88,8 @@ model_list:
     litellm_params:
       model: ollama_chat/hf.co/mradermacher/gemma-3-4b-it-i1-GGUF:Q4_K_S
       api_base: http://10.0.0.10:11434
+      max_output_tokens: 8192
+      max_input_tokens: 128000
       weight: 1
     model_info:
       id: boron-gemma-3:4b
@@ -203,9 +179,26 @@ model_list:
   - model_name: llama-3.3
     litellm_params:
       model: openrouter/meta-llama/llama-3.3-70b-instruct:free
-  - model_name: copilot/claude-4-sonnet
+  - model_name: claude-4-sonnet
     litellm_params:
-      <<: *copilot_claude4
+      model: openai/claude-sonnet-4
+      max_tokens: 80000
+      max_output_tokens: 16000
+      max_input_tokens: 80000
+      weight: 20
+      <<: *common_copilot
+  - model_name: claude-4-sonnet
+    litellm_params:
+      model: openrouter/anthropic/claude-4-sonnet
+      weight: 3
+    model_info:
+      id: openrouter-claude-3.7-sonnet
+  - model_name: claude-4-sonnet
+    litellm_params:
+      model: anthropic/claude-sonnet-4-20250514
+      weight: 1
+    model_info:
+      id: anthropic-claude-4-sonnet
   - model_name: claude-3.7-sonnet
     litellm_params:
       model: openai/claude-3.7-sonnet
@@ -235,35 +228,59 @@ model_list:
       max_output_tokens: 8192
       max_input_tokens: 90000
       <<: *common_copilot
+  - model_name: gemini-2.0-flash
+    litellm_params:
+      model: openai/gemini-2.0-flash-001
+      max_tokens: 1000000
+      max_output_tokens: 8192
+      max_input_tokens: 128000
+      <<: *common_copilot
+      weight: 20
   - model_name: gemini-pro
     litellm_params:
-      <<: *copilot_geminipro
-      weight: 5
+      model: openai/gemini-2.5-pro
+      max_tokens: 128000
+      max_output_tokens: 64000
+      max_input_tokens: 128000
+      <<: *common_copilot
+      weight: 10
+    model_info:
+      id: copilot-gemini-pro
   - model_name: gemini-pro
     litellm_params:
       model: openrouter/google/gemini-2.5-pro-preview
       weight: 1
-  - model_name: copilot/gemini-2.5-pro
-    litellm_params:
-      <<: *copilot_geminipro
+    model_info:
+      id: openrouter-gemini-pro
   - model_name: gpt-4o
     litellm_params:
       model: openai/gpt-4o
+      max_tokens: 128000
+      max_output_tokens: 4096
+      max_input_tokens: 64000
       weight: 20
       <<: *common_copilot
   - model_name: o1
     litellm_params:
       model: openai/o1
+      max_tokens: 200000
+      max_input_tokens: 20000
       weight: 20
       <<: *common_copilot
   - model_name: o3-mini
     litellm_params:
       model: openai/o3-mini
+      max_tokens: 200000
+      max_output_tokens: 100000
+      max_input_tokens: 64000
       weight: 20
       <<: *common_copilot
   - model_name: o4-mini
     litellm_params:
       model: openai/o4-mini
+      max_tokens: 128000
+      max_output_tokens: 16384
+      max_input_tokens: 128000
       weight: 20
       <<: *common_copilot
   - model_name: gpt-4.1
@@ -361,13 +378,23 @@ model_list:
       min_p: 0
   - model_name: workcode
     litellm_params:
-      <<: *copilot_claude4
+      <<: *copilot_base
   - model_name: homesimple
     litellm_params:
       <<: *copilot_base
   - model_name: worksimple
     litellm_params:
       <<: *copilot_base
+
+litellm_settings:
+  callbacks: custom_litellm.proxy_handler_instance
+  force_ipv4: true
+  default_fallbacks: ["copilot-gpt-4.1"]
+
+general_settings:
+  database_url: postgresql:///litellm
+  store_model_in_db: false
+
 router_settings:
   routing_strategy: simple-shuffle
   fallbacks: [
@@ -416,7 +443,7 @@ router_settings:
     },
     {
       "gemini-pro": [
-        "openrouter/google/gemini-2.5-pro-preview"
+        "openrouter-gemini-pro"
       ]
     },
     {
