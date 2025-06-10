@@ -139,7 +139,10 @@ in {
     claude-code
     codex
     fabric-ai
-    goose-cli
+    (pkgs.writeShellScriptBin "goose" ''
+      export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
+      exec ${pkgs.goose-cli}/bin/goose "$@"
+    '')
     llama-cpp
     llmscripts
     mods
