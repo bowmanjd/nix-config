@@ -417,6 +417,7 @@ model_list:
     litellm_params:
       model: cohere/BAAI/bge-reranker-base
       api_base: http://localhost:5113
+      api_key: fake_abc_123
     model_info:
       id: local-bge-reranker-base
 
