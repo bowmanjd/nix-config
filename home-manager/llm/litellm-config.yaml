@@ -24,14 +24,6 @@ qwen_params: &qwen_params
   min_p: 0
 
 model_list:
-  # - model_name: ollama/*
-  #   litellm_params:
-  #     model: ollama_chat/*
-  #     api_base: http://localhost:11434
-  # - model_name: boron/*
-  #   litellm_params:
-  #     model: ollama_chat/*
-  #     api_base: http://10.0.0.10:11434
   # - model_name: openai/*
   #   litellm_params:
   #     model: openai/*
@@ -41,9 +33,6 @@ model_list:
   # - model_name: anthropic/*
   #   litellm_params:
   #     model: anthropic/*
-  # - model_name: gemini/*
-  #   litellm_params:
-  #     model: gemini/*
   - model_name: gemini-2.5-flash
     litellm_params:
       model: gemini/gemini-2.5-flash-preview-05-20
@@ -176,6 +165,7 @@ model_list:
   - model_name: devstral
     litellm_params:
       model: ollama_chat/devstral
+      api_base: http://localhost:11434
       weight: 1
   - model_name: llama-3.3
     litellm_params:
@@ -343,6 +333,10 @@ model_list:
     litellm_params:
       model: ollama/hf.co/gaianet/jina-embeddings-v2-base-code-GGUF:Q5_K_M
       api_base: http://localhost:11434
+  - model_name: qwen3-embedding
+    litellm_params:
+      model: ollama/hf.co/Qwen/Qwen3-Embedding-0.6B-GGUF:Q8_0
+      api_base: http://localhost:11434
   - model_name: local-embedding
     litellm_params:
       model: ollama/granite-embedding:30m
@@ -419,6 +413,13 @@ model_list:
   - model_name: worksimple
     litellm_params:
       <<: *copilot_base
+  - model_name: bge-reranker-base
+    litellm_params:
+      model: cohere/BAAI/bge-reranker-base
+      api_base: http://localhost:5113
+    model_info:
+      id: local-bge-reranker-base
+
 
 litellm_settings:
   callbacks: custom_litellm.proxy_handler_instance
@@ -487,8 +488,9 @@ router_settings:
     },
     {
       "gemma-3": [
-        "openrouter-gemma-3",
-        "cf-gemma-3"
+        "openrouter-gemma-3:27b",
+        "cf-gemma-3:12b",
+        "local-gemma-3:4b"
       ]
     },
     {
@@ -508,5 +510,5 @@ router_settings:
       ]
     }
   ]
-  num_retries: 3
+  num_retries: 2
 
