@@ -17,12 +17,17 @@ copilot_base: &copilot_base
   max_input_tokens: 128000
   <<: *common_copilot
 
+qwen_params: &qwen_params
+  temperature: 0.7
+  top_p: 0.8
+  top_k: 20
+  min_p: 0
+
 model_list:
   # - model_name: ollama/*
   #   litellm_params:
   #     model: ollama_chat/*
   #     api_base: http://localhost:11434
-  #     hidden: true
   # - model_name: boron/*
   #   litellm_params:
   #     model: ollama_chat/*
@@ -83,7 +88,7 @@ model_list:
       max_input_tokens: 128000
       weight: 1
     model_info:
-      id: ollama-gemma-3:4b
+      id: local-gemma-3:4b
   - model_name: gemma-3
     litellm_params:
       model: ollama_chat/hf.co/mradermacher/gemma-3-4b-it-i1-GGUF:Q4_K_S
@@ -170,7 +175,7 @@ model_list:
       weight: 3
   - model_name: devstral
     litellm_params:
-      model: ollama/devstral
+      model: ollama_chat/devstral
       weight: 1
   - model_name: llama-3.3
     litellm_params:
@@ -325,10 +330,7 @@ model_list:
     litellm_params:
       model: ollama_chat/hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
       api_base: http://10.0.0.10:11434
-      temperature: 0.7
-      top_p: 0.8
-      top_k: 20
-      min_p: 0
+      <<: *qwen_params
   - model_name: boron-code-embedding
     litellm_params:
       model: ollama/hf.co/gaianet/jina-embeddings-v2-base-code-GGUF:Q5_K_M
@@ -351,10 +353,7 @@ model_list:
   - model_name: qwen3
     litellm_params:
       model: openrouter/qwen/qwen3-32b:free
-      temperature: 0.7
-      top_p: 0.8
-      top_k: 20
-      min_p: 0
+      <<: *qwen_params
       weight: 20
       extra_body:
         reasoning:
@@ -364,33 +363,31 @@ model_list:
   - model_name: qwen3
     litellm_params:
       model: cerebras/qwen-3-32b
-      temperature: 0.7
-      top_p: 0.8
-      top_k: 20
-      min_p: 0
       weight: 15
+      <<: *qwen_params
     model_info:
       id: cerebras-qwen-3-32b
   - model_name: qwen3
     litellm_params:
       model: openrouter/qwen/qwen3-32b
-      temperature: 0.7
-      top_p: 0.8
-      top_k: 20
-      min_p: 0
       weight: 1
+      <<: *qwen_params
       extra_body:
         reasoning:
           exclude: true
     model_info:
       id: openrouter-qwen-3-32b
+  - model_name: qwen3:8b
+    litellm_params:
+      model: ollama_chat/qwen3:8b
+      api_base: http://localhost:11434
+      <<: *qwen_params
+    model_info:
+      id: local-qwen-3:8b
   - model_name: qwen3big
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
-      temperature: 0.7
-      top_p: 0.8
-      top_k: 20
-      min_p: 0
+      <<: *qwen_params
       weight: 10
       extra_body:
         reasoning:
@@ -400,10 +397,7 @@ model_list:
   - model_name: qwen3big
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b
-      temperature: 0.7
-      top_p: 0.8
-      top_k: 20
-      min_p: 0
+      <<: *qwen_params
       weight: 1
       extra_body:
         reasoning:
@@ -413,10 +407,7 @@ model_list:
   - model_name: qwen3bigthink
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
-      temperature: 0.6
-      top_p: 0.95
-      top_k: 20
-      min_p: 0
+      <<: *qwen_params
     model_info:
       id: openrouter-qwen-3-235b-think:free
   - model_name: workcode
@@ -492,6 +483,12 @@ router_settings:
     {
       "gemini-2.5-flash": [
         "openrouter-gemini-2.5-flash"
+      ]
+    },
+    {
+      "gemma-3": [
+        "openrouter-gemma-3",
+        "cf-gemma-3"
       ]
     },
     {
