@@ -1,21 +1,5 @@
 return {
 	{
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- api_key_cmd = "agegent " .. home .. "/.ssh/secrets/openai.enc.txt",
-			openai_params = {
-				model = "gpt-4.1",
-			},
-		},
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"folke/trouble.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
-	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		event = "VeryLazy",
 		dependencies = {
