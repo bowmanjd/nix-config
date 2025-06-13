@@ -346,9 +346,16 @@ model_list:
       <<: *copilot_base
   - model_name: qwen3
     litellm_params:
+      model: groq/qwen/qwen3-32b
+      <<: *qwen_params
+      weight: 15
+    model_info:
+      id: groq-qwen-3-32b
+  - model_name: qwen3
+    litellm_params:
       model: openrouter/qwen/qwen3-32b:free
       <<: *qwen_params
-      weight: 20
+      weight: 10
       extra_body:
         reasoning:
           exclude: true
@@ -357,7 +364,7 @@ model_list:
   - model_name: qwen3
     litellm_params:
       model: cerebras/qwen-3-32b
-      weight: 15
+      weight: 8 
       <<: *qwen_params
     model_info:
       id: cerebras-qwen-3-32b
