@@ -59,11 +59,8 @@ cat > "$keyfile" <<EOF
 # Auto-generated; do not edit
 
 # Goose:
-GOOSE_PROVIDER=openai
-GOOSE_PLANNER_PROVIDER=openai
-GOOSE_MODEL=gpt-4.1
-GOOSE_PLANNER_MODEL=gpt-4.1
 GOOSE_DISABLE_KEYRING=true
+GOOSE_CONTEXT_STRATEGY=summarize
 OLLAMA_HOST=localhost
 GOOSE_MODE=smart_approve
 

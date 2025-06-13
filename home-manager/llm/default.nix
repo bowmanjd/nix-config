@@ -139,8 +139,13 @@ in {
     claude-code
     codex
     fabric-ai
-    (pkgs.writeShellScriptBin "goose" ''
+    goose-cli
+    (pkgs.writeShellScriptBin "goose-custom" ''
       export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
+      export OPENAI_BASE_PATH=/chat/completions
+      export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
+      export GOOSE_PROVIDER=openai
+      export GOOSE_MODEL=gpt-4.1
       exec ${pkgs.goose-cli}/bin/goose "$@"
     '')
     llama-cpp
@@ -153,7 +158,7 @@ in {
   ];
 
   # Config files
-
+/*
   home.activation.gooseConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     config_dir="$HOME/.config/goose"
     config_file="$config_dir/config.yaml"
@@ -162,6 +167,7 @@ in {
       cp ${./goose.yaml} "$config_file"
     fi
   '';
+*/
 
   xdg.dataFile."webui/.keep".text = "# just a placeholder";
   xdg.dataFile."litellm/.keep".text = "# just a placeholder";
