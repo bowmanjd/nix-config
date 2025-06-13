@@ -474,7 +474,7 @@ router_settings:
     },
     {
       "gpt-4.1": [
-        "openrouter-gpt-4.1",
+        "openrouter/openai/gpt-4.1",
         "openai-gpt-4.1"
       ]
     },
