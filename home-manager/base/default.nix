@@ -353,6 +353,7 @@
         lxml
         numpy
         #numpy_1
+        onnxruntime
         pep8-naming
         pexpect
         pip

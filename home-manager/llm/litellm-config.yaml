@@ -289,9 +289,9 @@ model_list:
   - model_name: gpt-4.1
     litellm_params:
       model: openai/gpt-4.1
-      # max_tokens: 128000
-      # max_output_tokens: 8192
-      # max_input_tokens: 64000
+      max_tokens: 128000
+      max_output_tokens: 16384
+      max_input_tokens: 128000
       weight: 20
       <<: *common_copilot
     model_info:
@@ -432,7 +432,7 @@ model_list:
 litellm_settings:
   callbacks: custom_litellm.proxy_handler_instance
   force_ipv4: true
-  default_fallbacks: ["copilot-gpt-4.1"]
+  default_fallbacks: ["gpt-4.1"]
 
 general_settings:
   #database_url: postgresql://postgres@localhost:5432/litellm
@@ -440,6 +440,9 @@ general_settings:
 
 router_settings:
   routing_strategy: simple-shuffle
+  context_window_fallbacks: [
+    {"gpt-4.1": ["openrouter-gpt-4.1"]}
+  ]
   fallbacks: [
     {
       "homecode": [
@@ -474,7 +477,7 @@ router_settings:
     },
     {
       "gpt-4.1": [
-        "openrouter/openai/gpt-4.1",
+        "openrouter-gpt-4.1",
         "openai-gpt-4.1"
       ]
     },
