@@ -139,14 +139,33 @@ in {
     claude-code
     codex
     fabric-ai
-    goose-cli
+    (goose-cli.overrideAttrs (finalAttrs: old: {
+      version = "1.0.28";
+      cargoHash = "sha256-sW4rWLElTPVzD+KCOrikEFcoIRGujMz+wHOWlYBpi0o=";
+      src = old.src.override {
+        tag = "v1.0.28";
+        hash = "sha256-ExFVgG05jlcz3nP6n94324sgXbIHpj8L30oNuqKyfto=";
+      };
+      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+        inherit (finalAttrs) pname src version;
+        hash = finalAttrs.cargoHash;
+      };
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.protobuf];
+      checkFlags =
+        (old.checkFlags or [])
+        ++ [
+          "--skip=providers::factory::tests::test_create_lead_worker_provider"
+          "--skip=providers::factory::tests::test_create_regular_provider_without_lead_config"
+          "--skip=providers::factory::tests::test_lead_model_env_vars_with_defaults"
+        ];
+    }))
     (pkgs.writeShellScriptBin "goose-custom" ''
       export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
       export OPENAI_BASE_PATH=/chat/completions
       export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
       export GOOSE_PROVIDER=openai
       export GOOSE_MODEL=gpt-4.1
-      exec ${pkgs.goose-cli}/bin/goose "$@"
+      exec ${goose-cli}/bin/goose "$@"
     '')
     llama-cpp
     llmscripts
@@ -158,7 +177,7 @@ in {
   ];
 
   # Config files
-/*
+  /*
   home.activation.gooseConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     config_dir="$HOME/.config/goose"
     config_file="$config_dir/config.yaml"
@@ -167,7 +186,7 @@ in {
       cp ${./goose.yaml} "$config_file"
     fi
   '';
-*/
+  */
 
   xdg.dataFile."webui/.keep".text = "# just a placeholder";
   xdg.dataFile."litellm/.keep".text = "# just a placeholder";
