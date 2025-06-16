@@ -363,9 +363,12 @@
         reorder-python-imports
         rich
         rich-rst
+        sentence-transformers
         setuptools
         #textual
         tidylib
+        torch
+        transformers
         types-beautifulsoup4
         weasyprint
         wheel
