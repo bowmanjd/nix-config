@@ -133,13 +133,8 @@ in {
   '';
 
   # Packages
-  home.packages = with pkgs; [
-    aichat
-    aider-chat-with-playwright
-    claude-code
-    codex
-    fabric-ai
-    (goose-cli.overrideAttrs (finalAttrs: old: {
+  home.packages = with pkgs; let
+    goose-ai = goose-cli.overrideAttrs (finalAttrs: old: {
       version = "1.0.28";
       cargoHash = "sha256-sW4rWLElTPVzD+KCOrikEFcoIRGujMz+wHOWlYBpi0o=";
       src = old.src.override {
@@ -158,14 +153,21 @@ in {
           "--skip=providers::factory::tests::test_create_regular_provider_without_lead_config"
           "--skip=providers::factory::tests::test_lead_model_env_vars_with_defaults"
         ];
-    }))
+    });
+  in [
+    aichat
+    aider-chat-with-playwright
+    claude-code
+    codex
+    fabric-ai
+    goose-ai
     (pkgs.writeShellScriptBin "goose-custom" ''
       export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
       export OPENAI_BASE_PATH=/chat/completions
       export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
       export GOOSE_PROVIDER=openai
       export GOOSE_MODEL=gpt-4.1
-      exec ${goose-cli}/bin/goose "$@"
+      exec ${goose-ai}/bin/goose "$@"
     '')
     llama-cpp
     llmscripts
