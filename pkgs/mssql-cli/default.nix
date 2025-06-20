@@ -1,11 +1,11 @@
-{ lib, pkgs, python3, fetchFromGitHub, ... }:
-python3.pkgs.buildPythonPackage rec {
+{ lib, pkgs, python312, fetchFromGitHub, ... }:
+python312.pkgs.buildPythonPackage rec {
   pname = "mssql-cli";
   version = "1.0";
 
   ms-sqltoolsservice = pkgs.callPackage ../ms-sqltoolsservice { };
 
-  propagatedBuildInputs = with python3.pkgs; [
+  propagatedBuildInputs = with python312.pkgs; [
     applicationinsights
     cli-helpers
     click
@@ -29,7 +29,7 @@ python3.pkgs.buildPythonPackage rec {
     wrapProgram "$out/bin/mssql-cli" \
       --set MSSQLTOOLSSERVICE_PATH ${lib.makeBinPath [ ms-sqltoolsservice ]} \
       --prefix PYTHONPATH : "$PYTHONPATH" \
-      --prefix PATH : ${lib.makeBinPath [ python3 ]}
+      --prefix PATH : ${lib.makeBinPath [ python312 ]}
     sed -i "s/utcnow().isoformat() + 'Z'/now(datetime.UTC).isoformat()/" $out/lib/python3*/site-packages/mssqlcli/telemetry_upload.py
   '';
   

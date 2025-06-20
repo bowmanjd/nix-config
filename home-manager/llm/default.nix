@@ -135,28 +135,31 @@ in {
   # Packages
   home.packages = with pkgs; let
     goose-ai = goose-cli.overrideAttrs (finalAttrs: old: {
-      version = "1.0.28";
-      cargoHash = "sha256-sW4rWLElTPVzD+KCOrikEFcoIRGujMz+wHOWlYBpi0o=";
+      version = "1.0.29";
+      # cargoHash = "sha256-sW4rWLElTPVzD+KCOrikEFcoIRGujMz+wHOWlYBpi0o=";
+      cargoHash = "sha256-EEivL+6XQyC9FkGnXwOYviwpY8lk7iaEJ1vbQMk2Rao=";
       src = old.src.override {
-        tag = "v1.0.28";
-        hash = "sha256-ExFVgG05jlcz3nP6n94324sgXbIHpj8L30oNuqKyfto=";
+        tag = "v1.0.29";
+        # hash = "sha256-ExFVgG05jlcz3nP6n94324sgXbIHpj8L30oNuqKyfto=";
+        hash = "sha256-R4hMGW9YKsvWEvSzZKkq5JTzBXGK2rXyOPB6vzMKbs0=";
       };
       cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
         inherit (finalAttrs) pname src version;
         hash = finalAttrs.cargoHash;
       };
-      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.protobuf];
-      checkFlags =
-        (old.checkFlags or [])
-        ++ [
-          "--skip=providers::factory::tests::test_create_lead_worker_provider"
-          "--skip=providers::factory::tests::test_create_regular_provider_without_lead_config"
-          "--skip=providers::factory::tests::test_lead_model_env_vars_with_defaults"
-        ];
+      # nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.protobuf];
+      # checkFlags =
+      #   (old.checkFlags or [])
+      #   ++ [
+      #     "--skip=providers::factory::tests::test_create_lead_worker_provider"
+      #     "--skip=providers::factory::tests::test_create_regular_provider_without_lead_config"
+      #     "--skip=providers::factory::tests::test_lead_model_env_vars_with_defaults"
+      #   ];
     });
   in [
     aichat
-    aider-chat-with-playwright
+    # aider-chat-with-playwright
+    aider-chat
     claude-code
     codex
     fabric-ai
