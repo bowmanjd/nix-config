@@ -6,6 +6,22 @@
 }: let
   scriptpath = lib.makeBinPath [pkgs.llmscripts];
 
+  litellm = pkgs.callPackage "${pkgs.path}/pkgs/by-name/li/litellm/package.nix" {
+    python3Packages =
+      pkgs.python3Packages
+      // {
+        litellm = pkgs.python3Packages.litellm.overridePythonAttrs (old: {
+          version = "1.72.6";
+          src = pkgs.fetchFromGitHub {
+            owner = "BerriAI";
+            repo = "litellm";
+            tag = "v1.72.6-stable";
+            hash = "sha256-Qs/jmNJx/fztLqce47yd1pzIZyPsz0XhXUyoC1vkp6g=";
+          };
+        });
+      };
+  };
+
   # Helper function for creating merged config files
   mergeConfigs = {
     name,
@@ -43,7 +59,7 @@ in {
       Service = {
         WorkingDirectory = "%D/litellm";
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %D/litellm";
-        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config %E/litellm/litellm-config.yaml";
+        ExecStart = "${litellm}/bin/litellm --port 1173 --config %E/litellm/litellm-config.yaml";
         EnvironmentFile = "-%t/llmconf/keys";
         Environment = [
           "PRISMA_SCHEMA_ENGINE_BINARY=${pkgs.prisma-engines}/bin/schema-engine"
@@ -172,6 +188,14 @@ in {
       export GOOSE_MODEL=gpt-4.1
       exec ${goose-ai}/bin/goose "$@"
     '')
+    (pkgs.writeShellScriptBin "claude-custom" ''
+      # export ANTHROPIC_API_BASE="http://localhost:1173"
+      export ANTHROPIC_BASE_URL="http://localhost:1173"
+      export ANTHROPIC_API_KEY="$LITELLM_MASTER_KEY"
+      # export ANTHROPIC_AUTH_TOKEN="$LITELLM_MASTER_KEY"
+      exec ${claude-code}/bin/claude "$@"
+    '')
+    litellm
     llama-cpp
     llmscripts
     mods

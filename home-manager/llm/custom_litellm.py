@@ -86,6 +86,8 @@ class MyCustomHandler(CustomLogger):
             kwargs: Parameters from the API request, including model and messages.
             response_obj: Completion or generation response returned by the model.
         """
+
+        print(f"\nkwargs: {kwargs}\n")
         model = kwargs.get("model")
         messages = kwargs.get("messages")
         litellm_params = kwargs.get("litellm_params", {})
