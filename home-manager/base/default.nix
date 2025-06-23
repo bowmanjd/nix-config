@@ -275,7 +275,7 @@
     dblab
     #degit
     #delta
-    #deno
+    deno
     devbox
     devenv
     diff-so-fancy
