@@ -188,11 +188,13 @@ in {
       export GOOSE_MODEL=gpt-4.1
       exec ${goose-ai}/bin/goose "$@"
     '')
-    (pkgs.writeShellScriptBin "claude-custom" ''
-      # export ANTHROPIC_API_BASE="http://localhost:1173"
-      export ANTHROPIC_BASE_URL="http://localhost:1173"
-      export ANTHROPIC_API_KEY="$LITELLM_MASTER_KEY"
-      # export ANTHROPIC_AUTH_TOKEN="$LITELLM_MASTER_KEY"
+    (pkgs.writeShellScriptBin "fraude" ''
+      export ANTHROPIC_BASE_URL="$LITELLM_PROXY_API_BASE"
+      unset ANTHROPIC_API_KEY
+      export ANTHROPIC_AUTH_TOKEN="$LITELLM_MASTER_KEY"
+      export ANTHROPIC_SMALL_FAST_MODEL="$CLAUDE_SMALL"
+      export ANTHROPIC_MODEL="$CLAUDE_MODEL"
+      export CLAUDE_CODE_MAX_OUTPUT_TOKENS="$CLAUDE_MAX_OUTPUT"
       exec ${claude-code}/bin/claude "$@"
     '')
     litellm

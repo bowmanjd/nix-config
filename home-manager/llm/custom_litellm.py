@@ -14,6 +14,7 @@ import litellm
 from litellm.caching.dual_cache import DualCache
 from litellm.integrations.custom_logger import CustomLogger
 from litellm.proxy._types import UserAPIKeyAuth
+import json
 
 
 class MyCustomHandler(CustomLogger):
@@ -87,18 +88,17 @@ class MyCustomHandler(CustomLogger):
             response_obj: Completion or generation response returned by the model.
         """
 
-        print(f"\nkwargs: {kwargs}\n")
         model = kwargs.get("model")
         messages = kwargs.get("messages")
-        litellm_params = kwargs.get("litellm_params", {})
-        metadata = litellm_params.get("metadata", {})
-        model_group = metadata.get("model_group")
+        litellm_params = kwargs.get("litellm_params") or {}
+        model_group = kwargs.get("standard_logging_object", {}).get("metadata", {}).get("model_group")
+        metadata = litellm_params.get("litellm_metadata") or {}
         deployment = metadata.get("deployment")
         model_id = metadata.get("model_info", {}).get("id")
         api_base = metadata.get("api_base")
 
-        if response_obj is None:
-            print(f"Logging warning: response_obj is None for event_type={event_type}, model={model}")
+        if not response_obj:
+            print(f"Logging warning: response_obj is empty for event_type={event_type}, model={model}")
             return
 
         if api_base and "githubcopilot" in api_base:

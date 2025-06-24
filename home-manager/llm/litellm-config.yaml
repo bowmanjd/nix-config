@@ -170,18 +170,33 @@ model_list:
   - model_name: llama-3.3
     litellm_params:
       model: cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast
+    model_info:
+      id: cf-llama-3.3
   - model_name: llama-3.3
     litellm_params:
       model: together_ai/meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
+    model_info:
+      id: together-llama-3.3
   - model_name: llama-3.3
     litellm_params:
       model: groq/llama-3.3-70b-versatile
+    model_info:
+      id: groq-llama-3.3
   - model_name: llama-3.3
     litellm_params:
       model: cerebras/llama-3.3-70b
+    model_info:
+      id: cerebras-llama-3.3
   - model_name: llama-3.3
     litellm_params:
       model: openrouter/meta-llama/llama-3.3-70b-instruct:free
+    model_info:
+      id: openrouter-llama-3.3-free
+  - model_name: llama-3.3-70b-instruct
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct
+    model_info:
+      id: openrouter-llama-3.3-free
   - model_name: claude-4-sonnet
     litellm_params:
       model: openai/claude-sonnet-4
@@ -291,37 +306,28 @@ model_list:
       max_input_tokens: 128000
       weight: 20
       <<: *common_copilot
-  - model_name: claude-3-5-haiku-20241022
-    litellm_params:
-      model: openai/gpt-4.1
-      max_tokens: 128000
-      max_output_tokens: 16384
-      max_input_tokens: 128000
-      <<: *common_copilot
-    model_info:
-      id: haiku-gpt-4.1
   - model_name: gpt-4.1
     litellm_params:
       model: openai/gpt-4.1
       max_tokens: 128000
       max_output_tokens: 16384
       max_input_tokens: 128000
-      weight: 20
+      # weight: 20
       <<: *common_copilot
     model_info:
       id: copilot-gpt-4.1
-  - model_name: gpt-4.1
+  - model_name: openrouter-gpt-4.1
     litellm_params:
       model: openrouter/openai/gpt-4.1
-      weight: 2
+      # weight: 1
       input_cost_per_token: 2e-06
       output_cost_per_token: 8e-06
     model_info:
       id: openrouter-gpt-4.1
-  - model_name: gpt-4.1
+  - model_name: openai-gpt-4.1
     litellm_params:
       model: openai/gpt-4.1
-      weight: 1
+      # weight: 1
       input_cost_per_token: 2e-06
       output_cost_per_token: 8e-06
     model_info:
@@ -365,6 +371,15 @@ model_list:
       weight: 15
     model_info:
       id: groq-qwen-3-32b
+  - model_name: qwen3:14b
+    litellm_params:
+      model: openrouter/qwen/qwen3-14b
+      <<: *qwen_params
+      extra_body:
+        reasoning:
+          exclude: true
+    model_info:
+      id: openrouter-qwen-3-14b
   - model_name: qwen3
     litellm_params:
       model: openrouter/qwen/qwen3-32b:free
@@ -374,7 +389,7 @@ model_list:
         reasoning:
           exclude: true
     model_info:
-      id: openrouter-qwen-3-32b:free
+      id: openrouter-qwen-3-32b-free
   - model_name: qwen3
     litellm_params:
       model: cerebras/qwen-3-32b
