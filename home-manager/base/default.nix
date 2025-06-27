@@ -285,6 +285,7 @@
     dotacat
     dotnet-repl
     dotnet-sdk
+    dotnet-sdk_9
     dnsutils
     du-dust
     elinks
