@@ -41,11 +41,11 @@
         + builtins.readFile environmentFile
     );
 in {
-  imports = [
-    (import ./vllm.nix {
-      inherit pkgs lib environment;
-    })
-  ];
+  # imports = [
+  #   (import ./vllm.nix {
+  #     inherit pkgs lib environment;
+  #   })
+  # ];
 
   # Systemd services
   systemd.user.services = {

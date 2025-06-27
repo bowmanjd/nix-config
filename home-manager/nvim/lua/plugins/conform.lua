@@ -28,6 +28,7 @@ return {
 			-- You can customize some of the format options for the filetype (:help conform.format)
 			-- Conform will run the first available formatter
 			javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
+			typescript = { "biome", "prettierd", "prettier", stop_after_first = true },
 			javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 			sql = { "sqlfluff" },
 			xml = { "xmllint" },

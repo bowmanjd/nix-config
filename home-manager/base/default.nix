@@ -277,7 +277,7 @@
     #delta
     deno
     devbox
-    devenv
+    # devenv
     diff-so-fancy
     dig
     distrobox
