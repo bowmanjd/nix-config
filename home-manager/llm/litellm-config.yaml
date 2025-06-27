@@ -412,8 +412,13 @@ model_list:
       model: ollama_chat/qwen3:8b
       api_base: http://localhost:11434
       <<: *qwen_params
+  - model_name: qwen3:1.7b
+    litellm_params:
+      model: ollama_chat/qwen3:1.7b
+      api_base: http://localhost:11434
+      <<: *qwen_params
     model_info:
-      id: local-qwen-3:8b
+      id: local-qwen-3:1.7b
   - model_name: qwen3big
     litellm_params:
       model: openrouter/qwen/qwen3-235b-a22b:free
