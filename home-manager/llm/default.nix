@@ -176,6 +176,7 @@ in {
     aichat
     # aider-chat-with-playwright
     aider-chat
+    amp-cli
     claude-code
     codex
     fabric-ai
