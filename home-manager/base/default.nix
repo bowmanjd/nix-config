@@ -375,7 +375,7 @@
         hf-transfer
         hf-xet
         huggingface-hub
-        # litellm
+        #litellm
         wordcloud
       ]))
     qrencode

@@ -6,21 +6,21 @@
 }: let
   scriptpath = lib.makeBinPath [pkgs.llmscripts];
 
-  litellm = pkgs.callPackage "${pkgs.path}/pkgs/by-name/li/litellm/package.nix" {
-    python3Packages =
-      pkgs.python3Packages
-      // {
-        litellm = pkgs.python3Packages.litellm.overridePythonAttrs (old: {
-          version = "1.72.6";
-          src = pkgs.fetchFromGitHub {
-            owner = "BerriAI";
-            repo = "litellm";
-            tag = "v1.72.6-stable";
-            hash = "sha256-Qs/jmNJx/fztLqce47yd1pzIZyPsz0XhXUyoC1vkp6g=";
-          };
-        });
-      };
-  };
+  # litellm = pkgs.callPackage "${pkgs.path}/pkgs/by-name/li/litellm/package.nix" {
+  #   python3Packages =
+  #     pkgs.python3Packages
+  #     // {
+  #       litellm = pkgs.python3Packages.litellm.overridePythonAttrs (old: {
+  #         version = "1.72.6";
+  #         src = pkgs.fetchFromGitHub {
+  #           owner = "BerriAI";
+  #           repo = "litellm";
+  #           tag = "v1.72.6-stable";
+  #           hash = "sha256-Qs/jmNJx/fztLqce47yd1pzIZyPsz0XhXUyoC1vkp6g=";
+  #         };
+  #       });
+  #     };
+  # };
 
   # Helper function for creating merged config files
   mergeConfigs = {
@@ -59,7 +59,7 @@ in {
       Service = {
         WorkingDirectory = "%D/litellm";
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %D/litellm";
-        ExecStart = "${litellm}/bin/litellm --port 1173 --config %E/litellm/litellm-config.yaml";
+        ExecStart = "${pkgs.litellm}/bin/litellm --port 1173 --config %E/litellm/litellm-config.yaml";
         EnvironmentFile = "-%t/llmconf/keys";
         Environment = [
           "PRISMA_SCHEMA_ENGINE_BINARY=${pkgs.prisma-engines}/bin/schema-engine"
