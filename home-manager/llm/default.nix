@@ -151,13 +151,13 @@ in {
   # Packages
   home.packages = with pkgs; let
     goose-ai = goose-cli.overrideAttrs (finalAttrs: old: {
-      version = "1.0.29";
-      # cargoHash = "sha256-sW4rWLElTPVzD+KCOrikEFcoIRGujMz+wHOWlYBpi0o=";
-      cargoHash = "sha256-EEivL+6XQyC9FkGnXwOYviwpY8lk7iaEJ1vbQMk2Rao=";
+      version = "1.0.30";
+      # cargoHash = "sha256-EEivL+6XQyC9FkGnXwOYviwpY8lk7iaEJ1vbQMk2Rao=";
+      cargoHash = "sha256-TNmeu0nQHTFnbe7CY5b58ysN6+iMD6yFTktr4gjKNY0=";
       src = old.src.override {
-        tag = "v1.0.29";
-        # hash = "sha256-ExFVgG05jlcz3nP6n94324sgXbIHpj8L30oNuqKyfto=";
-        hash = "sha256-R4hMGW9YKsvWEvSzZKkq5JTzBXGK2rXyOPB6vzMKbs0=";
+        tag = "v1.0.30";
+        # hash = "sha256-R4hMGW9YKsvWEvSzZKkq5JTzBXGK2rXyOPB6vzMKbs0=";
+        hash = "sha256-Mhscs7yv3/FmJ/v1W0xcHya82ztrYGVULrtMyq4W4BY=";
       };
       cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
         inherit (finalAttrs) pname src version;

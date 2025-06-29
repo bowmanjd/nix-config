@@ -277,7 +277,7 @@
     #delta
     deno
     devbox
-    # devenv
+    devenv
     diff-so-fancy
     dig
     distrobox
@@ -401,6 +401,7 @@
     starship
     swc
     tokei
+    typescript
     #toolong
     unixODBCDrivers.msodbcsql18
     usql
