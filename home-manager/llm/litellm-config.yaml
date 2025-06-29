@@ -24,15 +24,6 @@ qwen_params: &qwen_params
   min_p: 0
 
 model_list:
-  # - model_name: openai/*
-  #   litellm_params:
-  #     model: openai/*
-  # - model_name: openrouter/*
-  #   litellm_params:
-  #     model: openrouter/*
-  # - model_name: anthropic/*
-  #   litellm_params:
-  #     model: anthropic/*
   - model_name: gemini-2.5-flash
     litellm_params:
       model: gemini/gemini-2.5-flash-preview-05-20
@@ -411,11 +402,22 @@ model_list:
     litellm_params:
       model: ollama_chat/qwen3:8b
       api_base: http://localhost:11434
+      extra_body:
+        think: false
+      <<: *qwen_params
+  - model_name: qwen3:4b
+    litellm_params:
+      model: ollama_chat/qwen3:4b
+      api_base: http://localhost:11434
+      extra_body:
+        think: false
       <<: *qwen_params
   - model_name: qwen3:1.7b
     litellm_params:
       model: ollama_chat/qwen3:1.7b
       api_base: http://localhost:11434
+      extra_body:
+        think: false
       <<: *qwen_params
     model_info:
       id: local-qwen-3:1.7b

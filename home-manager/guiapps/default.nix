@@ -13,6 +13,7 @@
     openttd
     pavucontrol
     prismlauncher
+    vlc
     vscode-fhs
     xdotool
     xorg.xeyes
