@@ -85,7 +85,7 @@ return {
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		lazy = false,
-		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+		version = false,
 		keys = {
 			{
 				"<leader>ae",
@@ -97,16 +97,16 @@ return {
 		opts = {
 			provider = "copilot",
 			auto_suggestions_provider = nil, -- Set to nil to disable auto suggestions
-			copilot = {
-				model = "gpt-4.1",
-				max_tokens = 90000,
-			},
 			suggestion = {
 				enabled = false, -- Disable suggestions completely
 				debounce = 2000,
 				throttle = 2000,
 			},
-			vendors = {
+			providers = {
+				copilot = {
+					model = "gpt-4.1",
+					max_tokens = 128000,
+				},
 				openrouter = {
 					__inherited_from = "openai",
 					endpoint = "https://openrouter.ai/api/v1",
@@ -115,9 +115,14 @@ return {
 				},
 			},
 		},
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+		build = function()
+			-- conditionally use the correct build system for the current OS
+			if vim.fn.has("win32") == 1 then
+				return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+			else
+				return "make"
+			end
+		end,
 		dependencies = {
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
