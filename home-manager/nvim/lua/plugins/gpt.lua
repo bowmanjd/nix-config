@@ -105,7 +105,9 @@ return {
 			providers = {
 				copilot = {
 					model = "gpt-4.1",
-					max_tokens = 128000,
+					extra_request_body = {
+						max_tokens = 128000,
+					},
 				},
 				openrouter = {
 					__inherited_from = "openai",
