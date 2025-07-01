@@ -23,7 +23,9 @@ return {
 			lint.linters_by_ft = lint.linters_by_ft or {}
 			lint.linters_by_ft["markdown"] = { "markdownlint" }
 			lint.linters_by_ft["sql"] = { "sqlfluff" }
+			lint.linters_by_ft["javascriptreact"] = { "eslint" }
 			lint.linters_by_ft["javascript"] = { "biomejs" }
+			lint.linters_by_ft["typescript"] = { "biomejs" }
 
 			lint.linters.sqlfluff.stdin = true
 			lint.linters.sqlfluff.args = {

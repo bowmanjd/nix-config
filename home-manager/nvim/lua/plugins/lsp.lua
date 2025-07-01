@@ -1,5 +1,10 @@
 return {
 	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
+	{
 		"neovim/nvim-lspconfig",
 		opts = {},
 		dependencies = {
@@ -7,7 +12,7 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"Hoffs/omnisharp-extended-lsp.nvim",
-			"nvim-telescope/telescope.nvim"
+			"nvim-telescope/telescope.nvim",
 		},
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")

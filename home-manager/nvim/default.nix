@@ -38,6 +38,7 @@
     stylua
     superhtml
     tflint
+    typescript-language-server
     vale
     vim
     vimgolf
