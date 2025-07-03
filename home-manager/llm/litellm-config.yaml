@@ -141,6 +141,12 @@ model_list:
       model: openrouter/deepseek/deepseek-r1-0528-qwen3-8b:free
       temperature: 0.6
       top_p: 0.95
+  - model_name: qwen2.5-coder:32b
+    litellm_params:
+      model: cloudflare/@cf/qwen/qwen2.5-coder-32b-instruct
+  - model_name: qwen2.5-coder:32b
+    litellm_params:
+      model: openrouter/qwen/qwen-2.5-coder-32b-instruct:free
   - model_name: devstral
     litellm_params:
       model: mistral/devstral-small-2505
