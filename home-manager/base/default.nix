@@ -345,11 +345,13 @@
         black
         cmarkgfm
         eradicate
+        fastapi
         fire
         flake8
         #flake8-bugbear
         flake8-docstrings
         fonttools
+        html2text
         isort
         lxml
         numpy
@@ -376,6 +378,7 @@
         hf-transfer
         hf-xet
         huggingface-hub
+        uvicorn
         #litellm
         wordcloud
       ]))
