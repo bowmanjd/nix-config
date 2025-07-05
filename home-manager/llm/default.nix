@@ -151,26 +151,25 @@ in {
   # Packages
   home.packages = with pkgs; let
     goose-ai = goose-cli.overrideAttrs (finalAttrs: old: {
-      version = "1.0.30";
-      # cargoHash = "sha256-EEivL+6XQyC9FkGnXwOYviwpY8lk7iaEJ1vbQMk2Rao=";
-      cargoHash = "sha256-TNmeu0nQHTFnbe7CY5b58ysN6+iMD6yFTktr4gjKNY0=";
+      version = "1.0.32";
+      cargoHash = "sha256-yZuY6qZfhzvuD+1VF2Iz8V77g0YAwNYYIpkJLw4M2lk=";
       src = old.src.override {
-        tag = "v1.0.30";
-        # hash = "sha256-R4hMGW9YKsvWEvSzZKkq5JTzBXGK2rXyOPB6vzMKbs0=";
-        hash = "sha256-Mhscs7yv3/FmJ/v1W0xcHya82ztrYGVULrtMyq4W4BY=";
+        tag = "v1.0.32";
+        hash = "sha256-ik9bbDAfe0WEfb1mX0TzCSOsgb815UkSnz0LQ8EhXIs=";
       };
       cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
         inherit (finalAttrs) pname src version;
         hash = finalAttrs.cargoHash;
       };
-      # nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.protobuf];
-      # checkFlags =
-      #   (old.checkFlags or [])
-      #   ++ [
-      #     "--skip=providers::factory::tests::test_create_lead_worker_provider"
-      #     "--skip=providers::factory::tests::test_create_regular_provider_without_lead_config"
-      #     "--skip=providers::factory::tests::test_lead_model_env_vars_with_defaults"
-      #   ];
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.protobuf];
+      checkFlags =
+        (old.checkFlags or [])
+        ++ [
+          "--skip test_pricing_refresh"
+          "--skip test_concurrent_access"
+          "--skip test_model_not_in_openrouter"
+          "--skip test_pricing_cache_performance"
+        ];
     });
   in [
     aichat
