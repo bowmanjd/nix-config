@@ -8,6 +8,7 @@
     #easyeffects
     gimp
     helvum
+    imv
     inkscape
     #libreoffice-fresh
     openttd
