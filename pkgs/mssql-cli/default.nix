@@ -27,6 +27,12 @@ python312.pkgs.buildPythonPackage rec {
     hash = "sha256-XB+r8FW81oJ5h86LN1gkbOaN2s7QyVIW98YgDQQzH50=";
   };
 
+  preBuild = ''
+    substituteInPlace setup.py \
+      --replace "click >= 4.1,<7.1" "click>=4.1" \
+      --replace "sqlparse >=0.3.0,<0.5" "sqlparse>=0.3.0"
+  '';
+
   postFixup = ''
     wrapProgram "$out/bin/mssql-cli" \
       --set MSSQLTOOLSSERVICE_PATH ${lib.makeBinPath [ ms-sqltoolsservice ]} \
