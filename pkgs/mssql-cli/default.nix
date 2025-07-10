@@ -2,6 +2,8 @@
 python312.pkgs.buildPythonPackage rec {
   pname = "mssql-cli";
   version = "1.0";
+  pyproject = true;
+  build-system = [ python312.pkgs.setuptools ];
 
   ms-sqltoolsservice = pkgs.callPackage ../ms-sqltoolsservice { };
 
