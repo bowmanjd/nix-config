@@ -364,6 +364,7 @@
         pynvim
         pytest
         reorder-python-imports
+        rapidfuzz
         rich
         rich-rst
         sentence-transformers
