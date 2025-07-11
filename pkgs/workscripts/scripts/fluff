@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -z "$@" ]; then
-    sqlfluff fix --config "$HOME/devel/sql/.sqlfluff" --dialect tsql -f - 2>/dev/null
+    sqlfluff fix --config "$HOME/devel/sql/.sqlfluff" --dialect tsql - 2>/dev/null
 else
-    sqlfluff fix --config "$HOME/devel/sql/.sqlfluff" --dialect tsql -f "$@"
+    sqlfluff fix --config "$HOME/devel/sql/.sqlfluff" --dialect tsql "$@"
 fi

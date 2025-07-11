@@ -254,7 +254,35 @@
     };
   };
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs; let
+    sqruff-latest = sqruff.overrideAttrs (finalAttrs: old: {
+      version = "0.28.1";
+      cargoHash = "sha256-UqAyJc02iXADc5pr2H/qbj2wSU7SkhBBGrzc0JCtSu0=";
+      src = old.src.override {
+        tag = "v0.28.1";
+        hash = "sha256-9ZeEnbC8BxAIoV6TkElr4ZqTbgtz6ZNs5CJrVzA8Keg=";
+      };
+      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+        inherit (finalAttrs) pname src version;
+        hash = finalAttrs.cargoHash;
+      };
+      patches = [
+        (pkgs.path + "/pkgs/by-name/sq/sqruff/disable-templaters-test.diff")
+        ./patches/disable-ui_with_dbt-test.rs
+        ./patches/disable-ui_with_jinja-test.rs
+        ./patches/disable-ui_with_python-test.rs
+      ];
+      # Use a newer Rust toolchain for building sqruff
+      nativeBuildInputs =
+        (old.nativeBuildInputs or [])
+        ++ [
+          pkgs.rust-bin.beta.latest.default
+        ];
+      RUSTC = "${pkgs.rust-bin.beta.latest.default}/bin/rustc";
+      CARGO = "${pkgs.rust-bin.beta.latest.default}/bin/cargo";
+      buildNoDefaultFeatures = true;
+    });
+  in [
     age
     alejandra
     argc
@@ -265,10 +293,8 @@
     buildah
     bun
     cachix
-    cargo
     cargo-binstall
     cargo-insta
-    clippy
     cobra-cli
     comrak
     corepack_22
@@ -388,8 +414,8 @@
     rage
     #rich-cli
     repgrep
-    rustc
-    rustfmt
+    # rustc
+    rust-bin.beta.latest.default
     rust-analyzer
     sad
     sd
@@ -401,6 +427,8 @@
     sops
     sqlcmd
     sqlfluff
+    # sqruff-latest
+    sqruff
     sqlite
     starship
     swc
