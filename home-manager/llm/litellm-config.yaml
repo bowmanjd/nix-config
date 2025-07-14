@@ -78,6 +78,26 @@ model_list:
       weight: 1
     model_info:
       id: boron-gemma-3:4b
+  - model_name: boron-gemma-3n:e2b
+    litellm_params:
+      model: ollama_chat/gemma3n:e2b
+      api_base: http://10.0.0.10:11434
+      max_tokens: 32000
+      max_output_tokens: 32000
+      max_input_tokens: 32000
+      weight: 1
+    model_info:
+      id: boron-gemma-3n:e2b
+  - model_name: boron-gemma-3n:e4b
+    litellm_params:
+      model: ollama_chat/gemma3n
+      api_base: http://10.0.0.10:11434
+      max_tokens: 32000
+      max_output_tokens: 32000
+      max_input_tokens: 32000
+      weight: 1
+    model_info:
+      id: boron-gemma-3n:e4b
   - model_name: gemma-3n
     litellm_params:
       model: gemini/gemma-3n-e4b-it
@@ -422,6 +442,15 @@ model_list:
       <<: *qwen_params
     model_info:
       id: local-qwen-3:1.7b
+  - model_name: boron-qwen3:1.7b
+    litellm_params:
+      model: ollama_chat/qwen3:1.7b
+      api_base: http://10.0.0.10:11434
+      extra_body:
+        think: false
+      <<: *qwen_params
+    model_info:
+      id: boron-qwen-3:1.7b
   - model_name: qwen3:0.6b
     litellm_params:
       model: ollama_chat/qwen3:0.6b
