@@ -68,8 +68,8 @@ in {
         ];
         Restart = "on-failure";
         RestartSec = 5;
-        StateDirectory = "open-webui";
-        RuntimeDirectory = "open-webui";
+        StateDirectory = "litellm";
+        RuntimeDirectory = "litellm";
         RuntimeDirectoryMode = "0755";
         StandardOutput = "journal";
         StandardError = "journal";
@@ -89,7 +89,7 @@ in {
       Service = {
         WorkingDirectory = "%D/webui";
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %D/webui";
-        ExecStart = "${pkgs.open-webui}/bin/open-webui serve --port 3011 --host 127.0.0.1";
+        ExecStart = "${pkgs.stable.open-webui}/bin/open-webui serve --port 3011 --host 127.0.0.1";
         EnvironmentFile = "-%t/llmconf/webui";
         Restart = "on-failure";
         RestartSec = 5;
@@ -174,7 +174,7 @@ in {
   in [
     aichat
     # aider-chat-with-playwright
-    aider-chat
+    pkgs.stable.aider-chat
     amp-cli
     claude-code
     codex
@@ -202,7 +202,7 @@ in {
     llmscripts
     mods
     ollama
-    open-webui
+    pkgs.stable.open-webui
     onnxruntime
     prisma-engines
   ];
