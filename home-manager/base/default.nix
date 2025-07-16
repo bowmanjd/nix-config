@@ -139,15 +139,13 @@
     extraConfig = ''
       bind | split-window -h
       bind - split-window -v
-
-      set -g @catppuccin_flavor "mocha"
-      set -g @catppuccin_window_status_style "rounded"
     '';
     plugins = with pkgs; [
-      # tmuxPlugins.cpu
       {
         plugin = tmuxPlugins.catppuccin;
         extraConfig = ''
+          set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_window_status_style "rounded"
           set -g mouse on
           set -g default-terminal "tmux-256color"
           set -g @catppuccin_window_text " #W"
