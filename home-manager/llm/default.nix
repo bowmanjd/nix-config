@@ -176,7 +176,7 @@ in {
   in [
     aichat
     # aider-chat-with-playwright
-    pkgs.stable.aider-chat
+    pkgs.aider-chat
     amp-cli
     claude-code
     codex
