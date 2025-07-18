@@ -14,6 +14,11 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    llama-cpp-overlay = {
+      url = "github:ggml-org/llama.cpp";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -21,6 +26,7 @@
     nixpkgs,
     home-manager,
     rust-overlay,
+    llama-cpp-overlay,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -49,7 +55,7 @@
         modules =
           [
             {
-              nixpkgs.overlays = [overlay-stable rust-overlay.overlays.default];
+              nixpkgs.overlays = [overlay-stable rust-overlay.overlays.default llama-cpp-overlay.overlays.default];
               networking.hostName = hostname;
             }
             nixosConfigFile

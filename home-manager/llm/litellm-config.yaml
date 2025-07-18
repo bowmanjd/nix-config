@@ -353,6 +353,8 @@ model_list:
       model: ollama_chat/hf.co/bartowski/Qwen_Qwen3-4B-GGUF:IQ4_XS
       api_base: http://10.0.0.10:11434
       <<: *qwen_params
+      extra_body:
+        think: false
   - model_name: boron-code-embedding
     litellm_params:
       model: ollama/hf.co/gaianet/jina-embeddings-v2-base-code-GGUF:Q5_K_M
