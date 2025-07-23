@@ -205,7 +205,7 @@ in {
     llmscripts
     mods
     ollama
-    opencode
+    # opencode
     open-webui
     onnxruntime
     prisma-engines
