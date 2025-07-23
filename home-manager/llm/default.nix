@@ -181,6 +181,7 @@ in {
     claude-code
     codex
     fabric-ai
+    gemini-cli
     goose-ai
     (pkgs.writeShellScriptBin "goose-custom" ''
       export OPENAI_API_KEY="$LITELLM_MASTER_KEY"

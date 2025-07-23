@@ -509,7 +509,7 @@ model_list:
 litellm_settings:
   callbacks: custom_litellm.proxy_handler_instance
   force_ipv4: true
-  default_fallbacks: ["gpt-4.1"]
+  # default_fallbacks: ["gpt-4.1"]
 
 general_settings:
   #database_url: postgresql://postgres@localhost:5432/litellm
@@ -517,9 +517,9 @@ general_settings:
 
 router_settings:
   routing_strategy: simple-shuffle
-  context_window_fallbacks: [
-    {"gpt-4.1": ["openrouter-gpt-4.1"]}
-  ]
+  # context_window_fallbacks: [
+  #   {"gpt-4.1": ["openrouter-gpt-4.1"]}
+  # ]
   fallbacks: [
     {
       "homecode": [
@@ -552,12 +552,12 @@ router_settings:
         "ollama/gemma3:8b"
       ]
     },
-    {
-      "gpt-4.1": [
-        "openrouter-gpt-4.1",
-        "openai-gpt-4.1"
-      ]
-    },
+    # {
+    #   "gpt-4.1": [
+    #     "openrouter-gpt-4.1",
+    #     "openai-gpt-4.1"
+    #   ]
+    # },
     {
       "claude-3.7-sonnet": [
         "openrouter-claude-3.7-sonnet",
