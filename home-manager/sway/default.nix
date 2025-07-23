@@ -50,10 +50,8 @@
         term = "xterm-256color";
         font = "Hack Nerd Font:size=14";
       };
-      cursor = {
-        color = "111111 cccccc";
-      };
       colors = {
+        cursor = "111111 cccccc";
         foreground = "cdd6f4"; # Text
         background = "000000"; # Base
         regular0 = "45475a"; # Surface 1
