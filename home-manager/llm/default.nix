@@ -6,22 +6,6 @@
 }: let
   scriptpath = lib.makeBinPath [pkgs.llmscripts];
 
-  # litellm = pkgs.callPackage "${pkgs.path}/pkgs/by-name/li/litellm/package.nix" {
-  #   python3Packages =
-  #     pkgs.python3Packages
-  #     // {
-  #       litellm = pkgs.python3Packages.litellm.overridePythonAttrs (old: {
-  #         version = "1.72.6";
-  #         src = pkgs.fetchFromGitHub {
-  #           owner = "BerriAI";
-  #           repo = "litellm";
-  #           tag = "v1.72.6-stable";
-  #           hash = "sha256-Qs/jmNJx/fztLqce47yd1pzIZyPsz0XhXUyoC1vkp6g=";
-  #         };
-  #       });
-  #     };
-  # };
-
   # Helper function for creating merged config files
   mergeConfigs = {
     name,
@@ -104,34 +88,34 @@ in {
       };
     };
 
-    "copilotkey" = {
-      Unit = {
-        Description = "Refresh Github Copilot API key";
-        After = ["network-online.target"];
-        Wants = ["network-online.target"];
-      };
-      Service = {
-        ExecStart = "${scriptpath}/copilotkey.js";
-        Type = "oneshot";
-      };
-    };
+    # "copilotkey" = {
+    #   Unit = {
+    #     Description = "Refresh Github Copilot API key";
+    #     After = ["network-online.target"];
+    #     Wants = ["network-online.target"];
+    #   };
+    #   Service = {
+    #     ExecStart = "${scriptpath}/copilotkey.js";
+    #     Type = "oneshot";
+    #   };
+    # };
   };
 
   # Systemd timers
-  systemd.user.timers = {
-    "copilotkey" = {
-      Unit = {
-        Description = "Refresh Github Copilot API key regularly";
-      };
-      Timer = {
-        OnCalendar = "*:0/15";
-        Persistent = true;
-      };
-      Install = {
-        WantedBy = ["timers.target"];
-      };
-    };
-  };
+  # systemd.user.timers = {
+  #   "copilotkey" = {
+  #     Unit = {
+  #       Description = "Refresh Github Copilot API key regularly";
+  #     };
+  #     Timer = {
+  #       OnCalendar = "*:0/15";
+  #       Persistent = true;
+  #     };
+  #     Install = {
+  #       WantedBy = ["timers.target"];
+  #     };
+  #   };
+  # };
 
   # Bash config
   programs.bash.bashrcExtra = lib.mkAfter ''
