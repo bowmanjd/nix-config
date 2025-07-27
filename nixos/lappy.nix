@@ -17,6 +17,7 @@
     hostName = "lappy386";
     networkmanager = {
       enable = true;
+      wifi.powersave = false;
     };
     resolvconf.useLocalResolver = true;
   };
