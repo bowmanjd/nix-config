@@ -65,6 +65,7 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/.cache/.bun/bin"
     "$HOME/.dotnet/tools"
   ];
 
