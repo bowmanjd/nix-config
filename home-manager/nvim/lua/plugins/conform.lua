@@ -43,15 +43,25 @@ return {
 				require_cwd = false,
 				quiet = true,
 				exit_codes = { 0, 1 },
-				args = {
-					"fix",
-					"--ignore-local-config",
-					"--dialect",
-					"tsql",
-					"--config",
-					home .. "/devel/sql/.sqlfluff",
-					"-",
-				},
+				args = function(ctx)
+					local dialect = vim.b.sql_dialect or "tsql"
+					for i = 1, math.min(20, vim.fn.line("$")) do
+						local line = vim.fn.getline(i)
+						local found = line:match("%-%-%s*dialect:%s*(%w+)")
+						if found then
+							dialect = found
+							break
+						end
+					end
+					return {
+						"fix",
+						"--dialect",
+						dialect,
+						"--config",
+						home .. "/devel/sql/.sqlfluff",
+						"-",
+					}
+				end,
 			},
 		},
 	},

@@ -429,6 +429,7 @@
     # sqruff-latest
     sqruff
     sqlite
+    sqlite-vec
     starship
     swc
     tokei

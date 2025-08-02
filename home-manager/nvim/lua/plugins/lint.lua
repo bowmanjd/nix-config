@@ -28,16 +28,26 @@ return {
 			lint.linters_by_ft["typescript"] = { "biomejs" }
 
 			lint.linters.sqlfluff.stdin = true
-			lint.linters.sqlfluff.args = {
-				"lint",
-				"--format=json",
-				--"--ignore-local-config",
-				"--dialect",
-				"tsql",
-				"--config",
-				home .. "/devel/sql/.sqlfluff",
-				"-",
-			}
+			lint.linters.sqlfluff.args = function(ctx)
+				local dialect = vim.b.sql_dialect or "tsql"
+				for i = 1, math.min(20, vim.fn.line("$")) do
+					local line = vim.fn.getline(i)
+					local found = line:match("%-%-%s*dialect:%s*(%w+)")
+					if found then
+						dialect = found
+						break
+					end
+				end
+				return {
+					"lint",
+					"--format=json",
+					"--dialect",
+					dialect,
+					"--config",
+					home .. "/devel/sql/.sqlfluff",
+					"-",
+				}
+			end
 
 			-- Create autocommand which carries out the actual linting
 			-- on the specified events.
