@@ -31,7 +31,7 @@ function checkExistingKey() {
 
 		return expTimestamp > (currentTime + refreshThreshold);
 	} catch (error) {
-		console.error("Error checking existing key:", error.message);
+		console.error("# Error checking existing key:", error.message);
 		return false;
 	}
 }
@@ -54,7 +54,7 @@ function getGitHubToken() {
 				}
 			}
 		} catch (error) {
-			console.error(`Error reading ${configPath}:`, error.message);
+			console.error(`# Error reading ${configPath}:`, error.message);
 		}
 	}
 
@@ -81,7 +81,7 @@ async function fetchNewKey(token) {
 		const data = await response.json();
 		return data.token;
 	} catch (error) {
-		console.error("Error fetching Copilot API key:", error.message);
+		console.error("# Error fetching Copilot API key:", error.message);
 		process.exit(1);
 	}
 }
@@ -130,7 +130,7 @@ async function updateKeysFile(newKey) {
 		// 	);
 		// }
 	} catch (error) {
-		console.error("Error updating keys file:", error.message);
+		console.error("# Error updating keys file:", error.message);
 		throw error;
 	}
 }
@@ -157,7 +157,8 @@ async function main() {
 	// First check for GitHub connectivity, retry every 5 seconds if not available
 	let connected = await checkGitHubConnectivity();
 	while (!connected) {
-		console.log("<5>copilotkey: Waiting for connectivity to GitHub...");
+		// console.log("<5>copilotkey: Waiting for connectivity to GitHub...");
+		console.log("# copilotkey: Waiting for connectivity to GitHub...");
 		await new Promise((resolve) => setTimeout(resolve, 5000));
 		connected = await checkGitHubConnectivity();
 	}
@@ -174,7 +175,7 @@ async function main() {
 
 		process.exit(0);
 	} catch (error) {
-		console.error("Error:", error.message);
+		console.error("# Error:", error.message);
 		process.exit(1);
 	}
 }
