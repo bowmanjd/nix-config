@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   environment ? "home",
   ...
 }: let
@@ -157,43 +158,59 @@ in {
           "--skip test_pricing_cache_performance"
         ];
     });
-  in [
-    aichat
-    # aider-chat-with-playwright
-    pkgs.aider-chat
-    amp-cli
-    claude-code
-    codex
-    fabric-ai
-    gemini-cli
-    goose-ai
-    (pkgs.writeShellScriptBin "goose-custom" ''
-      export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
-      export OPENAI_BASE_PATH=/chat/completions
-      export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
-      export GOOSE_PROVIDER=openai
-      export GOOSE_MODEL=gpt-4.1
-      exec ${goose-ai}/bin/goose "$@"
-    '')
-    (pkgs.writeShellScriptBin "fraude" ''
-      export ANTHROPIC_BASE_URL="$LITELLM_PROXY_API_BASE"
-      unset ANTHROPIC_API_KEY
-      export ANTHROPIC_AUTH_TOKEN="$LITELLM_MASTER_KEY"
-      export ANTHROPIC_SMALL_FAST_MODEL="$CLAUDE_SMALL"
-      export ANTHROPIC_MODEL="$CLAUDE_MODEL"
-      export CLAUDE_CODE_MAX_OUTPUT_TOKENS="$CLAUDE_MAX_OUTPUT"
-      exec ${claude-code}/bin/claude "$@"
-    '')
-    litellm
-    llama-cpp
-    llmscripts
-    mods
-    ollama
-    # opencode
-    open-webui
-    onnxruntime
-    prisma-engines
-  ];
+  in
+    [
+      aichat
+      # aider-chat-with-playwright
+      pkgs.aider-chat
+      amp-cli
+      codex
+      fabric-ai
+      goose-ai
+      (pkgs.writeShellScriptBin "goose-custom" ''
+        export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
+        export OPENAI_BASE_PATH=/chat/completions
+        export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
+        export GOOSE_PROVIDER=openai
+        export GOOSE_MODEL=gpt-4.1
+        exec ${goose-ai}/bin/goose "$@"
+      '')
+      (pkgs.writeShellScriptBin "fraude" ''
+        export ANTHROPIC_BASE_URL="$LITELLM_PROXY_API_BASE"
+        unset ANTHROPIC_API_KEY
+        export ANTHROPIC_AUTH_TOKEN="$LITELLM_MASTER_KEY"
+        export ANTHROPIC_SMALL_FAST_MODEL="$CLAUDE_SMALL"
+        export ANTHROPIC_MODEL="$CLAUDE_MODEL"
+        export CLAUDE_CODE_MAX_OUTPUT_TOKENS="$CLAUDE_MAX_OUTPUT"
+        exec ${claude-code}/bin/claude "$@"
+      '')
+      litellm
+      llama-cpp
+      llmscripts
+      mods
+      ollama
+      open-webui
+      onnxruntime
+      prisma-engines
+    ]
+    ++ (with inputs.nix-ai-tools.packages.${pkgs.system}; [
+      backlog-md
+      claude-code
+      claude-code-router
+      crush
+      opencode
+      gemini-cli
+      # qwen-code
+      (pkgs.writeShellScriptBin "qwen" ''
+        # export OPENAI_API_KEY="$OPENROUTER_API_KEY"
+        # export OPENAI_BASE_URL="https://openrouter.ai/api/v1"
+        # export OPENAI_MODEL="qwen/qwen3-coder"
+        export OPENAI_API_KEY="$CEREBRAS_API_KEY"
+        export OPENAI_BASE_URL="https://api.cerebras.ai/v1"
+        export OPENAI_MODEL="qwen-3-coder-480b"
+        exec ${qwen-code}/bin/qwen "$@"
+      '')
+    ]);
 
   # Config files
   /*

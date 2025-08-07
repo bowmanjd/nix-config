@@ -10,6 +10,11 @@
     home-manager.url = "github:nix-community/home-manager/";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-ai-tools = {
+      url = "github:numtide/nix-ai-tools";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +32,7 @@
     home-manager,
     rust-overlay,
     llama-cpp-overlay,
+    nix-ai-tools,
     ...
   } @ inputs: let
     inherit (self) outputs;

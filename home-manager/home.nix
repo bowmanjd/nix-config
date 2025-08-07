@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   # You can import other home-manager modules here
@@ -8,7 +9,7 @@
     ./base
     ./nvim
     (import ./llm {
-      inherit pkgs lib;
+      inherit pkgs lib inputs;
       environment = "home";
     })
     ./fonts
