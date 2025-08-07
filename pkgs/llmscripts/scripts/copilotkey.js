@@ -118,17 +118,17 @@ async function updateKeysFile(newKey) {
 		//console.log(`Updated COPILOT_API_KEY in ${keysFilePath}`);
 
 		// Restart the litellm systemd user unit
-		try {
-			const result = spawnSync("systemctl", ["--user", "restart", "litellm"]);
-			if (result.error || result.status !== 0) {
-				throw new Error(result.stderr?.toString() || "Unknown error");
-			}
-			console.log("Restarted litellm systemd user unit");
-		} catch (error) {
-			console.error(
-				`Failed to restart litellm systemd user unit: ${error.message}`,
-			);
-		}
+		// try {
+		// 	const result = spawnSync("systemctl", ["--user", "restart", "litellm"]);
+		// 	if (result.error || result.status !== 0) {
+		// 		throw new Error(result.stderr?.toString() || "Unknown error");
+		// 	}
+		// 	console.log("Restarted litellm systemd user unit");
+		// } catch (error) {
+		// 	console.error(
+		// 		`Failed to restart litellm systemd user unit: ${error.message}`,
+		// 	);
+		// }
 	} catch (error) {
 		console.error("Error updating keys file:", error.message);
 		throw error;
@@ -170,7 +170,7 @@ async function main() {
 		await updateKeysFile(newKey);
 
 		// Print the key so it can be captured by the parent script if needed
-		//console.log(`export COPILOT_API_KEY='${newKey}'`);
+		console.log(`export COPILOT_API_KEY='${newKey}'`);
 
 		process.exit(0);
 	} catch (error) {
