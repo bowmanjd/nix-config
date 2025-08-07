@@ -3,7 +3,7 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-import { spawnSync } from "child_process";
+// import { spawnSync } from "child_process";
 
 function getKeysFilePath() {
 	const uid = process.getuid();
