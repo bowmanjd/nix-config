@@ -318,6 +318,14 @@ model_list:
       max_input_tokens: 128000
       weight: 20
       <<: *common_copilot
+  - model_name: gpt-5
+    litellm_params:
+      max_tokens: 128000
+      max_output_tokens: 64000
+      max_input_tokens: 128000
+      <<: *common_copilot
+    model_info:
+      id: copilot-gpt-5
   - model_name: gpt-4.1
     litellm_params:
       <<: *copilot_base
