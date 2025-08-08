@@ -320,6 +320,7 @@ model_list:
       <<: *common_copilot
   - model_name: gpt-5
     litellm_params:
+      model: github_copilot/gpt-5
       max_tokens: 128000
       max_output_tokens: 64000
       max_input_tokens: 128000
