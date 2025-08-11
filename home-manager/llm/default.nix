@@ -163,7 +163,6 @@ in {
       aichat
       # aider-chat-with-playwright
       pkgs.aider-chat
-      amp-cli
       codex
       fabric-ai
       goose-ai
@@ -194,6 +193,7 @@ in {
       prisma-engines
     ]
     ++ (with inputs.nix-ai-tools.packages.${pkgs.system}; [
+      amp
       backlog-md
       claude-code
       claude-code-router
