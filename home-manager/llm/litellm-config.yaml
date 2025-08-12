@@ -363,6 +363,10 @@ model_list:
     litellm_params:
       model: ollama/hf.co/gaianet/jina-embeddings-v2-base-code-GGUF:Q5_K_M
       api_base: http://10.0.0.10:11434
+  - model_name: text-embedding-3-small
+    litellm_params:
+      model: github_copilot/text-embedding-3-small
+      <<: *common_copilot
   - model_name: boron-embedding
     litellm_params:
       model: ollama/granite-embedding:30m
