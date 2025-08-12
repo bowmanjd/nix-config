@@ -11,6 +11,7 @@
     dockerfile-language-server-nodejs
     emmet-language-server
     eslint_d
+    eslint
     fzf
     golangci-lint
     # golangci-lint-langserver
