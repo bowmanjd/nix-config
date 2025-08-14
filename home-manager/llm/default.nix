@@ -26,11 +26,11 @@
         + builtins.readFile environmentFile
     );
 in {
-  # imports = [
-  #   (import ./vllm.nix {
-  #     inherit pkgs lib environment;
-  #   })
-  # ];
+  imports = [
+    (import ./llama-embedding.nix {
+      inherit lib pkgs;
+    })
+  ];
 
   # Systemd services
   systemd.user.services = {

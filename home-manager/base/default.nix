@@ -415,7 +415,7 @@
     repgrep
     # rustc
     rust-bin.beta.latest.default
-    rust-analyzer
+    # rust-analyzer
     sad
     sd
     sl
