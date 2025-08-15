@@ -1,9 +1,18 @@
+macros:
+  "llama-server": >
+    /etc/profiles/per-user/jbowman/bin/llama-server
+    --port ${PORT}
 models:
   "qwen-embedding":
     cmd: |
-      /etc/profiles/per-user/jbowman/bin/llama-server
+      ${llama-server}
       -hf Qwen/Qwen3-Embedding-0.6B-GGUF:Q8_0
       --embedding
       -c 512
-      --port ${PORT}
 
+  "qwen3-8b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/Qwen3-8B-GGUF:Q4_K_M
+
+    ttl: 180
