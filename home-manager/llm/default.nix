@@ -27,7 +27,7 @@
     );
 in {
   imports = [
-    (import ./llama-embedding.nix {
+    (import ./llama-swap.nix {
       inherit lib pkgs;
     })
   ];
@@ -238,6 +238,11 @@ in {
       enable = true;
       source = ./litellm-config.yaml;
       target = "litellm/litellm-config.yaml";
+    };
+    "llama-swap.yaml" = {
+      enable = true;
+      source = ./llama-swap.yaml;
+      target = "llama-swap/llama-swap.yaml";
     };
     "custom_litellm.py" = {
       enable = true;

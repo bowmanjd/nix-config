@@ -1,0 +1,9 @@
+models:
+  "qwen-embedding":
+    cmd: |
+      /etc/profiles/per-user/jbowman/bin/llama-server
+      -hf Qwen/Qwen3-Embedding-0.6B-GGUF:Q8_0
+      --embedding
+      -c 512
+      --port ${PORT}
+
