@@ -8,5 +8,6 @@
   mssql-bcp = pkgs.callPackage ./mssql-bcp { };
   ms-sqltoolsservice = pkgs.callPackage ./ms-sqltoolsservice { };
   mssql-cli = pkgs.callPackage ./mssql-cli { };
+  llama-swap = pkgs.callPackage ./llama-swap { };
   # mssql-scripter = pkgs.callPackage ./mssql-scripter { };
 }

@@ -185,6 +185,7 @@ in {
       '')
       litellm
       llama-cpp
+      llama-swap
       llmscripts
       mods
       ollama
