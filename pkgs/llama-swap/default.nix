@@ -1,80 +1,58 @@
 {
   lib,
-  stdenv,
-  nodejs,
-  gnumake,
-  go,
-  makeWrapper,
-  llama-cpp,
   buildGoModule,
   buildNpmPackage,
   fetchFromGitHub,
 }: let
-  react-ui = buildNpmPackage rec {
+  version = "151";
+  srcHash = "sha256-f2cKSbNjaoM5nqF3hQbvXMxzZJ6et8poX6wZh9Bme7M=";
+
+  react-ui = buildNpmPackage {
     pname = "llama-swap-ui";
-    version = "151";
+    version = version;
 
     src = fetchFromGitHub {
       owner = "mostlygeek";
       repo = "llama-swap";
       rev = "v${version}";
-      hash = "sha256-f2cKSbNjaoM5nqF3hQbvXMxzZJ6et8poX6wZh9Bme7M=";
+      hash = srcHash;
     };
 
-    sourceRoot = "source/ui"; # We only care about the ui subdirectory
-
+    sourceRoot = "source/ui";
     npmDepsHash = "sha256-Sbvz3oudMVf+PxOJ6s7LsDaxFwvftNc8ZW5KPpbI/cA=";
 
-    # Ensure Vite writes within sourceRoot (ui), not ../proxy
     buildPhase = ''
-      runHook preBuild
       npm run build -- --outDir dist
-      runHook postBuild
     '';
 
     installPhase = ''
-      runHook preInstall
       cp -r dist $out
-      runHook postInstall
     '';
   };
 in
-  buildGoModule rec {
+  buildGoModule {
     pname = "llama-swap";
-    version = "151";
-
+    version = version;
     src = fetchFromGitHub {
       owner = "mostlygeek";
       repo = "llama-swap";
       rev = "v${version}";
-      hash = "sha256-f2cKSbNjaoM5nqF3hQbvXMxzZJ6et8poX6wZh9Bme7M=";
+      hash = srcHash;
     };
 
     vendorHash = "sha256-5mmciFAGe8ZEIQvXejhYN+ocJL3wOVwevIieDuokhGU=";
 
-    nativeBuildInputs = [ makeWrapper gnumake go nodejs ];
     doCheck = false;
 
-    preBuild = ''
+    buildPhase = ''
       mkdir -p proxy/ui_dist
       cp -r ${react-ui}/* proxy/ui_dist/
-    '';
-
-    buildPhase = ''
-      runHook preBuild
       go build -o llama-swap .
-      runHook postBuild
     '';
 
     installPhase = ''
-      runHook preInstall
       mkdir -p $out/bin
       cp llama-swap $out/bin/
-
-      # Wrap the binary to make llama-cpp's binaries available in the PATH
-      wrapProgram $out/bin/llama-swap \
-        --prefix PATH : ${lib.makeBinPath [llama-cpp]}
-      runHook postInstall
     '';
 
     meta = with lib; {
