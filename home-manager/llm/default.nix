@@ -1,8 +1,8 @@
-{
+{environment ? "home"}: {
+  config,
   lib,
   pkgs,
   inputs,
-  environment ? "home",
   ...
 }: let
   scriptpath = lib.makeBinPath [pkgs.llmscripts];
@@ -241,7 +241,7 @@ in {
     };
     "llama-swap.yaml" = {
       enable = true;
-      source = ./llama-swap.yaml;
+      source = pkgs.writeText "llama-swap.yaml" (builtins.replaceStrings ["$USER"] [config.home.username] (builtins.readFile ./llama-swap.yaml));
       target = "llama-swap/llama-swap.yaml";
     };
     "custom_litellm.py" = {

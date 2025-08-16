@@ -1,6 +1,6 @@
 macros:
   "llama-server": >
-    /etc/profiles/per-user/jbowman/bin/llama-server
+    /etc/profiles/per-user/$USER/bin/llama-server
     --port ${PORT}
 models:
   "qwen-embedding":
