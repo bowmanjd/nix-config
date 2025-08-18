@@ -65,8 +65,8 @@ OLLAMA_HOST=localhost
 GOOSE_MODE=smart_approve
 
 # Fraude Code
-CLAUDE_MODEL=gpt-4.1
-CLAUDE_SMALL=gpt-4.1
+CLAUDE_MODEL=gpt-5-mini
+CLAUDE_SMALL=gpt-5-mini
 CLAUDE_MAX_OUTPUT=16384
 
 # Claude Code

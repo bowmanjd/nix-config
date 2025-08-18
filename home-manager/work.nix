@@ -8,10 +8,7 @@
   imports = [
     ./base
     ./nvim
-    (import ./llm {
-      inherit pkgs lib inputs;
-      environment = "work";
-    })
+    (import ./llm { environment = "work"; })
   ];
 
   home = {

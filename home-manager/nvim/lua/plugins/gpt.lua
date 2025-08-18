@@ -24,7 +24,7 @@ return {
 		},
 		-- build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
-			model = "gpt-4.1",
+			model = "gpt-5-mini",
 		},
 	},
 
@@ -55,7 +55,7 @@ return {
 						name = "claude_copilot", -- Unique adapter name
 						schema = {
 							model = {
-								default = "gpt-4.1",
+								default = "gpt-5-mini",
 							},
 						},
 					})
@@ -104,7 +104,7 @@ return {
 			},
 			providers = {
 				copilot = {
-					model = "gpt-4.1",
+					model = "gpt-5-mini",
 					extra_request_body = {
 						max_tokens = 128000,
 					},

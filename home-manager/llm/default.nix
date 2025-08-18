@@ -171,7 +171,7 @@ in {
         export OPENAI_BASE_PATH=/chat/completions
         export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
         export GOOSE_PROVIDER=openai
-        export GOOSE_MODEL=gpt-4.1
+        export GOOSE_MODEL=gpt-5-mini
         exec ${goose-ai}/bin/goose "$@"
       '')
       (pkgs.writeShellScriptBin "fraude" ''
@@ -245,7 +245,7 @@ in {
         let
           llamaServerPath =
             if environment == "work"
-            then "${builtins.getEnv "HOME"}/win/scoop/shims/llama-server.exe"
+            then "${config.home.homeDirectory}/win/scoop/shims/llama-server.exe"
             else "/etc/profiles/per-user/$USER/bin/llama-server";
         in
           builtins.replaceStrings ["$LLAMA_SERVER"] [llamaServerPath] (builtins.readFile ./llama-swap.yaml)
