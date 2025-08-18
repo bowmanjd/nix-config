@@ -4,7 +4,7 @@
   buildNpmPackage,
   fetchFromGitHub,
 }: let
-  version = "151";
+  version = "153";
   srcHash = "sha256-f2cKSbNjaoM5nqF3hQbvXMxzZJ6et8poX6wZh9Bme7M=";
 
   react-ui = buildNpmPackage {
