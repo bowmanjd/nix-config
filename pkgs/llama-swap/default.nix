@@ -5,7 +5,7 @@
   fetchFromGitHub,
 }: let
   version = "153";
-  srcHash = "sha256-f2cKSbNjaoM5nqF3hQbvXMxzZJ6et8poX6wZh9Bme7M=";
+  srcHash = "sha256-yBSMQ9Jl052FDYHCtBp96ZJxoXeACqIw/CMZhxh6FvQ=";
 
   react-ui = buildNpmPackage {
     pname = "llama-swap-ui";
