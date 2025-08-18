@@ -1,6 +1,6 @@
 macros:
   "llama-server": >
-    /etc/profiles/per-user/$USER/bin/llama-server
+    $LLAMA_SERVER
     --port ${PORT}
 
 models:

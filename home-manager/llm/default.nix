@@ -241,7 +241,16 @@ in {
     };
     "llama-swap.yaml" = {
       enable = true;
-      source = pkgs.writeText "llama-swap.yaml" (builtins.replaceStrings ["$USER"] [config.home.username] (builtins.readFile ./llama-swap.yaml));
+      source = pkgs.writeText "llama-swap.yaml" (
+        let
+          llamaServerPath =
+            if environment == "work"
+            then "${builtins.getEnv "HOME"}/win/scoop/shims/llama-server.exe"
+            else "/etc/profiles/per-user/$USER/bin/llama-server";
+        in
+          builtins.replaceStrings ["$LLAMA_SERVER"] [llamaServerPath] (builtins.readFile ./llama-swap.yaml)
+      );
+      # source = pkgs.writeText "llama-swap.yaml" (builtins.replaceStrings ["$LLAMA_SERVER"] [environment] (builtins.readFile ./llama-swap.yaml));
       target = "llama-swap/llama-swap.yaml";
     };
     "custom_litellm.py" = {
