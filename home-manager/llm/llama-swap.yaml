@@ -2,17 +2,62 @@ macros:
   "llama-server": >
     /etc/profiles/per-user/$USER/bin/llama-server
     --port ${PORT}
+
 models:
   "qwen-embedding":
     cmd: |
       ${llama-server}
-      -hf Qwen/Qwen3-Embedding-0.6B-GGUF:Q8_0
+      -hf Mungert/Qwen3-Embedding-0.6B-GGUF:Q6_K_M
+      --pooling last
       --embedding
       -c 512
+    ttl: 300
 
-  "qwen3-8b":
+  "mxbai-embed-large-v1":
     cmd: |
       ${llama-server}
-      -hf unsloth/Qwen3-8B-GGUF:Q4_K_M
+      -hf mixedbread-ai/mxbai-embed-large-v1
+      --pooling cls
+      --embedding
+    ttl: 300
 
+  "granite-embedding-125m":
+    cmd: |
+      ${llama-server}
+      -hf bartowski/granite-embedding-125m-english-GGUF:Q6_K
+      --pooling cls
+      --embedding
+    ttl: 300
+
+  "qwen3-4b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/Qwen3-4B-Instruct-2507-GGUF:IQ4_XS
+      -c 8192
+      --temp 0.7
+      --top-k 20
+      --min-p 0
+      --top-p 0.80
+      --presence-penalty 0.5
     ttl: 180
+
+  "gemma-3n-e2b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/gemma-3n-E2B-it-GGUF:IQ4_XS
+      -c 8192
+      --temp 1.0
+      --top-k 64
+      --min-p 0
+      --top-p 0.95
+    ttl: 180
+
+groups:
+  "embedding":
+    swap: true
+    exclusive: false
+    persistent: true
+    members:
+      - "qwen-embedding"
+      - "mxbai-embed-large-v1"
+      - "granite-embedding-125m"
