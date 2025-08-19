@@ -11,6 +11,8 @@ common_copilot: &common_copilot
     Editor-Version: vscode/1.85.1
 
 copilot_base: &copilot_base
+  # api_base: https://api.githubcopilot.com
+  # api_key: "os.environ/COPILOT_API_KEY" 
   model: github_copilot/gpt-5-mini
   max_tokens: 128000
   max_output_tokens: 64000
@@ -329,11 +331,7 @@ model_list:
       id: copilot-gpt-5
   - model_name: gpt-5-mini
     litellm_params:
-      model: github_copilot/gpt-5-mini
-      max_tokens: 128000
-      max_output_tokens: 64000
-      max_input_tokens: 128000
-      <<: *common_copilot
+      <<: *copilot_base
     model_info:
       id: copilot-gpt-5-mini
   - model_name: gpt-4.1
@@ -537,6 +535,7 @@ general_settings:
   store_model_in_db: false
 
 router_settings:
+  model_group_alias: {"copilot-5-min": "gpt-5-mini"}
   routing_strategy: simple-shuffle
   # context_window_fallbacks: [
   #   {"gpt-4.1": ["openrouter-gpt-4.1"]}

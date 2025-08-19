@@ -134,55 +134,13 @@ in {
   '';
 
   # Packages
-  home.packages = with pkgs; let
-    goose-ai = goose-cli.overrideAttrs (finalAttrs: old: {
-      version = "1.3.0";
-      cargoHash = "sha256-3D4huMqQXxXhKd62eM3uE+p4PCyQBxoDIBE65CpvhP8=";
-      # cargoHash = "sha256-ENuNt6rr039iiUqj9eK5trEdZLvaI0CZr33j7D+X3oA=";
-      src = old.src.override {
-        tag = "v1.3.0";
-        hash = "sha256-XzcmuICQyBUs7xYpRRaMk0pZu5xPyZo5aTavAFYL+u8=";
-        # hash = "sha256-LzQsx7b//C90w2nqDIR0AexRuD58tjiwL/KIzBrF5M4=";
-      };
-      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
-        inherit (finalAttrs) pname src version;
-        hash = finalAttrs.cargoHash;
-      };
-      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.protobuf];
-      checkFlags =
-        (old.checkFlags or [])
-        ++ [
-          "--skip test_pricing_refresh"
-          "--skip test_concurrent_access"
-          "--skip test_model_not_in_openrouter"
-          "--skip test_pricing_cache_performance"
-        ];
-    });
-  in
+  home.packages = with pkgs;
     [
       aichat
       # aider-chat-with-playwright
       pkgs.aider-chat
       codex
       fabric-ai
-      goose-ai
-      (pkgs.writeShellScriptBin "goose-custom" ''
-        export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
-        export OPENAI_BASE_PATH=/chat/completions
-        export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
-        export GOOSE_PROVIDER=openai
-        export GOOSE_MODEL=gpt-5-mini
-        exec ${goose-ai}/bin/goose "$@"
-      '')
-      (pkgs.writeShellScriptBin "fraude" ''
-        export ANTHROPIC_BASE_URL="$LITELLM_PROXY_API_BASE"
-        unset ANTHROPIC_API_KEY
-        export ANTHROPIC_AUTH_TOKEN="$LITELLM_MASTER_KEY"
-        export ANTHROPIC_SMALL_FAST_MODEL="$CLAUDE_SMALL"
-        export ANTHROPIC_MODEL="$CLAUDE_MODEL"
-        export CLAUDE_CODE_MAX_OUTPUT_TOKENS="$CLAUDE_MAX_OUTPUT"
-        exec ${claude-code}/bin/claude "$@"
-      '')
       litellm
       llama-cpp
       llama-swap
@@ -199,9 +157,29 @@ in {
       claude-code
       claude-code-router
       crush
+      forge
+      goose-cli
+      groq-code-cli
       opencode
       gemini-cli
       # qwen-code
+      (pkgs.writeShellScriptBin "goose-custom" ''
+        export OPENAI_API_KEY="$LITELLM_MASTER_KEY"
+        export OPENAI_BASE_PATH=/chat/completions
+        export OPENAI_HOST="$LITELLM_PROXY_API_BASE"
+        export GOOSE_PROVIDER=openai
+        export GOOSE_MODEL=copilot-5-min
+        exec ${goose-cli}/bin/goose "$@"
+      '')
+      (pkgs.writeShellScriptBin "fraude" ''
+        export ANTHROPIC_BASE_URL="$LITELLM_PROXY_API_BASE"
+        unset ANTHROPIC_API_KEY
+        export ANTHROPIC_AUTH_TOKEN="$LITELLM_MASTER_KEY"
+        export ANTHROPIC_SMALL_FAST_MODEL="$CLAUDE_SMALL"
+        export ANTHROPIC_MODEL="$CLAUDE_MODEL"
+        export CLAUDE_CODE_MAX_OUTPUT_TOKENS="$CLAUDE_MAX_OUTPUT"
+        exec ${claude-code}/bin/claude "$@"
+      '')
       (pkgs.writeShellScriptBin "qwen" ''
         # export OPENAI_API_KEY="$OPENROUTER_API_KEY"
         # export OPENAI_BASE_URL="https://openrouter.ai/api/v1"
