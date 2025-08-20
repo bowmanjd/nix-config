@@ -50,9 +50,9 @@ return {
 		},
 		opts = {
 			adapters = {
-				claude_copilot = function()
+				gpt5mini_copilot = function()
 					return require("codecompanion.adapters").extend("copilot", {
-						name = "claude_copilot", -- Unique adapter name
+						name = "gpt5mini_copilot", -- Unique adapter name
 						schema = {
 							model = {
 								default = "gpt-5-mini",
