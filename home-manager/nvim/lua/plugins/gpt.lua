@@ -76,8 +76,8 @@ return {
 				end,
 			},
 			strategies = {
-				chat = { adapter = "claude_copilot" },
-				inline = { adapter = "claude_copilot" },
+				chat = { adapter = "gpt5mini_copilot" },
+				inline = { adapter = "copilot" },
 			},
 		},
 	},
