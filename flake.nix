@@ -2,45 +2,40 @@
   description = "Jonathan Bowman nix config";
 
   inputs = {
-    # Nixpkgs
+    # Pin channels
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
-    # Home manager
-    home-manager.url = "github:nix-community/home-manager/";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-ai-tools = {
-      url = "github:numtide/nix-ai-tools";
+    # Home Manager (follows nixpkgs)
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Tooling/overlays
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     llama-cpp-overlay = {
       url = "github:ggml-org/llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Optional extras (kept for future use)
+    nix-ai-tools = {
+      url = "github:numtide/nix-ai-tools";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    rust-overlay,
-    llama-cpp-overlay,
-    nix-ai-tools,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
+  outputs = inputs@{ self, nixpkgs, home-manager, rust-overlay, llama-cpp-overlay, ... }: let
     inherit (nixpkgs) lib;
-    systems = ["x86_64-linux"];
+
+    systems = [ "x86_64-linux" ];
     forAllSystems = lib.genAttrs systems;
 
-    # Add stable nixpkgs as overlay
+    # Stable nixpkgs overlay
     overlay-stable = final: prev: {
       stable = import inputs.nixpkgs-stable {
         system = final.system;
@@ -48,19 +43,13 @@
       };
     };
 
-    # Overlay to enable CPU optimizations for llama.cpp (current CMake flags)
-
-    # overlay: llama-cpp-opt
+    # llama.cpp CPU-optimized build
     llama-cpp-optimized = final: prev: {
       llama-cpp = prev.llama-cpp.overrideAttrs (old: {
-        # replace, don't append, to avoid contradictory defaults
         cmakeFlags = [
           "-GNinja"
           "-DCMAKE_BUILD_TYPE=Release"
-          "-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON" # LTO
-
-          # ggml CPU flags (modern names)
-          # SSE42 AVX F16C AVX2 BMI2 FMA AVX512 AVX512_VBMI AVX512_VNNI
+          "-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
           "-DGGML_NATIVE=ON"
           "-DGGML_SSE42=ON"
           "-DGGML_AVX=ON"
@@ -71,72 +60,57 @@
           "-DGGML_AVX512=ON"
           "-DGGML_AVX512_VBMI=ON"
           "-DGGML_AVX512_VNNI=ON"
-
-          # threading; start with no BLAS (often best for decode)
           "-DGGML_OPENMP=ON"
           "-DGGML_BLAS=OFF"
-
-          # optional quality-of-life
           "-DLLAMA_BUILD_SERVER=ON"
           "-DBUILD_SHARED_LIBS=ON"
         ];
-
-        NIX_CFLAGS_COMPILE =
-          (old.NIX_CFLAGS_COMPILE or "")
-          + " -O3 -march=native -mtune=native";
+        NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -O3 -march=native -mtune=native";
       });
     };
 
-    # Create a common function for NixOS configurations
-    mkNixosSystem = {
-      hostname,
-      username,
-      nixosConfigFile,
-      homeConfigFile,
-      extraModules ? [],
-    }:
+    # Helper to define NixOS systems
+    mkNixosSystem = { hostname, username, nixosConfigFile, homeConfigFile, extraModules ? [] }:
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules =
-          [
-            {
-              nixpkgs.overlays = [
-                overlay-stable
-                rust-overlay.overlays.default
-                llama-cpp-overlay.overlays.default
-                llama-cpp-optimized
-              ];
-              networking.hostName = hostname;
-            }
-            nixosConfigFile
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = import homeConfigFile;
-                extraSpecialArgs = {inherit inputs outputs;};
-              };
-            }
-          ]
-          ++ extraModules;
+        specialArgs = { inherit inputs; };
+        modules = [
+          {
+            nixpkgs.overlays = [
+              overlay-stable
+              rust-overlay.overlays.default
+              llama-cpp-overlay.overlays.default
+              llama-cpp-optimized
+            ];
+            networking.hostName = hostname;
+          }
+          nixosConfigFile
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import homeConfigFile;
+              extraSpecialArgs = { inherit inputs; };
+            };
+          }
+        ] ++ extraModules;
       };
   in {
+    # Formatters and overlays
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    overlays = import ./overlays {inherit inputs;};
+    overlays = import ./overlays { inherit inputs; };
 
-    # NixOS configuration entrypoint
+    # Packages by system
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+
+    # Hosts
     nixosConfigurations = {
-      # Available through 'sudo nixos-rebuild switch --flake .#lappy386'
       lappy386 = mkNixosSystem {
         hostname = "lappy386";
         username = "bowmanjd";
         nixosConfigFile = ./nixos/lappy.nix;
         homeConfigFile = ./home-manager/home.nix;
       };
-
-      # Available through 'sudo nixos-rebuild switch --flake .#work'
       work = mkNixosSystem {
         hostname = "jbowman-cargas";
         username = "jbowman";
