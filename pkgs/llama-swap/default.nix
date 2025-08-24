@@ -4,8 +4,8 @@
   buildNpmPackage,
   fetchFromGitHub,
 }: let
-  version = "153";
-  srcHash = "sha256-yBSMQ9Jl052FDYHCtBp96ZJxoXeACqIw/CMZhxh6FvQ=";
+  version = "154";
+  srcHash = "sha256-0AA0DXB8MLVTPdFZ9J4H7h7TF7ZWnzQ/wf1ZfCo+Dag=";
 
   react-ui = buildNpmPackage {
     pname = "llama-swap-ui";

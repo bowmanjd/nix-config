@@ -29,10 +29,59 @@ models:
       --embedding
     ttl: 300
 
+  "deepseek-8b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF:Q4_K_XL
+      -c 32768
+      --temp 0.6
+      --top-k 20
+      --min-p 0.0
+      --top-p 0.95
+      --presence-penalty 1.5
+    ttl: 180
+
+  "qwen3-8b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/Qwen3-8B-GGUF:Q4_K_M
+      -c 8192
+      --temp 0.7
+      --top-k 20
+      --min-p 0
+      --top-p 0.80
+      --presence-penalty 0.5
+    ttl: 180
+
+  "nextcoder-7b":
+    cmd: |
+      ${llama-server}
+      -hf Mungert/NextCoder-7B-GGUF:Q4_K_M
+      -c 16384
+    ttl: 180
+
+  "qwen2.5-coder-7b":
+    cmd: |
+      ${llama-server}
+      -hf Qwen/Qwen2.5-Coder-7B-Instruct-GGUF:Q4_K_M
+      -c 16384
+    ttl: 180
+
+  "gemma-3n-e4b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/gemma-3n-E4B-it-GGUF:Q4_K_M
+      -c 8192
+      --temp 1.0
+      --top-k 64
+      --min-p 0
+      --top-p 0.95
+    ttl: 180
+
   "qwen3-4b":
     cmd: |
       ${llama-server}
-      -hf unsloth/Qwen3-4B-Instruct-2507-GGUF:IQ4_XS
+      -hf unsloth/Qwen3-4B-Instruct-2507-GGUF:Q4_K_M
       -c 8192
       --temp 0.7
       --top-k 20
@@ -44,12 +93,19 @@ models:
   "gemma-3n-e2b":
     cmd: |
       ${llama-server}
-      -hf unsloth/gemma-3n-E2B-it-GGUF:IQ4_XS
+      -hf unsloth/gemma-3n-E2B-it-GGUF:Q4_K_M
       -c 8192
       --temp 1.0
       --top-k 64
       --min-p 0
       --top-p 0.95
+    ttl: 180
+
+  "qwen2.5-coder-3b":
+    cmd: |
+      ${llama-server}
+      -hf Qwen/Qwen2.5-Coder-3B-Instruct-GGUF:Q5_K_M
+      -c 8192
     ttl: 180
 
   "qwen3-1.7b":
@@ -62,6 +118,29 @@ models:
       --min-p 0
       --top-p 0.80
       --presence-penalty 0.5
+    ttl: 300
+
+  "qwen3-0.6b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/Qwen3-0.6B-GGUF:Q5_K_XL
+      -c 4096
+      --temp 0.7
+      --top-k 20
+      --min-p 0
+      --top-p 0.80
+      --presence-penalty 0.5
+    ttl: 300
+
+  "gemma-3-270m":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/gemma-3-270m-it-GGUF:Q8_0
+      -c 4096
+      --temp 1.0
+      --top-k 64
+      --min-p 0.0
+      --top-p 0.95
     ttl: 300
 
 groups:
