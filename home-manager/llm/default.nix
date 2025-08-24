@@ -224,11 +224,10 @@ in {
           llamaServerPath =
             if environment == "work"
             then "${config.home.homeDirectory}/win/scoop/shims/llama-server.exe"
-            else "/etc/profiles/per-user/$USER/bin/llama-server";
+            else "/etc/profiles/per-user/${config.home.username}/bin/llama-server";
         in
           builtins.replaceStrings ["$LLAMA_SERVER"] [llamaServerPath] (builtins.readFile ./llama-swap.yaml)
       );
-      # source = pkgs.writeText "llama-swap.yaml" (builtins.replaceStrings ["$LLAMA_SERVER"] [environment] (builtins.readFile ./llama-swap.yaml));
       target = "llama-swap/llama-swap.yaml";
     };
     "custom_litellm.py" = {

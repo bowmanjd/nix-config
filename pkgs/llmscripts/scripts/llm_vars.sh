@@ -32,10 +32,10 @@ cat > "$webuifile" <<EOF
 # Auto-generated; do not edit
 
 # Open WebUI:
-STATIC_DIR=.
-DATA_DIR=.
-HF_HOME=.
-SENTENCE_TRANSFORMERS_HOME=.
+STATIC_DIR="$HOME/.local/share/webui/static"
+DATA_DIR="$HOME/.local/share/webui/data"
+HF_HOME="$HOME/.local/share/webui"
+SENTENCE_TRANSFORMERS_HOME="$HOME/.local/share/webui"
 WEBUI_URL=http://webui.home.arpa
 ENABLE_PERSISTENT_CONFIG=False
 CUSTOM_NAME="Chat Like an Owner"
@@ -49,7 +49,7 @@ WEB_SEARCH_ENGINE=google_pse
 GOOGLE_PSE_ENGINE_ID=626da60bfa6e445c8
 GOOGLE_PSE_API_KEY=$GOOGLE_SEARCH_API_KEY
 RAG_EMBEDDING_ENGINE=ollama
-RAG_EMBEDDING_MODEL=hf.co/Qwen/Qwen3-Embedding-0.6B-GGUF:Q4_K_M
+RAG_EMBEDDING_MODEL=granite-embedding:30m
 RAG_TOP_K=5
 RAG_TOP_K_RERANKER=5
 # RAG_RERANKING_MODEL=
