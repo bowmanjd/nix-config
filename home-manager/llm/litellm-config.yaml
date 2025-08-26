@@ -528,6 +528,7 @@ model_list:
 litellm_settings:
   callbacks: custom_litellm.proxy_handler_instance
   force_ipv4: true
+  drop_params: true
   # default_fallbacks: ["gpt-4.1"]
 
 general_settings:
