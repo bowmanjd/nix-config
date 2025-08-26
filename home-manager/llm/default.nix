@@ -74,7 +74,7 @@ in {
       Service = {
         WorkingDirectory = "%D/webui";
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %D/webui";
-        ExecStart = "${pkgs.open-webui}/bin/open-webui serve --port 3011 --host 127.0.0.1";
+        ExecStart = "${pkgs.stable.open-webui}/bin/open-webui serve --port 3011 --host 127.0.0.1";
         EnvironmentFile = "-%t/llmconf/webui";
         Restart = "on-failure";
         RestartSec = 5;
@@ -138,7 +138,7 @@ in {
     [
       aichat
       # aider-chat-with-playwright
-      pkgs.aider-chat
+      pkgs.stable.aider-chat
       codex
       fabric-ai
       litellm
@@ -147,7 +147,7 @@ in {
       llmscripts
       mods
       ollama
-      open-webui
+      pkgs.stable.open-webui
       onnxruntime
       prisma-engines
     ]

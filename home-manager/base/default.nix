@@ -324,7 +324,7 @@
     gh
     #gitbutler
     gitoxide
-    gitui
+    # gitui
     git-subrepo
     glow
     gnumake
