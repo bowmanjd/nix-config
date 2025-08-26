@@ -36,6 +36,7 @@
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
       trusted-users = ["@wheel"];
+      download-buffer-size = 268435456;
     };
   };
 
