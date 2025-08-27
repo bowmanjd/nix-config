@@ -118,6 +118,7 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
   };
 
   programs.zellij = {
@@ -366,6 +367,7 @@
     powershell
     (python3.withPackages (ps:
       with ps; [
+        aiohttp
         bandit
         beautifulsoup4
         black
@@ -383,6 +385,7 @@
         numpy
         #numpy_1
         onnxruntime
+        opentelemetry-api
         pep8-naming
         pexpect
         pip
