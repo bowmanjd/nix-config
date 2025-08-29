@@ -212,6 +212,11 @@ in {
       source = ./mods.yml;
       target = "mods/mods.yml";
     };
+    "stocha.json" = {
+      enable = true;
+      source = ./stocha.json;
+      target = "stocha/stocha.json";
+    };
     "litellm-config.yaml" = {
       enable = true;
       source = ./litellm-config.yaml;

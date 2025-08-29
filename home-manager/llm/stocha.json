@@ -1,0 +1,369 @@
+{
+  "vars": {
+    "litellm_key": "env.LITELLM_MASTER_KEY",
+    "litellm": {
+      "apiBase": "http://127.0.0.1:1173",
+      "apiKey": "var.litellm_key"
+    }
+  },
+  "defaultModel": "gpt-4.1",
+  "embeddingModel": "qwen3-embedding-0.6b",
+  "providers": {
+    "copilot": {
+      "apiBase": "https://api.githubcopilot.com",
+      "apiKeyFunction": "copilot#getKey",
+      "chatEndpoint": "/chat/completions",
+      "embeddingEndpoint": "/embeddings",
+      "embeddingOutput": "data.0.embedding",
+      "embeddingInput": "input.0",
+      "embeddingDimensionsInput": "dimensions",
+      "additionalHeaders": {
+        "Copilot-Integration-Id": "vscode-chat",
+        "Editor-Version": "stocha/0.2.0"
+      }
+    },
+    "litellm": {
+      "merge_var": "var.litellm",
+      "chatEndpoint": "/v1/chat/completions",
+      "embeddingEndpoint": "/embeddings",
+      "embeddingOutput": "data.0.embedding",
+      "embeddingDimensionsInput": "dimensions"
+    },
+    "openrouter": {
+      "apiBase": "https://openrouter.ai/api",
+      "apiKey": "env.OPENROUTER_API_KEY",
+      "chatEndpoint": "/v1/chat/completions"
+    },
+    "groq": {
+      "apiBase": "https://api.groq.com/openai",
+      "apiKey": "env.GROQ_API_KEY",
+      "chatEndpoint": "/v1/chat/completions"
+    },
+    "boron": {
+      "apiBase": "http://10.0.0.10:11434",
+      "chatEndpoint": "/api/chat",
+      "embeddingEndpoint": "/api/embed",
+      "embeddingOutput": "embeddings.0",
+      "optionsInput": "options",
+      "responseOutput": "message.content",
+      "thinkingOutput": "message.thinking",
+      "responseNoStreamOutput": "message.content"
+    },
+    "ollama": {
+      "apiBase": "http://127.0.0.1:11434",
+      "chatEndpoint": "/api/chat",
+      "embeddingEndpoint": "/api/embed",
+      "embeddingOutput": "embeddings.0",
+      "optionsInput": "options",
+      "responseOutput": "message.content",
+      "thinkingOutput": "message.thinking",
+      "responseNoStreamOutput": "message.content"
+    },
+    "gemini-embedding": {
+      "apiBase": "https://generativelanguage.googleapis.com/v1beta/models",
+      "apiKey": "env.GEMINI_API_KEY",
+      "apiKeyHeader": "x-goog-api-key",
+      "embeddingEndpoint": "/gemini-embedding-001:embedContent",
+      "embeddingOutput": "embedding.values",
+      "embeddingInput": "content.parts.0.text",
+      "embeddingDimensionsInput": "output_dimensionality"
+    },
+    "llama-embedding": {
+      "apiBase": "http://127.0.0.1:3383",
+      "embeddingEndpoint": "/embeddings",
+      "embeddingOutput": "0.embedding.0"
+    },
+    "llama-swap": {
+      "apiBase": "http://127.0.0.1:5349/v1",
+			"chatEndpoint": "/chat/completions",
+      "embeddingEndpoint": "/embeddings",
+      "embeddingOutput": "data.0.embedding"
+    }
+  },
+  "ensemble": {
+    "summarizer": {
+      "models": [
+        "gpt-4o"
+      ]
+    },
+    "titler": {
+      "models": [
+        "llama-3.1-8b",
+        "gpt-4o"
+      ]
+    },
+    "coder": {
+      "models": [
+        "gpt-4.1",
+        "kimi-k2",
+        "claude-4",
+        "gemini"
+      ]
+    },
+    "wizard": {
+      "models": [
+        "gemini"
+      ]
+    }
+  },
+  "models": {
+    "gemini-embedding-001": {
+      "name": "models/gemini-embedding-001",
+      "provider": "gemini-embedding",
+      "type": "embedding",
+      "dimensions": 512,
+      "normalize": true,
+      "decimalScale": 8,
+      "aliases": [
+        "gemini-embedding"
+      ]
+    },
+    "qwen3-embedding-0.6b": {
+      "name": "hf.co/Qwen/Qwen3-Embedding-0.6B-GGUF:Q8_0",
+      "provider": "ollama",
+      "type": "embedding",
+      "dimensions": 512,
+      "normalize": true,
+      "decimalScale": 8,
+      "aliases": [
+        "qwen-embedding"
+      ]
+    },
+    "llama-embedding": {
+      "name": "qwen-embedding",
+      "provider": "llama-swap",
+      "type": "embedding",
+      "dimensions": 512,
+      "normalize": true,
+      "decimalScale": 8
+    },
+    "granite-embedding-30m": {
+      "name": "boron-embedding",
+      "provider": "litellm",
+      "type": "embedding",
+      "aliases": [
+        "boron-embedding",
+        "granite-embedding-small"
+      ]
+    },
+    "text-embedding-3-small": {
+      "name": "text-embedding-3-small",
+      "provider": "copilot",
+      "type": "embedding",
+      "dimensions": 512,
+      "aliases": [
+        "copilot-embedding"
+      ]
+    },
+    "gpt-4.1": {
+      "name": "gpt-4.1",
+      "provider": "copilot",
+      "aliases": [
+        "gpt41",
+        "copilot"
+      ]
+    },
+    "gpt-5": {
+      "name": "gpt-5",
+      "provider": "copilot",
+      "aliases": [
+        "gpt5"
+      ]
+    },
+    "gpt-5-mini": {
+      "name": "gpt-5-mini",
+      "provider": "copilot",
+      "aliases": [
+        "gpt5mini"
+      ]
+    },
+    "gemini-pro": {
+      "name": "gemini-2.5-pro",
+      "provider": "copilot",
+      "aliases": [
+        "pro-2.5",
+        "gemini"
+      ]
+    },
+    "claude-4": {
+      "name": "claude-sonnet-4",
+      "provider": "copilot",
+      "aliases": [
+        "claude",
+        "claude4"
+      ]
+    },
+    "grok-code": {
+      "name": "grok-code-fast-1",
+      "provider": "copilot",
+      "aliases": [
+        "grok-code"
+      ]
+    },
+    "gpt-4o": {
+      "name": "gpt-4o",
+      "provider": "copilot",
+      "aliases": [
+        "gpt4o"
+      ]
+    },
+    "qwen3-coder": {
+      "name": "qwen/qwen3-coder:free",
+      "provider": "openrouter",
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "repetitionPenalty": 1.05
+    },
+    "qwen3-coder-paid": {
+      "name": "qwen/qwen3-coder",
+      "provider": "openrouter",
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "repetitionPenalty": 1.05,
+      "aliases": [
+        "qwen-coder-paid"
+      ]
+    },
+    "kimi-k2-openrouter": {
+      "name": "moonshotai/kimi-k2:free",
+      "provider": "openrouter",
+      "aliases": [
+        "kimi-or",
+        "k2or"
+      ]
+    },
+    "llama-3.1-8b": {
+      "name": "llama-3.1-8b-instant",
+      "provider": "groq",
+      "aliases": [
+        "llama8"
+      ]
+    },
+    "gpt-oss-120b": {
+      "name": "openai/gpt-oss-120b",
+      "provider": "groq",
+      "aliases": [
+        "gpt-oss",
+        "gpt120"
+      ]
+    },
+    "gpt-oss-20b": {
+      "name": "openai/gpt-oss-20b",
+      "provider": "groq",
+      "aliases": [
+        "gpt-oss-20",
+        "gpt20"
+      ]
+    },
+    "kimi-k2": {
+      "name": "moonshotai/kimi-k2-instruct",
+      "provider": "groq",
+      "aliases": [
+        "kimi",
+        "k2"
+      ]
+    },
+    "glm-4.5-air": {
+      "name": "z-ai/glm-4.5-air:free",
+      "provider": "openrouter",
+      "aliases": [
+        "glm-air"
+      ]
+    },
+    "glm-4.5": {
+      "name": "z-ai/glm-4.5",
+      "provider": "openrouter",
+      "aliases": [
+        "glm"
+      ]
+    },
+    "qwen3-instruct": {
+      "name": "qwen/qwen3-235b-a22b-2507",
+      "provider": "openrouter",
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen3"
+      ]
+    },
+    "qwen3-thinking": {
+      "name": "qwen/qwen3-235b-a22b-thinking-2507",
+      "provider": "openrouter",
+      "temperature": 0.6,
+      "topP": 0.95,
+      "topK": 20,
+      "minP": 0.0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen3-think",
+        "qwen3-thinking"
+      ]
+    },
+    "local-qwen3:1.7b": {
+      "name": "qwen3:1.7b",
+      "provider": "ollama",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "local"
+      ]
+    },
+    "qwen3:4b": {
+      "name": "qwen3-4b",
+      "provider": "llama-swap",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen3-4b"
+      ]
+    },
+    "lgemma3n": {
+      "name": "gemma3n:e2b",
+      "provider": "ollama",
+      "aliases": [
+        "gemma3n2"
+      ]
+    },
+    "boron-gemma-3n:e2b": {
+      "name": "boron-gemma-3n:e2b",
+      "merge_var": "var.litellm",
+      "aliases": [
+        "gemma3n2"
+      ]
+    },
+    "boron-gemma3n": {
+      "name": "boron-gemma-3n:e4b",
+      "merge_var": "var.litellm",
+      "aliases": [
+        "gemma3n4"
+      ]
+    },
+    "boron-qwen3:1.7b": {
+      "name": "qwen3:1.7b",
+      "provider": "boron",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen3tiny",
+        "boron"
+      ]
+    }
+  }
+}
