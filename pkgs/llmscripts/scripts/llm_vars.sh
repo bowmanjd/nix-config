@@ -26,6 +26,7 @@ TOGETHERAI_API_KEY=$(agegent ~/.ssh/secrets/together.enc.txt)
 MISTRAL_API_KEY=$(agegent ~/.ssh/secrets/mistral.enc.txt)
 NVIDIA_NIM_API_KEY=$(agegent ~/.ssh/secrets/nvidia.enc.txt)
 LITELLM_KEY=$(agegent ~/.ssh/secrets/litellm-key.enc.txt)
+CONTEXT7_API_KEY=$(agegent ~/.ssh/secrets/context7.enc.txt)
 LITELLM_SALT=$(agegent ~/.ssh/secrets/litellm-salt.enc.txt)
 
 cat > "$webuifile" <<EOF
@@ -104,6 +105,7 @@ MISTRAL_API_KEY=$MISTRAL_API_KEY
 MISTRAL_OCR_API_KEY=$MISTRAL_API_KEY
 TOGETHERAI_API_KEY=$TOGETHERAI_API_KEY
 NVIDIA_NIM_API_KEY=$NVIDIA_NIM_API_KEY
+CONTEXT7_API_KEY=$CONTEXT7_API_KEY
 EOF
 
 # copilotkey.js
