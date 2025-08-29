@@ -297,6 +297,13 @@ model_list:
       max_input_tokens: 64000
       weight: 20
       <<: *common_copilot
+  - model_name: grok-code
+    litellm_params:
+      model: github_copilot/grok-code-fast-1
+      max_tokens: 128000
+      max_output_tokens: 64000
+      max_input_tokens: 128000
+      <<: *common_copilot
   - model_name: o1
     litellm_params:
       model: github_copilot/o1
