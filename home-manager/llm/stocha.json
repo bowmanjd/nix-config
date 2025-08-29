@@ -305,8 +305,8 @@
       ]
     },
     "local-qwen3:1.7b": {
-      "name": "qwen3:1.7b",
-      "provider": "ollama",
+      "name": "qwen3-1.7b",
+      "provider": "llama-swap",
       "think": false,
       "temperature": 0.7,
       "topP": 0.8,
@@ -331,8 +331,8 @@
       ]
     },
     "lgemma3n": {
-      "name": "gemma3n:e2b",
-      "provider": "ollama",
+      "name": "gemma-3n-e2b",
+      "provider": "llama-swap",
       "aliases": [
         "gemma3n2"
       ]
@@ -341,7 +341,7 @@
       "name": "boron-gemma-3n:e2b",
       "merge_var": "var.litellm",
       "aliases": [
-        "gemma3n2"
+        "boron-gemma3n2"
       ]
     },
     "boron-gemma3n": {
