@@ -304,19 +304,6 @@
         "qwen3-thinking"
       ]
     },
-    "local-qwen3:1.7b": {
-      "name": "qwen3-1.7b",
-      "provider": "llama-swap",
-      "think": false,
-      "temperature": 0.7,
-      "topP": 0.8,
-      "topK": 20,
-      "minP": 0,
-      "presencePenalty": 0.5,
-      "aliases": [
-        "local"
-      ]
-    },
     "qwen3:4b": {
       "name": "qwen3-4b",
       "provider": "llama-swap",
@@ -335,6 +322,41 @@
       "provider": "llama-swap",
       "aliases": [
         "gemma3n2"
+      ]
+    },
+    "local-qwen3:1.7b": {
+      "name": "qwen3-1.7b",
+      "provider": "llama-swap",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "local"
+      ]
+    },
+    "local-qwen3:0.6b": {
+      "name": "qwen3-0.6b",
+      "provider": "llama-swap",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen0.6",
+        "qwen-tiny"
+      ]
+    },
+    "gemma3:270m": {
+      "name": "gemma-3-270m",
+      "provider": "llama-swap",
+      "aliases": [
+        "gemma270",
+        "gemma270m"
       ]
     },
     "boron-gemma-3n:e2b": {
