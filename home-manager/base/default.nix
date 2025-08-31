@@ -382,6 +382,7 @@
         html2text
         isort
         lxml
+        markitdown
         numpy
         #numpy_1
         onnxruntime

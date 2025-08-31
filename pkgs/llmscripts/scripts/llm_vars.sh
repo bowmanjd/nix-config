@@ -8,6 +8,7 @@ touch "$keyfile"
 touch "$webuifile"
 
 TAVILY_API_KEY=$(agegent ~/.ssh/secrets/tavily.enc.txt)
+EXA_API_KEY=$(agegent ~/.ssh/secrets/exa.enc.txt)
 GOOGLE_SEARCH_API_KEY=$(agegent ~/.ssh/secrets/google_search.enc.txt)
 OPENAI_API_KEY=$(agegent ~/.ssh/secrets/openai.enc.txt)
 ANTHROPIC_API_KEY=$(agegent ~/.ssh/secrets/anthropic.enc.txt)
@@ -87,6 +88,7 @@ LITELLM_API_KEY=$LITELLM_KEY
 LITELLM_MASTER_KEY=$LITELLM_KEY
 LITELLM_SALT_KEY=$LITELLM_SALT_KEY
 TAVILY_API_KEY=$TAVILY_API_KEY
+EXA_API_KEY=$EXA_API_KEY
 GOOGLE_SEARCH_API_KEY=$GOOGLE_SEARCH_API_KEY
 ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY
 OPENAI_API_KEY=$OPENAI_API_KEY
