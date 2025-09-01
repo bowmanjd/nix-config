@@ -212,11 +212,16 @@ in {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/mods.yml";
       target = "mods/mods.yml";
     };
-    "opencode.jsonc" = {
+    "opencode" = {
       enable = true;
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/opencode.jsonc";
-      target = "opencode/opencode.jsonc";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/opencode";
+      target = "opencode";
     };
+    # "opencode.jsonc" = {
+    #   enable = true;
+    #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/opencode.jsonc";
+    #   target = "opencode/opencode.jsonc";
+    # };
     "stocha.json" = {
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/stocha.json";

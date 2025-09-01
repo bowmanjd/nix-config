@@ -5,6 +5,15 @@
   "small_model": "github-copilot/gpt-4.1",
   "theme": "vesper",
   "autoupdate": false,
+  "provider": {
+    "openrouter": {
+      "models": {
+        "inception/mercury-coder": {},
+        "qwen/qwen3-30b-a3b-thinking-2507": {},
+        "qwen/qwen3-coder-30b-a3b-instruct": {},
+      }
+    }
+  },
   "mcp": {
     "context7": {
       "type": "local",
@@ -31,6 +40,14 @@
         "npx",
         "-y",
         "exa-mcp-server"
+      ]
+    },
+    "mcp-time": {
+      "type": "local",
+      "enabled": true,
+      "command": [
+        "uvx",
+        "mcp-server-time"
       ]
     },
     "mcp-nixos": {
