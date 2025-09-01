@@ -1,0 +1,77 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // "model": "github-copilot/gpt-5",
+  "model": "opencode/grok-code",
+  "small_model": "github-copilot/gpt-4.1",
+  "theme": "vesper",
+  "autoupdate": false,
+  "mcp": {
+    "context7": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "enabled": true
+    },
+    "tavily": {
+      "type": "local",
+      "enabled": false,
+      "command": [
+        "npx",
+        "-y",
+        "tavily-mcp"
+      ]
+    },
+    "mcp-exa": {
+      "type": "local",
+      "enabled": false,
+      "command": [
+        "npx",
+        "-y",
+        "exa-mcp-server"
+      ]
+    },
+    "mcp-nixos": {
+      "type": "local",
+      "enabled": false,
+      "command": [
+        "nix",
+        "run",
+        "github:utensils/mcp-nixos",
+        "--"
+      ]
+    },
+    "serena": {
+      "type": "local",
+      "enabled": false,
+      "command": [
+        "nix",
+        "run",
+        "github:oraios/serena",
+        "--",
+        "start-mcp-server",
+        "--transport",
+        "stdio"
+      ]
+    },
+    "mcp-github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_API_KEY}"
+      }
+    },
+    "mcp-thinking": {
+      "type": "local",
+      "enabled": false,
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+  }
+}

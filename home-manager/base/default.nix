@@ -356,6 +356,7 @@
     ncdu
     #ncftp
     neofetch
+    nixd
     nix-index
     nmap
     nodejs_22

@@ -209,17 +209,22 @@ in {
   xdg.configFile = {
     "mods.yml" = {
       enable = true;
-      source = ./mods.yml;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/mods.yml";
       target = "mods/mods.yml";
+    };
+    "opencode.jsonc" = {
+      enable = true;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/opencode.jsonc";
+      target = "opencode/opencode.jsonc";
     };
     "stocha.json" = {
       enable = true;
-      source = ./stocha.json;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/stocha.json";
       target = "stocha/stocha.json";
     };
     "litellm-config.yaml" = {
       enable = true;
-      source = ./litellm-config.yaml;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/litellm-config.yaml";
       target = "litellm/litellm-config.yaml";
     };
     "llama-swap.yaml" = {

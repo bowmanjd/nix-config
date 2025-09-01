@@ -1,0 +1,36 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "mcp-nixos": {
+      "type": "local",
+      "enabled": true,
+      "command": [
+        "nix",
+        "run",
+        "github:utensils/mcp-nixos",
+        "--"
+      ]
+    },
+    "serena": {
+      "type": "local",
+      "enabled": false,
+      "command": [
+        "nix",
+        "run",
+        "github:oraios/serena",
+        "--",
+        "start-mcp-server",
+        "--transport",
+        "stdio"
+      ]
+    },
+    "mcp-github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_API_KEY}"
+      }
+    },
+  }
+}

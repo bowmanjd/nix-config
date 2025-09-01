@@ -113,7 +113,7 @@
       nvim-web-devicons
       oil-nvim
       plenary-nvim
-      render-markdown-nvim
+      SchemaStore-nvim
       telescope-fzf-native-nvim
       telescope-nvim
       toggleterm-nvim
