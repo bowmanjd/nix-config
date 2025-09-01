@@ -50,7 +50,6 @@
 
     # Overlay to enable CPU optimizations for llama.cpp (current CMake flags)
 
-    # overlay: llama-cpp-opt
     llama-cpp-optimized = final: prev: {
       llama-cpp = prev.llama-cpp.overrideAttrs (old: {
         # replace, don't append, to avoid contradictory defaults
