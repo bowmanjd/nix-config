@@ -120,6 +120,28 @@ models:
       --presence-penalty 0.5
     ttl: 300
 
+  "lfm2-1.2b":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/LFM2-1.2B-GGUF:Q5_K_XL
+      --jinja
+      -c 4096
+      --temp 0.3
+      --min-p 0.15
+      --repetition-penalty 1.05
+    ttl: 300
+
+  "lfm2-700m":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/LFM2-700M-GGUF:Q6_K_XL
+      --jinja
+      -c 4096
+      --temp 0.3
+      --min-p 0.15
+      --repetition-penalty 1.05
+    ttl: 300
+
   "qwen3-0.6b":
     cmd: |
       ${llama-server}
