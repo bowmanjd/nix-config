@@ -1,0 +1,3 @@
+#!/bin/sh
+
+printf "## Instructions:\nProvide only shell commands without any description.\nEnsure the output is a valid shell command.\nIf there is a lack of details, provide most logical solution.\nIf multiple steps are required, try to combine them using '&&'\nOutput only plain text without any markdown formatting.\n## Prompt:\n$*" | stocha -m sheller
