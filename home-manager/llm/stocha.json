@@ -234,14 +234,15 @@
       "topK": 20,
       "repetitionPenalty": 1.05,
       "aliases": [
-        "simplecoder"
+        "simplecoder",
+        "sheller",
+        "coduh"
       ]
     },
     "mercury-coder": {
       "name": "inception/mercury-coder",
       "provider": "openrouter",
       "aliases": [
-        "sheller",
         "fastcoder"
       ]
     },
