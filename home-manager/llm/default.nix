@@ -232,6 +232,7 @@ in {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/litellm-config.yaml";
       target = "litellm/litellm-config.yaml";
     };
+    # curl -s -X POST 'http://localhost:5349/v1/chat/completions' -H 'Content-Type: application/json' -d '{"model": "qwen3-1.7b","messages": [{"role": "user", "content": "Write a Powershell one-liner to fetch the contents of https://wttr.in; no explanation, comments, just the code"}], "extra_template_kwargs": {"enable_thinking": false} }' | jq
     "llama-swap.yaml" = {
       enable = true;
       source = pkgs.writeText "llama-swap.yaml" (
@@ -240,8 +241,15 @@ in {
             if environment == "work"
             then "${config.home.homeDirectory}/win/scoop/shims/llama-server.exe"
             else "/etc/profiles/per-user/${config.home.username}/bin/llama-server";
+          configDirPath =
+            if environment == "work"
+            then "//wsl.localhost/nix/home/jbowman/.config/llama-swap"
+            else "${config.home.homeDirectory}/.config/llama-swap";
         in
-          builtins.replaceStrings ["$LLAMA_SERVER"] [llamaServerPath] (builtins.readFile ./llama-swap.yaml)
+          builtins.replaceStrings
+          ["$LLAMA_SERVER" "$CONFIGDIR"]
+          [llamaServerPath configDirPath]
+          (builtins.readFile ./llama-swap.yaml)
       );
       target = "llama-swap/llama-swap.yaml";
     };

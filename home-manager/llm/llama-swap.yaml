@@ -2,6 +2,7 @@ macros:
   "llama-server": >
     $LLAMA_SERVER
     --port ${PORT}
+  "configdir": $CONFIGDIR
 
 models:
   "qwen-embedding":
@@ -113,7 +114,8 @@ models:
       ${llama-server}
       -hf unsloth/Qwen3-1.7B-GGUF:Q5_K_XL
       --jinja
-      --chat-template-file "$HOME/.config/llama-swap/qwen3-nothink.jinja"
+      --chat-template-file "${configdir}/qwen3-nothink.jinja"
+      --chat_template_kwargs '{"enable_thinking":false}'
       -c 8192
       --temp 0.7
       --top-k 20
@@ -148,6 +150,9 @@ models:
     cmd: |
       ${llama-server}
       -hf unsloth/Qwen3-0.6B-GGUF:Q5_K_XL
+      --jinja
+      --chat-template-file "${configdir}/qwen3-nothink.jinja"
+      --chat_template_kwargs '{"enable_thinking":false}'
       -c 4096
       --temp 0.7
       --top-k 20
