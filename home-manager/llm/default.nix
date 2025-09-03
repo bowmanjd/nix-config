@@ -245,6 +245,11 @@ in {
       );
       target = "llama-swap/llama-swap.yaml";
     };
+    "qwen3-nothink.jinja" = {
+      enable = true;
+      source = ./qwen3-nothink.jinja;
+      target = "llama-swap/qwen3-nothink.jinja";
+    };
     "custom_litellm.py" = {
       enable = true;
       source = ./custom_litellm.py;

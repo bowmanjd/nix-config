@@ -1,0 +1,26 @@
+{%- for message in messages -%}
+    {%- if loop.index0 == 0 and message['role'] == 'system' -%}
+        {%- set thinking = False -%}
+    {%- else -%}
+        {%- set thinking = True -%}
+    {%- endif -%}
+    {%- if message['role'] == 'system' -%}
+        {{- '<|im_start|>system\n' + message['content'] + '<|im_end|>' -}}
+    {%- elif message['role'] == 'user' -%}
+        {{- '<|im_start|>user\n' + message['content'] + '<|im_end|>' -}}
+    {%- elif message['role'] == 'assistant' -%}
+        {{- '<|im_start|>assistant\n' + message['content'] + '<|im_end|>' -}}
+    {%- endif -%}
+{%- endfor -%}
+{%- if add_generation_prompt -%}
+    {{- '<|im_start|>assistant' -}}
+    {%- if enable_thinking is not defined or enable_thinking -%}
+        {{- '\n' -}}
+        {%- if thinking is defined and thinking -%}
+            {{- '<think>' -}}
+        {%- endif -%}
+    {%- else -%}
+        {{- '\n' -}}
+    {%- endif -%}
+{%- endif -%}
+

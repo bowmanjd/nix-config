@@ -353,6 +353,7 @@
       "topK": 20,
       "minP": 0,
       "presencePenalty": 0.5,
+      "systemMessagePrefix": "/no_think ",
       "aliases": [
         "local"
       ]
