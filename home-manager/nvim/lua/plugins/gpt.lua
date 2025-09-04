@@ -24,7 +24,7 @@ return {
 		},
 		-- build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
-			model = "gpt-5-mini",
+			model = "gpt-4.1",
 		},
 	},
 
@@ -50,16 +50,6 @@ return {
 		},
 		opts = {
 			adapters = {
-				gpt5mini_copilot = function()
-					return require("codecompanion.adapters").extend("copilot", {
-						name = "gpt5mini_copilot", -- Unique adapter name
-						schema = {
-							model = {
-								default = "gpt-5-mini",
-							},
-						},
-					})
-				end,
 				openrouter = function()
 					return require("codecompanion.adapters").extend("openai_compatible", {
 						env = {
@@ -79,7 +69,7 @@ return {
 				chat = {
 					adapter = {
 						name = "copilot",
-						model = "gpt-5-mini",
+						model = "gpt-4.1",
 					},
 				},
 				inline = {
