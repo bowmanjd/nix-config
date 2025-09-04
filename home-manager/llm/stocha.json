@@ -367,6 +367,7 @@
       "topK": 20,
       "minP": 0,
       "presencePenalty": 0.5,
+      "systemMessagePrefix": "/no_think ",
       "aliases": [
         "qwen0.6",
         "qwen-tiny"
@@ -403,6 +404,7 @@
       "topK": 20,
       "minP": 0,
       "presencePenalty": 0.5,
+      "systemMessagePrefix": "/no_think ",
       "aliases": [
         "qwen3tiny",
         "boron"

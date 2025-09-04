@@ -4,8 +4,9 @@
   buildNpmPackage,
   fetchFromGitHub,
 }: let
-  version = "154";
-  srcHash = "sha256-0AA0DXB8MLVTPdFZ9J4H7h7TF7ZWnzQ/wf1ZfCo+Dag=";
+  version = "157";
+  # srcHash = "sha256-0AA0DXB8MLVTPdFZ9J4H7h7TF7ZWnzQ/wf1ZfCo+Dag=";
+  srcHash = "";
 
   react-ui = buildNpmPackage {
     pname = "llama-swap-ui";
@@ -19,7 +20,8 @@
     };
 
     sourceRoot = "source/ui";
-    npmDepsHash = "sha256-Sbvz3oudMVf+PxOJ6s7LsDaxFwvftNc8ZW5KPpbI/cA=";
+    npmDepsHash = "";
+    # npmDepsHash = "sha256-Sbvz3oudMVf+PxOJ6s7LsDaxFwvftNc8ZW5KPpbI/cA=";
 
     buildPhase = ''
       npm run build -- --outDir dist
