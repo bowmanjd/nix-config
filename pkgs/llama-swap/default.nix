@@ -6,7 +6,7 @@
 }: let
   version = "157";
   # srcHash = "sha256-0AA0DXB8MLVTPdFZ9J4H7h7TF7ZWnzQ/wf1ZfCo+Dag=";
-  srcHash = "";
+  srcHash = "sha256-r34GEUI/2M7ttH8RitlerUxXiNLfBU0AXEac3Qp+2cw=";
 
   react-ui = buildNpmPackage {
     pname = "llama-swap-ui";
@@ -20,7 +20,7 @@
     };
 
     sourceRoot = "source/ui";
-    npmDepsHash = "";
+    npmDepsHash = "sha256-Sbvz3oudMVf+PxOJ6s7LsDaxFwvftNc8ZW5KPpbI/cA=";
     # npmDepsHash = "sha256-Sbvz3oudMVf+PxOJ6s7LsDaxFwvftNc8ZW5KPpbI/cA=";
 
     buildPhase = ''
