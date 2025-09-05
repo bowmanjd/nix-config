@@ -1,0 +1,20 @@
+#!/bin/sh
+
+REPO_PATH="${REPO_PATH:-C:/Users/jbowman/devel/CargasEnergy}"
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+CUR_DIR=$(pwd)
+REL_PATH=$(realpath --relative-to="$GIT_ROOT" "$CUR_DIR")
+
+if [ "$REL_PATH" = "." ]; then
+  WD_PATH="$REPO_PATH"
+else
+  WD_PATH="$REPO_PATH/$REL_PATH"
+fi
+
+CMD="$*"
+
+# Encode the command string in UTF-16LE and then base64
+ENCODED_CMD=$(printf '%s' "$CMD" | iconv -f UTF-8 -t UTF-16LE | base64 -w 0)
+
+/mnt/c/Program\ Files/PowerShell/7/pwsh.exe -wd "$WD_PATH" -EncodedCommand "$ENCODED_CMD"
