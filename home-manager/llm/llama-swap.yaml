@@ -14,6 +14,14 @@ models:
       -c 512
     ttl: 300
 
+  "embeddinggemma":
+    cmd: |
+      ${llama-server}
+      -hf unsloth/embeddinggemma-300m-GGUF:Q8_0
+      --embedding
+      -c 512
+    ttl: 300
+
   "mxbai-embed-large-v1":
     cmd: |
       ${llama-server}

@@ -129,6 +129,14 @@
         "qwen-embedding"
       ]
     },
+    "embeddinggemma": {
+      "name": "embeddinggemma",
+      "provider": "llama-swap",
+      "type": "embedding",
+      "dimensions": 512,
+      "normalize": true,
+      "decimalScale": 8
+    },
     "llama-embedding": {
       "name": "qwen-embedding",
       "provider": "llama-swap",
@@ -246,12 +254,20 @@
         "fastcoder"
       ]
     },
-    "kimi-k2-openrouter": {
+    "kimi-k2-openrouter-free": {
       "name": "moonshotai/kimi-k2:free",
       "provider": "openrouter",
       "aliases": [
-        "kimi-or",
-        "k2or"
+        "kimi-free",
+        "k2free"
+      ]
+    },
+    "kimi-k2-openrouter": {
+      "name": "moonshotai/kimi-k2-0905",
+      "provider": "openrouter",
+      "aliases": [
+        "kimi-paid",
+        "k2-paid"
       ]
     },
     "llama-3.1-8b": {
@@ -278,11 +294,28 @@
       ]
     },
     "kimi-k2": {
-      "name": "moonshotai/kimi-k2-instruct",
+      "name": "moonshotai/kimi-k2-instruct-0905",
       "provider": "groq",
       "aliases": [
         "kimi",
+        "kimi-groq",
         "k2"
+      ]
+    },
+    "sonoma-sky-alpha": {
+      "name": "openrouter/sonoma-sky-alpha",
+      "provider": "openrouter",
+      "aliases": [
+        "sonoma-sky",
+        "sky"
+      ]
+    },
+    "sonoma-dusk-alpha": {
+      "name": "openrouter/sonoma-dusk-alpha",
+      "provider": "openrouter",
+      "aliases": [
+        "sonoma-dusk",
+        "dusk"
       ]
     },
     "glm-4.5-air": {
