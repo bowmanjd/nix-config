@@ -16,7 +16,11 @@
       "models": {
         "inception/mercury-coder": {},
         "qwen/qwen3-30b-a3b-thinking-2507": {},
-        "qwen/qwen3-coder-30b-a3b-instruct": {}
+        "qwen/qwen3-coder-30b-a3b-instruct": {},
+        "qwen/qwen3-max": {},
+        "openrouter/sonoma-dusk-alpha": {},
+        "openrouter/sonoma-sky-alpha": {},
+        "moonshotai/kimi-k2-0905": {}
       }
     }
   },
