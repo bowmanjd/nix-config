@@ -313,7 +313,7 @@
     dotnet-repl
     # dotnet-sdk
     dotnet-sdk_9
-    dnsutils
+    # dnsutils
     du-dust
     elinks
     eza

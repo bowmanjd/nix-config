@@ -391,6 +391,34 @@
         "local"
       ]
     },
+    "think-qwen3:1.7b": {
+      "name": "qwen3-1.7b",
+      "provider": "llama-swap",
+      "think": true,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen-think"
+      ]
+    },
+    "local-qwen3:0.6b": {
+      "name": "qwen3-0.6b",
+      "provider": "llama-swap",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "systemMessagePrefix": "/no_think ",
+      "aliases": [
+        "qwen0.6",
+        "qwen-tiny"
+      ]
+    },
     "local-qwen3:0.6b": {
       "name": "qwen3-0.6b",
       "provider": "llama-swap",
