@@ -159,7 +159,7 @@ in {
       crush
       forge
       goose-cli
-      # groq-code-cli
+      groq-code-cli
       opencode
       gemini-cli
       # qwen-code
