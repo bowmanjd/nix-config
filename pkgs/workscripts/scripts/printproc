@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sqlcmd -C -y 0 -Q "SET NOCOUNT ON; SELECT OBJECT_DEFINITION (OBJECT_ID('$1'))" | sed 's/CREATE\s\+PROC/CREATE OR ALTER PROC/' | head -n -1 | sed $'s/\r$//'

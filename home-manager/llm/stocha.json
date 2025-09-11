@@ -357,6 +357,16 @@
         "qwen3-thinking"
       ]
     },
+    "nemotron-9b": {
+      "name": "nemotron-9b",
+      "provider": "llama-swap",
+      "think": false,
+      "temperature": 0.6,
+      "topP": 0.95,
+      "aliases": [
+        "nemotron"
+      ]
+    },
     "qwen3:4b": {
       "name": "qwen3-4b",
       "provider": "llama-swap",
