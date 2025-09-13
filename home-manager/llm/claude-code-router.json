@@ -1,0 +1,47 @@
+{
+  "Providers": [
+    {
+      "name": "openrouter",
+      "api_base_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key": "$OPENROUTER_API_KEY",
+      "models": [
+        "openrouter/sonoma-sky-alpha",
+        "openrouter/sonoma-dusk-alpha",
+        "anthropic/claude-sonnet-4",
+        "x-ai/grok-code-fast-1",
+        "qwen/qwen3-coder",
+        "qwen/qwen3-next-80b-a3b-instruct",
+        "qwen/qwen3-235b-a22b-thinking-2507",
+        "google/gemini-2.5-pro",
+        "deepseek/deepseek-chat-v3.1",
+        "moonshotai/kimi-k2-0905",
+        "google/gemini-2.5-flash",
+        "z-ai/glm-4.5",
+        "z-ai/glm-4.5-air",
+        "google/gemma-3-12b-it"
+      ],
+      "transformer": {
+        "use": [
+          "openrouter"
+        ]
+      }
+    },
+    {
+      "name": "openai",
+      "api_base_url": "https://api.openai.com/v1/chat/completions",
+      "api_key": "$OPENAI_API_KEY",
+      "models": [
+        "gpt-5",
+        "gpt-5-mini"
+      ]
+    }
+  ],
+  "Router": {
+    "default": "openrouter,qwen/qwen3-coder",
+    "background": "openrouter,qwen/qwen3-next-80b-a3b-instruct",
+    "think": "openrouter,qwen/qwen3-235b-a22b-thinking-2507",
+    "longContext": "openrouter,openrouter/sonoma-sky-alpha",
+    "longContextThreshold": 60000,
+    "webSearch": "openrouter,google/gemini-2.5-flash"
+  }
+}

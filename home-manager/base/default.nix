@@ -177,6 +177,12 @@
       port = 22;
       forwardAgent = true;
     };
+    "beryllium" = {
+      hostname = "10.0.0.5";
+      user = "beryllium";
+      port = 22;
+      forwardAgent = true;
+    };
     "nitrogen" = {
       hostname = "10.0.0.11";
       user = "nitrogen";

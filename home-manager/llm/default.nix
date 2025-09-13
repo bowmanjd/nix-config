@@ -138,7 +138,7 @@ in {
     [
       aichat
       # aider-chat-with-playwright
-      pkgs.stable.aider-chat
+      pkgs.aider-chat
       codex
       fabric-ai
       litellm
@@ -284,5 +284,11 @@ in {
       commonFile = ./aider-common.conf.yml;
     };
     target = "./.aider.conf.yml";
+  };
+
+  home.file."claude-code-router" = {
+    enable = true;
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/llm/claude-code-router.json";
+    target = "./.claude-code-router/config.json";
   };
 }
