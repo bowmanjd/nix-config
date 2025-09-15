@@ -141,8 +141,9 @@ in {
       pkgs.aider-chat
       codex
       fabric-ai
+      gemini-cli-bin
       litellm
-      llama-cpp
+      llama-cpp-vulkan-native
       llama-swap
       llmscripts
       mods
@@ -161,7 +162,6 @@ in {
       goose-cli
       groq-code-cli
       opencode
-      gemini-cli
       # qwen-code
       (pkgs.writeShellScriptBin "goose-custom" ''
         export OPENAI_API_KEY="$LITELLM_MASTER_KEY"

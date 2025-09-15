@@ -8,7 +8,7 @@
     csharpier
     delve
     djlint
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     emmet-language-server
     eslint_d
     eslint

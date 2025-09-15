@@ -93,6 +93,9 @@
     ripgrep
     sudo
     tree
+    vulkan-tools
+    vulkan-loader
+    vulkan-validation-layers
     wget
     zip
   ];

@@ -278,16 +278,16 @@
       ]
     },
     "gpt-oss-120b": {
-      "name": "openai/gpt-oss-120b",
-      "provider": "groq",
+      "name": "openai/gpt-oss-120b:free",
+      "provider": "openrouter",
       "aliases": [
         "gpt-oss",
         "gpt120"
       ]
     },
     "gpt-oss-20b": {
-      "name": "openai/gpt-oss-20b",
-      "provider": "groq",
+      "name": "openai/gpt-oss-20b:free",
+      "provider": "openrouter",
       "aliases": [
         "gpt-oss-20",
         "gpt20"
@@ -355,6 +355,32 @@
       "aliases": [
         "qwen3-think",
         "qwen3-thinking"
+      ]
+    },
+    "qwen3-next": {
+      "name": "qwen/qwen3-next-80b-a3b-instruct",
+      "provider": "openrouter",
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen-next",
+        "qwen3-80"
+      ]
+    },
+    "qwen3-next-thinking": {
+      "name": "qwen/qwen3-next-80b-a3b-thinking",
+      "provider": "openrouter",
+      "temperature": 0.6,
+      "topP": 0.95,
+      "topK": 20,
+      "minP": 0.0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "qwen-next-think",
+        "qwen3-80-think"
       ]
     },
     "nemotron-9b": {
