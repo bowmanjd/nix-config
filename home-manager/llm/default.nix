@@ -141,7 +141,7 @@ in {
       pkgs.aider-chat
       codex
       fabric-ai
-      gemini-cli-bin
+      # gemini-cli-bin
       litellm
       llama-cpp-vulkan-native
       llama-swap
@@ -159,6 +159,7 @@ in {
       claude-code-router
       crush
       forge
+      gemini-cli
       goose-cli
       groq-code-cli
       opencode
