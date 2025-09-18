@@ -6,7 +6,7 @@
       "apiKey": "var.litellm_key"
     }
   },
-  "defaultModel": "gpt-4.1",
+  "defaultModel": "sky",
   "embeddingModel": "qwen3-embedding-0.6b",
   "providers": {
     "copilot": {
