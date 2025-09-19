@@ -2,6 +2,7 @@ macros:
   "llama-server": >
     $LLAMA_SERVER
     --port ${PORT}
+    --no-webui
   "configdir": $CONFIGDIR
 
 models:
