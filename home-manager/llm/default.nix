@@ -74,7 +74,7 @@ in {
       Service = {
         WorkingDirectory = "%D/webui";
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %D/webui";
-        ExecStart = "${pkgs.stable.open-webui}/bin/open-webui serve --port 3011 --host 127.0.0.1";
+        ExecStart = "${pkgs.open-webui}/bin/open-webui serve --port 3011 --host 127.0.0.1";
         EnvironmentFile = "-%t/llmconf/webui";
         Restart = "on-failure";
         RestartSec = 5;
@@ -148,7 +148,7 @@ in {
       llmscripts
       mods
       ollama
-      pkgs.stable.open-webui
+      pkgs.open-webui
       onnxruntime
       prisma-engines
     ]
