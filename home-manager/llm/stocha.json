@@ -73,6 +73,18 @@
       "embeddingEndpoint": "/embeddings",
       "embeddingOutput": "0.embedding.0"
     },
+    "boron-swap": {
+      "apiBase": "http://10.0.0.10:5349/v1",
+			"chatEndpoint": "/chat/completions",
+      "embeddingEndpoint": "/embeddings",
+      "embeddingOutput": "data.0.embedding"
+    },
+    "nitrogen-swap": {
+      "apiBase": "http://10.0.0.11:5349/v1",
+			"chatEndpoint": "/chat/completions",
+      "embeddingEndpoint": "/embeddings",
+      "embeddingOutput": "data.0.embedding"
+    },
     "llama-swap": {
       "apiBase": "http://127.0.0.1:5349/v1",
 			"chatEndpoint": "/chat/completions",
@@ -390,7 +402,18 @@
       "temperature": 0.6,
       "topP": 0.95,
       "aliases": [
-        "nemotron"
+        "nemotron9"
+      ]
+    },
+    "nemotron-12b": {
+      "name": "nemotron-12b",
+      "provider": "nitrogen-swap",
+      "think": false,
+      "temperature": 0.6,
+      "topP": 0.95,
+      "aliases": [
+        "nemotron",
+        "nemotron12"
       ]
     },
     "qwen3:4b": {
@@ -404,6 +427,32 @@
       "presencePenalty": 0.5,
       "aliases": [
         "qwen3-4b"
+      ]
+    },
+    "nitrogen-qwen3:4b": {
+      "name": "qwen3-4b",
+      "provider": "nitrogen-swap",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "nitrogen-qwen3-4b"
+      ]
+    },
+    "boron-qwen3:4b": {
+      "name": "qwen3-4b",
+      "provider": "boron-swap",
+      "think": false,
+      "temperature": 0.7,
+      "topP": 0.8,
+      "topK": 20,
+      "minP": 0,
+      "presencePenalty": 0.5,
+      "aliases": [
+        "boron-qwen3-4b"
       ]
     },
     "lgemma3n": {
