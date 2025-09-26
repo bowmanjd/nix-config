@@ -8,7 +8,7 @@ common_copilot: &common_copilot
   output_cost_per_token: 0.0
   extra_headers:
     Copilot-Integration-Id: vscode-chat
-    Editor-Version: vscode/1.85.1
+    Editor-Version: vscode/1.104.2
 
 copilot_base: &copilot_base
   # api_base: https://api.githubcopilot.com
@@ -327,6 +327,15 @@ model_list:
       max_input_tokens: 128000
       weight: 20
       <<: *common_copilot
+  - model_name: gpt-5-codex
+    litellm_params:
+      model: github_copilot/gpt-5-codex
+      max_tokens: 200000
+      max_output_tokens: 64000
+      max_input_tokens: 128000
+      <<: *common_copilot
+    model_info:
+      id: copilot-gpt-5-codex
   - model_name: gpt-5
     litellm_params:
       model: github_copilot/gpt-5
