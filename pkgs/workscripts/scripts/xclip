@@ -1,0 +1,70 @@
+#!/bin/sh
+
+WIN32YANK=${WIN32YANK:-win32yank.exe}
+
+if command -v "$WIN32YANK" >/dev/null 2>&1; then
+    :
+elif command -v win32yank >/dev/null 2>&1; then
+    WIN32YANK=win32yank
+else
+    echo "xclip shim: win32yank executable not found in PATH" >&2
+    exit 1
+fi
+
+mode=write
+selection=
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -selection)
+            shift
+            if [ $# -eq 0 ]; then
+                echo "xclip shim: -selection requires an argument" >&2
+                exit 1
+            fi
+            selection=$1
+            shift
+            ;;
+        -o)
+            mode=read
+            shift
+            ;;
+        -i)
+            mode=write
+            shift
+            ;;
+        -h|--help)
+            cat <<'EOF'
+xclip shim for WSL that delegates to win32yank.
+Supported usage:
+  xclip -selection clipboard            # stdin -> clipboard
+  xclip -selection clipboard -o         # clipboard -> stdout
+EOF
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "xclip shim: unsupported argument '$1'" >&2
+            exit 1
+            ;;
+    esac
+done
+
+if [ $# -gt 0 ]; then
+    echo "xclip shim: unexpected positional arguments not supported" >&2
+    exit 1
+fi
+
+if [ -n "$selection" ] && [ "$selection" != "clipboard" ]; then
+    echo "xclip shim: only '-selection clipboard' is supported" >&2
+    exit 1
+fi
+
+if [ "$mode" = read ]; then
+    exec "$WIN32YANK" -o
+else
+    exec "$WIN32YANK" -i
+fi
